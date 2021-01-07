@@ -3,6 +3,16 @@ include_once('web-config.php');
 getHeader("Contact us", "includes/header.php");
 ?>
 
+
+
+
+
+
+
+
+
+
+
 <?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
