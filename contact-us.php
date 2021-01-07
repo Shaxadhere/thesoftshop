@@ -2,7 +2,7 @@
 include_once('web-config.php');
 getHeader("Contact us", "includes/header.php");
 ?>
-sadasdasdasd
+//contact us data
 <?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
