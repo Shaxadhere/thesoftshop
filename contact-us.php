@@ -6,6 +6,9 @@ getHeader("Contact us", "includes/header.php");
 <!-- //contact us data -->
 <!-- //contact us data -->
 <!-- //contact us data -->
+<!-- //contact us data -->
+<!-- //contact us data -->
+<!-- //contact us data -->
 <?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
