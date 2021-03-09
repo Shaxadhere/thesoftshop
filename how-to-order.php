@@ -3,6 +3,7 @@ include_once('web-config.php');
 getHeader("How to order", "includes/header.php");
 ?>
 <!-- How to order content -->
+<!-- How to order content -->
 <?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
