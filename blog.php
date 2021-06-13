@@ -1,6 +1,9 @@
 <?php
 include_once('web-config.php');
 getHeader("Blog", "includes/header.php");
+?>
+
+<?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
 include_once('components/quick-shop.php');
