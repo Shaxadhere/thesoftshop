@@ -47,7 +47,6 @@ include_once('web-config.php');
                                     <div class=" branding ts__05 lh__1">
                                         <a class="dib" href="home-default.html">
                                             <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
-                                            <!-- <img style="width: 160px" class="logo_sticky dn" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template"> -->
                                             <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
                                         </a>
                                     </div>
