@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Home", "includes/web-config.php");
+getHeader("Home", "includes/header.php");
 ?>
 
 <!-- main slide -->
@@ -1098,3 +1098,7 @@ getHeader("Home", "includes/web-config.php");
     </div>
 </div>
 <!--end shipping info-->
+
+<?php
+getFooter("includes/footer.php");
+?>
