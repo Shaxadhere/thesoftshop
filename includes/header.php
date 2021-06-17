@@ -55,7 +55,7 @@ include_once('web-config.php');
                                     <nav class="nt_navigation kl_navigation tc hover_side_up nav_arrow_false">
                                         <ul id="nt_menu_id" class="nt_menu in_flex wrap al_center">
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Home</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>">Home</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
@@ -65,7 +65,7 @@ include_once('web-config.php');
                                                 </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">New Arrivals</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/new-arrivals">New Arrivals</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
@@ -75,7 +75,7 @@ include_once('web-config.php');
                                                 </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Stationary</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=stationary">Stationary</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
@@ -85,7 +85,7 @@ include_once('web-config.php');
                                                 </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Happy Deals</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/happy-deals">Happy Deals</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
@@ -95,7 +95,7 @@ include_once('web-config.php');
                                                 </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Accessories</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
@@ -105,7 +105,7 @@ include_once('web-config.php');
                                                 </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Sale</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/sale">Sale</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
@@ -115,7 +115,7 @@ include_once('web-config.php');
                                                 </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">How To Order</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
@@ -135,7 +135,7 @@ include_once('web-config.php');
                                             <a class="cb chp db push_side" href="#" data-id="#nt_login_canvas">
                                                 <i class="iccl iccl-user"></i></a>
                                         </div>
-                                        <a class="icon_like cb chp position-relative dn db_md js_link_wis" href="wishlist.html"><i class="iccl iccl-heart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">3</span></i>
+                                        <a class="icon_like cb chp position-relative dn db_md js_link_wis" href="<?= getHTMLRoot() ?>/wishlist"><i class="iccl iccl-heart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">3</span></i>
                                         </a>
                                         <div class="icon_cart pr">
                                             <a class="push_side position-relative cb chp db" href="#" data-id="#nt_cart_canvas"><i class="iccl iccl-cart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">5</span></i></a>
