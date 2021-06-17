@@ -1,13 +1,18 @@
 <?php
+//phprapid library
+include_once('assets/vendor/phprapid/rapid.php');
 
+//get application root address
 function getHTMLRoot(){
 	return "/thesoftshop";
 }
 
+//get application host
 function getServerRoot(){
 	return $_SERVER['HTTP_HOST'];
 }
 
+//database connection
 function connect(){
 	$server = "localhost";
 	$usr = "root";
@@ -17,8 +22,7 @@ function connect(){
 	return ($connection);
 }
 
-include_once('assets/vendor/phprapid/rapid.php');
-
+//html toast
 function HTMLToast(){
 	if (isset($_REQUEST['Success'])) {
 		echo "<div class='sa4d25'>";
@@ -55,6 +59,7 @@ function HTMLToast(){
 	}
 }
 
+//email body
 function getEmailBody($RecipentName, $Message, $AdditionalInformation, $FromName){
 	return "<!DOCTYPE html
         PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
@@ -172,6 +177,7 @@ function getEmailBody($RecipentName, $Message, $AdditionalInformation, $FromName
       </html>";
 }
 
+//smtp mailing credentials
 function getSMTPCredentials(){
 	return array(
 		"host" => "mail.artt.edu.pk",
@@ -182,7 +188,7 @@ function getSMTPCredentials(){
 	);
 }
 
-function isHtml($string)
-{
+//check if string have html tags
+function isHtml($string){
   return preg_match("/<[^<]+>/",$string,$m) != 0;
 }
