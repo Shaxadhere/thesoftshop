@@ -10,7 +10,7 @@ include_once('web-config.php');
             <div class="col-12 slideshow__slide">
                 <div class="oh position-relative nt_img_txt bg-black--transparent">
                     <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
-                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/slider-01.jpg"></div>
+                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/3.png"></div>
                     </div>
                     <div class="caption-wrap caption-w-1 pe_none z_100 tl_md tl">
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-left">
@@ -30,7 +30,7 @@ include_once('web-config.php');
             <div class="col-12 slideshow__slide">
                 <div class="oh position-relative nt_img_txt bg-black--transparent">
                     <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
-                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_zoom pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/slider-02.jpg"></div>
+                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_zoom pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/2.jpg"></div>
                     </div>
                     <div class="caption-wrap caption-w-1 pe_none z_100 tr_md tl">
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-right">
@@ -50,7 +50,7 @@ include_once('web-config.php');
             <div class="col-12 slideshow__slide">
                 <div class="oh position-relative nt_img_txt bg-black--transparent">
                     <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
-                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/slider-03.jpg"></div>
+                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/1.png"></div>
                     </div>
                     <div class="caption-wrap caption-w-1 pe_none z_100 tl_md tl">
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-left">
