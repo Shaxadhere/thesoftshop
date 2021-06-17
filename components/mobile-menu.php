@@ -9,13 +9,13 @@
     <div id="kalles-section-mb_nav_js" class="mb_nav_tab active">
         <div id="kalles-section-mb_nav" class="kalles-section">
             <ul id="menu_mb_ul" class="nt_mb_menu">
-                <li class="menu-item"><a href="blog-grid.html">Home</a></li>
-                <li class="menu-item"><a href="blog-grid.html">New Arrival</a></li>
-                <li class="menu-item"><a href="blog-grid.html">Stationary</a></li>
-                <li class="menu-item"><a href="blog-grid.html">Happy Deals</a></li>
-                <li class="menu-item"><a href="blog-grid.html">Accessories</a></li>
-                <li class="menu-item"><a href="blog-grid.html">Sale</a></li>
-                <li class="menu-item"><a href="blog-grid.html">How To Order</a></li>
+                <li class="menu-item"><a href="<?= getHTMLRoot() ?>">Home</a></li>
+                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/new-arrivals">New Arrivals</a></li>
+                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/category?query=stationary">Stationary</a></li>
+                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/happy-deals">Happy Deals</a></li>
+                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a></li>
+                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/sale">Sale</a></li>
+                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a></li>
                 <li class="menu-item menu-item-btns menu-item-wishlist">
                     <a class="js_link_wis" href="<?= getHTMLRoot() ?>/wishlist"><span class="iconbtns">Wishlist</span></a>
                 </li>

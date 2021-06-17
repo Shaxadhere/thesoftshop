@@ -6,7 +6,7 @@
             <i class="close_pp pegk pe-7s-close ts__03 cd"></i>
         </div>
         <div class="cart_threshold cart_thres_js">
-            <div class="cart_thres_2">Almost there, add
+            <div class="cart_thres_2">Almost tsshere, add
                 <span class="cr fwm mn_thres_js">$9.00</span> more to get <span class="cr fwm">FREE SHIPPING!</span>
             </div>
         </div>
