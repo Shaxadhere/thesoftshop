@@ -30,25 +30,6 @@ include_once('web-config.php');
         <!-- header -->
         <header id="ntheader" class="ntheader header_3 h_icon_iccl ">
             <div class="kalles-header__wrapper ntheader_wrapper pr z_200">
-                <div id="kalles-section-header_top">
-                    <div class="h__top bgbl pt__10 pb__10 fs__12 flex fl_center al_center">
-                        <div class="container">
-                            <div class="row al_center">
-                                <div class="col-lg-4 col-12 tc tl_lg col-md-12 ">
-                                    <div class="header-text">
-                                        <i class="pegk pe-7s-call"></i> +01 23456789 <i class="pegk pe-7s-mail ml__15"></i>
-                                        <a class="cg" href="https://themes.the4.co/cdn-cgi/l/email-protection#cea5afa2a2abbd8eaaa1a3afa7a0e0ada1a3"><span class="__cf_email__" data-cfemail="4e052f22222b3d0e2a21232f2720602d2123">[email&#160;protected]</span></a>
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 col-12 tc col-md-12 ">
-                                    <div class="header-text">Summer sale discount off <span class="cr">50%</span>!
-                                        <a href="shop.html">Shop Now</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="sp_header_mid">
                     <div class="header__mid">
                         <div class="container">
@@ -65,9 +46,9 @@ include_once('web-config.php');
                                 <div class="col-lg-2 col-md-4 col-6 tc tl_lg">
                                     <div class=" branding ts__05 lh__1">
                                         <a class="dib" href="home-default.html">
-                                            <img class="w__95 logo_normal dn db_lg" src="<?= getHTMLRoot() ?>/assets/images/svg/kalles.svg" alt="Kalles Template">
-                                            <img class="w__100 logo_sticky dn" src="<?= getHTMLRoot() ?>/assets/images/svg/kalles.svg" alt="Kalles Template">
-                                            <img class="w__100 logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/images/svg/kalles.svg" alt="Kalles Template">
+                                            <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
+                                            <!-- <img style="width: 160px" class="logo_sticky dn" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template"> -->
+                                            <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
                                         </a>
                                     </div>
                                 </div>
@@ -75,32 +56,71 @@ include_once('web-config.php');
                                     <nav class="nt_navigation kl_navigation tc hover_side_up nav_arrow_false">
                                         <ul id="nt_menu_id" class="nt_menu in_flex wrap al_center">
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Blog</a>
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Home</a>
                                                 <div class="sub-menu">
                                                     <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
                                                             <a href="blog-grid.html">Grid Layout</a>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">New Arrivals</a>
+                                                <div class="sub-menu">
+                                                    <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
-                                                            <a href="blog-masonry.html">Masonry Layout</a>
+                                                            <a href="blog-grid.html">Grid Layout</a>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Stationary</a>
+                                                <div class="sub-menu">
+                                                    <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
-                                                            <a href="blog-left-sidebar.html">Left Sidebar</a>
+                                                            <a href="blog-grid.html">Grid Layout</a>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Happy Deals</a>
+                                                <div class="sub-menu">
+                                                    <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
-                                                            <a href="blog-right-sidebar.html">Right Sidebar</a>
+                                                            <a href="blog-grid.html">Grid Layout</a>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Accessories</a>
+                                                <div class="sub-menu">
+                                                    <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
-                                                            <a href="blog-post-with-product-listing.html">Single Post with Product Listing</a>
+                                                            <a href="blog-grid.html">Grid Layout</a>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Sale</a>
+                                                <div class="sub-menu">
+                                                    <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
-                                                            <a href="blog-post-with-instagram-shop.html">Single Post with Instagram Shop</a>
+                                                            <a href="blog-grid.html">Grid Layout</a>
                                                         </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">How To Order</a>
+                                                <div class="sub-menu">
+                                                    <div class="lazy_menu lazyload">
                                                         <div class="menu-item">
-                                                            <a href="blog-post-with-instagram-shop.html">Single Post with Categories</a>
-                                                        </div>
-                                                        <div class="menu-item">
-                                                            <a href="blog-post-with-lookbook.html">Single Post with lookbook</a>
+                                                            <a href="blog-grid.html">Grid Layout</a>
                                                         </div>
                                                     </div>
                                                 </div>
