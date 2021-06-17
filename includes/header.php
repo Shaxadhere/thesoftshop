@@ -1,289 +1,134 @@
 <?php
-session_start();
-$UserType = 0;
-if (isset($_SESSION['USER'])) {
-    $UserType = $_SESSION['USER']['FK_UserType'];
-}
-else{
-    redirectWindow("Auth/index?message=You must login to continue");
-}
+include_once('web-config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, shrink-to-fit=9">
-    <meta name="description" content="ARTT CSS Academy LMS">
-    <meta name="author" content="Shehzad Ahmed">
-    <title></title>
-
-    <link rel="icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/favicon.png">
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,500" rel='stylesheet'>
-    <link href='<?= getHTMLRoot() ?>/assets/vendor/unicons-2.0.1/css/unicons.css' rel='stylesheet'>
-    <link href="<?= getHTMLRoot() ?>/assets/css/vertical-responsive-menu.min.css" rel="stylesheet">
-    <link href="<?= getHTMLRoot() ?>/assets/css/style.css" rel="stylesheet">
-    <link href="<?= getHTMLRoot() ?>/assets/css/responsive.css" rel="stylesheet">
-    <link href="<?= getHTMLRoot() ?>/assets/css/night-mode.css" rel="stylesheet">
-    <link href="<?= getHTMLRoot() ?>/assets/css/instructor-dashboard.css" rel="stylesheet">
-
-    <link href="<?= getHTMLRoot() ?>/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="<?= getHTMLRoot() ?>/assets/vendor/OwlCarousel/assets/owl.carousel.css" rel="stylesheet">
-    <link href="<?= getHTMLRoot() ?>/assets/vendor/OwlCarousel/assets/owl.theme.default.min.css" rel="stylesheet">
-    <link href="<?= getHTMLRoot() ?>/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="<?= getHTMLRoot() ?>/assets/vendor/semantic/semantic.min.css">
-
-
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.jqueryui.min.css">
-    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.5/css/buttons.jqueryui.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css" />
-
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/images/k_favicon_32x.png">
+    <title>TheSoftShop.pk</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com/">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/font-icon.min.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/reset.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/defined.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/base.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/style.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/home-default.css">
 </head>
 
-<body>
+<body class="kalles-template header_full_true des_header_3 css_scrollbar lazy_icons btnt4_style_2 zoom_tp_2 css_scrollbar template-index kalles_toolbar_true hover_img2 swatch_style_rounded swatch_list_size_small label_style_rounded wrapper_full_width header_full_true hide_scrolld_true lazyload">
 
-    <header class="header clearfix">
-        <button type="button" id="toggleMenu" class="toggle_menu">
-            <i class='uil uil-bars'></i>
-        </button>
-        <button id="collapse_menu" class="collapse_menu">
-            <i class="uil uil-bars collapse_menu--icon "></i>
-            <span class="collapse_menu--label"></span>
-        </button>
-        <div class="main_logo" id="logo">
-            <a href="<?= getHTMLRoot() ?>"><img src="<?= getHTMLRoot() ?>/assets/logo.png" alt=""></a>
-            <a href="<?= getHTMLRoot() ?>"><img class="logo-inverse" src="<?= getHTMLRoot() ?>/assets/images/logo.png" alt=""></a>
-        </div>
-        <div class="header_right">
-            <ul>
-                <li class="ui dropdown">
-                    <a href="#" class="option_links" title="Notifications">
-                        <i class='uil uil-bell'></i>
-                        <span class="noti_count">3</span>
-                    </a>
-                    <div class="menu dropdown_mn">
-                        <?php
-                        include_once('Models/NotificationsModel.php');
-                        $NotificationsModel = new Notifications();
-                        $Notifications = $NotificationsModel->ListFilterForStudent($_SESSION['USER']['PK_ID']);
-                        $Sno = 1;
-                        while ($row = mysqli_fetch_array($Notifications)) {
+    <div id="nt_wrapper">
 
-                        ?>
-                            <a href="#" class="channel_my item">
-                                <div class="profile_link">
-                                    <img src="<?= getHTMLRoot() ?>/assets/images/bell.png" alt="">
-                                    <div class="pd_content">
-                                        <h6><?= $row['NotificationText'] ?></h6>
-                                        <p><?= $row['NotificationTitle'] ?></p>
-                                        <span class="nm_time"><?= date('h:i A d M, Y', strtotime($row['DateTime'])) ?></span>
+        <!-- header -->
+        <header id="ntheader" class="ntheader header_3 h_icon_iccl ">
+            <div class="kalles-header__wrapper ntheader_wrapper pr z_200">
+                <div id="kalles-section-header_top">
+                    <div class="h__top bgbl pt__10 pb__10 fs__12 flex fl_center al_center">
+                        <div class="container">
+                            <div class="row al_center">
+                                <div class="col-lg-4 col-12 tc tl_lg col-md-12 ">
+                                    <div class="header-text">
+                                        <i class="pegk pe-7s-call"></i> +01 23456789 <i class="pegk pe-7s-mail ml__15"></i>
+                                        <a class="cg" href="https://themes.the4.co/cdn-cgi/l/email-protection#cea5afa2a2abbd8eaaa1a3afa7a0e0ada1a3"><span class="__cf_email__" data-cfemail="4e052f22222b3d0e2a21232f2720602d2123">[email&#160;protected]</span></a>
                                     </div>
                                 </div>
-                            </a>
-                        <?php
-                            if ($Sno == 4) {
-                                break;
-                            }
-                            $Sno++;
-                        }
-                        ?>
-                        <a class="vbm_btn" href="Notifications">View All
-                            <i class='uil uil-arrow-right'></i>
-                        </a>
-                    </div>
-                </li>
-                <li class="ui dropdown">
-                    <a href="#" class="opts_account" title="Account">
-                        <img src="<?= getHTMLRoot() ?>/Uploads/DisplayPictures/<?php echo (!empty($_SESSION['USER']['UserProfilePicture'])) ? $_SESSION['USER']['UserProfilePicture'] : "avatar.png" ?>" alt="">
-                    </a>
-                    <div class="menu dropdown_account">
-                        <div class="channel_my">
-                            <div class="profile_link">
-                                <img src="<?= getHTMLRoot() ?>/Uploads/DisplayPictures/<?php echo (!empty($_SESSION['USER']['UserProfilePicture'])) ? $_SESSION['USER']['UserProfilePicture'] : "avatar.png" ?>" alt="">
-                                <div class="pd_content">
-                                    <div class="rhte85">
-                                        <h6><?= $_SESSION['USER']['FullName'] ?></h6>
-                                        <div class="mef78" title="Verify">
-                                            <i class='uil uil-check-circle'></i>
-                                        </div>
+                                <div class="col-lg-4 col-12 tc col-md-12 ">
+                                    <div class="header-text">Summer sale discount off <span class="cr">50%</span>!
+                                        <a href="shop.html">Shop Now</a>
                                     </div>
-                                    <span>
-                                        <?= $_SESSION['USER']['Email'] ?>
-                                    </span>
                                 </div>
                             </div>
-                            <a href="Profile" class="dp_link_12">View Profile</a>
                         </div>
-                        <div class="night_mode_switch__btn">
-                            <a href="#" id="night-mode" class="btn-night-mode">
-                                <i class="uil uil-moon"></i>
-                                Night mode
-                                <span class="btn-night-mode-switch">
-                                    <span class="uk-switch-button"></span>
-                                </span>
-                            </a>
-                        </div>
-                        <a href="logout" class="item channel_item">Sign Out</a>
                     </div>
-                </li>
-            </ul>
-        </div>
-    </header>
-
-
-    <?php
-    //Students Section Starts Here
-    if ($UserType == 2) {
-    ?>
-        <nav class="vertical_nav">
-            <div class="left_section menu_left" id="js-menu">
-                <div class="left_section">
-                    <ul>
-
-                        <li class="menu--item">
-                            <a href="<?= getHTMLRoot() ?>/dashboard" class="menu--link active" title="Home">
-                                <i class='uil uil-home-alt menu--icon'></i>
-                                <span class="menu--label">Home</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="Subjects" class="menu--link" title="">
-                                <i class='uil uil-books menu--icon'></i>
-                                <span class="menu--label">Subjects</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="AcademyMaterial" class="menu--link" title="">
-                                <i class='uil uil-swatchbook menu--icon'></i>
-                                <span class="menu--label">Academy Material</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ExtraMaterial" class="menu--link" title="Extra Material">
-                                <i class='uil uil-book-open menu--icon'></i>
-                                <span class="menu--label">Extra Material</span>
-                            </a>
-                        </li>
-                    </ul>
                 </div>
-
-                <div class="left_section pt-2">
-                    <ul>
-                        <li class="menu--item">
-                            <a href="Help" class="menu--link" title="Help">
-                                <i class='uil uil-question-circle menu--icon'></i>
-                                <span class="menu--label">Help</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    <?php
-    }
-    //Students Section Ends Here
-    ?>
-
-
-    <?php
-    //Admin Section Starts Here
-    if ($UserType == 1) {
-    ?>
-        <nav class="vertical_nav">
-            <div class="left_section menu_left" id="js-menu">
-            
-                <div class="left_section">
-                    <ul>
-                        <li class="menu--item">
-                            <a href="<?= getHTMLRoot() ?>/dashboard" class="menu--link active" title="Home">
-                                <i class='uil uil-home-alt menu--icon'></i>
-                                <span class="menu--label">Home</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ManageSubjects" class="menu--link" title="Subjects">
-                                <i class='uil uil-books menu--icon'></i>
-                                <span class="menu--label">Subjects</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ManageTopics" class="menu--link" title="Topics">
-                                <i class='uil uil-book-alt  menu--icon'></i>
-                                <span class="menu--label">Topics</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ManageNotes" class="menu--link" title="Notes">
-                                <i class='uil uil-notes menu--icon'></i>
-                                <span class="menu--label">Notes</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ManageRecordedLectures" class="menu--link" title="Recorded Lectures">
-                                <i class='uil uil-play menu--icon'></i>
-                                <span class="menu--label">Recorded Lectures</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ManageAcademicMaterial" class="menu--link" title="Academic Material">
-                                <i class='uil uil-swatchbook menu--icon'></i>
-                                <span class="menu--label">Academy Material</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ManageExtraMaterial" class="menu--link" title="Extra Material">
-                                <i class='uil uil-book-open menu--icon'></i>
-                                <span class="menu--label">Extra Material</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="left_section pt-2">
-                    <ul>
-                        <li class="menu--item">
-                            <a href="AssignSubjects" class="menu--link" title="Assign Subjects">
-                                <i class='uil uil-book-medical menu--icon'></i>
-                                <span class="menu--label">Assign Subjects</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="ManageStudents" class="menu--link" title="Students">
-                                <i class='uil uil-users-alt menu--icon'></i>
-                                <span class="menu--label">Students</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="left_section pt-2">
-                    <ul>
-                        <li class="menu--item">
-                            <a href="Settings" class="menu--link" title="Setting">
-                                <i class='uil uil-cog menu--icon'></i>
-                                <span class="menu--label">Setting</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="Help" class="menu--link" title="Help">
-                                <i class='uil uil-question-circle menu--icon'></i>
-                                <span class="menu--label">Help</span>
-                            </a>
-                        </li>
-                        <li class="menu--item">
-                            <a href="Feedback" class="menu--link" title="Send Feedback">
-                                <i class='uil uil-comment-alt-exclamation menu--icon'></i>
-                                <span class="menu--label">Send Feedback</span>
-                            </a>
-                        </li>
-                    </ul>
+                <div class="sp_header_mid">
+                    <div class="header__mid">
+                        <div class="container">
+                            <div class="row al_center css_h_se">
+                                <div class="col-md-4 col-3 dn_lg">
+                                    <a href="#" data-id="#nt_menu_canvas" class="push_side push-menu-btn  lh__1 flex al_center">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="16" viewBox="0 0 30 16">
+                                            <rect width="30" height="1.5"></rect>
+                                            <rect y="7" width="20" height="1.5"></rect>
+                                            <rect y="14" width="30" height="1.5"></rect>
+                                        </svg>
+                                    </a>
+                                </div>
+                                <div class="col-lg-2 col-md-4 col-6 tc tl_lg">
+                                    <div class=" branding ts__05 lh__1">
+                                        <a class="dib" href="home-default.html">
+                                            <img class="w__95 logo_normal dn db_lg" src="<?= getHTMLRoot() ?>/assets/images/svg/kalles.svg" alt="Kalles Template">
+                                            <img class="w__100 logo_sticky dn" src="<?= getHTMLRoot() ?>/assets/images/svg/kalles.svg" alt="Kalles Template">
+                                            <img class="w__100 logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/images/svg/kalles.svg" alt="Kalles Template">
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col dn db_lg">
+                                    <nav class="nt_navigation kl_navigation tc hover_side_up nav_arrow_false">
+                                        <ul id="nt_menu_id" class="nt_menu in_flex wrap al_center">
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="blog-grid.html">Blog</a>
+                                                <div class="sub-menu">
+                                                    <div class="lazy_menu lazyload">
+                                                        <div class="menu-item">
+                                                            <a href="blog-grid.html">Grid Layout</a>
+                                                        </div>
+                                                        <div class="menu-item">
+                                                            <a href="blog-masonry.html">Masonry Layout</a>
+                                                        </div>
+                                                        <div class="menu-item">
+                                                            <a href="blog-left-sidebar.html">Left Sidebar</a>
+                                                        </div>
+                                                        <div class="menu-item">
+                                                            <a href="blog-right-sidebar.html">Right Sidebar</a>
+                                                        </div>
+                                                        <div class="menu-item">
+                                                            <a href="blog-post-with-product-listing.html">Single Post with Product Listing</a>
+                                                        </div>
+                                                        <div class="menu-item">
+                                                            <a href="blog-post-with-instagram-shop.html">Single Post with Instagram Shop</a>
+                                                        </div>
+                                                        <div class="menu-item">
+                                                            <a href="blog-post-with-instagram-shop.html">Single Post with Categories</a>
+                                                        </div>
+                                                        <div class="menu-item">
+                                                            <a href="blog-post-with-lookbook.html">Single Post with lookbook</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </nav>
+                                </div>
+                                <div class="col-lg-auto col-md-4 col-3 tr col_group_btns">
+                                    <div class="nt_action in_flex al_center cart_des_1">
+                                        <a class="icon_search push_side cb chp" data-id="#nt_search_canvas" href="#">
+                                            <i class="iccl iccl-search"></i></a>
+                                        <div class="my-account ts__05 position-relative dn db_md">
+                                            <a class="cb chp db push_side" href="#" data-id="#nt_login_canvas">
+                                                <i class="iccl iccl-user"></i></a>
+                                        </div>
+                                        <a class="icon_like cb chp position-relative dn db_md js_link_wis" href="wishlist.html"><i class="iccl iccl-heart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">3</span></i>
+                                        </a>
+                                        <div class="icon_cart pr">
+                                            <a class="push_side position-relative cb chp db" href="#" data-id="#nt_cart_canvas"><i class="iccl iccl-cart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">5</span></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </nav>
-    <?php
-    }
-    //Admin Section Ends Here
-    ?>
-    <div class="wrapper mb-5">
+        </header>
+        <!-- end header -->
+
+        <div id="nt_content">
