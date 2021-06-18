@@ -1,110 +1,9 @@
 <?php
 
-include_once('../config.php');
-
-//Request from sign up confirm
-if (isset($_POST['signup'])) {
-  $status = true;
-
-  if (empty($_POST['FullName'])) {
-    $status = false;
-    redirectWindow("signup?FullName=Full name is required");
-  }
-
-  if (empty($_POST['Email'])) {
-    $status = false;
-    redirectWindow("signup?Email=Email is required");
-  }
-
-  if (checkExistance("tbl_users", "Email", $_POST['Email'], connect())) {
-    $status = false;
-    redirectWindow("signup?Email=Email already exists");
-  }
-
-  echo "<script>alert('$_POST[Email]')</script>";
-
-  if (!validateEmail($_POST['Email'])) {
-    $status = false;
-    redirectWindow("signup?Email=Email is invalid");
-  }
-
-  if (empty($_POST['Password'])) {
-    $status = false;
-    redirectWindow("signup?Password=Password is required");
-  }
-
-  if (empty($_POST['Contact'])) {
-    $status = false;
-    redirectWindow("signup?Contact=Contact is required");
-  }
-
-  if (strlen($_POST['Contact']) != 12) {
-    $status = false;
-    redirectWindow("signup?Contact=Contact is invalid");
-  }
-
-  if (empty($_POST['CNIC'])) {
-    $status = false;
-    redirectWindow("signup?CNIC=CNIC is required");
-  }
-
-  if (strlen($_POST['CNIC']) != 15) {
-    $status = false;
-    redirectWindow("signup?CNIC=CNIC is invalid");
-  }
-
-  if ($status) {
-    $FullName = $_POST['FullName'];
-    $Email = $_POST['Email'];
-    $Password = $_POST['Password'];
-    $Contact = $_POST['Contact'];
-    $CNIC = $_POST['CNIC'];
-
-    insertData(
-      "tbl_users",
-      array(
-        "FullName",
-        "Email",
-        "Password",
-        "Contact",
-        "FK_UserType",
-        "CreatedAt",
-        "CNIC"
-      ),
-      array(
-        $FullName,
-        $Email,
-        password_hash($Password, 1),
-        $Contact,
-        2,
-        date('Y-m-d H:i:s'),
-        $CNIC
-      ),
-      connect()
-    );
-
-    $User = verifyValues(
-      "tbl_users",
-      array(
-        "Email",
-        $Email
-      ),
-      connect()
-    );
-
-    $User = mysqli_fetch_array($User);
-
-    session_start();
-    $_SESSION["USER"] = $User;
-
-    redirectWindow(getHtmlRoot() . "/dashboard");
-  } else {
-    http_response_code(500);
-  }
-}
+include_once('../web-config.php');
 
 //Request from login confirm
-if (isset($_POST['login'])) {
+if (isset($_POST['SignIn'])) {
   //if it contains email in POST
   if (isset($_POST['Email'])) {
     //if email is empty string
@@ -127,10 +26,10 @@ if (isset($_POST['login'])) {
 
   //verifies the email entered
   $user = verifyValues(
-    "tbl_users",
+    "tbl_user",
     array(
       "Email",
-      $_POST['Email']
+      mysqli_real_escape_string(connect(), $_POST['Email'])
     ),
     connect()
   );
@@ -144,7 +43,7 @@ if (isset($_POST['login'])) {
     if (password_verify($_POST['Password'], $ValidUser['Password'])) {
       $UserType = $ValidUser['FK_UserType'];
       session_start();
-      $_SESSION["USER"] = $ValidUser;
+      $_SESSION["ADMIN"] = $ValidUser;
       redirectWindow(getHTMLRoot() . "/dashboard");
     }
     //returning password is incorect
@@ -405,4 +304,4 @@ if (isset($_POST['SavePassword'])) {
   }
 }
 
-include_once("../Errors/errors.php");
+include_once("../errors/errors.php");

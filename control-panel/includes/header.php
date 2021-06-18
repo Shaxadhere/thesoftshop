@@ -1,60 +1,38 @@
 <?php
 include_once('web-config.php');
+session_start();
+if (!isset($_SESSION['ADMIN'])) {
+    redirectWindow("auth/index?error=you must login to continue");
+}
+
+include_once('models/user-model.php');
+$UserModel = new User();
+$User = $UserModel->FetchUser(base64_encode($_SESSION['ADMIN']['PK_ID']));
+$User = mysqli_fetch_array($User);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Twitter -->
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DashForge">
-    <meta name="twitter:description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="twitter:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
-
-    <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/dashforge">
-    <meta property="og:title" content="DashForge">
-    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
-
-    <meta property="og:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/dashforge/img/dashforge-social.png">
-    <meta property="og:image:type" content="image/png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="600">
-
-    <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
-
-    <!-- Favicon -->
+    <meta name="description" content="TheSoftShop.pk Admin Panel">
+    <meta name="author" content="Shehzad Ahmed">
     <link rel="shortcut icon" type="image/x-icon" href="<?= getHTMLRoot() ?>/assets/img/favicon.png">
-
-    <title>DashForge Responsive Bootstrap 4 Dashboard Template</title>
-
-    <!-- vendor css -->
+    <title>Dashboard | TheSoftShop</title>
     <link href="<?= getHTMLRoot() ?>/assets/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
-
-    <!-- DashForge CSS -->
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/dashforge.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/dashforge.dashboard.css">
 </head>
 
 <body>
-
     <aside class="aside aside-fixed">
         <div class="aside-header">
-            <a href="../../index.html" class="aside-logo">dash<span>forge</span>
+            <a href="<?= getHTMLRoot() ?>" class="aside-logo">TheSoft<span>Shop</span>
             </a>
-            <a href="dashboard-one.html" class="aside-menu-link">
+            <a href="<?= getHTMLRoot() ?>" class="aside-menu-link">
                 <i data-feather="menu"></i>
                 <i data-feather="x"></i>
             </a>
@@ -62,153 +40,69 @@ include_once('web-config.php');
         <div class="aside-body">
             <div class="aside-loggedin">
                 <div class="d-flex align-items-center justify-content-start">
-                    <a href="dashboard-one.html" class="avatar"><img src="<?= getHTMLRoot() ?>/assets/img/img1.png" class="rounded-circle" alt=""></a>
+                    <a href="<?= getHTMLRoot() ?>" class="avatar"><img src="<?= getHTMLRoot()  ?>/uploads/display-pictures/<?= (!empty($User['DisplayPicture'])) ? $User['DisplayPicture'] : "default.png" ?>" class="rounded-circle" alt=""></a>
                     <div class="aside-alert-link">
-                        <a href="dashboard-one.html" class="new" data-toggle="tooltip" title="You have 2 unread messages">
+                        <a href="<?= getHTMLRoot() ?>" class="new" data-toggle="tooltip" title="You have 2 unread messages">
                             <i data-feather="message-square"></i>
                         </a>
-                        <a href="dashboard-one.html" class="new" data-toggle="tooltip" title="You have 4 new notifications">
+                        <a href="<?= getHTMLRoot() ?>" class="new" data-toggle="tooltip" title="You have 4 new notifications">
                             <i data-feather="bell"></i>
                         </a>
-                        <a href="dashboard-one.html" data-toggle="tooltip" title="Sign out">
+                        <a href="<?= getHTMLRoot() ?>/logout" data-toggle="tooltip" title="Sign out">
                             <i data-feather="log-out"></i>
                         </a>
                     </div>
                 </div>
                 <div class="aside-loggedin-user">
-                    <a href="dashboard-one.html#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2" data-toggle="collapse">
-                        <h6 class="tx-semibold mg-b-0">Katherine Pechon</h6>
-                        <i data-feather="chevron-down"></i>
+                    <a href="#" class="d-flex align-items-center justify-content-between mg-b-2" data-toggle="collapse">
+                        <h6 class="tx-semibold mg-b-0"><?= $User['FullName'] ?></h6>
                     </a>
-                    <p class="tx-color-03 tx-12 mg-b-0">Administrator</p>
-                </div>
-                <div class="collapse" id="loggedinMenu">
-                    <ul class="nav nav-aside mg-b-0">
-                        <li class="nav-item">
-                            <a href="dashboard-one.html" class="nav-link">
-                                <i data-feather="edit"></i>
-                                <span>Edit Profile</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="dashboard-one.html" class="nav-link">
-                                <i data-feather="user"></i>
-                                <span>View Profile</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="dashboard-one.html" class="nav-link">
-                                <i data-feather="settings"></i>
-                                <span>Account Settings</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="dashboard-one.html" class="nav-link">
-                                <i data-feather="help-circle"></i>
-                                <span>Help Center</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="dashboard-one.html" class="nav-link">
-                                <i data-feather="log-out"></i>
-                                <span>Sign Out</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <p class="tx-color-03 tx-12 mg-b-0"><?= ($User['FK_UserType'] == 1) ? "Administrator" : "Unknown Role" ?></p>
                 </div>
             </div>
-            <!-- aside-loggedin -->
             <ul class="nav nav-aside">
-                <li class="nav-label">Dashboard</li>
                 <li class="nav-item active">
-                    <a href="dashboard-one.html" class="nav-link">
+                    <a href="<?= getHTMLRoot() ?>/dashboard" class="nav-link">
+                        <i data-feather="home"></i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-label mg-t-25">Product Management</li>
+                <li class="nav-item">
+                    <a href="<?= getHTMLRoot() ?>/products" class="nav-link">
                         <i data-feather="shopping-bag"></i>
-                        <span>Sales Monitoring</span>
+                        <span>Products</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="dashboard-two.html" class="nav-link">
-                        <i data-feather="globe"></i>
-                        <span>Website Analytics</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="dashboard-three.html" class="nav-link">
-                        <i data-feather="pie-chart"></i>
-                        <span>Cryptocurrency</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="dashboard-four.html" class="nav-link">
-                        <i data-feather="life-buoy"></i>
-                        <span>Helpdesk Management</span>
-                    </a>
-                </li>
-                <li class="nav-label mg-t-25">Web Apps</li>
-                <li class="nav-item">
-                    <a href="app-calendar.html" class="nav-link">
-                        <i data-feather="calendar"></i>
-                        <span>Calendar</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="app-chat.html" class="nav-link">
-                        <i data-feather="message-square"></i>
-                        <span>Chat</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="app-contacts.html" class="nav-link">
-                        <i data-feather="users"></i>
-                        <span>Contacts</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="app-file-manager.html" class="nav-link">
-                        <i data-feather="file-text"></i>
-                        <span>File Manager</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="app-mail.html" class="nav-link">
-                        <i data-feather="mail"></i>
-                        <span>Mail</span>
-                    </a>
-                </li>
-
-                <li class="nav-label mg-t-25">Pages</li>
-                <li class="nav-item with-sub">
-                    <a href="dashboard-one.html" class="nav-link">
-                        <i data-feather="user"></i>
-                        <span>User Pages</span>
-                    </a>
-                    <ul>
-                        <li><a href="page-profile-view.html">View Profile</a></li>
-                        <li><a href="page-connections.html">Connections</a></li>
-                        <li><a href="page-groups.html">Groups</a></li>
-                        <li><a href="page-events.html">Events</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item with-sub">
-                    <a href="dashboard-one.html" class="nav-link">
-                        <i data-feather="file"></i>
-                        <span>Other Pages</span>
-                    </a>
-                    <ul>
-                        <li><a href="page-timeline.html">Timeline</a></li>
-                    </ul>
-                </li>
-                <li class="nav-label mg-t-25">User Interface</li>
-                <li class="nav-item">
-                    <a href="../../components.html" class="nav-link">
+                    <a href="<?= getHTMLRoot() ?>/categories" class="nav-link">
                         <i data-feather="layers"></i>
-                        <span>Components</span>
+                        <span>Categories</span>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="../../collections.html" class="nav-link">
+                    <a href="<?= getHTMLRoot() ?>/inventory" class="nav-link">
                         <i data-feather="box"></i>
-                        <span>Collections</span>
+                        <span>Inventory</span>
+                    </a>
+                </li>
+                <li class="nav-label mg-t-25">Sales Management</li>
+                <li class="nav-item">
+                    <a href="<?= getHTMLRoot() ?>/customers" class="nav-link">
+                        <i data-feather="users"></i>
+                        <span>Customers</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= getHTMLRoot() ?>/orders" class="nav-link">
+                        <i data-feather="package"></i>
+                        <span>Orders</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="<?= getHTMLRoot() ?>/sales" class="nav-link">
+                        <i data-feather="activity"></i>
+                        <span>Sales</span>
                     </a>
                 </li>
             </ul>
@@ -221,13 +115,13 @@ include_once('web-config.php');
                 <input type="search" class="form-control" placeholder="Search...">
             </div>
             <nav class="nav">
-                <a href="dashboard-one.html" class="nav-link">
+                <a href="<?= getHTMLRoot() ?>" class="nav-link">
                     <i data-feather="help-circle"></i>
                 </a>
-                <a href="dashboard-one.html" class="nav-link">
+                <a href="<?= getHTMLRoot() ?>" class="nav-link">
                     <i data-feather="grid"></i>
                 </a>
-                <a href="dashboard-one.html" class="nav-link">
+                <a href="<?= getHTMLRoot() ?>" class="nav-link">
                     <i data-feather="align-left"></i>
                 </a>
             </nav>

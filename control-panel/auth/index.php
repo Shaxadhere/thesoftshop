@@ -2,7 +2,7 @@
 include_once('../web-config.php');
 session_start();
 if (isset($_SESSION['ADMIN'])) {
-  redirectWindow(getHTMLRoot());
+  redirectWindow(getHTMLRoot() . "/dashboard");
 }
 ?>
 <!DOCTYPE html>
@@ -54,14 +54,36 @@ if (isset($_SESSION['ADMIN'])) {
 
               <div class="form-group">
                 <label>Email address</label>
-                <input type="email" class="form-control" placeholder="yourname@yourmail.com">
+                <input name="Email" type="email" class="form-control" placeholder="yourname@yourmail.com">
+                <?php
+                if(isset($_GET['Email'])){
+                  $error = $_GET['Email'];
+                  echo "<span style='color:red;font-size: 11px;'>";
+                  echo $error;
+                  echo "</span>";
+                }
+                ?>
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">Password</label>
                   <a href="forgot-password" class="tx-13">Forgot password?</a>
                 </div>
-                <input type="password" class="form-control" placeholder="Enter your password">
+                <input name="Password" type="password" class="form-control" placeholder="Enter your password">
+                <?php
+                if(isset($_GET['Password'])){
+                  $error = $_GET['Password'];
+                  echo "<span style='color:red;font-size: 11px;'>";
+                  echo $error;
+                  echo "</span>";
+                }
+                if(isset($_GET['error'])){
+                  $error = $_GET['error'];
+                  echo "<span style='color:red;font-size: 11px;'>";
+                  echo $error;
+                  echo "</span>";
+                }
+                ?>
               </div>
               <button name="SignIn" class="btn btn-brand-02 btn-block">Sign In</button>
             </div>
