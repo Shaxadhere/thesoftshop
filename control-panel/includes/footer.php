@@ -3,23 +3,23 @@ include_once('web-config.php');
 ?>
 </div>
 
-<script src="<?= getHTMLRoot() ?>/lib/jquery/jquery.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/feather-icons/feather.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/jquery.flot/jquery.flot.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/jquery.flot/jquery.flot.stack.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/jquery.flot/jquery.flot.resize.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/chart.js/Chart.bundle.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/jqvmap/jquery.vmap.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/jquery/jquery.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/feather-icons/feather.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/jquery.flot/jquery.flot.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/jquery.flot/jquery.flot.stack.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/jquery.flot/jquery.flot.resize.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/chart.js/Chart.bundle.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/jqvmap/jquery.vmap.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
 
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.aside.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.sampledata.js"></script>
 
 <!-- append theme customizer -->
-<script src="<?= getHTMLRoot() ?>/lib/js-cookie/js.cookie.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/js-cookie/js.cookie.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/dashboard-one.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.settings.js"></script>
 
@@ -29,11 +29,6 @@ include_once('web-config.php');
 
 
 <script>
-    var d = new Date();
-    var n = d.getFullYear();
-    document.getElementById("year").innerHTML = n;
-
-
     function delay(callback, ms) {
         var timer = 0;
         return function() {
