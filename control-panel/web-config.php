@@ -1,6 +1,6 @@
 <?php
 //phprapid library
-include_once('../assets/vendor/phprapid/rapid.php');
+include_once('assets/vendor/phprapid/rapid.php');
 
 //get application root address
 function getHTMLRoot(){
