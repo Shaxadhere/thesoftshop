@@ -4,150 +4,232 @@ include_once('web-config.php');
 <!DOCTYPE html>
 <html lang="en">
 
-<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-
 <head>
+
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/images/k_favicon_32x.png">
-    <title>TheSoftShop.pk</title>
-    <link rel="preconnect" href="https://fonts.gstatic.com/">
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/font-icon.min.css">
-    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/reset.css">
-    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/defined.css">
-    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/base.css">
-    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/style.css">
-    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/home-default.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Twitter -->
+    <meta name="twitter:site" content="@themepixels">
+    <meta name="twitter:creator" content="@themepixels">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DashForge">
+    <meta name="twitter:description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta name="twitter:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+
+    <!-- Facebook -->
+    <meta property="og:url" content="http://themepixels.me/dashforge">
+    <meta property="og:title" content="DashForge">
+    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
+
+    <meta property="og:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+    <meta property="og:image:secure_url" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="600">
+
+    <!-- Meta -->
+    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta name="author" content="ThemePixels">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="<?= getHTMLRoot() ?>/assets/img/favicon.png">
+
+    <title>DashForge Responsive Bootstrap 4 Dashboard Template</title>
+
+    <!-- vendor css -->
+    <link href="<?= getHTMLRoot() ?>/assets/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="<?= getHTMLRoot() ?>/assets/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="<?= getHTMLRoot() ?>/assets/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
+
+    <!-- DashForge CSS -->
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/dashforge.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/dashforge.dashboard.css">
 </head>
 
-<body class="kalles-template header_full_true des_header_3 css_scrollbar lazy_icons btnt4_style_2 zoom_tp_2 css_scrollbar template-index kalles_toolbar_true hover_img2 swatch_style_rounded swatch_list_size_small label_style_rounded wrapper_full_width header_full_true hide_scrolld_true lazyload">
+<body>
 
-    <div id="nt_wrapper">
-
-        <!-- header -->
-        <header id="ntheader" class="ntheader header_3 h_icon_iccl ">
-            <div class="kalles-header__wrapper ntheader_wrapper pr z_200">
-                <div class="sp_header_mid">
-                    <div class="header__mid">
-                        <div class="container">
-                            <div class="row al_center css_h_se">
-                                <div class="col-md-4 col-3 dn_lg">
-                                    <a href="#" data-id="#nt_menu_canvas" class="push_side push-menu-btn  lh__1 flex al_center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="16" viewBox="0 0 30 16">
-                                            <rect width="30" height="1.5"></rect>
-                                            <rect y="7" width="20" height="1.5"></rect>
-                                            <rect y="14" width="30" height="1.5"></rect>
-                                        </svg>
-                                    </a>
-                                </div>
-                                <div class="col-lg-2 col-md-4 col-6 tc tl_lg">
-                                    <div class=" branding ts__05 lh__1">
-                                        <a class="dib" href="home-default.html">
-                                            <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
-                                            <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="col dn db_lg">
-                                    <nav class="nt_navigation kl_navigation tc hover_side_up nav_arrow_false">
-                                        <ul id="nt_menu_id" class="nt_menu in_flex wrap al_center">
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>">Home</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/new-arrivals">New Arrivals</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=stationary">Stationary</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/happy-deals">Happy Deals</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/sale">Sale</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <div class="col-lg-auto col-md-4 col-3 tr col_group_btns">
-                                    <div class="nt_action in_flex al_center cart_des_1">
-                                        <a class="icon_search push_side cb chp" data-id="#nt_search_canvas" href="#">
-                                            <i class="iccl iccl-search"></i></a>
-                                        <div class="my-account ts__05 position-relative dn db_md">
-                                            <a class="cb chp db push_side" href="#" data-id="#nt_login_canvas">
-                                                <i class="iccl iccl-user"></i></a>
-                                        </div>
-                                        <a class="icon_like cb chp position-relative dn db_md js_link_wis" href="<?= getHTMLRoot() ?>/wishlist"><i class="iccl iccl-heart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">3</span></i>
-                                        </a>
-                                        <div class="icon_cart pr">
-                                            <a class="push_side position-relative cb chp db" href="#" data-id="#nt_cart_canvas"><i class="iccl iccl-cart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">5</span></i></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <aside class="aside aside-fixed">
+        <div class="aside-header">
+            <a href="../../index.html" class="aside-logo">dash<span>forge</span>
+            </a>
+            <a href="dashboard-one.html" class="aside-menu-link">
+                <i data-feather="menu"></i>
+                <i data-feather="x"></i>
+            </a>
+        </div>
+        <div class="aside-body">
+            <div class="aside-loggedin">
+                <div class="d-flex align-items-center justify-content-start">
+                    <a href="dashboard-one.html" class="avatar"><img src="<?= getHTMLRoot() ?>/assets/img/img1.png" class="rounded-circle" alt=""></a>
+                    <div class="aside-alert-link">
+                        <a href="dashboard-one.html" class="new" data-toggle="tooltip" title="You have 2 unread messages">
+                            <i data-feather="message-square"></i>
+                        </a>
+                        <a href="dashboard-one.html" class="new" data-toggle="tooltip" title="You have 4 new notifications">
+                            <i data-feather="bell"></i>
+                        </a>
+                        <a href="dashboard-one.html" data-toggle="tooltip" title="Sign out">
+                            <i data-feather="log-out"></i>
+                        </a>
                     </div>
                 </div>
+                <div class="aside-loggedin-user">
+                    <a href="dashboard-one.html#loggedinMenu" class="d-flex align-items-center justify-content-between mg-b-2" data-toggle="collapse">
+                        <h6 class="tx-semibold mg-b-0">Katherine Pechon</h6>
+                        <i data-feather="chevron-down"></i>
+                    </a>
+                    <p class="tx-color-03 tx-12 mg-b-0">Administrator</p>
+                </div>
+                <div class="collapse" id="loggedinMenu">
+                    <ul class="nav nav-aside mg-b-0">
+                        <li class="nav-item">
+                            <a href="dashboard-one.html" class="nav-link">
+                                <i data-feather="edit"></i>
+                                <span>Edit Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="dashboard-one.html" class="nav-link">
+                                <i data-feather="user"></i>
+                                <span>View Profile</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="dashboard-one.html" class="nav-link">
+                                <i data-feather="settings"></i>
+                                <span>Account Settings</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="dashboard-one.html" class="nav-link">
+                                <i data-feather="help-circle"></i>
+                                <span>Help Center</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="dashboard-one.html" class="nav-link">
+                                <i data-feather="log-out"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </header>
-        <!-- end header -->
+            <!-- aside-loggedin -->
+            <ul class="nav nav-aside">
+                <li class="nav-label">Dashboard</li>
+                <li class="nav-item active">
+                    <a href="dashboard-one.html" class="nav-link">
+                        <i data-feather="shopping-bag"></i>
+                        <span>Sales Monitoring</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard-two.html" class="nav-link">
+                        <i data-feather="globe"></i>
+                        <span>Website Analytics</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard-three.html" class="nav-link">
+                        <i data-feather="pie-chart"></i>
+                        <span>Cryptocurrency</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="dashboard-four.html" class="nav-link">
+                        <i data-feather="life-buoy"></i>
+                        <span>Helpdesk Management</span>
+                    </a>
+                </li>
+                <li class="nav-label mg-t-25">Web Apps</li>
+                <li class="nav-item">
+                    <a href="app-calendar.html" class="nav-link">
+                        <i data-feather="calendar"></i>
+                        <span>Calendar</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="app-chat.html" class="nav-link">
+                        <i data-feather="message-square"></i>
+                        <span>Chat</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="app-contacts.html" class="nav-link">
+                        <i data-feather="users"></i>
+                        <span>Contacts</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="app-file-manager.html" class="nav-link">
+                        <i data-feather="file-text"></i>
+                        <span>File Manager</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="app-mail.html" class="nav-link">
+                        <i data-feather="mail"></i>
+                        <span>Mail</span>
+                    </a>
+                </li>
 
-        <div id="nt_content">
+                <li class="nav-label mg-t-25">Pages</li>
+                <li class="nav-item with-sub">
+                    <a href="dashboard-one.html" class="nav-link">
+                        <i data-feather="user"></i>
+                        <span>User Pages</span>
+                    </a>
+                    <ul>
+                        <li><a href="page-profile-view.html">View Profile</a></li>
+                        <li><a href="page-connections.html">Connections</a></li>
+                        <li><a href="page-groups.html">Groups</a></li>
+                        <li><a href="page-events.html">Events</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item with-sub">
+                    <a href="dashboard-one.html" class="nav-link">
+                        <i data-feather="file"></i>
+                        <span>Other Pages</span>
+                    </a>
+                    <ul>
+                        <li><a href="page-timeline.html">Timeline</a></li>
+                    </ul>
+                </li>
+                <li class="nav-label mg-t-25">User Interface</li>
+                <li class="nav-item">
+                    <a href="../../components.html" class="nav-link">
+                        <i data-feather="layers"></i>
+                        <span>Components</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="../../collections.html" class="nav-link">
+                        <i data-feather="box"></i>
+                        <span>Collections</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </aside>
+    <div class="content ht-100v pd-0">
+        <div class="content-header">
+            <div class="content-search">
+                <i data-feather="search"></i>
+                <input type="search" class="form-control" placeholder="Search...">
+            </div>
+            <nav class="nav">
+                <a href="dashboard-one.html" class="nav-link">
+                    <i data-feather="help-circle"></i>
+                </a>
+                <a href="dashboard-one.html" class="nav-link">
+                    <i data-feather="grid"></i>
+                </a>
+                <a href="dashboard-one.html" class="nav-link">
+                    <i data-feather="align-left"></i>
+                </a>
+            </nav>
+        </div>
+        <!-- content-header -->
