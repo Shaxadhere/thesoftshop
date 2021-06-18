@@ -17,7 +17,7 @@ function connect(){
 	$server = "localhost";
 	$usr = "root";
 	$pass = "";
-	$data = "arttcsslms";
+	$data = "thesoftshop.pk";
 	$connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
 	return ($connection);
 }
