@@ -28,6 +28,17 @@ $User = mysqli_fetch_array($User);
     <link href="<?= getHTMLRoot() ?>/assets/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/lib/select2/css/select2.min.css" rel="stylesheet">
+    <style>
+        .select2-selection__choice {
+            background-color: #0168fa !important;
+            border: transparent !important;
+            border-radius: 0.1875rem !important;
+            padding: 3px 10px 3px 20px !important;
+        }
+        .select2-search select2-search--inline{
+            padding: 0 0 0 13px !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -64,45 +75,45 @@ $User = mysqli_fetch_array($User);
                 </div>
             </div>
             <ul class="nav nav-aside">
-                <li class="nav-item active">
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/dashboard") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/dashboard" class="nav-link">
                         <i data-feather="home"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
                 <li class="nav-label mg-t-25">Product Management</li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/products") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/products" class="nav-link">
                         <i data-feather="shopping-bag"></i>
                         <span>Products</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/categories") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/categories" class="nav-link">
                         <i data-feather="layers"></i>
                         <span>Categories</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/inventory") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/inventory" class="nav-link">
                         <i data-feather="box"></i>
                         <span>Inventory</span>
                     </a>
                 </li>
                 <li class="nav-label mg-t-25">Sales Management</li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/customers") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/customers" class="nav-link">
                         <i data-feather="users"></i>
                         <span>Customers</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/orders") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/orders" class="nav-link">
                         <i data-feather="package"></i>
                         <span>Orders</span>
                     </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/sales") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/sales" class="nav-link">
                         <i data-feather="activity"></i>
                         <span>Sales</span>

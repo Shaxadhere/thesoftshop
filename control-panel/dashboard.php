@@ -7,8 +7,8 @@ getHeader("Home", "includes/header.php");
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                    <li class="breadcrumb-item"><a href="dashboard-one.html#">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Sales Monitoring</li>
+                    <li class="breadcrumb-item"><a href="../index">TheSoftShop.pk</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
                 </ol>
             </nav>
         </div>

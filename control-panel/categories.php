@@ -31,7 +31,7 @@ getHeader("Categories", "includes/header.php");
                         <div class="form-group col-md-6">
                             <label for="CategoryImages">Category Images</label>
                             <div class="custom-file">
-                                <input type="file" name="CategoryImages" class="custom-file-input" id="CategoryImages">
+                                <input type="file" name="CategoryImages" class="custom-file-input" id="CategoryImages" multiple>
                                 <label class="custom-file-label" for="customFile">Upload Category Images</label>
                             </div>
                         </div>
