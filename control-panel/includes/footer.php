@@ -45,6 +45,14 @@ include_once('web-config.php');
             lengthMenu: '_MENU_ items/page'
         }
     });
+    $('#normal-table').DataTable({
+        responsive: false,
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page'
+        }
+    });
 
     function delay(callback, ms) {
         var timer = 0;
@@ -71,32 +79,19 @@ include_once('web-config.php');
     }
     // Adding placeholder for search input
     (function($) {
-
         'use strict'
-
         var Defaults = $.fn.select2.amd.require('select2/defaults');
-
         $.extend(Defaults.defaults, {
             searchInputPlaceholder: ''
         });
-
         var SearchDropdown = $.fn.select2.amd.require('select2/dropdown/search');
-
         var _renderSearchDropdown = SearchDropdown.prototype.render;
-
         SearchDropdown.prototype.render = function(decorated) {
-
-            // invoke parent method
             var $rendered = _renderSearchDropdown.apply(this, Array.prototype.slice.apply(arguments));
-
             this.$search.attr('placeholder', this.options.get('searchInputPlaceholder'));
-
             return $rendered;
         };
-
     })(window.jQuery);
-
-
     $(function() {
         'use strict'
         $('.sizes-input').select2({

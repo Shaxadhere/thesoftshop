@@ -7,7 +7,7 @@ getHeader("Categories", "includes/header.php");
         <div>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                    <li class="breadcrumb-item"><a href="<?= getHTMLRoot()."/dashboard" ?>">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="<?= getHTMLRoot() . "/dashboard" ?>">Dashboard</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Categories</li>
                 </ol>
             </nav>
@@ -47,32 +47,34 @@ getHeader("Categories", "includes/header.php");
 
         <hr>
         <h2>Categories</h2>
-        <div data-label="Categories" class="main-table">
-            <table id="main-table" class="table">
+        <div data-label="Categories" class="normal-table">
+            <table id="normal-table" class="table">
                 <thead>
                     <tr>
-                        <th class="wd-20p">Name</th>
-                        <th class="wd-25p">Position</th>
-                        <th class="wd-20p">Office</th>
-                        <th class="wd-15p">Age</th>
-                        <th class="wd-20p">Salary</th>
+                        <th class="wd-5p">S.NO</th>
+                        <th class="wd-25p">Category Name</th>
+                        <th class="wd-20p">Category Slug</th>
+                        <th class="wd-20p">Options</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>$170,750</td>
-                    </tr>
+                    <?php
+                    include_once('models/category-model.php');
+                    $CategoryModel = new Category();
+                    $CategoryList = $CategoryModel->List();
+                    $SNo = 1;
+                    while ($row = mysqli_fetch_array($CategoryList)) {
+                    ?>
+                        <tr>
+                            <td><?= $SNo ?></td>
+                            <td><?= $row['CategoryName'] ?></td>
+                            <td><?= $row['CategorySlug'] ?></td>
+                            <td>$320,800</td>
+                        </tr>
+                    <?php
+                    $SNo++;
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>
