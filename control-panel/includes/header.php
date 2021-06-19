@@ -25,6 +25,9 @@ $User = mysqli_fetch_array($User);
     <link href="<?= getHTMLRoot() ?>/assets/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/dashforge.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/dashforge.dashboard.css">
+    <link href="<?= getHTMLRoot() ?>/assets/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+    <link href="<?= getHTMLRoot() ?>/assets/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
+    <link href="<?= getHTMLRoot() ?>/assets/lib/select2/css/select2.min.css" rel="stylesheet">
 </head>
 
 <body>

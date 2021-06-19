@@ -13,6 +13,13 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/lib/chart.js/Chart.bundle.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/lib/jqvmap/jquery.vmap.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/lib/jqvmap/maps/jquery.vmap.usa.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/select2/js/select2.min.js"></script>
+
+<script src="<?= getHTMLRoot() ?>/assets/js/dashforge.js"></script>
 
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.aside.js"></script>
@@ -25,10 +32,20 @@ include_once('web-config.php');
 
 
 </body>
+
 </html>
 
 
 <script>
+    $('#main-table').DataTable({
+        responsive: true,
+        language: {
+            searchPlaceholder: 'Search...',
+            sSearch: '',
+            lengthMenu: '_MENU_ items/page'
+        }
+    });
+
     function delay(callback, ms) {
         var timer = 0;
         return function() {
