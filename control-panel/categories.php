@@ -13,6 +13,9 @@ getHeader("Categories", "includes/header.php");
             </nav>
         </div>
     </div>
+        <?php
+        HTMLToast();
+        ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">

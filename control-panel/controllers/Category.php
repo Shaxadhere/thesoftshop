@@ -39,6 +39,8 @@ if (isset($_POST['SaveCategory'])) {
         redirectWindow(getHTMLRoot() . "/categories?error=$errors[0]");
     }
 
+    
+
     if ($_FILES['CategoryImages'] != null) {
         $status = true;
         $Images = $_FILES['CategoryImages'];

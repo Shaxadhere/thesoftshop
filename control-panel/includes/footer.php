@@ -109,7 +109,7 @@ include_once('web-config.php');
     });
 </script>
 <?php
-if (isset($_REQUEST['Success'])) {
+if (isset($_REQUEST['success'])) {
     echo "<script>";
     echo "$(document).ready(function() {";
     echo "$('#alert').fadeTo(2000, 500).slideUp(500, function() {";

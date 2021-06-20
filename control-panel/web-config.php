@@ -24,39 +24,21 @@ function connect(){
 
 //html toast
 function HTMLToast(){
-	if (isset($_REQUEST['Success'])) {
-		echo "<div class='sa4d25'>";
-		echo "<div class='container-fluid'>";
-		echo "<div class='row'>";
-		echo "<div class='col-lg-12'>";
-		echo "<div class='alert alert-success' id='alert'>";
-		echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
-		echo "<strong>Success! </strong> $_REQUEST[Success]";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
+	if (isset($_REQUEST['success'])) {
+    echo "<div id='alert' class='container-fluid'>";
+    echo "<div class='alert alert-success d-flex' role='alert'>";
+    echo "<i data-feather='alert-circle' class='mg-r-10'></i> $_REQUEST[success]";
+    echo "</div>";
 		echo "</div>";
 	}
 
 	if (isset($_REQUEST['error'])) {
-		echo "<div class='sa4d25'>";
-		echo "<div class='container-fluid'>";
-		echo "<div class='row'>";
-		echo "<div class='col-lg-12'>";
-		echo "<div class='alert alert-danger' id='alertdanger'>";
-		echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
-		if ($_REQUEST['error'] == 401) {
-			echo "<strong>Error! </strong> Access Unauthorized! You are not allowed to visit the page you are trying to access";
-		} else {
-			echo "<strong>Error! </strong> $_REQUEST[error]";
-		}
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-	}
+      echo "<div id='alertdanger' class='container-fluid'>";
+      echo "<div class='alert alert-danger d-flex' role='alert'>";
+      echo "<i data-feather='alert-triangle' class='mg-r-10'></i> $_REQUEST[error]";
+      echo "</div>";
+      echo "</div>";
+  }
 }
 
 //email body
