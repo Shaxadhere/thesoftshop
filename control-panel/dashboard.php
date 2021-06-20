@@ -13,7 +13,7 @@ getHeader("Home", "includes/header.php");
             </nav>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="row row-xs">
 
         </div>

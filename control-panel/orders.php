@@ -13,7 +13,7 @@ getHeader("Orders", "includes/header.php");
             </nav>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <h2>Orders</h2>
         <div data-label="Orders" class="main-table">
             <table id="main-table" class="table">

@@ -13,9 +13,10 @@ getHeader("Categories", "includes/header.php");
             </nav>
         </div>
     </div>
-    <div class="container">
+    <div class="container-fluid">
         <div class="card">
             <div class="card-body">
+            <h5 class="card-title">Add Product</h5>
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-6">
