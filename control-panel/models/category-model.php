@@ -8,6 +8,25 @@ class Category{
         );
     }
 
+    function GenerateSlug($ProductName){
+        $ProductName = mysqli_real_escape_string(connect(), $ProductName);
+        $Slug = slugify($ProductName);
+        $Existence = checkExistance(
+            "tbl_product",
+            "ProductSlug",
+            $Slug,
+            connect()
+        );
+        if($Existence){
+            $ExtraString = 1;
+            while($Existence == false){
+                $Slug = slugify($ProductName) . "-" . $ExtraString;
+                $ExtraString++;
+            }
+        }
+        echo $Slug;
+    }
+
     function Add($CategoryName, $CategorySlug, $CategoryImagesArray, $CategoryTagsArray, $CreatedBy){
         $CategoryName = mysqli_real_escape_string(connect(), $CategoryName);
         $CategorySlug = mysqli_real_escape_string(connect(), $CategorySlug);

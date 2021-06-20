@@ -16,7 +16,7 @@ getHeader("Categories", "includes/header.php");
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Add Product</h5>
+            <h5 class="card-title">Add Category</h5>
                 <form>
                     <div class="form-row">
                         <div class="form-group col-md-6">
