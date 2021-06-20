@@ -17,7 +17,7 @@ getHeader("Products", "includes/header.php");
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Product</h5>
-                <form>
+                <form action="Controllers/Product.php" method="post">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="ProductName">Product Name</label>
@@ -25,13 +25,13 @@ getHeader("Products", "includes/header.php");
                         </div>
                         <div class="form-group col-md-12">
                             <label for="ProductDescription">Product Description</label>
-                            <textarea class="form-control" rows="2" placeholder="Please type product description.."></textarea>
+                            <textarea name="ProductDescription" id="ProductDescription" class="form-control" rows="2" placeholder="Please type product description.."></textarea>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="Sizes">Sizes</label>
-                            <select name="Sizes" style="color:blue" class="form-control sizes-input" multiple="multiple">
+                            <select id="Sizes" name="Sizes" style="color:blue" class="form-control sizes-input" multiple="multiple">
                                 <option label="Choose Sizes"></option>
                                 <option value="Small">Small</option>
                                 <option value="Medium">Medium</option>
@@ -40,12 +40,12 @@ getHeader("Products", "includes/header.php");
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="ProductCode">Product Code</label>
-                            <input type="text" name="ProductCode" class="form-control" id="ProductCode" placeholder="Please type product code">
+                            <label for="ProductSlug">Product Slug</label>
+                            <input type="text" name="ProductSlug" class="form-control" id="ProductSlug" placeholder="Please type product slug">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Categories">Select Categories</label>
-                            <select name="Categories" style="color:blue" class="form-control categories-input" multiple="multiple">
+                            <select id="Categories" name="Categories" style="color:blue" class="form-control categories-input" multiple="multiple">
                                 <option label="Select Categories"></option>
                                 <option value="Small">Small</option>
                             </select>
@@ -72,31 +72,45 @@ getHeader("Products", "includes/header.php");
         <hr>
         <h2>Products</h2>
         <div data-label="Products" class="main-table">
-            <table id="main-table" class="table">
+            <table id="normal-table" class="table">
                 <thead>
                     <tr>
-                        <th class="wd-20p">Name</th>
-                        <th class="wd-25p">Position</th>
-                        <th class="wd-20p">Office</th>
-                        <th class="wd-15p">Age</th>
-                        <th class="wd-20p">Salary</th>
+                        <th class="wd-5p">S.No</th>
+                        <th class="wd-25p">Product Name</th>
+                        <th class="wd-20p">Product Slug</th>
+                        <th class="wd-20p">Options</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Tiger Nixon</td>
-                        <td>System Architect</td>
-                        <td>Edinburgh</td>
-                        <td>61</td>
-                        <td>$320,800</td>
-                    </tr>
-                    <tr>
-                        <td>Garrett Winters</td>
-                        <td>Accountant</td>
-                        <td>Tokyo</td>
-                        <td>63</td>
-                        <td>$170,750</td>
-                    </tr>
+                    <?php
+                    include_once('models/product-model.php');
+                    $ProductModel = new Product();
+                    $ProductList = $ProductModel->List();
+                    $SNo = 1;
+                    while ($row = mysqli_fetch_array($ProductList)) {
+                    ?>
+                        <tr>
+                            <td><?= $SNo ?></td>
+                            <td><?= $row['ProductName'] ?></td>
+                            <td><?= $row['ProductSlug'] ?></td>
+                            <td>
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Options
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item text-primary" href="#">Edit</a>
+                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                    <div class="wd-200 pd-15">
+                                        <p><strong>Created By:</strong>Admin</p>
+                                        <p class="mb-0"><strong>Created At:</strong><?= $row['CreatedAt'] ?></p>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    <?php
+                        $SNo++;
+                    }
+                    ?>
                 </tbody>
             </table>
         </div>

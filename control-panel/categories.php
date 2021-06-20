@@ -13,13 +13,13 @@ getHeader("Categories", "includes/header.php");
             </nav>
         </div>
     </div>
-        <?php
-        HTMLToast();
-        ?>
+    <?php
+    HTMLToast();
+    ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-            <h5 class="card-title">Add Category</h5>
+                <h5 class="card-title">Add Category</h5>
                 <form action="Controllers/Category" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -73,10 +73,22 @@ getHeader("Categories", "includes/header.php");
                             <td><?= $SNo ?></td>
                             <td><?= $row['CategoryName'] ?></td>
                             <td><?= $row['CategorySlug'] ?></td>
-                            <td>$320,800</td>
+                            <td>
+                                <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Options
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item text-primary" href="#">Edit</a>
+                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                    <div class="wd-200 pd-15">
+                                        <p><strong>Created By:</strong>Admin</p>
+                                        <p class="mb-0"><strong>Created At:</strong><?= $row['CreatedAt'] ?></p>
+                                    </div>
+                                </div>
+                            </td>
                         </tr>
                     <?php
-                    $SNo++;
+                        $SNo++;
                     }
                     ?>
                 </tbody>
@@ -88,33 +100,31 @@ getHeader("Categories", "includes/header.php");
 getFooter("includes/footer.php");
 ?>
 <script>
-//get category slug
-$(document).on('keyup', '#CategoryName', function(){
-    var category = $(this).val()
-    $.ajax({
-        type: "POST",
-        url: "Controllers/Category",
-        data: {
-            GenerateSlug: true,
-            CategoryName: category
-        },
-        success: function(response){
-            var result = JSON.parse(response)
-            if(result['success'] == true){
-                if(result['slug'] != "n-a"){
-                    $('#CategorySlug').val(result['slug'])
+    //get category slug
+    $(document).on('keyup', '#CategoryName', function() {
+        var category = $(this).val()
+        $.ajax({
+            type: "POST",
+            url: "Controllers/Category",
+            data: {
+                GenerateSlug: true,
+                CategoryName: category
+            },
+            success: function(response) {
+                var result = JSON.parse(response)
+                if (result['success'] == true) {
+                    if (result['slug'] != "n-a") {
+                        $('#CategorySlug').val(result['slug'])
+                    } else {
+                        $('#CategorySlug').val("")
+                    }
+                } else {
+                    console.log("Error in generating slug")
                 }
-                else{
-                    $('#CategorySlug').val("")
-                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
             }
-            else{
-                console.log("Error in generating slug")
-            }
-        },
-        error: function(error){
-            console.log("Error in connection: " + error)
-        }
+        })
     })
-})
 </script>
