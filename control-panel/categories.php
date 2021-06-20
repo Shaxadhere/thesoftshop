@@ -17,7 +17,7 @@ getHeader("Categories", "includes/header.php");
         <div class="card">
             <div class="card-body">
             <h5 class="card-title">Add Category</h5>
-                <form>
+                <form action="Controllers/Category" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="CategoryName">Category Name</label>
@@ -32,7 +32,7 @@ getHeader("Categories", "includes/header.php");
                         <div class="form-group col-md-6">
                             <label for="CategoryImages">Category Images</label>
                             <div class="custom-file">
-                                <input type="file" name="CategoryImages" class="custom-file-input" id="CategoryImages" multiple>
+                                <input type="file" name="CategoryImages[]" class="custom-file-input" id="CategoryImages" multiple>
                                 <label class="custom-file-label" for="customFile">Upload Category Images</label>
                             </div>
                         </div>
@@ -41,7 +41,7 @@ getHeader("Categories", "includes/header.php");
                             <input type="text" class="form-control" id="CategoryTags" placeholder="watch, discount, aesthetic..">
                         </div>
                     </div>
-                    <button name="SaveCategory" type="submit" class="btn btn-primary">Submit Form</button>
+                    <button name="SaveCategory" type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
@@ -84,3 +84,34 @@ getHeader("Categories", "includes/header.php");
 <?php
 getFooter("includes/footer.php");
 ?>
+<script>
+//get category slug
+$(document).on('keyup', '#CategoryName', function(){
+    var category = $(this).val()
+    $.ajax({
+        type: "POST",
+        url: "Controllers/Category",
+        data: {
+            GenerateSlug: true,
+            CategoryName: category
+        },
+        success: function(response){
+            var result = JSON.parse(response)
+            if(result['success'] == true){
+                if(result['slug'] != "n-a"){
+                    $('#CategorySlug').val(result['slug'])
+                }
+                else{
+                    $('#CategorySlug').val("")
+                }
+            }
+            else{
+                console.log("Error in generating slug")
+            }
+        },
+        error: function(error){
+            console.log("Error in connection: " + error)
+        }
+    })
+})
+</script>
