@@ -41,7 +41,7 @@ getHeader("Categories", "includes/header.php");
                         </div>
                         <div class="form-group col-md-6">
                             <label for="CategoryTags">Category Tags (Comma Seperated)</label>
-                            <input type="text" class="form-control" id="CategoryTags" placeholder="watch, discount, aesthetic..">
+                            <input type="text" name="CategoryTags" class="form-control" id="CategoryTags" placeholder="watch, discount, aesthetic..">
                         </div>
                     </div>
                     <button name="SaveCategory" type="submit" class="btn btn-primary">Submit</button>

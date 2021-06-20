@@ -39,7 +39,7 @@ if (isset($_POST['SaveCategory'])) {
         redirectWindow(getHTMLRoot() . "/categories?error=$errors[0]");
     }
 
-    
+    $TagsArray = explode(",", $_POST['CategoryTags']);
 
     if ($_FILES['CategoryImages'] != null) {
         $status = true;
@@ -74,7 +74,7 @@ if (isset($_POST['SaveCategory'])) {
             $_POST['CategoryName'],
             $_POST['CategorySlug'],
             json_encode($ImageNamesArray),
-            "sss",
+            json_encode($TagsArray),
             $_SESSION['ADMIN']['PK_ID']
         );
         redirectWindow(getHTMLRoot() . "/categories?success=Category added successfully");
