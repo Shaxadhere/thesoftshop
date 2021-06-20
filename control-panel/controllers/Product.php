@@ -8,7 +8,7 @@ session_start();
 $ProductModel = new Product();
 
 if (isset($_POST['GenerateSlug'])) {
-    if(!isset($_SESSION['ADMIN'])){
+    if (!isset($_SESSION['ADMIN'])) {
         exit();
     }
     $Slug = $ProductModel->GenerateSlug(
@@ -22,7 +22,7 @@ if (isset($_POST['GenerateSlug'])) {
 }
 
 if (isset($_POST['SaveProduct'])) {
-    if(!isset($_SESSION['ADMIN'])){
+    if (!isset($_SESSION['ADMIN'])) {
         exit();
     }
     $errors = array();
@@ -74,6 +74,7 @@ if (isset($_POST['SaveProduct'])) {
     if ($errors == null) {
         $ProductModel->Add(
             $_POST['ProductName'],
+            $_POST['Price'],
             $_POST['ProductDescription'],
             json_encode($SizesArray),
             json_encode($Categories),
@@ -82,6 +83,11 @@ if (isset($_POST['SaveProduct'])) {
             json_encode($TagsArray),
             $_SESSION['ADMIN']['PK_ID']
         );
+        $LastProduct = $ProductModel->LastProduct();
+        $LastProduct = mysqli_fetch_array($LastProduct);
+        include_once('../models/inventory-model.php');
+        $InventoryModel = new Inventory();
+        $InventoryModel->Add($LastProduct['PK_ID']);
         redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");
     }
 }

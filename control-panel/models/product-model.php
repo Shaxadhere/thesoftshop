@@ -8,6 +8,13 @@ class Product{
         );
     }
 
+    function LastProduct(){
+        return mysqli_query(
+            connect(),
+            "select * from tbl_product where deleted = 0 order by PK_ID desc LIMIT 1"
+        );
+    }
+
     function GenerateSlug($ProductName){
         $ProductName = mysqli_real_escape_string(connect(), $ProductName);
         $Slug = slugify($ProductName);
@@ -33,9 +40,10 @@ class Product{
         return $Slug;
     }
 
-    function Add($ProductName, $ProductDescription, $Sizes, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray, $CreatedBy)
+    function Add($ProductName, $Price, $ProductDescription, $Sizes, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray, $CreatedBy)
     {
         $ProductName = mysqli_real_escape_string(connect(), $ProductName);
+        $Price = mysqli_real_escape_string(connect(), $Price);
         $ProductDescription = mysqli_real_escape_string(connect(), $ProductDescription);
         $Sizes = mysqli_real_escape_string(connect(), $Sizes);
         $Categories = mysqli_real_escape_string(connect(), $Categories);
@@ -47,6 +55,7 @@ class Product{
             "tbl_product",
             array(
                 "ProductName",
+                "Price",
                 "ProductDescription",
                 "Sizes",
                 "Categories",
@@ -57,6 +66,7 @@ class Product{
             ),
             array(
                 $ProductName,
+                $Price,
                 $ProductDescription,
                 $Sizes,
                 $Categories,

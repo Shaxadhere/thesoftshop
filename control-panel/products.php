@@ -22,9 +22,13 @@ getHeader("Products", "includes/header.php");
                 <h5 class="card-title">Add Product</h5>
                 <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
                     <div class="form-row">
-                        <div class="form-group col-md-12">
+                        <div class="form-group col-md-8">
                             <label for="ProductName">Product Name</label>
                             <input type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Price">Price (in rupees)</label>
+                            <input type="number" name="Price" class="form-control" id="Price" placeholder="Please type price">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="ProductDescription">Product Description</label>
