@@ -13,11 +13,14 @@ getHeader("Products", "includes/header.php");
             </nav>
         </div>
     </div>
+    <?php
+    HTMLToast();
+    ?>
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Product</h5>
-                <form action="Controllers/Product.php" method="post">
+                <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="ProductName">Product Name</label>
@@ -47,7 +50,14 @@ getHeader("Products", "includes/header.php");
                             <label for="Categories">Select Categories</label>
                             <select id="Categories" name="Categories" style="color:blue" class="form-control categories-input" multiple="multiple">
                                 <option label="Select Categories"></option>
-                                <option value="Small">Small</option>
+                                <?php
+                                include_once('models/category-model.php');
+                                $CategoryModel = new Category();
+                                $CategoryList = $CategoryModel->List();
+                                while($row = mysqli_fetch_array($CategoryList)){
+                                    echo "<option value='$row[CategoryName]'>$row[CategoryName]</option>";
+                                }
+                                ?>
                             </select>
                         </div>
                     </div>
@@ -55,7 +65,7 @@ getHeader("Products", "includes/header.php");
                         <div class="form-group col-md-4">
                             <label for="ProductImages">Product Images</label>
                             <div class="custom-file">
-                                <input type="file" name="ProductImages" class="custom-file-input" id="ProductImages" multiple>
+                                <input type="file" name="ProductImages[]" class="custom-file-input" id="ProductImages" multiple>
                                 <label class="custom-file-label" for="customFile">Upload Product Images</label>
                             </div>
                         </div>
@@ -119,3 +129,32 @@ getHeader("Products", "includes/header.php");
 <?php
 getFooter("includes/footer.php");
 ?>
+<script>
+    //get product slug
+    $(document).on('keyup', '#ProductName', function() {
+        var product = $(this).val()
+        $.ajax({
+            type: "POST",
+            url: "Controllers/Product",
+            data: {
+                GenerateSlug: true,
+                ProductName: product
+            },
+            success: function(response) {
+                var result = JSON.parse(response)
+                if (result['success'] == true) {
+                    if (result['slug'] != "n-a") {
+                        $('#ProductSlug').val(result['slug'])
+                    } else {
+                        $('#ProductSlug').val("")
+                    }
+                } else {
+                    console.log("Error in generating slug")
+                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+</script>
