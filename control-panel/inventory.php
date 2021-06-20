@@ -42,7 +42,7 @@ getHeader("Inventory", "includes/header.php");
                                     Options
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item text-primary" href="#AddQuantity" data-toggle="modal">Add Quantity</a>
+                                    <a class="dropdown-item text-primary" data-id="<?= base64_encode($row['InventoryID']) ?>" href="#AddQuantity" data-toggle="modal">Add Quantity</a>
                                     <div class="wd-200 pd-15">
                                         <p><strong>Last Updated By: </strong>Admin</p>
                                         <p class="mb-0"><strong>Last Updated At: </strong><?= $row['CreatedAt'] ?></p>
@@ -63,17 +63,25 @@ getHeader("Inventory", "includes/header.php");
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content tx-14">
             <div class="modal-header">
-                <h6 class="modal-title" id="exampleModalLabel4">Modal Title</h6>
+                <h6 class="modal-title" id="ModalTitle"></h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p class="mg-b-0">It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="ModalCardTitle"></h5>
+                        <h6 class="card-subtitle mb-2 text-muted" id="ModalCardSubtitle"></h6>
+                        <p class="card-text" id="ModalCardText"></p>
+                        <a href="#" class="card-link" id="ModalCardLink"></a>
+                        <a href="#" class="card-link" id="ModalCardLink2"></a>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary tx-13">Save changes</button>
+                <button type="button" class="btn btn-primary tx-13" id="ModalAddButton">Add</button>
             </div>
         </div>
     </div>
@@ -81,3 +89,26 @@ getHeader("Inventory", "includes/header.php");
 <?php
 getFooter("includes/footer.php");
 ?>
+<script>
+    //add quantity button handle
+    $('#AddQuantity').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var inventoryId = button.data('id')
+        $.ajax({
+            type: "POST",
+            url: "Controllers/Inventory",
+            data: {
+                FetchInventory: true,
+                InventoryID: inventoryId
+            },
+            success: function(response) {
+                var result = JSON.parse(response)
+
+
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+</script>
