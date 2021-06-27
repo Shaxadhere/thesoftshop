@@ -20,6 +20,7 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/lib/select2/js/select2.min.js"></script>
 
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/bootstrap-tagsinput.min.js"></script>
 
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.aside.js"></script>

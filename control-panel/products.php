@@ -37,14 +37,15 @@ getHeader("Products", "includes/header.php");
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
-                            <label for="Sizes">Sizes</label>
-                            <select id="Sizes" name="Sizes" style="color:blue" class="form-control sizes-input" multiple="multiple">
+                            <label for="Colors">Colors</label>
+                            <input type="text" data-role="tagsinput" id="Colors" class="form-control">
+                            <!-- <select id="Sizes" name="Sizes" style="color:blue" class="form-control sizes-input" multiple="multiple">
                                 <option label="Choose Sizes"></option>
                                 <option value="Small">Small</option>
                                 <option value="Medium">Medium</option>
                                 <option value="Large">Large</option>
                                 <option value="ExtraLarge">Extra Large</option>
-                            </select>
+                            </select> -->
                         </div>
                         <div class="form-group col-md-4">
                             <label for="ProductSlug">Product Slug</label>
@@ -161,4 +162,7 @@ getFooter("includes/footer.php");
             }
         })
     })
+    
+    //Add color
+    $(document).on('click', '#')
 </script>

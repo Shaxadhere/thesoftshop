@@ -42,7 +42,7 @@ getHeader("Inventory", "includes/header.php");
                                     Options
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item text-primary" data-id="<?= base64_encode($row['InventoryID']) ?>" href="#AddQuantity" data-toggle="modal">Add Quantity</a>
+                                    <a class="dropdown-item text-primary" data-id="<?= base64_encode($row['InventoryID']) ?>" href="#AddQuantity" data-toggle="modal">Update Quantity</a>
                                     <div class="wd-200 pd-15">
                                         <p><strong>Last Updated By: </strong>Admin</p>
                                         <p class="mb-0"><strong>Last Updated At: </strong><?= $row['CreatedAt'] ?></p>
@@ -59,29 +59,22 @@ getHeader("Inventory", "includes/header.php");
         </div>
     </div>
 </div>
-<div class="modal fade" id="AddQuantity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel4" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+<div class="modal fade" id="AddQuantity" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
         <div class="modal-content tx-14">
             <div class="modal-header">
-                <h6 class="modal-title" id="ModalTitle"></h6>
+                <h6 class="modal-title" id="ModalTitle">Modal Title</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title" id="ModalCardTitle"></h5>
-                        <h6 class="card-subtitle mb-2 text-muted" id="ModalCardSubtitle"></h6>
-                        <p class="card-text" id="ModalCardText"></p>
-                        <a href="#" class="card-link" id="ModalCardLink"></a>
-                        <a href="#" class="card-link" id="ModalCardLink2"></a>
-                    </div>
-                </div>
+                <label>Quantity</label>
+                <input class="form-control" type="number" name="Quantity" value="" id="ModalQuantity" />
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary tx-13" id="ModalAddButton">Add</button>
+                <button type="button" id="ModalCancelButton" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
+                <button type="button" data-id="" id="ModalSaveChanges" class="btn btn-primary tx-13">Save changes</button>
             </div>
         </div>
     </div>
@@ -103,10 +96,39 @@ getFooter("includes/footer.php");
             },
             success: function(response) {
                 var result = JSON.parse(response)
-
+                if (result['success'] == true) {
+                    var inventory = result['inventory']
+                    $('#ModalTitle').html(inventory['ProductName'])
+                    $('#ModalQuantity').val(inventory['Quantity'])
+                    $('#ModalSaveChanges').data('id', btoa(inventory['InventoryID']))
+                }
 
             },
             error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+
+    //Save Changes Update Quantity
+    $(document).on('click', '#ModalSaveChanges', function(){
+        var id = $(this).data('id')
+        var quantity = $('#ModalQuantity').val()
+        $.ajax({
+            type: "POST",
+            url: "Controllers/Inventory",
+            data: {
+                UpdateInventory: true,
+                InventoryID: id,
+                Quantity: quantity
+            },
+            success: function(response){
+                if(response == true){
+                    location.reload()
+                    // $('#ModalCancelButton').click()
+                }
+            },
+            error: function(error){
                 console.log("Error in connection: " + error)
             }
         })
