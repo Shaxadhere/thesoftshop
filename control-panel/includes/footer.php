@@ -18,9 +18,11 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/lib/select2/js/select2.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/lib/spectrum-colorpicker/spectrum.js"></script>
 
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/bootstrap-tagsinput.min.js"></script>
+
 
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/dashforge.aside.js"></script>
@@ -107,6 +109,9 @@ include_once('web-config.php');
             placeholder: 'Select Categories',
             searchInputPlaceholder: 'Search options'
         });
+    });
+    $('#colorpicker').spectrum({
+        color: '#17A2B8'
     });
 </script>
 <?php
