@@ -48,14 +48,12 @@ getHeader("Products", "includes/header.php");
                                 include_once('models/category-model.php');
                                 $CategoryModel = new Category();
                                 $CategoryList = $CategoryModel->List();
-                                while($row = mysqli_fetch_array($CategoryList)){
+                                while ($row = mysqli_fetch_array($CategoryList)) {
                                     echo "<option value='$row[CategoryName]'>$row[CategoryName]</option>";
                                 }
                                 ?>
                             </select>
                         </div>
-                    </div>
-                    <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="ProductImages">Product Images</label>
                             <div class="custom-file">
@@ -63,9 +61,47 @@ getHeader("Products", "includes/header.php");
                                 <label class="custom-file-label" for="customFile">Upload Product Images</label>
                             </div>
                         </div>
-                        <div class="form-group col-md-8">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
                             <label for="ProductTags">Product Tags (Comma Seperated)</label>
                             <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4"><strong>Size</strong></div>
+                                        <div class="col-md-4"><strong>Color</strong></div>
+                                        <div class="col-md-4"><strong>Quantity</strong></div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <select id="Sizes" name="Categories" style="color:blue" class="form-control sizes-input">
+                                                <option label="Select Categories"></option>
+                                                <?php
+                                                include_once('models/category-model.php');
+                                                $CategoryModel = new Category();
+                                                $CategoryList = $CategoryModel->List();
+                                                while ($row = mysqli_fetch_array($CategoryList)) {
+                                                    echo "<option value='$row[CategoryName]'>$row[CategoryName]</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary">
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                     <button name="SaveProduct" type="submit" class="btn btn-primary">Save Product</button>
@@ -151,7 +187,7 @@ getFooter("includes/footer.php");
             }
         })
     })
-    
+
     //Add color
     $(document).on('click', '#')
 </script>
