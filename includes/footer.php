@@ -104,22 +104,16 @@ include_once('web-config.php');
                             <div class="menu_footer widget_footer">
                                 <ul class="menu">
                                     <li class="menu-item">
-                                        <a href="store-location.html">Store Location</a>
+                                        <a href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="blog-grid.html">Latest News</a>
+                                        <a href="<?= getHTMLRoot() ?>/file-a-complaint">File a Complaint</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="my-account.html">My Account</a>
+                                        <a href="<?= getHTMLRoot() ?>/my-account">My Account</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="size-guide.html">Size Guide</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="faqs-2.html">FAQs 2</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="faqs.html">FAQs</a>
+                                        <a href="<?= getHTMLRoot() ?>/faqs">FAQs</a>
                                     </li>
                                 </ul>
                             </div>
@@ -128,19 +122,19 @@ include_once('web-config.php');
                     <div class="col-lg-3 col-md-6 col-12 mb__50 order-lg-5 order-1">
                         <div class="widget widget_text">
                             <h3 class="widget-title fwsb flex al_center fl_between fs__16 mg__0 mb__30">
-                                <span class="txt_title">Newsletter Signup</span>
+                                <span class="txt_title">Get Discount Updates</span>
                                 <span class="nav_link_icon ml__5"></span>
                             </h3>
                             <div class="widget_footer newl_des_1">
-                                <p>Subscribe to our newsletter and get 10% off your first purchase</p>
-                                <form id="contact_form" class="mc4wp-form pr z_100">
+                                <p>Subscribe to our newsletter and get sale notifications</p>
+                                <form method="post" action="controllers/newsletter" id="contact_form" class="mc4wp-form pr z_100">
                                     <div class="mc4wp-form-fields">
                                         <div class="signup-newsletter-form row no-gutters pr oh ">
                                             <div class="col col_email">
                                                 <input type="email" name="email" placeholder="Your email address" value="" class="tc tl_md input-text" required="required">
                                             </div>
                                             <div class="col-auto">
-                                                <button type="submit" class="btn_new_icon_false w__100 submit-btn truncate">
+                                                <button name="AddNewsletter" type="submit" class="btn_new_icon_false w__100 submit-btn truncate">
                                                     <span>Subscribe</span>
                                                 </button>
                                             </div>
