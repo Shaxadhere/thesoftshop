@@ -2,19 +2,19 @@
 <div id="kalles-section-toolbar_mobile" class="kalles-section">
     <div class="kalles_toolbar kalles_toolbar_label_true ntpf r__0 l__0 b__0 flex fl_between al_center">
         <div class="type_toolbar_shop kalles_toolbar_item">
-            <a href="shop-filter-options.html">
+            <a href="<?= getHTMLRoot() ?>/shop">
                 <span class="toolbar_icon"></span>
                 <span class="kalles_toolbar_label">Shop</span>
             </a>
         </div>
         <div class="type_toolbar_filter kalles_toolbar_item dn">
-            <a class="dt_trigger_cl" href="#" data-trigger=".btn_filter">
+            <a class="dt_trigger_cl" href="<?= getHTMLRoot() ?>/shop" data-trigger=".btn_filter">
                 <span class="toolbar_icon"></span>
                 <span class="kalles_toolbar_label">Filter</span>
             </a>
         </div>
         <div class="type_toolbar_wish kalles_toolbar_item">
-            <a class="js_link_wis" href="wishlist.html">
+            <a class="js_link_wis" href="<?= getHTMLRoot() ?>/wishlist">
                 <span class="toolbar_icon">
                     <span class="jswcount toolbar_count">3</span>
                 </span>
