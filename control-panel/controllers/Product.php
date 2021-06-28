@@ -4,7 +4,6 @@ include_once('../models/product-model.php');
 
 session_start();
 
-
 $ProductModel = new Product();
 
 if (isset($_POST['GenerateSlug'])) {
@@ -21,11 +20,15 @@ if (isset($_POST['GenerateSlug'])) {
     echo json_encode($result);
 }
 
+//Confirm request from save product
 if (isset($_POST['SaveProduct'])) {
+    //check if user is admin
     if (!isset($_SESSION['ADMIN'])) {
         exit();
     }
+    //initialise erros arary
     $errors = array();
+    //empty input validation
     if (empty($_POST['ProductName'])) {
         array_push($errors, "Product name is required");
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
@@ -34,15 +37,17 @@ if (isset($_POST['SaveProduct'])) {
         array_push($errors, "Product slug is required");
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
     }
+    //check if slug already exists
     if (checkExistance("tbl_Product", "ProductSlug", mysqli_real_escape_string(connect(), $_POST['ProductSlug']), connect())) {
         array_push($errors, "Product slug is should be unique");
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
     }
 
-    $SizesArray = explode(",", $_POST['Sizes']);
+    // $SizesArray = explode(",", $_POST['Sizes']);
     $Categories = explode(",", $_POST['Categories']);
     $TagsArray = explode(",", $_POST['ProductTags']);
 
+    //Check if at least one image is there and add images
     if ($_FILES['ProductImages'] != null) {
         $status = true;
         $Images = $_FILES['ProductImages'];
@@ -71,6 +76,7 @@ if (isset($_POST['SaveProduct'])) {
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
     }
 
+    //Check if there are no errors, finally add the product
     if ($errors == null) {
         $ProductModel->Add(
             $_POST['ProductName'],
@@ -83,11 +89,8 @@ if (isset($_POST['SaveProduct'])) {
             json_encode($TagsArray),
             $_SESSION['ADMIN']['PK_ID']
         );
-        $LastProduct = $ProductModel->LastProduct();
-        $LastProduct = mysqli_fetch_array($LastProduct);
-        include_once('../models/inventory-model.php');
-        $InventoryModel = new Inventory();
-        $InventoryModel->Add($LastProduct['PK_ID']);
+        
+        //to manage inventory ----------------------------------------------
         redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");
     }
 }
