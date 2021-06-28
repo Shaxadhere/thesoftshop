@@ -43,10 +43,7 @@ if (isset($_POST['SaveProduct'])) {
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
     }
 
-    
-
     //Explode comma string input
-    $Categories = explode(",", $_POST['Categories']);
     $TagsArray = explode(",", $_POST['ProductTags']);
 
     //Check if at least one image is there and add images
@@ -57,7 +54,7 @@ if (isset($_POST['SaveProduct'])) {
         // echo json_encode($Images);
         $NumberOfImages = count($_FILES['ProductImages']['name']);
         for ($i = 0; $i < $NumberOfImages; $i++) {
-            $directory = "../uploads/product-images/";
+            $directory = "../../uploads/product-images/";
             $target_file = $directory . basename($_FILES['ProductImages']["name"][$i]);
             $temp = explode(".", $_FILES['ProductImages']["name"][$i]);
             $SingleImageName = random_strings(20) . '.' . end($temp);
@@ -84,15 +81,25 @@ if (isset($_POST['SaveProduct'])) {
             $_POST['ProductName'],
             $_POST['Price'],
             $_POST['ProductDescription'],
-            json_encode($SizesArray),
-            json_encode($Categories),
+            json_encode($_POST['Categories']),
             $_POST['ProductSlug'],
             json_encode($ImageNamesArray),
             json_encode($TagsArray),
             $_SESSION['ADMIN']['PK_ID']
         );
         
-        //to manage inventory ----------------------------------------------
-        redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");
+        $LastProduct = $ProductModel->LastProduct();
+        $LastProduct = mysqli_fetch_array($LastProduct);
+        include_once('../models/inventory-model.php');
+        $InventoryModel = new Inventory();
+        for ($i=0; $i < count($_POST['Quantity']) ; $i++) {
+            $InventoryModel->Add(
+                $LastProduct['PK_ID'],
+                $_POST['Sizes'][$i],
+                $_POST['Colors'][$i],
+                $_POST['Quantity'][$i],
+            );
+        }
+        // redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");
     }
 }

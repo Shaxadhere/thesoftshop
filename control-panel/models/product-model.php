@@ -40,12 +40,11 @@ class Product{
         return $Slug;
     }
 
-    function Add($ProductName, $Price, $ProductDescription, $Sizes, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray, $CreatedBy)
+    function Add($ProductName, $Price, $ProductDescription, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray, $CreatedBy)
     {
         $ProductName = mysqli_real_escape_string(connect(), $ProductName);
         $Price = mysqli_real_escape_string(connect(), $Price);
         $ProductDescription = mysqli_real_escape_string(connect(), $ProductDescription);
-        $Sizes = mysqli_real_escape_string(connect(), $Sizes);
         $Categories = mysqli_real_escape_string(connect(), $Categories);
         $ProductSlug = mysqli_real_escape_string(connect(), $ProductSlug);
         $ProductImagesArray = mysqli_real_escape_string(connect(), $ProductImagesArray);
@@ -57,7 +56,6 @@ class Product{
                 "ProductName",
                 "Price",
                 "ProductDescription",
-                "Sizes",
                 "Categories",
                 "ProductSlug",
                 "ProductImages",
@@ -68,7 +66,6 @@ class Product{
                 $ProductName,
                 $Price,
                 $ProductDescription,
-                $Sizes,
                 $Categories,
                 $ProductSlug,
                 $ProductImagesArray,

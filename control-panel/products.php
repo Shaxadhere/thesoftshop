@@ -42,7 +42,7 @@ getHeader("Products", "includes/header.php");
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Categories">Select Categories</label>
-                            <select id="Categories" name="Categories" style="color:blue" class="form-control categories-input" multiple="multiple">
+                            <select id="Categories" name="Categories[]" style="color:blue" class="form-control categories-input" multiple="multiple">
                                 <option label="Select Categories"></option>
                                 <?php
                                 include_once('models/category-model.php');
