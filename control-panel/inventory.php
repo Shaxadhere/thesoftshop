@@ -21,6 +21,8 @@ getHeader("Inventory", "includes/header.php");
                     <tr>
                         <th class="wd-5p">S.No</th>
                         <th class="wd-25p">Product Name</th>
+                        <th class="wd-25p">Color</th>
+                        <th class="wd-25p">Size</th>
                         <th class="wd-20p">Quantity</th>
                         <th class="wd-20p">Options</th>
                     </tr>
@@ -36,6 +38,8 @@ getHeader("Inventory", "includes/header.php");
                         <tr>
                             <td><?= $SNo ?></td>
                             <td><?= $row['ProductName'] ?></td>
+                            <td><?= $row['ColorName'] ?></td>
+                            <td><?= $row['SizeValue'] ?></td>
                             <td><?= $row['Quantity'] ?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

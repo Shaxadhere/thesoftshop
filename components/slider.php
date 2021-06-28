@@ -15,9 +15,9 @@ include_once('web-config.php');
                     <div class="caption-wrap caption-w-1 pe_none z_100 tl_md tl">
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-left">
                             <div class="left_right">
-                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">SUMMER 2020</h4>
+                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">SUMMER 2021</h4>
                                 <h3 class="kalles-caption-layout-01__title mg__0 lh__1">New Arrival Collection</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="shop-filter-options.html">Explore Now</a>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/new-arrivals">Explore Now</a>
                             </div>
                         </div>
                     </div>
@@ -36,8 +36,8 @@ include_once('web-config.php');
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-right">
                             <div class="right_left">
                                 <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">NEW SEASON</h4>
-                                <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Lookbook Collection</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="shop-filter-options.html">Explore Now</a>
+                                <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Scrunchies Collection</h3>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?query=Scrunchies">Explore Now</a>
                             </div>
                         </div>
                     </div>
@@ -57,7 +57,7 @@ include_once('web-config.php');
                             <div class="left_right">
                                 <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">SUMMER SALE</h4>
                                 <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Save up to 70%</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="shop-filter-options.html">Explore Now</a>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/happy-deals">Explore Now</a>
                             </div>
                         </div>
                     </div>
