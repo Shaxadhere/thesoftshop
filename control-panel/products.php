@@ -131,6 +131,7 @@ getHeader("Products", "includes/header.php");
                         <th class="wd-5p">S.No</th>
                         <th class="wd-25p">Product Name</th>
                         <th class="wd-20p">Product Slug</th>
+                        <th class="wd-20p">Price</th>
                         <th class="wd-20p">Options</th>
                     </tr>
                 </thead>
@@ -146,6 +147,7 @@ getHeader("Products", "includes/header.php");
                             <td><?= $SNo ?></td>
                             <td><?= $row['ProductName'] ?></td>
                             <td><?= $row['ProductSlug'] ?></td>
+                            <td><?= $row['Price'] ?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Options
@@ -154,8 +156,8 @@ getHeader("Products", "includes/header.php");
                                     <a class="dropdown-item text-primary" href="#">Edit</a>
                                     <a class="dropdown-item text-danger" href="#">Delete</a>
                                     <div class="wd-200 pd-15">
-                                        <p><strong>Created By:</strong>Admin</p>
-                                        <p class="mb-0"><strong>Created At:</strong><?= $row['CreatedAt'] ?></p>
+                                        <p><strong>Created By: </strong>System</p>
+                                        <p class="mb-0"><strong>Created At: </strong><?= date('D, d M, Y', strtotime($row['CreatedAt'])) ?></p>
                                     </div>
                                 </div>
                             </td>
