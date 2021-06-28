@@ -43,7 +43,9 @@ if (isset($_POST['SaveProduct'])) {
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
     }
 
-    // $SizesArray = explode(",", $_POST['Sizes']);
+    
+
+    //Explode comma string input
     $Categories = explode(",", $_POST['Categories']);
     $TagsArray = explode(",", $_POST['ProductTags']);
 

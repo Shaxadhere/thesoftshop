@@ -71,17 +71,17 @@ getHeader("Products", "includes/header.php");
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <ul class="list-group">
-                                <li class="list-group-item">
+                                <li id="" class="list-group-item">
                                     <div class="row">
                                         <div class="col-md-4"><strong>Size</strong></div>
                                         <div class="col-md-4"><strong>Color</strong></div>
                                         <div class="col-md-4">
                                             <strong>Quantity</strong>
-                                            <button class="btn btn-link" style="padding:0 !important; float:right !important;">Add Row</button>
+                                            <button class="btn btn-link" type="button" id="AddRowBtn" style="padding:0 !important; float:right !important;">Add Row</button>
                                         </div>
                                     </div>
                                 </li>
-                                <li class="list-group-item">
+                                <li id="QtyRowContainer" class="list-group-item">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
                                             <select id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
@@ -201,6 +201,33 @@ getFooter("includes/footer.php");
         })
     })
 
-    //Add color
-    $(document).on('click', '#')
+    //Add Row
+    $(document).on('click', '#AddRowBtn', function() {
+        var index = $('#QtyRowContainer .form-row').length
+        $.ajax({
+            type: "GET",
+            url: "Components/ProductQuantityRow",
+            data: {
+                Index: index
+            },
+            success: function(response) {
+                $('#QtyRowContainer').append(response)
+                $('.sizes-input').select2({
+                    placeholder: 'Select Size',
+                    searchInputPlaceholder: 'Search options'
+                });
+                $('.colors-input').select2({
+                    placeholder: 'Select Color',
+                    searchInputPlaceholder: 'Search options'
+                });
+                $('.categories-input').select2({
+                    placeholder: 'Select Categories',
+                    searchInputPlaceholder: 'Search options'
+                });
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
 </script>
