@@ -42,6 +42,9 @@ if(isset($_POST['UpdateColor'])){
     if(empty($_POST['ColorName'])){
         array_push($errors, "Color name is required");
     }
+    if(empty($_POST['ColorCode'])){
+        array_push($errors, "Color code is required");
+    }
     if($errors == null){
         $ColorModel->Edit(
             $_POST['ColorID'],
