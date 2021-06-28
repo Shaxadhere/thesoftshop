@@ -88,6 +88,7 @@ if (isset($_POST['SaveProduct'])) {
             $_SESSION['ADMIN']['PK_ID']
         );
         
+        ///Add inventory
         $LastProduct = $ProductModel->LastProduct();
         $LastProduct = mysqli_fetch_array($LastProduct);
         include_once('../models/inventory-model.php');
@@ -100,6 +101,6 @@ if (isset($_POST['SaveProduct'])) {
                 $_POST['Quantity'][$i],
             );
         }
-        // redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");
+        redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");
     }
 }
