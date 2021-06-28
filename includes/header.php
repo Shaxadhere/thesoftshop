@@ -58,6 +58,9 @@ include_once('web-config.php');
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>">Home</a>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/shop">Shop</a>
+                                            </li>
+                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/new-arrivals">New Arrivals</a>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
@@ -71,9 +74,6 @@ include_once('web-config.php');
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/sale">Sale</a>
-                                            </li>
-                                            <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a>
                                             </li>
                                         </ul>
                                     </nav>

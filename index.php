@@ -3,7 +3,7 @@ include_once('web-config.php');
 getHeader("Home", "includes/header.php");
 include_once('components/slider.php');
 include_once('components/category-banner.php');
-include_once('components/trending.php');
+include_once('components/featured.php');
 include_once('components/two-banners.php');
 include_once('components/bestsellers.php');
 include_once('components/instagram.php');
