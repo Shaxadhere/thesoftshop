@@ -1,3 +1,6 @@
+<?php
+// session_start();
+?>
 <!-- mobile toolbar -->
 <div id="kalles-section-toolbar_mobile" class="kalles-section">
     <div class="kalles_toolbar kalles_toolbar_label_true ntpf r__0 l__0 b__0 flex fl_between al_center">
@@ -30,7 +33,7 @@
             </a>
         </div>
         <div class="type_toolbar_account kalles_toolbar_item">
-            <a href="#" class="push_side" data-id="#nt_login_canvas">
+            <a href="<?= isset($_SESSION['USER']) ? getHTMLRoot()."my-account" : "#" ?>" class="push_side" data-id="<?= isset($_SESSION['USER']) ? getHTMLRoot()."" : "#nt_login_canvas" ?>">
                 <span class="toolbar_icon"></span>
                 <span class="kalles_toolbar_label">Account</span>
             </a>
