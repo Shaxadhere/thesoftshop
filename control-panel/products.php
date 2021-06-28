@@ -24,11 +24,11 @@ getHeader("Products", "includes/header.php");
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label for="ProductName">Product Name</label>
-                            <input type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name">
+                            <input required type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Price">Price (in rupees)</label>
-                            <input type="number" name="Price" class="form-control" id="Price" placeholder="Please type price">
+                            <input required type="number" name="Price" class="form-control" id="Price" placeholder="Please type price">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="ProductDescription">Product Description</label>
@@ -38,11 +38,11 @@ getHeader("Products", "includes/header.php");
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="ProductSlug">Product Slug</label>
-                            <input type="text" name="ProductSlug" class="form-control" id="ProductSlug" placeholder="Please type product slug">
+                            <input required type="text" name="ProductSlug" class="form-control" id="ProductSlug" placeholder="Please type product slug">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Categories">Select Categories</label>
-                            <select id="Categories" name="Categories[]" style="color:blue" class="form-control categories-input" multiple="multiple">
+                            <select required id="Categories" name="Categories[]" style="color:blue" class="form-control categories-input" multiple="multiple">
                                 <option label="Select Categories"></option>
                                 <?php
                                 include_once('models/category-model.php');
@@ -57,7 +57,7 @@ getHeader("Products", "includes/header.php");
                         <div class="form-group col-md-4">
                             <label for="ProductImages">Product Images</label>
                             <div class="custom-file">
-                                <input type="file" name="ProductImages[]" class="custom-file-input" id="ProductImages" multiple>
+                                <input required type="file" name="ProductImages[]" class="custom-file-input" id="ProductImages" multiple>
                                 <label class="custom-file-label" for="customFile">Upload Product Images</label>
                             </div>
                         </div>
@@ -84,7 +84,7 @@ getHeader("Products", "includes/header.php");
                                 <li id="QtyRowContainer" class="list-group-item">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <select id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
+                                            <select required id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
                                                 <option label="Select Size"></option>
                                                 <?php
                                                 include_once('models/size-model.php');
@@ -97,7 +97,7 @@ getHeader("Products", "includes/header.php");
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <select id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
+                                            <select required id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
                                                 <option label="Select Color"></option>
                                                 <?php
                                                 include_once('models/color-model.php');
@@ -110,7 +110,7 @@ getHeader("Products", "includes/header.php");
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <input style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
+                                            <input required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
                                         </div>
                                     </div>
                                 </li>
