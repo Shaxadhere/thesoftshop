@@ -75,29 +75,42 @@ getHeader("Products", "includes/header.php");
                                     <div class="row">
                                         <div class="col-md-4"><strong>Size</strong></div>
                                         <div class="col-md-4"><strong>Color</strong></div>
-                                        <div class="col-md-4"><strong>Quantity</strong></div>
+                                        <div class="col-md-4">
+                                            <strong>Quantity</strong>
+                                            <button class="btn btn-link" style="padding:0 !important; float:right !important;">Add Row</button>
+                                        </div>
                                     </div>
                                 </li>
                                 <li class="list-group-item">
                                     <div class="form-row">
                                         <div class="form-group col-md-4">
-                                            <select id="Sizes" name="Categories" style="color:blue" class="form-control sizes-input">
-                                                <option label="Select Categories"></option>
+                                            <select id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
+                                                <option label="Select Size"></option>
                                                 <?php
-                                                include_once('models/category-model.php');
-                                                $CategoryModel = new Category();
-                                                $CategoryList = $CategoryModel->List();
-                                                while ($row = mysqli_fetch_array($CategoryList)) {
-                                                    echo "<option value='$row[CategoryName]'>$row[CategoryName]</option>";
+                                                include_once('models/size-model.php');
+                                                $SizeModel = new Size();
+                                                $SizesList = $SizeModel->List();
+                                                while ($row = mysqli_fetch_array($SizesList)) {
+                                                    echo "<option value='$row[PK_ID]'>$row[SizeValue]</option>";
                                                 }
                                                 ?>
                                             </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary">
+                                            <select id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
+                                                <option label="Select Color"></option>
+                                                <?php
+                                                include_once('models/color-model.php');
+                                                $ColorModel = new Color();
+                                                $ColorList = $ColorModel->List();
+                                                while ($row = mysqli_fetch_array($ColorList)) {
+                                                    echo "<option value='$row[PK_ID]'>$row[ColorName]</option>";
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary">
+                                            <input style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
                                         </div>
                                     </div>
                                 </li>

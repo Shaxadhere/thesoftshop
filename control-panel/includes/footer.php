@@ -96,11 +96,11 @@ include_once('web-config.php');
     $(function() {
         'use strict'
         $('.sizes-input').select2({
-            placeholder: 'Select Available Sizes',
+            placeholder: 'Select Size',
             searchInputPlaceholder: 'Search options'
         });
         $('.colors-input').select2({
-            placeholder: 'Add Colors',
+            placeholder: 'Select Color',
             searchInputPlaceholder: 'Search options'
         });
         $('.categories-input').select2({
