@@ -37,7 +37,7 @@ include_once('web-config.php');
                             <div class="right_left">
                                 <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">NEW SEASON</h4>
                                 <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Scrunchies Collection</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?query=Scrunchies">Explore Now</a>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?name=Scrunchies">Explore Now</a>
                             </div>
                         </div>
                     </div>

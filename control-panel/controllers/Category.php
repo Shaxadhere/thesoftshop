@@ -48,7 +48,7 @@ if (isset($_POST['SaveCategory'])) {
         // echo json_encode($Images);
         $NumberOfImages = count($_FILES['CategoryImages']['name']);
         for ($i = 0; $i < $NumberOfImages; $i++) {
-            $directory = "../uploads/category-images/";
+            $directory = "../../uploads/category-images/";
             $target_file = $directory . basename($_FILES['CategoryImages']["name"][$i]);
             $temp = explode(".", $_FILES['CategoryImages']["name"][$i]);
             $SingleImageName = random_strings(20) . '.' . end($temp);

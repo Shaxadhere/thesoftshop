@@ -30,15 +30,15 @@ include_once('web-config.php');
                                     </p>
                                     <a href="tel:923032804856"><i class="pegk pe-7s-call"></i> <span>+92 (303) 280 4856</span></a>
                                     <div class="nt-social">
-                                        <a href="https://www.facebook.com/thesoftshop.pk" class="facebook cb ttip_nt tooltip_top">
+                                        <a target="_blank" href="https://www.facebook.com/thesoftshop.pk" class="facebook cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Facebook</span>
                                             <i class="facl facl-facebook"></i>
                                         </a>
-                                        <a href="https://twitter.com/thesoftshop.pk" class="twitter cb ttip_nt tooltip_top">
+                                        <a target="_blank" href="https://twitter.com/thesoftshop.pk" class="twitter cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Twitter</span>
                                             <i class="facl facl-twitter"></i>
                                         </a>
-                                        <a href="https://www.instagram.com/thesoftshop.pk" class="instagram cb ttip_nt tooltip_top">
+                                        <a target="_blank" href="https://www.instagram.com/thesoftshop.pk" class="instagram cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Instagram</span>
                                             <i class="facl facl-instagram"></i>
                                         </a>
@@ -56,16 +56,16 @@ include_once('web-config.php');
                             <div class="menu_footer widget_footer">
                                 <ul class="menu">
                                     <li class="menu-item">
-                                        <a href="<?= getHTMLRoot() ?>/category?query=stationary">Stationary</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?name=stationary">Stationary</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?name=accessories">Accessories</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="<?= getHTMLRoot() ?>/category?query=jewellery">Jewellery</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?name=jewellery">Jewellery</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="<?= getHTMLRoot() ?>/category?query=scrunchies">Scrunchies</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?name=scrunchies">Scrunchies</a>
                                     </li>
                                 </ul>
                             </div>
