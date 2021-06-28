@@ -18,37 +18,29 @@ include_once('web-config.php');
                             <div class="widget_footer">
                                 <div class="footer-contact">
                                     <p>
-                                        <a class="d-block" href="index-2.html">
-                                            <img class="w__100 mb__15 lz_op_ef lazyload max-width__95px" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20220%2066%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" alt="Kalles Template" data-src="<?= getHTMLRoot() ?>/assets/images/svg/kalles.svg">
+                                        <a class="d-block" href="<?= getHTMLRoot() ?>">
+                                            <img class="w__100 mb__15 lz_op_ef lazyload" style="width:200px !important" alt="TheSoftShop" data-src="<?= getHTMLRoot() ?>/assets/logo.png">
                                         </a>
                                     </p>
                                     <p>
-                                        <i class="pegk pe-7s-map-marker"> </i><span>184 Main Rd E, St Albans <br> <span class="pl__30">VIC 3021, Australia</span></span>
+                                        <i class="pegk pe-7s-map-marker"> </i><span>Karachi, Pakistan</span></span>
                                     </p>
                                     <p><i class="pegk pe-7s-mail"></i>
-                                        <span><a href="https://themes.the4.co/cdn-cgi/l/email-protection#583b37362c393b2c183b373528393621763b3735"><span class="__cf_email__" data-cfemail="15767a7b6174766155767a7865747b6c3b767a78">[email&#160;protected]</span></a></span>
+                                        <span><a href="mailto:contact@thesoftshop.pk"><span class="__cf_email__" data-cfemail="15767a7b6174766155767a7865747b6c3b767a78">contact@thesoftshop.pk</span></a></span>
                                     </p>
-                                    <p><i class="pegk pe-7s-call"></i> <span>+001 2233 456 </span></p>
+                                    <a href="tel:923032804856"><i class="pegk pe-7s-call"></i> <span>+92 (303) 280 4856</span></a>
                                     <div class="nt-social">
-                                        <a href="https://www.facebook.com/" class="facebook cb ttip_nt tooltip_top">
+                                        <a href="https://www.facebook.com/thesoftshop.pk" class="facebook cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Facebook</span>
                                             <i class="facl facl-facebook"></i>
                                         </a>
-                                        <a href="https://twitter.com/" class="twitter cb ttip_nt tooltip_top">
+                                        <a href="https://twitter.com/thesoftshop.pk" class="twitter cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Twitter</span>
                                             <i class="facl facl-twitter"></i>
                                         </a>
-                                        <a href="https://www.instagram.com/" class="instagram cb ttip_nt tooltip_top">
+                                        <a href="https://www.instagram.com/thesoftshop.pk" class="instagram cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Instagram</span>
                                             <i class="facl facl-instagram"></i>
-                                        </a>
-                                        <a href="https://www.linkedin.com/" class="linkedin cb ttip_nt tooltip_top">
-                                            <span class="tt_txt">Follow on Linkedin</span>
-                                            <i class="facl facl-linkedin"></i>
-                                        </a>
-                                        <a href="https://www.pinterest.com/" class="pinterest cb ttip_nt tooltip_top">
-                                            <span class="tt_txt">Follow on Pinterest</span>
-                                            <i class="facl facl-pinterest"></i>
                                         </a>
                                     </div>
                                 </div>
@@ -64,22 +56,16 @@ include_once('web-config.php');
                             <div class="menu_footer widget_footer">
                                 <ul class="menu">
                                     <li class="menu-item">
-                                        <a href="shop-filter-options.html">Men</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?query=stationary">Stationary</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="shop-filter-options.html">Women</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="shop-1600px-layout.html">Accessories</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?query=jewellery">Jewellery</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="shop-1600px-layout.html">Shoes</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="shop-1600px-layout.html">Denim</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="shop-1600px-layout.html">Dress</a>
+                                        <a href="<?= getHTMLRoot() ?>/category?query=scrunchies">Scrunchies</a>
                                     </li>
                                 </ul>
                             </div>
@@ -94,22 +80,16 @@ include_once('web-config.php');
                             <div class="menu_footer widget_footer">
                                 <ul class="menu">
                                     <li class="menu-item">
-                                        <a href="about-us.html">About Us</a>
+                                        <a href="<?= getHTMLRoot() ?>/about-us">About Us</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="contact-us.html">Contact Us</a>
+                                        <a href="<?= getHTMLRoot() ?>/contact-us">Contact Us</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="terms-conditions.html">Terms &amp; Conditions</a>
+                                        <a href="<?= getHTMLRoot() ?>/terms-and-conditions">Terms &amp; Conditions</a>
                                     </li>
                                     <li class="menu-item">
-                                        <a href="returns-exchanges.html">Returns &amp; Exchanges</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="shipping-delivery.html">Shipping &amp; Delivery</a>
-                                    </li>
-                                    <li class="menu-item">
-                                        <a href="privacy-policy.html">Privacy Policy</a>
+                                        <a href="<?= getHTMLRoot() ?>/shipping-and-delivery">Shipping &amp; Delivery</a>
                                     </li>
                                 </ul>
                             </div>
@@ -188,16 +168,16 @@ include_once('web-config.php');
                     <div class="col-lg-6 col-md-12 col-12 col_2">
                         <ul id="footer-menu" class="clearfix">
                             <li class="menu-item">
-                                <a href="shop-filter-options.html">Shop</a>
+                                <a href="<?= getHTMLRoot() ?>/shop">Shop</a>
                             </li>
                             <li class="menu-item">
-                                <a href="about-us.html">About Us</a>
+                                <a href="<?= getHTMLRoot() ?>/about-us">About Us</a>
                             </li>
                             <li class="menu-item">
-                                <a href="contact-us.html">Contact</a>
+                                <a href="<?= getHTMLRoot() ?>/contact">Contact</a>
                             </li>
                             <li class="menu-item">
-                                <a href="blog-grid.html">Blog</a>
+                                <a href="<?= getHTMLRoot() ?>/blog">Blog</a>
                             </li>
                         </ul>
                     </div>

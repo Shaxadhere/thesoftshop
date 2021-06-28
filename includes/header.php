@@ -46,8 +46,8 @@ include_once('web-config.php');
                                 <div class="col-lg-2 col-md-4 col-6 tc tl_lg">
                                     <div class=" branding ts__05 lh__1">
                                         <a class="dib" href="home-default.html">
-                                            <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
-                                            <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="Kalles Template">
+                                            <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="TheSoftShop">
+                                            <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="TheSoftShop">
                                         </a>
                                     </div>
                                 </div>
@@ -56,73 +56,24 @@ include_once('web-config.php');
                                         <ul id="nt_menu_id" class="nt_menu in_flex wrap al_center">
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>">Home</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/new-arrivals">New Arrivals</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=stationary">Stationary</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/happy-deals">Happy Deals</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/sale">Sale</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a>
-                                                <div class="sub-menu">
-                                                    <div class="lazy_menu lazyload">
-                                                        <div class="menu-item">
-                                                            <a href="blog-grid.html">Grid Layout</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
                                             </li>
                                         </ul>
                                     </nav>
