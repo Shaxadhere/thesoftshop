@@ -96,6 +96,18 @@ $User = mysqli_fetch_array($User);
                         <span>Categories</span>
                     </a>
                 </li>
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/colors") ? "active" : "" ?>">
+                    <a href="<?= getHTMLRoot() ?>/colors" class="nav-link">
+                        <i data-feather="layers"></i>
+                        <span>Colors</span>
+                    </a>
+                </li>
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/sizes") ? "active" : "" ?>">
+                    <a href="<?= getHTMLRoot() ?>/sizes" class="nav-link">
+                        <i data-feather="layers"></i>
+                        <span>Sizes</span>
+                    </a>
+                </li>
                 <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot()."/inventory") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/inventory" class="nav-link">
                         <i data-feather="box"></i>

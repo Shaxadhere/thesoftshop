@@ -13,9 +13,6 @@ getHeader("Colors", "includes/header.php");
             </nav>
         </div>
     </div>
-    <?php
-    HTMLToast();
-    ?>
     <div id='success-alert' class='container-fluid' style="display:none">
         <div class='alert alert-success d-flex' role='alert'>
             <i data-feather='alert-circle' class='mg-r-10'></i> <span id="success-alert-msg"></span>
@@ -70,7 +67,9 @@ getHeader("Colors", "includes/header.php");
                         <tr>
                             <td><?= $SNo ?></td>
                             <td><?= $row['ColorName'] ?></td>
-                            <td><div class="square" style="border: 1px solid lightgrey;height: 30px;width: 30px;<?= $row['ColorCode'] ?>;"></div></td>
+                            <td>
+                                <div class="square" style="border: 1px solid lightgrey;height: 30px;width: 30px;<?= $row['ColorCode'] ?>;"></div>
+                            </td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Options
@@ -115,6 +114,8 @@ getFooter("includes/footer.php");
             },
             success: function(response) {
                 if (response == true) {
+                    $('#ColorName').val("")
+                    $('#ColorCode').val("")
                     $('#success-alert-msg').html("Color added successfully!")
                     $('#success-alert').show()
                     setTimeout(function() {

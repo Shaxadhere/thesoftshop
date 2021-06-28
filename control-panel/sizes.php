@@ -13,9 +13,16 @@ getHeader("Sizes", "includes/header.php");
             </nav>
         </div>
     </div>
-    <?php
-    HTMLToast();
-    ?>
+    <div id='success-alert' class='container-fluid' style="display:none">
+        <div class='alert alert-success d-flex' role='alert'>
+            <i data-feather='alert-circle' class='mg-r-10'></i> <span id="success-alert-msg"></span>
+        </div>
+    </div>
+    <div id='error-alert' class='container-fluid' style="display:none">
+        <div class='alert alert-danger d-flex' role='alert'>
+            <i data-feather='alert-triangle' class='mg-r-10'></i> <span id="error-alert-msg"></span>
+        </div>
+    </div>
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
@@ -26,7 +33,7 @@ getHeader("Sizes", "includes/header.php");
                             <label for="SizeValue">Size Value</label>
                             <input type="text" name="SizeValue" class="form-control" id="SizeValue" placeholder="Please type size value">
                         </div>
-                        <button name="CreateSize" type="submit" class="btn btn-primary">Submit</button>
+                        <button name="CreateSize" id="CreateSize" type="button" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
             </div>
@@ -34,7 +41,7 @@ getHeader("Sizes", "includes/header.php");
 
         <hr>
         <h2>Sizes</h2>
-        <div data-label="Categories" class="normal-table">
+        <div data-label="Sizes" class="normal-table">
             <table id="normal-table" class="table">
                 <thead>
                     <tr>
@@ -45,15 +52,15 @@ getHeader("Sizes", "includes/header.php");
                 </thead>
                 <tbody>
                     <?php
-                    include_once('models/category-model.php');
-                    $CategoryModel = new Category();
-                    $CategoryList = $CategoryModel->List();
+                    include_once('models/size-model.php');
+                    $SizeModel = new Size();
+                    $SizeList = $SizeModel->List();
                     $SNo = 1;
-                    while ($row = mysqli_fetch_array($CategoryList)) {
+                    while ($row = mysqli_fetch_array($SizeList)) {
                     ?>
                         <tr>
                             <td><?= $SNo ?></td>
-                            <td><?= $row['CategoryName'] ?></td>
+                            <td><?= $row['SizeValue'] ?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Options
@@ -62,8 +69,8 @@ getHeader("Sizes", "includes/header.php");
                                     <a class="dropdown-item text-primary" href="#">Edit</a>
                                     <a class="dropdown-item text-danger" href="#">Delete</a>
                                     <div class="wd-200 pd-15">
-                                        <p><strong>Created By:</strong>Admin</p>
-                                        <p class="mb-0"><strong>Created At:</strong><?= $row['CreatedAt'] ?></p>
+                                        <p><strong>Created By: </strong>Admin</p>
+                                        <p class="mb-0"><strong>Created At: </strong><?= $row['CreatedAt'] ?></p>
                                     </div>
                                 </div>
                             </td>
@@ -80,3 +87,37 @@ getHeader("Sizes", "includes/header.php");
 <?php
 getFooter("includes/footer.php");
 ?>
+<script>
+    $(document).on('click', '#CreateSize', function() {
+        var sizeValue = $('#SizeValue').val()
+        $.ajax({
+            type: "POST",
+            url: "controllers/Size",
+            data: {
+                CreateSize: true,
+                SizeValue: sizeValue
+            },
+            success: function(response) {
+                if (response == true) {
+                    $('#SizeValue').val("")
+                    $('#success-alert-msg').html("Size added successfully!")
+                    $('#success-alert').show()
+                    setTimeout(function() {
+                        $('#success-alert').hide()
+                    }, 3000)
+
+                } else {
+                    var result = JSON.parse(response)
+                    $('#error-alert-msg').html(result[0])
+                    $('#error-alert').show()
+                    setTimeout(function() {
+                        $('#error-alert').hide()
+                    }, 3000)
+                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+</script>
