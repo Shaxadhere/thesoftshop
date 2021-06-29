@@ -156,7 +156,7 @@ include_once('web-config.php');
         <div class="footer__bot_wrap pt__20 pb__20">
             <div class="container pr tc">
                 <div class="row">
-                    <div class="col-lg-6 col-md-12 col-12 col_1">Copyright © 2021
+                    <div class="col-lg-6 col-md-12 col-12 col_1">Copyright © <span id="year"></span>
                         <span class="cp">TheSoftShop</span> all rights reserved.
                     </div>
                     <div class="col-lg-6 col-md-12 col-12 col_2">
@@ -187,7 +187,6 @@ include_once('web-config.php');
 <!--mask overlay-->
 <div class="mask-overlay ntpf t__0 r__0 l__0 b__0 op__0 pe_none"></div>
 <!--end mask overlay-->
-<script data-cfasync="false" src="../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/jquery-3.5.1.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/jarallax.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/packery.pkgd.min.js"></script>
@@ -204,7 +203,6 @@ include_once('web-config.php');
     var d = new Date();
     var n = d.getFullYear();
     document.getElementById("year").innerHTML = n;
-
 
     function delay(callback, ms) {
         var timer = 0;
@@ -229,6 +227,36 @@ include_once('web-config.php');
         }
         console.log('Query variable %s not found', variable);
     }
+
+    $(document).on('mouseover', '.quick-view-product', function(){
+        var productId = $(this).attr('data-id')
+        $.ajax({
+            type: "POST",
+            url: "controllers/product",
+            data: {
+                ViewProduct: true,
+                ProductID: productId
+            },
+            success: function(response){
+                var result = JSON.parse(response)
+                if(result['success'] == true){
+                    var product = result['productDetails'][0]
+                    console.log(product['ProductName'])
+                    $('#view-product-name-anchor').html(product['ProductName'])
+                }
+                else{
+                    console.log(result['error'])
+                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+
+    $(document).on('click', '.checklol', function(){
+        alert("clicked")
+    })
 </script>
 <?php
 if (isset($_REQUEST['Success'])) {

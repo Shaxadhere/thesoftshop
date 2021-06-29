@@ -23,6 +23,17 @@
             while($row = mysqli_fetch_array($FeaturedProducts)){
                 $Categories = json_decode($row['Categories']);
                 $ProductImages = json_decode($row['ProductImages']);
+
+                $ProductDetails = $ProductModel->FilterWithAttributesByProductID(base64_encode($row['PK_ID']));
+                $Colors = array();
+                $ColorCodes = array();
+                $Sizes = array();
+
+                while($Deatil = mysqli_fetch_array($ProductDetails)){
+                    array_push($Colors, $Deatil['ColorName']);
+                    array_push($ColorCodes, $Deatil['ColorCode']);
+                    array_push($Sizes, $Deatil['SizeValue']);
+                }
             ?>
             
             <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
@@ -33,7 +44,7 @@
                             <div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>"></div>
                         </a>
                         <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
-                            <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>"></div>
+                            <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= (isset($ProductImages[1])) ? $ProductImages[1] : $ProductImages[0] ?>"></div>
                         </div>
                         <div class="nt_add_w ts__03 pa ">
                             <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right">
@@ -41,13 +52,13 @@
                                 <i class="facl facl-heart-o"></i>
                             </a>
                         </div>
-                        <div class="hover_button op__0 tc pa flex column ts__03">
+                        <div class="hover_button op__0 tc pa flex column ts__03 checklol">
                             <a class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left" href="#">
                                 <span class="tt_txt">Quick view</span>
-                                <i class="iccl iccl-eye"></i>
+                                <i data-id="<?= base64_encode($row['PK_ID']) ?>" class="iccl iccl-eye quick-view-product"></i>
                                 <span>Quick view</span>
                             </a>
-                            <a href="#" class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left">
+                            <a href="#" class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left" class="quick-shop-product">
                                 <span class="tt_txt">Quick Shop</span>
                                 <i class="iccl iccl-cart"></i>
                                 <span>Quick Shop</span>
@@ -59,13 +70,18 @@
                     </div>
                     <div class="product-info mt__15">
                         <h3 class="product-title position-relative fs__14 mg__0 fwm">
-                            <a class="cd chp" href="product-detail-layout-01.html">Blush Beanie</a>
+                            <a class="cd chp" href="product-detail-layout-01.html"><?= $row['ProductName'] ?></a>
                         </h3>
-                        <span class="price dib mb__5">$15.00</span>
+                        <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
                         <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
-                            <span data-bgset="<?= getHTMLRoot() ?>/assets/images/products/pr-05.jpg" class="lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right"><span class="tt_txt">Grey</span><span class="swatch__value bg_color_grey"></span></span>
-                            <span data-bgset="<?= getHTMLRoot() ?>/assets/images/products/pr-31.jpg" class="lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right"><span class="tt_txt">Pink</span><span class="swatch__value bg_color_pink"></span></span>
-                            <span data-bgset="<?= getHTMLRoot() ?>/assets/images/products/pr-32.jpg" class="lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right"><span class="tt_txt">Black</span><span class="swatch__value bg_color_black"></span></span>
+                            <?php
+                            for ($i=0; $i < count($Colors); $i++) { 
+                                echo "<span ";
+                                echo "class='lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right'>";
+                                echo "<span class='tt_txt'>".$Colors[$i]."</span>";
+                                echo "<span class='swatch__value' style='".$ColorCodes[$i]."'></span></span>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
