@@ -89,8 +89,8 @@
                                 <img class="lazyload img_tr_s1 w__100" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%202244%20285%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/assets/images/trust_img2.png" alt="">
                             </div>
                             <div class="product_meta">
-                                <span class="posted_in" id="view-product-categories-container"><span class="cb">Categories:</span> <a href="shop-filter-options.html" class="cg" title="Women">Women</a></span>
-                                <span class="tagged_as" id="view-product-tags-container"><span class="cb">Tags:</span> <a href="shop-filter-options.html" class="cg" title="Color Black">Color Black</a>, <a href="shop-filter-options.html" class="cg" title="Color Pink">Color Pink</a>, <a href="shop-filter-options.html" class="cg" title="Price $7-$50">Price $7-$50</a>, <a href="shop-filter-options.html" class="cg" title="Vendor Kalles">Vendor Kalles</a>, <a href="shop-filter-options.html" class="cg" title="Watch">Watch</a>, <a href="shop-filter-options.html" class="cg" title="women">women</a></span>
+                                <span class="posted_in" id="view-product-categories-container"><span class="cb">Categories:</span> <a href="shop-filter-options.html" class="cg" title="Women">${Categories}</a></span>
+                                <span class="tagged_as" id="view-product-tags-container"><span class="cb">Tags:</span> <a href="shop-filter-options.html" class="cg" title="Color Black">${Tags}</a></span>
                             </div>
                             <a id="view-product-view-full-details" href="#" class="btn fwsb detail_link p-0 fs__14">View full details<i class="facl facl-right"></i></a>
                         </div>

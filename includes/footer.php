@@ -228,7 +228,7 @@ include_once('web-config.php');
         console.log('Query variable %s not found', variable);
     }
 
-    $(document).on('mouseover', '.quick-view-product', function(){
+    $(document).on('mouseover', '.quick-view-product', function() {
         var productId = $(this).attr('data-id')
         $.ajax({
             type: "POST",
@@ -237,19 +237,21 @@ include_once('web-config.php');
                 ViewProduct: true,
                 ProductID: productId
             },
-            success: function(response){
+            success: function(response) {
                 var result = JSON.parse(response)
-                if(result['success'] == true){
+                if (result['success'] == true) {
                     var productDetails = result['productDetails']
                     var product = productDetails[0]
                     var images = JSON.parse(product['ProductImages'])
                     var reviews = JSON.parse(product['Reviews'])
+                    var categories = JSON.parse(product['Categories'])
+                    var tags = JSON.parse(product['ProductTags'])
                     $('#view-product-name-anchor').html(product['ProductName'])
                     $('#view-product-image-container').empty()
                     images.forEach(item => {
                         $('#view-product-image-container').append(
-                            "<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>"+
-                            "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='<?= getHTMLRoot() ?>/uploads/product-images/"+item+"'></span>"+
+                            "<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" +
+                            "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='<?= getHTMLRoot() ?>/uploads/product-images/" + item + "'></span>" +
                             "</div>"
                         )
                     });
@@ -258,29 +260,67 @@ include_once('web-config.php');
                     $('#view-product-description').html(product['ProductDescription'])
                     $('#view-product-default-color').html(product['ColorName'])
                     $('#view-product-default-size').html(
-                        (product['SizeValue'] != "None") 
-                        ? "Size: <span class='nt_name_current user_choose_js'>"+product['SizeValue']+"</span>"
-                        : ""
+                        (product['SizeValue'] != "None") ?
+                        "Size: <span class='nt_name_current user_choose_js'>" + product['SizeValue'] + "</span>" :
+                        ""
                     )
                     $('#view-product-colors-container').empty()
                     $('#view-product-sizes-container').empty()
                     productDetails.forEach(item => {
                         $('#view-product-colors-container').append(
-                            "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='"+item['ColorName']+"'>"+
-                            "<span class='tt_txt' >"+item['ColorName']+"</span><span class='swatch__value_pr pr' style='"+item['ColorCode']+"'></span>"+
+                            "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" +
+                            "<span class='tt_txt' >" + item['ColorName'] + "</span><span class='swatch__value_pr pr' style='" + item['ColorCode'] + "'></span>" +
                             "</li>"
                         )
-                        if(item['SizeValue'] != "None"){
+                        if (item['SizeValue'] != "None") {
                             $('#view-product-sizes-container').append(
-                                "<li class='nt-swatch swatch_pr_item pr' data-escape='"+item['SizeValue']+"'>"+
-                                "<span class='swatch__value_pr'>"+item['SizeValue']+"</span>"+
+                                "<li class='nt-swatch swatch_pr_item pr' data-escape='" + item['SizeValue'] + "'>" +
+                                "<span class='swatch__value_pr'>" + item['SizeValue'] + "</span>" +
                                 "</li>"
                             )
                         }
                     });
+                    $('#view-product-categories-container').empty()
+                    $('#view-product-categories-container').html(
+                        "<span class='cb'>Categories: </span>"
+                    )
+                    count = categories.length
+                    index = 0;
+                    categories.forEach(item => {
+                        index++
+                        if(count == index){
+                            $('#view-product-categories-container').append(
+                                "<a href='<?= getHTMLRoot() ?>/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
+                            )
+                        }
+                        else{
+                            $('#view-product-categories-container').append(
+                                "<a href='<?= getHTMLRoot() ?>/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
+                            )
+                        }
+                    });
+                    $('#view-product-tags-container').empty()
+                    $('#view-product-tags-container').html(
+                        "<span class='cb'>Tags: </span>"
+                    )
+                    count = tags.length
+                    index = 0;
+                    tags.forEach(item => {
+                        index++
+                        if(count == index){
+                            $('#view-product-tags-container').append(
+                                "<a href='<?= getHTMLRoot() ?>/products?tags=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
+                            )
+                        }
+                        else{
+                            $('#view-product-tags-container').append(
+                                "<a href='<?= getHTMLRoot() ?>/products?tags=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
+                            )
+                        }
+                    });
 
-                }
-                else{
+
+                } else {
                     console.log(result['error'])
                 }
             },
@@ -290,7 +330,7 @@ include_once('web-config.php');
         })
     })
 
-    $(document).on('click', '.checklol', function(){
+    $(document).on('click', '.checklol', function() {
         alert("clicked")
     })
 </script>
