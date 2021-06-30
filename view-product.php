@@ -52,7 +52,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                             "class='img_ptw p_ptw p-item sp-pr-gallery__img w__100 nt_bg_lz lazyload padding-top__127_66 media_id_001' " .
                                             "data-mdid='001' data-height='1440' data-width='1128' data-ratio='0.7833333333333333' data-mdtype='image' " .
                                             "data-src='" . getHtmlRoot() . "/uploads/product-images/" . $image . "' data-bgset='" . getHtmlRoot() . "/uploads/product-images/" . $image . "' " .
-                                            "data-cap='Blush Beanie - color pink , size S'></div>";
+                                            "data-cap='$Product[ProductName] - color pink , size S'></div>";
                                     }
                                     ?>
                                 </div>
