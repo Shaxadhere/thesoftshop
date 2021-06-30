@@ -1,13 +1,18 @@
 <?php
 include_once('web-config.php');
-getHeader("Category", "includes/header.php");
+$CategorySlug = $_REQUEST['name'];
+include_once('models/category-model.php');
+$CategoryModel = new Category();
+$Category = $CategoryModel->FilterByCategorySlug($CategorySlug);
+$Category = mysqli_fetch_array($Category);
+getHeader($Category['CategoryName'], "includes/header.php");
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
     <div class="page-head tc pr oh cat_bg_img page_head_">
         <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
         <div class="container pr z_100">
-            <h1 class="mb__5 cw">New Arrivals</h1>
+            <h1 class="mb__5 cw"><?= $Category['CategoryName'] ?></h1>
             <p class="mg__0">Trendy new products with very unique style and design for your unique experience.</p>
         </div>
     </div>
@@ -22,8 +27,8 @@ getHeader("Category", "includes/header.php");
             include_once('web-config.php');
             include_once('models/product-model.php');
             $ProductModel = new Product();
-            $FeaturedProducts = $ProductModel->ListByCategoryName("New arrivals");
-            while ($row = mysqli_fetch_array($FeaturedProducts)) {
+            $CategoryProducts = $ProductModel->ListByCategoryName($Category['CategoryName']);
+            while ($row = mysqli_fetch_array($CategoryProducts)) {
                 $Categories = json_decode($row['Categories']);
                 $ProductImages = json_decode($row['ProductImages']);
 

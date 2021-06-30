@@ -67,16 +67,16 @@ session_start();
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/new-arrivals">New Arrivals</a>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=stationary">Stationary</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?name=stationary">Stationary</a>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
                                                 <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/happy-deals">Happy Deals</a>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?name=accessories">Accessories</a>
                                             </li>
                                             <li class="type_dropdown menu-item has-children menu_has_offsets menu_right pos_right">
-                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/sale">Sale</a>
+                                                <a class="lh__1 flex al_center pr" href="<?= getHTMLRoot() ?>/category?name=stickers">Stickers</a>
                                             </li>
                                         </ul>
                                     </nav>
