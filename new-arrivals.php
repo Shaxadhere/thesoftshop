@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Home", "includes/header.php");
+getHeader("New Arrivals", "includes/header.php");
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
@@ -22,7 +22,7 @@ getHeader("Home", "includes/header.php");
             include_once('web-config.php');
             include_once('models/product-model.php');
             $ProductModel = new Product();
-            $FeaturedProducts = $ProductModel->ListFeatured();
+            $FeaturedProducts = $ProductModel->ListByCategoryName("New arrivals");
             while ($row = mysqli_fetch_array($FeaturedProducts)) {
                 $Categories = json_decode($row['Categories']);
                 $ProductImages = json_decode($row['ProductImages']);

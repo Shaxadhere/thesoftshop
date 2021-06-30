@@ -4,7 +4,15 @@ class Product{
     function ListFeatured(){
         return mysqli_query(
             connect(),
-            "SELECT * FROM `tbl_product` WHERE tbl_product.Categories LIKE '%featured%' order by PK_ID desc limit 8"
+            "SELECT * FROM `tbl_product` WHERE tbl_product.Categories LIKE '%featured%' and Status = 1 and Deleted = 0 order by PK_ID desc limit 8"
+        );
+    }
+
+    function ListByCategoryName($CategoryName){
+        $CategoryName = mysqli_real_escape_string(connect(), $CategoryName);
+        return mysqli_query(
+            connect(),
+            "SELECT * FROM `tbl_product` WHERE tbl_product.Categories LIKE '%$CategoryName%' and Status = 1 and Deleted = 0 order by PK_ID desc limit 8"
         );
     }
 
