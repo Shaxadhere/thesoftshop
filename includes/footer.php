@@ -249,7 +249,7 @@ include_once('web-config.php');
                     images.forEach(item => {
                         $('#view-product-image-container').append(
                             "<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>"+
-                            "<span class='nt_bg_lz lazyload' data-bgset='<?= getHTMLRoot() ?>/uploads/product-images/"+item+"'></span>"+
+                            "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='<?= getHTMLRoot() ?>/uploads/product-images/"+item+"'></span>"+
                             "</div>"
                         )
                     });
