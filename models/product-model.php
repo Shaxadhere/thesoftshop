@@ -13,6 +13,14 @@ class Product{
         );
     }
 
+    function ListRandom($limit){
+        $limit = mysqli_real_escape_string(connect(), $limit);
+        return mysqli_query(
+            connect(),
+            "SELECT * FROM tbl_product ORDER BY RAND() LIMIT 4;"
+        );
+    }
+
     function ListByCategoryName($CategoryName){
         $CategoryName = mysqli_real_escape_string(connect(), $CategoryName);
         return mysqli_query(
