@@ -83,24 +83,20 @@ getHeader($Product['ProductName'], "includes/header.php");
                     <div class="col-md-6 col-12 product-infors pr_sticky_su">
                         <div class="theiaStickySidebar">
                             <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
-                                <h1 class="product_title entry-title fs__16">Blush Beanie</h1>
+                                <h1 class="product_title entry-title fs__16"><?= $Product['ProductName'] ?></h1>
                                 <div class="flex wrap fl_between al_center price-review">
-                                    <p class="price_range" id="price_ppr">$15.00</p>
+                                    <p class="price_range" id="price_ppr">Rs. <?= $Product['Price'] ?></p>
                                     <a href="#tab_reviews_product" class="rating_sp_kl dib">
                                         <div class="kalles-rating-result">
-                                            <span class="kalles-rating-result__pipe">
-                                                <span class="kalles-rating-result__start kalles-rating-result__start--big"></span>
-                                                <span class="kalles-rating-result__start kalles-rating-result__start--big"></span>
-                                                <span class="kalles-rating-result__start kalles-rating-result__start--big"></span>
-                                                <span class="kalles-rating-result__start kalles-rating-result__start--big active"></span>
-                                                <span class="kalles-rating-result__start kalles-rating-result__start--big"></span>
-                                            </span>
-                                            <span class="kalles-rating-result__number">(12 reviews)</span>
+                                            <?php
+                                            $Reviews = json_decode($Product['Reviews']);
+                                            ?>
+                                            <span class="kalles-rating-result__number">(<?= (($Reviews != null) ? count($Reviews) : "0") ?> reviews)</span>
                                         </div>
                                     </a>
                                 </div>
                                 <div class="pr_short_des">
-                                    <p class="mg__0">Go kalles this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish kalles vibe.</p>
+                                    <p class="mg__0"><?= $Product['ProductDescription'] ?></p>
                                 </div>
                                 <div class="btn-atc atc-slide btn_des_1 btn_txt_3">
                                     <div id="callBackVariant_ppr">

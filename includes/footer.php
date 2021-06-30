@@ -194,12 +194,12 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/js/magnific-popup.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/flickity.pkgd.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/lazysizes.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/assets/js/js-cookie.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/assets/js/jquery.countdown.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/assets/js/interface.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/photoswipe.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/photoswipe-ui-default.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/drift.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/js-cookie.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/jquery.countdown.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/interface.js"></script>
 
 
 <script>
