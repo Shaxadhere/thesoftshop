@@ -1,6 +1,141 @@
 <?php
 include_once('web-config.php');
-getHeader("Home", "includes/header.php");
+getHeader("Shop", "includes/header.php");
+?>
+<!--shop banner-->
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh cat_bg_img page_head_">
+        <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
+        <div class="container pr z_100">
+            <h1 class="mb__5 cw">Shop</h1>
+            <p class="mg__0">Shop through our latest selection of very unique and best quality products</p>
+        </div>
+    </div>
+</div>
+<!--end shop banner-->
+
+<div class="container container_cat pop_default cat_default mb__20">
+
+    <!--grid control-->
+    <div class="cat_toolbar row fl_center al_center mt__30">
+        <div class="cat_filter col op__0 pe_none">
+            <a href="#" data-opennt="#kalles-section-nt_filter" data-pos="left" data-remove="true" data-class="popup_filter" data-bg="hide_btn" class="has_icon btn_filter mgr"><i class="iccl fwb iccl-filter fwb mr__5"></i>Filter</a>
+            <a href="#" data-id="#kalles-section-nt_filter" class="btn_filter js_filter dn mgr"><i class="iccl fwb iccl-filter fwb mr__5"></i>Filter</a>
+        </div>
+        <div class="cat_view col-auto">
+            <div class="dn dev_desktop">
+                <a href="#" data-mode="grid" data-dev="dk" data-col="6" class="pr mr__10 cat_view_page view_6"></a>
+                <a href="#" data-mode="grid" data-dev="dk" data-col="4" class="pr mr__10 cat_view_page view_4"></a>
+                <a href="#" data-mode="grid" data-dev="dk" data-col="3" class="pr mr__10 cat_view_page view_3 active"></a>
+                <a href="#" data-mode="grid" data-dev="dk" data-col="15" class="pr mr__10 cat_view_page view_15"></a>
+                <a href="#" data-mode="grid" data-dev="dk" data-col="2" class="pr cat_view_page view_2"></a>
+            </div>
+            <div class="dn dev_tablet dev_view_cat">
+                <a href="#" data-dev="tb" data-col="6" class="pr mr__10 cat_view_page view_6"></a>
+                <a href="#" data-dev="tb" data-col="4" class="pr mr__10 cat_view_page view_4"></a>
+                <a href="#" data-dev="tb" data-col="3" class="pr cat_view_page view_3"></a>
+            </div>
+            <div class="flex dev_mobile dev_view_cat">
+                <a href="#" data-dev="mb" data-col="12" class="pr mr__10 cat_view_page view_12"></a>
+                <a href="#" data-dev="mb" data-col="6" class="pr cat_view_page view_6"></a>
+            </div>
+        </div>
+        <div class="cat_sortby cat_sortby_js col tr kalles_dropdown kalles_dropdown_container">
+            <a class="in_flex fl_between al_center sortby_pick kalles_dropDown_label" href="#">
+                <span class="lbl-title sr_txt dn">Featured</span>
+                <span class="lbl-title sr_txt_mb">Sort by</span>
+                <i class="ml__5 mr__5 facl facl-angle-down"></i>
+            </a>
+            <div class="nt_sortby dn">
+                <svg class="ic_triangle_svg" viewBox="0 0 20 9" role="presentation">
+                    <path d="M.47108938 9c.2694725-.26871321.57077721-.56867841.90388257-.89986354C3.12384116 6.36134886 5.74788116 3.76338565 9.2467995.30653888c.4145057-.4095171 1.0844277-.40860098 1.4977971.00205122L19.4935156 9H.47108938z" fill="#ffffff"></path>
+                </svg>
+                <div class="h3 mg__0 tc cd tu ls__2 dn_lg db">Sort by<i class="pegk pe-7s-close fs__50 ml__5"></i>
+                </div>
+                <div class="nt_ajaxsortby wrap_sortby kalles_dropdown_options">
+                    <a data-label="Featured" class="kalles_dropdown_option truncate selected" href="#">Featured</a>
+                    <a data-label="Best selling" class="kalles_dropdown_option truncate" href="#">Best selling</a>
+                    <a data-label="Alphabetically, A-Z" class="kalles_dropdown_option truncate" href="#">Alphabetically, A-Z</a>
+                    <a data-label="Alphabetically, Z-A" class="kalles_dropdown_option truncate" href="#">Alphabetically, Z-A</a>
+                    <a data-label="Price, low to high" class="kalles_dropdown_option truncate" href="#">Price, low to high</a>
+                    <a data-label="Price, high to low" class="kalles_dropdown_option truncate" href="#">Price, high to low</a>
+                    <a data-label="Date, old to new" class="kalles_dropdown_option truncate" href="#">Date, old to new</a>
+                    <a data-label="Date, new to old" class="kalles_dropdown_option truncate" href="#">Date, new to old</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--end grid control-->
+
+    <!--product section-->
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <div class="kalles-section tp_se_cdt">
+                <!--products list-->
+                <div class="on_list_view_false products nt_products_holder row fl_center row_pr_1 cdt_des_1 round_cd_false nt_cover ratio_nt position_8 space_30 nt_default">
+                    <?php
+                    include_once('models/product-model.php');
+                    $ProductModel = new Product();
+                    $Products = $ProductModel->List(0, 4);
+                    while ($row = mysqli_fetch_array($Products)) {
+                        $ProductImages = json_decode($row['ProductImages']);
+                    ?>
+                        <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
+                            <div class="product-inner pr">
+                                <div class="product-image pr oh lazyload">
+                                    <a class="d-block" href="product-detail-layout-01.html">
+                                        <div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>"></div>
+                                    </a>
+                                    <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
+                                        <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= isset($ProductImages[1]) ? $ProductImages[1] : $ProductImages[0] ?>"></div>
+                                    </div>
+                                    <div class="nt_add_w ts__03 pa ">
+                                        <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
+                                    </div>
+                                    <div class="hover_button op__0 tc pa flex column ts__03">
+                                        <a class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>
+                                        <a href="#" class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"><span class="tt_txt">Quick Shop</span><i class="iccl iccl-cart"></i><span>Quick Shop</span></a>
+                                    </div>
+                                    <div class="product-attr pa ts__03 cw op__0 tc">
+                                        <p class="truncate mg__0 w__100">XS, S, M, L, XL</p>
+                                    </div>
+                                </div>
+                                <div class="product-info mt__15">
+                                    <h3 class="product-title pr fs__14 mg__0 fwm">
+                                        <a class="cd chp" href="product-detail-layout-01.html"><?= $row['ProductName'] ?></a>
+                                    </h3>
+                                    <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+                <!--end products list-->
+
+                <!--navigation-->
+                <div class="products-footer tc mt__40">
+                    <nav class="nt-pagination w__100 tc paginate_ajax">
+                        <ul class="pagination-page page-numbers">
+                            <li><a class="prev page-numbers" href="#" style="color:grey">Prev</a></li>
+                            <li><span class="page-numbers current">1</span></li>
+                            <li><a class="page-numbers" href="#">2</a></li>
+                            <li><a class="page-numbers" href="#">3</a></li>
+                            <li><a class="page-numbers" href="#">4</a></li>
+                            <li><a class="next page-numbers" href="#">Next</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--end navigation-->
+
+            </div>
+        </div>
+    </div>
+    <!--end product section-->
+
+</div>
+<?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
 include_once('components/quick-shop.php');

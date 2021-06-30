@@ -1,10 +1,11 @@
 <?php
 
 class Product{
-    function ListFeatured(){
+
+    function List($index, $limit){
         return mysqli_query(
             connect(),
-            "SELECT * FROM `tbl_product` WHERE tbl_product.Categories LIKE '%featured%' and Status = 1 and Deleted = 0 order by PK_ID desc limit 8"
+            "SELECT * FROM `tbl_product` WHERE tbl_product.Categories LIKE '%featured%' and Status = 1 and Deleted = 0 order by PK_ID desc limit $index, $limit"
         );
     }
 
