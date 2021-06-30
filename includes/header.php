@@ -48,7 +48,7 @@ session_start();
                                 </div>
                                 <div class="col-lg-2 col-md-4 col-6 tc tl_lg">
                                     <div class=" branding ts__05 lh__1">
-                                        <a class="dib" href="home-default.html">
+                                        <a class="dib" href="<?= getHTMLRoot() ?>">
                                             <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="TheSoftShop">
                                             <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="TheSoftShop">
                                         </a>
