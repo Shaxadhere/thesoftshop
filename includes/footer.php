@@ -257,13 +257,26 @@ include_once('web-config.php');
                     $('#view-product-review-count').html(((reviews != null) ? reviews.length : "0") + " Reviews")
                     $('#view-product-description').html(product['ProductDescription'])
                     $('#view-product-default-color').html(product['ColorName'])
+                    $('#view-product-default-size').html(
+                        (product['SizeValue'] != "None") 
+                        ? "Size: <span class='nt_name_current user_choose_js'>"+product['SizeValue']+"</span>"
+                        : ""
+                    )
                     $('#view-product-colors-container').empty()
+                    $('#view-product-sizes-container').empty()
                     productDetails.forEach(item => {
                         $('#view-product-colors-container').append(
-                            "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item is-selected' data-escape='"+item['ColorName']+"'>"+
+                            "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='"+item['ColorName']+"'>"+
                             "<span class='tt_txt' >"+item['ColorName']+"</span><span class='swatch__value_pr pr' style='"+item['ColorCode']+"'></span>"+
                             "</li>"
                         )
+                        if(item['SizeValue'] != "None"){
+                            $('#view-product-sizes-container').append(
+                                "<li class='nt-swatch swatch_pr_item pr' data-escape='"+item['SizeValue']+"'>"+
+                                "<span class='swatch__value_pr'>"+item['SizeValue']+"</span>"+
+                                "</li>"
+                            )
+                        }
                     });
 
                 }

@@ -3,7 +3,7 @@
     <div class="product-quickview single-product-content img_action_zoom kalles-quick-view-tpl">
         <div class="row product-image-summary">
             <div class="col-lg-7 col-md-6 col-12 product-images pr oh">
-            <!-- Need to check if sale is available -->
+                <!-- Need to check if sale is available -->
                 <span style="display:none" class="tc nt_labels pa pe_none cw"><span class="onsale nt_label"><span id="view-product-discount-percentage">-34%</span></span></span>
                 <div class="images">
                     <div id="view-product-image-container" class="product-images-slider tc equal_nt nt_slider nt_carousel_qv p-thumb_qv nt_contain ratio_imgtrue position_8" data-flickity='{ "fade":true,"cellSelector": ".q-item:not(.is_varhide)","cellAlign": "center","wrapAround": true,"autoPlay": false,"prevNextButtons":true,"adaptiveHeight": true,"imagesLoaded": false, "lazyLoad": 0,"dragThreshold" : 0,"pageDots": true,"rightToLeft": false }'>
@@ -30,7 +30,7 @@
                                 </a>
                             </div>
                             <div class="pr_short_des">
-                                <p class="mg__0" id="view-product-description">Go kalles this summer with this vintage navy and white striped v-neck t-shirt from the Nike. Perfect for pairing with denim and white kicks for a stylish kalles vibe.</p>
+                                <p class="mg__0" id="view-product-description">${Product Description}</p>
                             </div>
                             <div class="btn-atc atc-slide btn_des_1 btn_txt_3">
                                 <div id="callBackVariant_qv" class="nt_pink nt1_ nt2_">
@@ -38,17 +38,20 @@
                                         <div class="variations mb__40 style__circle size_medium style_color des_color_1">
                                             <div class="swatch is-color kalles_swatch_js">
                                                 <h4 class="swatch__title">Color:
-                                                    <span class="nt_name_current user_choose_js" id="view-product-default-color">Pink</span>
+                                                    <span class="nt_name_current user_choose_js" id="view-product-default-color">${Default Color}</span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr" id="view-product-colors-container">
-                                                    <li class="ttip_nt tooltip_top_right nt-swatch swatch_pr_item is-selected" data-escape="Pink">
-                                                        <span class="tt_txt" >Pink</span><span class="swatch__value_pr pr bg_color_pink"></span>
+                                                    <!-- <li class="ttip_nt tooltip_top_right nt-swatch swatch_pr_item is-selected" data-escape="Pink">
+                                                        <span class="tt_txt">Pink</span><span class="swatch__value_pr pr bg_color_pink"></span>
                                                     </li>
+                                                    <li class="ttip_nt tooltip_top nt-swatch swatch_pr_item" data-escape="Black">
+                                                        <span class="tt_txt">Black</span><span class="swatch__value_pr pr bg_color_black"></span>
+                                                    </li> -->
                                                 </ul>
                                             </div>
                                             <div class="swatch is-label kalles_swatch_js">
-                                                <h4 class="swatch__title">Size:
-                                                    <span class="nt_name_current user_choose_js" id="view-product-default-size">M</span>
+                                                <h4 class="swatch__title" id="view-product-default-size">Size:
+                                                    <span class="nt_name_current user_choose_js">${Default Size}</span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr" id="view-product-sizes-container">
                                                     <li class="nt-swatch swatch_pr_item pr" data-escape="XS">
