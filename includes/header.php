@@ -15,6 +15,8 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/drift-basic.min.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/photoswipe.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/font-icon.min.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/reset.css">

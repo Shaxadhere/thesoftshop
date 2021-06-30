@@ -197,6 +197,9 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/js/js-cookie.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/jquery.countdown.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/interface.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/photoswipe.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/photoswipe-ui-default.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/drift.min.js"></script>
 
 
 <script>
@@ -318,6 +321,7 @@ include_once('web-config.php');
                             )
                         }
                     });
+                    $('#view-product-view-full-details').attr('href', "<?=getHTMLRoot()?>/view-product?name="+product['ProductSlug'])
 
 
                 } else {
