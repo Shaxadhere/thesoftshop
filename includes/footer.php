@@ -240,9 +240,32 @@ include_once('web-config.php');
             success: function(response){
                 var result = JSON.parse(response)
                 if(result['success'] == true){
-                    var product = result['productDetails'][0]
-                    console.log(product['ProductName'])
+                    var productDetails = result['productDetails']
+                    var product = productDetails[0]
+                    var images = JSON.parse(product['ProductImages'])
+                    var reviews = JSON.parse(product['Reviews'])
                     $('#view-product-name-anchor').html(product['ProductName'])
+                    $('#view-product-image-container').empty()
+                    images.forEach(item => {
+                        $('#view-product-image-container').append(
+                            "<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>"+
+                            "<span class='nt_bg_lz lazyload' data-bgset='<?= getHTMLRoot() ?>/uploads/product-images/"+item+"'></span>"+
+                            "</div>"
+                        )
+                    });
+                    $('#view-product-current-price').html("Rs. " + product['Price'])
+                    $('#view-product-review-count').html(((reviews != null) ? reviews.length : "0") + " Reviews")
+                    $('#view-product-description').html(product['ProductDescription'])
+                    $('#view-product-default-color').html(product['ColorName'])
+                    $('#view-product-colors-container').empty()
+                    productDetails.forEach(item => {
+                        $('#view-product-colors-container').append(
+                            "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item is-selected' data-escape='"+item['ColorName']+"'>"+
+                            "<span class='tt_txt' >"+item['ColorName']+"</span><span class='swatch__value_pr pr' style='"+item['ColorCode']+"'></span>"+
+                            "</li>"
+                        )
+                    });
+
                 }
                 else{
                     console.log(result['error'])

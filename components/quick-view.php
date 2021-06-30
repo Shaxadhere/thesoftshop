@@ -7,9 +7,9 @@
                 <span style="display:none" class="tc nt_labels pa pe_none cw"><span class="onsale nt_label"><span id="view-product-discount-percentage">-34%</span></span></span>
                 <div class="images">
                     <div id="view-product-image-container" class="product-images-slider tc equal_nt nt_slider nt_carousel_qv p-thumb_qv nt_contain ratio_imgtrue position_8" data-flickity='{ "fade":true,"cellSelector": ".q-item:not(.is_varhide)","cellAlign": "center","wrapAround": true,"autoPlay": false,"prevNextButtons":true,"adaptiveHeight": true,"imagesLoaded": false, "lazyLoad": 0,"dragThreshold" : 0,"pageDots": true,"rightToLeft": false }'>
-                        <div data-grname="not4" data-grpvl="ntt4" class="js-sl-item q-item sp-pr-gallery__img w__100" data-mdtype="image">
+                        <!-- <div data-grname="not4" data-grpvl="ntt4" class="js-sl-item q-item sp-pr-gallery__img w__100" data-mdtype="image">
                             <span class="nt_bg_lz lazyload" data-bgset="<?= getHTMLRoot() ?>/assets/images/quick_view/pr-01.jpg"></span>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -17,11 +17,11 @@
                 <div class="summary-inner gecko-scroll-quick">
                     <div class="gecko-scroll-content-quick">
                         <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
-                            <h1 class="product_title entry-title fs__16"><a id="view-product-name-anchor" href="#">La Bohème Rose Gold</a></h1>
+                            <h1 class="product_title entry-title fs__16"><a id="view-product-name-anchor" href="#">${Product Name}</a></h1>
                             <div class="flex wrap fl_between al_center price-review">
                                 <p class="price_range" id="price_qv">
-                                    <del id="view-product-original-price" style="display:none">$60.00</del>
-                                    <ins id="view-product-sale-price">$40.00</ins>
+                                    <del id="view-product-original-price" style="display:none">${Original Price}</del>
+                                    <ins id="view-product-current-price">${Current Price}</ins>
                                 </p>
                                 <a href="product-detail-layout-01.html" class="rating_sp_kl dib">
                                     <div class="kalles-rating-result">
