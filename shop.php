@@ -42,13 +42,47 @@ getHeader("Shop", "includes/header.php");
         </div>
         <div class="cat_sortby cat_sortby_js col tr kalles_dropdown kalles_dropdown_container">
             <a class="in_flex fl_between al_center sortby_pick kalles_dropDown_label" href="#">
-                <span class="lbl-title sr_txt dn"><?= 
-                (($_REQUEST['sort'] == "new-to-old") 
-                ? "Date, new to old" 
-                : ($_REQUEST['sort'] == "old-to-new"))
-                ? "Date, old to new" 
-                : "" 
-                ?></span>
+                <span class="lbl-title sr_txt dn">
+                    <?php
+                    if (isset($_REQUEST['sort'])) {
+                        switch ($_REQUEST['sort']) {
+                            case 'new-to-old':
+                                echo "Date, new to old";
+                                break;
+
+                            case 'old-to-new':
+                                echo "Date, old to new";
+                                break;
+
+                            case 'best-selling':
+                                echo "Best Selling";
+                                break;
+
+                            case 'a-z':
+                                echo "Alphabetically, A-Z";
+                                break;
+
+                            case 'z-a':
+                                echo "Alphabetically, Z-A";
+                                break;
+
+                            case 'low-to-high':
+                                echo "Price, low to high";
+                                break;
+
+                            case 'high-to-low':
+                                echo "Price, high to low";
+                                break;
+
+                            default:
+                                echo "Date, new to old";
+                                break;
+                        }
+                    } else {
+                        echo "Date, new to old";
+                    }
+                    ?>
+                </span>
                 <span class="lbl-title sr_txt_mb">Sort by</span>
                 <i class="ml__5 mr__5 facl facl-angle-down"></i>
             </a>
@@ -59,7 +93,7 @@ getHeader("Shop", "includes/header.php");
                 <div class="h3 mg__0 tc cd tu ls__2 dn_lg db">Sort by<i class="pegk pe-7s-close fs__50 ml__5"></i>
                 </div>
                 <div class="nt_ajaxsortby wrap_sortby kalles_dropdown_options">
-                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=new-to-old'" data-label="Date, new to old" class="kalles_dropdown_option truncate selected" href="<?= getHTMLRoot() ?>/shop?sort=new-to-old">Date, new to old</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=new-to-old'" data-label="Date, new to old" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=new-to-old">Date, new to old</a>
                     <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=old-to-new'" data-label="Date, old to new" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=old-to-new">Date, old to new</a>
                     <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=best-selling'" data-label="Best selling" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=best-selling">Best selling</a>
                     <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=a-z'" data-label="Alphabetically, A-Z" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=a-z">Alphabetically, A-Z</a>
@@ -81,14 +115,42 @@ getHeader("Shop", "includes/header.php");
                     <?php
                     include_once('models/product-model.php');
                     $ProductModel = new Product();
-                    if(!isset($_REQUEST['sort'])){
+                    if (isset($_REQUEST['sort'])) {
+                        switch ($_REQUEST['sort']) {
+                            case 'new-to-old':
+                                $Products = $ProductModel->List(0, 4);
+                                break;
+
+                            case 'old-to-new':
+                                $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
+                                break;
+
+                            case 'best-selling':
+                                $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
+                                break;
+
+                            case 'a-z':
+                                $Products = $ProductModel->List(0, 4, "ProductName", "asc");
+                                break;
+
+                            case 'z-a':
+                                $Products = $ProductModel->List(0, 4, "ProductName", "desc");
+                                break;
+
+                            case 'low-to-high':
+                                $Products = $ProductModel->List(0, 4, "Price", "asc");
+                                break;
+
+                            case 'high-to-low':
+                                $Products = $ProductModel->List(0, 4, "Price", "desc");
+                                break;
+
+                            default:
+                                $Products = $ProductModel->List(0, 4);
+                                break;
+                        }
+                    } else {
                         $Products = $ProductModel->List(0, 4);
-                    }
-                    else if($_REQUEST['sort'] == "new-to-old" || $_REQUEST['sort'] == ""){
-                        $Products = $ProductModel->List(0, 4);
-                    }
-                    else if($_REQUEST['sort'] == "old-to-new"){
-                        $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
                     }
 
                     while ($row = mysqli_fetch_array($Products)) {
