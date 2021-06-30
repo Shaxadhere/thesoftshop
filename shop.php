@@ -42,7 +42,13 @@ getHeader("Shop", "includes/header.php");
         </div>
         <div class="cat_sortby cat_sortby_js col tr kalles_dropdown kalles_dropdown_container">
             <a class="in_flex fl_between al_center sortby_pick kalles_dropDown_label" href="#">
-                <span class="lbl-title sr_txt dn">Featured</span>
+                <span class="lbl-title sr_txt dn"><?= 
+                (($_REQUEST['sort'] == "new-to-old") 
+                ? "Date, new to old" 
+                : ($_REQUEST['sort'] == "old-to-new"))
+                ? "Date, old to new" 
+                : "" 
+                ?></span>
                 <span class="lbl-title sr_txt_mb">Sort by</span>
                 <i class="ml__5 mr__5 facl facl-angle-down"></i>
             </a>
@@ -53,14 +59,13 @@ getHeader("Shop", "includes/header.php");
                 <div class="h3 mg__0 tc cd tu ls__2 dn_lg db">Sort by<i class="pegk pe-7s-close fs__50 ml__5"></i>
                 </div>
                 <div class="nt_ajaxsortby wrap_sortby kalles_dropdown_options">
-                    <a data-label="Featured" class="kalles_dropdown_option truncate selected" href="#">Featured</a>
-                    <a data-label="Best selling" class="kalles_dropdown_option truncate" href="#">Best selling</a>
-                    <a data-label="Alphabetically, A-Z" class="kalles_dropdown_option truncate" href="#">Alphabetically, A-Z</a>
-                    <a data-label="Alphabetically, Z-A" class="kalles_dropdown_option truncate" href="#">Alphabetically, Z-A</a>
-                    <a data-label="Price, low to high" class="kalles_dropdown_option truncate" href="#">Price, low to high</a>
-                    <a data-label="Price, high to low" class="kalles_dropdown_option truncate" href="#">Price, high to low</a>
-                    <a data-label="Date, old to new" class="kalles_dropdown_option truncate" href="#">Date, old to new</a>
-                    <a data-label="Date, new to old" class="kalles_dropdown_option truncate" href="#">Date, new to old</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=new-to-old'" data-label="Date, new to old" class="kalles_dropdown_option truncate selected" href="<?= getHTMLRoot() ?>/shop?sort=new-to-old">Date, new to old</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=old-to-new'" data-label="Date, old to new" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=old-to-new">Date, old to new</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=best-selling'" data-label="Best selling" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=best-selling">Best selling</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=a-z'" data-label="Alphabetically, A-Z" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=a-z">Alphabetically, A-Z</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=z-a'" data-label="Alphabetically, Z-A" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=z-a">Alphabetically, Z-A</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=low-to-high'" data-label="Price, low to high" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=low-to-high">Price, low to high</a>
+                    <a onclick="location.href='<?= getHTMLRoot() ?>/shop?sort=high-to-low'" data-label="Price, high to low" class="kalles_dropdown_option truncate" href="<?= getHTMLRoot() ?>/shop?sort=high-to-low">Price, high to low</a>
                 </div>
             </div>
         </div>
@@ -76,7 +81,16 @@ getHeader("Shop", "includes/header.php");
                     <?php
                     include_once('models/product-model.php');
                     $ProductModel = new Product();
-                    $Products = $ProductModel->List(0, 4);
+                    if(!isset($_REQUEST['sort'])){
+                        $Products = $ProductModel->List(0, 4);
+                    }
+                    else if($_REQUEST['sort'] == "new-to-old" || $_REQUEST['sort'] == ""){
+                        $Products = $ProductModel->List(0, 4);
+                    }
+                    else if($_REQUEST['sort'] == "old-to-new"){
+                        $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
+                    }
+
                     while ($row = mysqli_fetch_array($Products)) {
                         $ProductImages = json_decode($row['ProductImages']);
                     ?>
@@ -93,11 +107,11 @@ getHeader("Shop", "includes/header.php");
                                         <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
                                     </div>
                                     <div class="hover_button op__0 tc pa flex column ts__03">
-                                        <a class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>
+                                        <a data-id="<?= base64_encode($row['PK_ID']) ?>" class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left quick-view-product" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>
                                         <a href="#" class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"><span class="tt_txt">Quick Shop</span><i class="iccl iccl-cart"></i><span>Quick Shop</span></a>
                                     </div>
                                     <div class="product-attr pa ts__03 cw op__0 tc">
-                                        <p class="truncate mg__0 w__100">XS, S, M, L, XL</p>
+                                        <p class="truncate mg__0 w__100">S, M, L</p>
                                     </div>
                                 </div>
                                 <div class="product-info mt__15">

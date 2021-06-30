@@ -53,9 +53,9 @@
                             </a>
                         </div>
                         <div class="hover_button op__0 tc pa flex column ts__03 checklol">
-                            <a class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left" href="#">
+                            <a data-id="<?= base64_encode($row['PK_ID']) ?>" class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left quick-view-product" href="#">
                                 <span class="tt_txt">Quick view</span>
-                                <i data-id="<?= base64_encode($row['PK_ID']) ?>" class="iccl iccl-eye quick-view-product"></i>
+                                <i data-id="<?= base64_encode($row['PK_ID']) ?>" class="iccl iccl-eye quick-view-product-eye"></i>
                                 <span>Quick view</span>
                             </a>
                             <a href="#" class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left" class="quick-shop-product">
