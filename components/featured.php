@@ -11,7 +11,7 @@
                 <i class="dn clprfalse title_2 la-gem"></i>
                 <span></span>
             </span>
-            <span class="section-subtitle db tc sub-title">Top view in this week</span>
+            <span class="section-subtitle db tc sub-title">Our featured products</span>
         </div>
 
         <div class="products nt_products_holder row fl_center row_pr_1 cdt_des_5 round_cd_true nt_cover ratio_nt position_8 space_30">
@@ -40,7 +40,7 @@
                 <div class="product-inner pr">
                     <div class="product-image position-relative oh lazyload">
 
-                        <a class="d-block" href="product-detail-layout-01.html">
+                        <a class="d-block" href="<?= getHTMLRoot()?>/view-product?name=<?= $row['ProductSlug'] ?>">
                             <div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>"></div>
                         </a>
                         <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
@@ -70,7 +70,7 @@
                     </div>
                     <div class="product-info mt__15">
                         <h3 class="product-title position-relative fs__14 mg__0 fwm">
-                            <a class="cd chp" href="product-detail-layout-01.html"><?= $row['ProductName'] ?></a>
+                            <a class="cd chp" href="<?= getHTMLRoot()?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                         </h3>
                         <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
                         <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
