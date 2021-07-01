@@ -336,8 +336,8 @@ include_once('web-config.php');
         })
     })
 
-    function search_products() {
-        var query = $('.search-input').val()
+    function search_products(query) {
+        // var query = $('.search-input').val()
         const queryString = window.location.search
         const params = new URLSearchParams(queryString)
         const sort = (params.has('sort')) ? params.get('sort') : ""
@@ -349,15 +349,17 @@ include_once('web-config.php');
         location.href = url
     }
 
-    $('.search-input').keypress(function(event) {
+    $(document).on('keypress', '.search-input', function(event){
+        var query = $(this).val()
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
-            search_products()
+            search_products(query)
         }
-    });
+    })
 
     $(document).on('click', '.btn-search-products', function() {
-        search_products()
+        var query = $(this).prev().val()
+        search_products(query)
     })
 </script>
 <?php

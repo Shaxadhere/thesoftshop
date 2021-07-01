@@ -2,14 +2,56 @@
 
 class Product{
 
-    function List($index, $limit, $OrderBy = "PK_ID", $Order = "desc"){
+    function List($index, $limit, $ProductName = "", $CategoryName = "", $Sort = "PK_ID"){
         $index = mysqli_real_escape_string(connect(), $index);
         $limit = mysqli_real_escape_string(connect(), $limit);
-        $OrderBy = mysqli_real_escape_string(connect(), $OrderBy);
-        $Order = mysqli_real_escape_string(connect(), $Order);
+        $Sort = mysqli_real_escape_string(connect(), $Sort);
+        $ProductName = mysqli_real_escape_string(connect(), $ProductName);
+        $CategoryName = mysqli_real_escape_string(connect(), $CategoryName);
+        switch ($Sort) {
+            case 'new-to-old':
+                $OrderBy = "PK_ID";
+                $Order = "desc";
+                break;
+
+            case 'old-to-new':
+                $OrderBy = "PK_ID";
+                $Order = "asc";
+                break;
+
+            case 'best-selling':
+                $OrderBy = "PK_ID";
+                $Order = "desc";
+                break;
+
+            case 'a-z':
+                $OrderBy = "ProductName";
+                $Order = "asc";
+                break;
+
+            case 'z-a':
+                $OrderBy = "ProductName";
+                $Order = "desc";
+                break;
+
+            case 'low-to-high':
+                $OrderBy = "Price";
+                $Order = "asc";
+                break;
+
+            case 'high-to-low':
+                $OrderBy = "Price";
+                $Order = "desc";
+                break;
+
+            default:
+                $OrderBy = "PK_ID";
+                $Order = "desc";
+                break;
+        }
         return mysqli_query(
             connect(),
-            "SELECT * FROM `tbl_product` WHERE tbl_product.Categories LIKE '%featured%' and Status = 1 and Deleted = 0 order by $OrderBy $Order limit $index, $limit"
+            "SELECT * FROM `tbl_product` WHERE (tbl_product.ProductName LIKE '%$ProductName%' or tbl_product.ProductTags Like '%$ProductName%') and tbl_product.Categories Like '%$CategoryName%' and Status = 1 and Deleted = 0 order by $OrderBy $Order limit $index, $limit"
         );
     }
 
@@ -67,4 +109,3 @@ class Product{
         );
     }
 }
-?>

@@ -139,43 +139,73 @@ getHeader("Shop", "includes/header.php");
                     <?php
                     include_once('models/product-model.php');
                     $ProductModel = new Product();
-                    if (isset($_REQUEST['sort'])) {
-                        switch ($_REQUEST['sort']) {
-                            case 'new-to-old':
-                                $Products = $ProductModel->List(0, 4);
-                                break;
-
-                            case 'old-to-new':
-                                $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
-                                break;
-
-                            case 'best-selling':
-                                $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
-                                break;
-
-                            case 'a-z':
-                                $Products = $ProductModel->List(0, 4, "ProductName", "asc");
-                                break;
-
-                            case 'z-a':
-                                $Products = $ProductModel->List(0, 4, "ProductName", "desc");
-                                break;
-
-                            case 'low-to-high':
-                                $Products = $ProductModel->List(0, 4, "Price", "asc");
-                                break;
-
-                            case 'high-to-low':
-                                $Products = $ProductModel->List(0, 4, "Price", "desc");
-                                break;
-
-                            default:
-                                $Products = $ProductModel->List(0, 4);
-                                break;
+                    if(isset($_REQUEST['name']) && isset($_REQUEST['category'])){
+                        if(isset($_REQUEST['sort'])){
+                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
                         }
-                    } else {
-                        $Products = $ProductModel->List(0, 4);
+                        else{
+                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], $_REQUEST['category']);
+                        }
                     }
+                    else if(isset($_REQUEST['name'])){
+                        if(isset($_REQUEST['sort'])){
+                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
+                        }
+                        else{
+                            $Products = $ProductModel->List(0, 4, $_REQUEST['name']);
+                        }
+                    }
+                    else if(isset($_REQUEST['category'])){
+                        if(isset($_REQUEST['sort'])){
+                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
+                        }
+                        else{
+                            $Products = $ProductModel->List(0, 4, $_REQUEST['name']);
+                        }
+                    }
+                    else if(isset($_REQUEST['sort'])){
+                        $Products = $ProductModel->List(0, 4, "", "", $_REQUEST['sort']);
+                    }
+                    else{
+                        $Products = $ProductModel->List(0, 4, "", "", "");
+                    }
+                    // if (isset($_REQUEST['sort'])) {
+                    //     switch ($_REQUEST['sort']) {
+                    //         case 'new-to-old':
+                    //             $Products = $ProductModel->List(0, 4);
+                    //             break;
+
+                    //         case 'old-to-new':
+                    //             $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
+                    //             break;
+
+                    //         case 'best-selling':
+                    //             $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
+                    //             break;
+
+                    //         case 'a-z':
+                    //             $Products = $ProductModel->List(0, 4, "ProductName", "asc");
+                    //             break;
+
+                    //         case 'z-a':
+                    //             $Products = $ProductModel->List(0, 4, "ProductName", "desc");
+                    //             break;
+
+                    //         case 'low-to-high':
+                    //             $Products = $ProductModel->List(0, 4, "Price", "asc");
+                    //             break;
+
+                    //         case 'high-to-low':
+                    //             $Products = $ProductModel->List(0, 4, "Price", "desc");
+                    //             break;
+
+                    //         default:
+                    //             $Products = $ProductModel->List(0, 4);
+                    //             break;
+                    //     }
+                    // } else {
+                    //     $Products = $ProductModel->List(0, 4);
+                    // }
 
                     while ($row = mysqli_fetch_array($Products)) {
                         $ProductImages = json_decode($row['ProductImages']);

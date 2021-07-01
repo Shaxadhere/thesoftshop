@@ -21,8 +21,8 @@
                     </select>
                 </div>
                 <div class="frm_search_input pr oh">
-                    <input class="search_header__input js_iput_search placeholder-black" autocomplete="off" type="text" name="q" placeholder="Search for products">
-                    <button class="search_header__submit js_btn_search" type="submit"><i class="iccl iccl-search"></i>
+                    <input class="search_header__input js_iput_search placeholder-black search-input" autocomplete="off" type="text" name="q" placeholder="Search for products">
+                    <button class="search_header__submit js_btn_search btn-search-products" type="button"><i class="iccl iccl-search"></i>
                     </button>
                 </div>
                 <div class="ld_bar_search"></div>
