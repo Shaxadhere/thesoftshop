@@ -88,8 +88,18 @@ session_start();
                                         <a class="icon_search push_side cb chp" data-id="#nt_search_canvas" href="#">
                                             <i class="iccl iccl-search"></i></a>
                                         <div class="my-account ts__05 position-relative dn db_md">
-                                            <a class="cb chp db push_side" href="#" data-id="#nt_login_canvas">
-                                                <i class="iccl iccl-user"></i></a>
+                                            <?php
+                                            if(isset($_SESSION['USER'])){
+                                                echo "<a class='cb chp db push_side' href='".getHTMLRoot()."/my-account'>";
+                                                echo "<i class='iccl iccl-user'></i>";
+                                                echo "</a>";
+                                            }
+                                            else{
+                                                echo "<a class='cb chp db push_side' href='#' data-id='#nt_login_canvas'>";
+                                                echo "<i class='iccl iccl-user'></i>";
+                                                echo "</a>";
+                                            }
+                                            ?>
                                         </div>
                                         <a class="icon_like cb chp position-relative dn db_md js_link_wis" href="<?= getHTMLRoot() ?>/wishlist"><i class="iccl iccl-heart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">3</span></i>
                                         </a>

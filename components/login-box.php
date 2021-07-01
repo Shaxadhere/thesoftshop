@@ -10,12 +10,13 @@
                 <div class="fixcl-scroll-content">
                     <p class="form-row">
                         <label for="CustomerEmail">Email <span class="required">*</span></label>
-                        <input type="email" name="email" id="CustomerEmail" autocomplete="email" autocapitalize="off">
+                        <input type="email" name="CustomerEmail" id="CustomerEmail" autocomplete="email" autocapitalize="off">
                     </p>
                     <p class="form-row">
                         <label for="CustomerPassword">Password <span class="required">*</span></label>
-                        <input type="password" value="" name="password" autocomplete="current-password" id="CustomerPassword">
-                    </p><input type="submit" class="button button_primary w__100 tu js_add_ld" value="Sign In">
+                        <input type="password" value="" name="CustomerPassword" autocomplete="current-password" id="CustomerPassword">
+                    </p>
+                    <input type="submit" id="CustomerLoginBtn" class="button button_primary w__100 tu js_add_ld" value="Sign In">
                     <br>
                     <p class="mb__10 mt__20">New customer?
                         <a href="#" data-id="#RegisterForm" class="link_acc">Create your account</a>

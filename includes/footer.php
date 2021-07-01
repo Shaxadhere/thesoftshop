@@ -367,6 +367,29 @@ include_once('web-config.php');
         var category = (_category != undefined) ? _category : "";
         search_products(query, category)
     })
+
+    $(document).on('submit', '#customer_login', function(event){
+        event.preventDefault()
+        var customerEmail = $('#CustomerEmail').val()
+        var customerPassword = $('#CustomerPassword').val()
+        $.ajax({
+            type: "POST",
+            url: "<?= getHTMLRoot() ?>/auth/auth",
+            data: {
+                AuthenticateUser: true,
+                CustomerEmail: customerEmail,
+                CustomerPassword: customerPassword
+            },
+            success: function(response){
+                if(response == true){
+                    location.reload()
+                }
+            },
+            error: function(error){
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
 </script>
 <?php
 if (isset($_REQUEST['Success'])) {
