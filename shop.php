@@ -224,7 +224,6 @@ getHeader("Shop", "includes/header.php");
                                     echo "<span class='prev page-numbers' style='color:grey'>Prev</span></li>";
                                 }
                                 ?>
-                                <a class="prev page-numbers" href="#" style="color:grey">Prev</a></li>
                             <?php
                             if(isset($_REQUEST['name']) && isset($_REQUEST['category'])){
                                 if(isset($_REQUEST['sort'])){
@@ -258,26 +257,41 @@ getHeader("Shop", "includes/header.php");
                             }
                             $NumberOfProducts = mysqli_num_rows($Products);
                             $PageNumbers = (intval($NumberOfProducts) / 4) + 1;
+                            $URL = $_SERVER['QUERY_STRING'];
+                            $URL = preg_replace('~(\?|&)page=[^&]*~', '$1', $URL);
                             for ($i=1; $i < $PageNumbers; $i++) { 
                                 if(isset($_REQUEST['page'])){
                                     if($_REQUEST['page'] == $i){
-                                        echo "<li><a href='#' class='page-numbers current'>$i</a></li>";
+                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers current'>$i</a></li>";
                                     }
                                     else{
-                                        echo "<li><a href='#' class='page-numbers'>$i</a></li>";
+                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers'>$i</a></li>";
                                     }
                                 }
                                 else{
                                     if($i == "1"){
-                                        echo "<li><a href='#' class='page-numbers current'>$i</a></li>";
+                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers current'>$i</a></li>";
                                     }
                                     else{
-                                        echo "<li><a href='#' class='page-numbers'>$i</a></li>";
+                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers'>$i</a></li>";
                                     }
                                 }
                             }
+                            $NextURL = getHTMLRoot() . "/shop?" .$URL;
+                            if(isset($_REQUEST['page'])){
+                                if($_REQUEST['page'] != $NumberOfProducts){
+                                    $PageNumber = intval($_REQUEST['page']) + 1;
+                                    $NextURL .= "page=".$PageNumber;
+                                }
+                            }
+                            else{
+                                if(1 != $NumberOfProducts){
+                                    $PageNumber = 2;
+                                    $NextURL .= "page=".$PageNumber;
+                                }
+                            }
                             ?>
-                            <li><a class="next page-numbers" href="#">Next</a></li>
+                            <li><a class="next page-numbers" href="<?= $NextURL ?>">Next</a></li>
                         </ul>
                     </nav>
                 </div>
