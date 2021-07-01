@@ -55,6 +55,15 @@ class Product{
         );
     }
 
+    function getTotalNumberOfProducts(){
+        return mysqli_num_rows(
+            mysqli_query(
+                connect(),
+                "select * from tbl_product where Status = 1 and Deleted = 0"
+            )
+            );
+    }
+
     function ListRandom($limit){
         $limit = mysqli_real_escape_string(connect(), $limit);
         return mysqli_query(

@@ -348,8 +348,7 @@ include_once('web-config.php');
         if (sort != "") {
             url += "&sort=" + sort
         }
-        console.log(url)
-        // location.href = url
+        location.href = url
     }
 
     $(document).on('keypress', '.search-input', function(event){

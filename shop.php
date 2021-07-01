@@ -210,11 +210,73 @@ getHeader("Shop", "includes/header.php");
                 <div class="products-footer tc mt__40">
                     <nav class="nt-pagination w__100 tc paginate_ajax">
                         <ul class="pagination-page page-numbers">
-                            <li><a class="prev page-numbers" href="#" style="color:grey">Prev</a></li>
-                            <li><span class="page-numbers current">1</span></li>
-                            <li><a class="page-numbers" href="#">2</a></li>
-                            <li><a class="page-numbers" href="#">3</a></li>
-                            <li><a class="page-numbers" href="#">4</a></li>
+                            <li>
+                                <?php
+                                if(isset($_REQUEST['page'])){
+                                    if($_REQUEST['page'] == 1){
+                                        echo "<span class='prev page-numbers' style='color:grey'>Prev</span></li>";
+                                    }
+                                    else{
+                                        echo "<a class='prev page-numbers' href='#' style='color:grey'>Prev</a></li>";
+                                    }
+                                }
+                                else{
+                                    echo "<span class='prev page-numbers' style='color:grey'>Prev</span></li>";
+                                }
+                                ?>
+                                <a class="prev page-numbers" href="#" style="color:grey">Prev</a></li>
+                            <?php
+                            if(isset($_REQUEST['name']) && isset($_REQUEST['category'])){
+                                if(isset($_REQUEST['sort'])){
+                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
+                                }
+                                else{
+                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], $_REQUEST['category']);
+                                }
+                            }
+                            else if(isset($_REQUEST['name'])){
+                                if(isset($_REQUEST['sort'])){
+                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], "", $_REQUEST['sort']);
+                                }
+                                else{
+                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name']);
+                                }
+                            }
+                            else if(isset($_REQUEST['category'])){
+                                if(isset($_REQUEST['sort'])){
+                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], "", $_REQUEST['sort']);
+                                }
+                                else{
+                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name']);
+                                }
+                            }
+                            else if(isset($_REQUEST['sort'])){
+                                $Products = $ProductModel->List(0, 9999999, "", "", $_REQUEST['sort']);
+                            }
+                            else{
+                                $Products = $ProductModel->List(0, 9999999, "", "", "");
+                            }
+                            $NumberOfProducts = mysqli_num_rows($Products);
+                            $PageNumbers = (intval($NumberOfProducts) / 4) + 1;
+                            for ($i=1; $i < $PageNumbers; $i++) { 
+                                if(isset($_REQUEST['page'])){
+                                    if($_REQUEST['page'] == $i){
+                                        echo "<li><a href='#' class='page-numbers current'>$i</a></li>";
+                                    }
+                                    else{
+                                        echo "<li><a href='#' class='page-numbers'>$i</a></li>";
+                                    }
+                                }
+                                else{
+                                    if($i == "1"){
+                                        echo "<li><a href='#' class='page-numbers current'>$i</a></li>";
+                                    }
+                                    else{
+                                        echo "<li><a href='#' class='page-numbers'>$i</a></li>";
+                                    }
+                                }
+                            }
+                            ?>
                             <li><a class="next page-numbers" href="#">Next</a></li>
                         </ul>
                     </nav>
