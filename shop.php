@@ -169,44 +169,6 @@ getHeader("Shop", "includes/header.php");
                     else{
                         $Products = $ProductModel->List(0, 4, "", "", "");
                     }
-                    // if (isset($_REQUEST['sort'])) {
-                    //     switch ($_REQUEST['sort']) {
-                    //         case 'new-to-old':
-                    //             $Products = $ProductModel->List(0, 4);
-                    //             break;
-
-                    //         case 'old-to-new':
-                    //             $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
-                    //             break;
-
-                    //         case 'best-selling':
-                    //             $Products = $ProductModel->List(0, 4, "PK_ID", "asc");
-                    //             break;
-
-                    //         case 'a-z':
-                    //             $Products = $ProductModel->List(0, 4, "ProductName", "asc");
-                    //             break;
-
-                    //         case 'z-a':
-                    //             $Products = $ProductModel->List(0, 4, "ProductName", "desc");
-                    //             break;
-
-                    //         case 'low-to-high':
-                    //             $Products = $ProductModel->List(0, 4, "Price", "asc");
-                    //             break;
-
-                    //         case 'high-to-low':
-                    //             $Products = $ProductModel->List(0, 4, "Price", "desc");
-                    //             break;
-
-                    //         default:
-                    //             $Products = $ProductModel->List(0, 4);
-                    //             break;
-                    //     }
-                    // } else {
-                    //     $Products = $ProductModel->List(0, 4);
-                    // }
-
                     while ($row = mysqli_fetch_array($Products)) {
                         $ProductImages = json_decode($row['ProductImages']);
                     ?>

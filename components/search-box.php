@@ -9,13 +9,13 @@
             <div class="search_header mini_search_frm pr js_frm_search" role="search">
                 <div class="frm_search_cat mb__20">
                     <select name="product_type">
-                        <option value="*">All Categories</option>
+                        <option value="">All Categories</option>
                         <?php
                         include_once('models/category-model.php');
                         $CategoryModel = new Category();
                         $Categories = $CategoryModel->List();
                         while ($row = mysqli_fetch_array($Categories)) {
-                            echo "<option value='$row[CategorySlug]'>$row[CategoryName]</option>";
+                            echo "<option value='$row[CategoryName]'>$row[CategoryName]</option>";
                         }
                         ?>
                     </select>

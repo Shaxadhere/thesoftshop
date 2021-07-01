@@ -336,30 +336,37 @@ include_once('web-config.php');
         })
     })
 
-    function search_products(query) {
-        // var query = $('.search-input').val()
+    function search_products(query, category) {
         const queryString = window.location.search
         const params = new URLSearchParams(queryString)
         const sort = (params.has('sort')) ? params.get('sort') : ""
         var url = "<?= getHTMLRoot() ?>/shop?"
         url += "name=" + query
+        if (category != "") {
+            url += "&category=" + category
+        }
         if (sort != "") {
             url += "&sort=" + sort
         }
-        location.href = url
+        console.log(url)
+        // location.href = url
     }
 
     $(document).on('keypress', '.search-input', function(event){
         var query = $(this).val()
+        var _category = $(this).parent().prev().children().first().val();
+        var category = (_category != undefined) ? _category : "";
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
-            search_products(query)
+            search_products(query, category)
         }
     })
 
     $(document).on('click', '.btn-search-products', function() {
         var query = $(this).prev().val()
-        search_products(query)
+        var _category = $(this).parent().prev().children().first().val();
+        var category = (_category != undefined) ? _category : "";
+        search_products(query, category)
     })
 </script>
 <?php
