@@ -295,12 +295,11 @@ include_once('web-config.php');
                     index = 0;
                     categories.forEach(item => {
                         index++
-                        if(count == index){
+                        if (count == index) {
                             $('#view-product-categories-container').append(
                                 "<a href='<?= getHTMLRoot() ?>/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
                             )
-                        }
-                        else{
+                        } else {
                             $('#view-product-categories-container').append(
                                 "<a href='<?= getHTMLRoot() ?>/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
                             )
@@ -314,18 +313,17 @@ include_once('web-config.php');
                     index = 0;
                     tags.forEach(item => {
                         index++
-                        if(count == index){
+                        if (count == index) {
                             $('#view-product-tags-container').append(
                                 "<a href='<?= getHTMLRoot() ?>/products?tags=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
                             )
-                        }
-                        else{
+                        } else {
                             $('#view-product-tags-container').append(
                                 "<a href='<?= getHTMLRoot() ?>/products?tags=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
                             )
                         }
                     });
-                    $('#view-product-view-full-details').attr('href', "<?=getHTMLRoot()?>/view-product?name="+product['ProductSlug'])
+                    $('#view-product-view-full-details').attr('href', "<?= getHTMLRoot() ?>/view-product?name=" + product['ProductSlug'])
 
 
                 } else {
@@ -338,8 +336,28 @@ include_once('web-config.php');
         })
     })
 
-    $(document).on('click', '.checklol', function() {
-        alert("clicked")
+    function search_products() {
+        var query = $('.search-input').val()
+        const queryString = window.location.search
+        const params = new URLSearchParams(queryString)
+        const sort = (params.has('sort')) ? params.get('sort') : ""
+        var url = "<?= getHTMLRoot() ?>/shop?"
+        url += "name=" + query
+        if (sort != "") {
+            url += "&sort=" + sort
+        }
+        location.href = url
+    }
+
+    $('.search-input').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+            search_products()
+        }
+    });
+
+    $(document).on('click', '.btn-search-products', function() {
+        search_products()
     })
 </script>
 <?php
