@@ -15,6 +15,7 @@ session_start();
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/nouislider.min.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/drift-basic.min.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/photoswipe.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/font-icon.min.css">
@@ -24,6 +25,7 @@ session_start();
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/base.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/style.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/home-default.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/shop.css">
 </head>
 
 <body class="kalles-template header_full_true des_header_3 css_scrollbar lazy_icons btnt4_style_2 zoom_tp_2 css_scrollbar template-index kalles_toolbar_true hover_img2 swatch_style_rounded swatch_list_size_small label_style_rounded wrapper_full_width header_full_true hide_scrolld_true lazyload">

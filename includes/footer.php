@@ -188,17 +188,21 @@ include_once('web-config.php');
 <div class="mask-overlay ntpf t__0 r__0 l__0 b__0 op__0 pe_none"></div>
 <!--end mask overlay-->
 <script src="<?= getHTMLRoot() ?>/assets/js/jquery-3.5.1.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/nouislider.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/jarallax.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/packery.pkgd.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/jquery.hoverIntent.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/magnific-popup.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/flickity.pkgd.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/lazysizes.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/js-cookie.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/jquery.countdown.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/photoswipe.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/photoswipe-ui-default.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/drift.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/assets/js/js-cookie.min.js"></script>
-<script src="<?= getHTMLRoot() ?>/assets/js/jquery.countdown.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/isotope.pkgd.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/resize-sensor.min.js"></script>
+<script src="<?= getHTMLRoot() ?>/assets/js/theia-sticky-sidebar.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/interface.js"></script>
 
 
