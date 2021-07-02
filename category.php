@@ -4,6 +4,10 @@ $CategorySlug = $_REQUEST['name'];
 include_once('models/category-model.php');
 $CategoryModel = new Category();
 $Category = $CategoryModel->FilterByCategorySlug($CategorySlug);
+if(mysqli_num_rows($Category) == 0){
+    redirectWindow(getHTMLRoot());
+    exit();
+}
 $Category = mysqli_fetch_array($Category);
 getHeader($Category['CategoryName'], "includes/header.php");
 ?>
