@@ -27,6 +27,7 @@ session_start();
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/home-default.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/shop.css">
     <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/shopping-cart.css">
+    <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/shopping-cart.css">
 </head>
 
 <body class="kalles-template header_full_true des_header_3 css_scrollbar lazy_icons btnt4_style_2 zoom_tp_2 css_scrollbar template-index kalles_toolbar_true hover_img2 swatch_style_rounded swatch_list_size_small label_style_rounded wrapper_full_width header_full_true hide_scrolld_true lazyload">

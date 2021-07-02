@@ -4,128 +4,135 @@ getHeader("Cart", "includes/header.php");
 ?>
 <!--cart section-->
 <div class="kalles-section cart_page_section container mt__60">
-    <div class="frm_cart_page check-out_calculator">
-        <div class="row">
-            <div class="col-12 col-md-6 col-lg-7">
-                <div class="checkout-section">
-                    <h3 class="checkout-section__title">Billing details</h3>
-                    <div class="row">
-                        <p class="checkout-section__field col-lg-6 col-12">
-                            <label for="f-name">First name</label>
-                            <input type="text" id="f-name" value="">
-                        </p>
-                        <p class="checkout-section__field col-lg-6 col-12">
-                            <label for="l-name">Last name</label>
-                            <input type="text" id="l-name" value="">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="company">Company name (optional)</label>
-                            <input type="text" id="company" value="">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_01">Street address *</label>
-                            <input type="text" id="address_01" value="" class="mb__20" placeholder="House number and street name">
-                            <input type="text" id="address_02" value="" placeholder="Apartment, suite, unit, etc. (optional)">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_03">Town / City</label>
-                            <input type="text" id="address_03" value="">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_province_ship" id="address_province_label">State *</label>
-                            <select disabled id="address_province_ship">
-                                <option value="Pakistan" selected>Sindh</option>
-                                <option value="Pakistan" selected>Punjab</option>
-                                <option value="Pakistan" selected>Pakistan</option>
-                                <option value="Pakistan" selected>Pakistan</option>
-                                <option value="Pakistan" selected>Pakistan</option>
-                            </select>
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_zip_ship_2">Postal/Zip Code</label>
-                            <input type="text" id="address_zip_ship_2" />
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_phone">Phone</label>
-                            <input type="text" id="address_phone" />
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_amail">Email</label>
-                            <input type="text" id="address_amail" />
-                        </p>
-                    </div>
-                </div>
-                <div class="checkout-section">
-                    <h3 class="checkout-section__title">Shipping Details</h3>
-                    <div class="row">
-                        <p class="checkout-section__field col-12">
-                            <label for="order_comments" class="">Order notes (optional)</label>
-                            <textarea id="order_comments" name="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5"></textarea>
-                        </p>
-                    </div>
-                </div>
-
+    <form action="<?= getHTMLRoot() ?>/checkout" method="post" class="frm_cart_ajax_true frm_cart_page nt_js_cart pr oh ">
+        <div class="cart_header">
+            <div class="row al_center">
+                <div class="col-5">Product</div>
+                <div class="col-3 tc">Price</div>
+                <div class="col-2 tc">Quantity</div>
+                <div class="col-2 tc tr_md">Total</div>
             </div>
-            <div class="col-12 col-md-6 col-lg-5 mt__50 mb__80 mt-md-0 mb-md-0">
-                <div class="order-review__wrapper">
-                    <h3 class="order-review__title">Your order</h3>
-                    <div class="checkout-order-review">
-                        <table class="checkout-review-order-table">
-                            <thead>
-                                <tr>
-                                    <th class="product-name">Product</th>
-                                    <th class="product-total">Subtotal</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="cart_item">
-                                    <td class="product-name">Black mountain hat<strong class="product-quantity">× 1</strong>
-                                    </td>
-                                    <td class="product-total"><span class="cart_price">$50.00</span></td>
-                                </tr>
-                                <tr class="cart_item">
-                                    <td class="product-name">Cream women pants<strong class="product-quantity">× 1</strong>
-                                    </td>
-                                    <td class="product-total"><span class="cart_price">$35.00</span></td>
-                                </tr>
-                            </tbody>
-                            <tfoot>
-                                <tr class="cart-subtotal cart_item">
-                                    <th>Subtotal</th>
-                                    <td><span class="cart_price">$85.00</span></td>
-                                </tr>
-                                <tr class="cart_item">
-                                    <th>Shipping</th>
-                                    <td><span class="cart_price">$50.00</span></td>
-                                </tr>
-                                <tr class="order-total cart_item">
-                                    <th>Total</th>
-                                    <td><strong><span class="cart_price amount">$145.00</span></strong></td>
-                                </tr>
-                            </tfoot>
-                        </table>
-                        <div class="checkout-payment">
-                            <ul class="payment_methods">
-                                <li class="payment_method">
-                                    <input id="payment_method_bacs" type="radio" class="input-radio" name="payment_method" value="bacs" checked="checked">
-                                    <label for="payment_method_bacs">Direct bank transfer</label>
-                                    <div class="payment_box payment_method_bacs">
-                                        <p>You can pay in cash to our courier when you receive the goods at your doorstep.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                            <p class="checkout-payment__policy-text">Your personal data will be used to process your order, support your experience throughout shipping process, and for other purposes described in our<a href="<?= getHTMLRoot() ?>/privacy-policy"> privacy policy</a>.
-                            </p>
-                            <label class="checkout-payment__confirm-terms-and-conditions">
-                                <span>By proceeding means you have read and agree to our <a href="<?= getHTMLRoot()?>/terms-and-conditions" class="terms-and-conditions-link">terms and conditions</a></span>&nbsp;<span class="required">*</span>
-                            </label>
-                            <button type="button" class="button button_primary btn checkout-payment__btn-place-order">Place order</button>
+        </div>
+        <div class="cart_items js_cat_items">
+            <div class="cart_item js_cart_item">
+                <div class="ld_cart_bar"></div>
+                <div class="row al_center">
+                    <div class="col-12 col-md-12 col-lg-5">
+                        <div class="page_cart_info flex al_center">
+                            <a href="product-detail-layout-01.html">
+                                <img style="width: 140px;height: 140px;object-fit: cover;padding:5px" class="lazyload w__100 lz_op_ef" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201128%201439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/uploads/product-images/MklgPTxq6wUKsbfa8yzu.png" alt="">
+                            </a>
+                            <div class="mini_cart_body ml__15">
+                                <h5 class="mini_cart_title mg__0 mb__5"><a href="product-detail-layout-01.html">Cream women pants</a></h5>
+                                <div class="mini_cart_meta">
+                                    <p class="cart_selling_plan"></p>
+                                </div>
+                                <div class="mini_cart_tool mt__10">
+                                    <a href="#" class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"><span class="tt_txt">Remove this item</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
+                        <div class="cart_meta_prices price">
+                            <div class="cart_price">Rs. 35</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
+                        <div class="quantity pr mr__10 qty__true">
+                            <input type="number" class="input-text qty text tc qty_cart_js" name="updates[]" value="1">
+                            <div class="qty tc fs__14">
+                                <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
+                                    <i class="facl facl-plus"></i></button>
+                                <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0 qty_1">
+                                    <i class="facl facl-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
+                        <span class="cart-item-price fwm cd js_tt_price_it">Rs. 35</span>
+                    </div>
+                </div>
+            </div>
+            <div class="cart_item js_cart_item">
+                <div class="ld_cart_bar"></div>
+                <div class="row al_center">
+                    <div class="col-12 col-md-12 col-lg-5">
+                        <div class="page_cart_info flex al_center">
+                            <a href="product-detail-layout-01.html">
+                                <img style="width: 140px;height: 140px;object-fit: cover;padding:5px"  class="lazyload w__100 lz_op_ef" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201128%201439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/uploads/product-images/uzjFynK3YLfcDbIt6Z12.jfif" alt="">
+                            </a>
+                            <div class="mini_cart_body ml__15">
+                                <h5 class="mini_cart_title mg__0 mb__5">
+                                    <a href="product-detail-layout-01.html">Black mountain hat</a>
+                                </h5>
+                                <div class="mini_cart_meta">
+                                    <p class="cart_selling_plan"></p>
+                                </div>
+                                <div class="mini_cart_tool mt__10">
+                                    <a href="#" class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"><span class="tt_txt">Remove this item</span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="3 6 5 6 21 6"></polyline>
+                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
+                        <div class="cart_meta_prices price">
+                            <div class="cart_price">Rs. 50</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
+                        <div class="quantity pr mr__10 qty__true">
+                            <input type="number" class="input-text qty text tc qty_cart_js" name="updates[]" value="1">
+                            <div class="qty tc fs__14">
+                                <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
+                                    <i class="facl facl-plus"></i></button>
+                                <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0 qty_1">
+                                    <i class="facl facl-minus"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
+                        <span class="cart-item-price fwm cd js_tt_price_it">Rs. 50</span>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="cart__footer mt__60">
+            <div class="row">
+                <div class="col-12 tr_md tc order-md-12 order-12 col-md-12">
+                    <div class="total row in_flex fl_between al_center cd fs__18 tu">
+                        <div class="col-auto"><strong>Subtotal:</strong></div>
+                        <div class="col-auto tr js_cat_ttprice fs__20 fwm">
+                            <div class="cart_tot_price">Rs. 85</div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <p class="db txt_tax_ship mb__5">Taxes, shipping and discounts codes calculated at checkout</p>
+                    <div class="clearfix"></div>
+                    <button type="submit" name="update" class="button btn_update mt__10 mb__10 js_add_ld w__100">Update Cart</button>
+                    <button type="submit" onclick="location.href='<?= getHTMLRoot() ?>/checkout'" data-confirm="ck_lumise" name="checkout" class="btn_checkout button button_primary tu mt__10 mb__10 js_add_ld w__100">Check Out</button>
+                    <div class="clearfix"></div>
+                    <div class="cat_img_trust mt__10">
+                        <img class="lz_op_ef lazyload w-50" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%20476%2052%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/uploads/product-images/cart_image.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
 <!--end cart section-->
 <?php
