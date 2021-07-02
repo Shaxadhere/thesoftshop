@@ -1,7 +1,9 @@
+//add current year in footer
 var d = new Date();
 var n = d.getFullYear();
 document.getElementById("year").innerHTML = n;
 
+//delay function to skip keyup for sometime
 function delay(callback, ms) {
     var timer = 0;
     return function() {
@@ -14,6 +16,7 @@ function delay(callback, ms) {
     };
 }
 
+//parse url query
 function parse_my_query(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split('&');
@@ -26,6 +29,7 @@ function parse_my_query(variable) {
     console.log('Query variable %s not found', variable);
 }
 
+//quick view modal handle
 $(document).on('mouseover', '.quick-view-product', function() {
     var productId = $(this).attr('data-id')
     $.ajax({
@@ -45,6 +49,7 @@ $(document).on('mouseover', '.quick-view-product', function() {
                 var categories = JSON.parse(product['Categories'])
                 var tags = JSON.parse(product['ProductTags'])
                 $('#view-product-name-anchor').html(product['ProductName'])
+                $('#view-product-name-anchor').attr('href', "/thesoftshop/view-product?name=" + product['ProductSlug'])
                 $('#view-product-image-container').empty()
                 images.forEach(item => {
                     $('#view-product-image-container').append(
@@ -127,6 +132,7 @@ $(document).on('mouseover', '.quick-view-product', function() {
     })
 })
 
+//search products function
 function search_products(query, category) {
     const queryString = window.location.search
     const params = new URLSearchParams(queryString)
@@ -142,6 +148,7 @@ function search_products(query, category) {
     location.href = url
 }
 
+//search input on keypress enter handle
 $(document).on('keypress', '.search-input', function(event){
     var query = $(this).val()
     var _category = $(this).parent().prev().children().first().val();
@@ -152,6 +159,7 @@ $(document).on('keypress', '.search-input', function(event){
     }
 })
 
+//search button handle
 $(document).on('click', '.btn-search-products', function() {
     var query = $(this).prev().val()
     var _category = $(this).parent().prev().children().first().val();
@@ -159,6 +167,7 @@ $(document).on('click', '.btn-search-products', function() {
     search_products(query, category)
 })
 
+//customer login handle
 $(document).on('submit', '#customer_login', function(event){
     event.preventDefault()
     var customerEmail = $('#CustomerEmail').val()
@@ -191,6 +200,7 @@ $(document).on('submit', '#customer_login', function(event){
     })
 })
 
+//customer register handle
 $(document).on('submit', '#RegisterForm', function(event){
     event.preventDefault()
     var fullName = $('#RegisterFullName').val()
@@ -225,6 +235,7 @@ $(document).on('submit', '#RegisterForm', function(event){
     })
 })
 
+//personal profile form submit handle
 $(document).on('submit', '#PersonalProfileForm', function(event){
     event.preventDefault()
     var fullName = $('#edit-profile-full-name').val()
@@ -259,6 +270,7 @@ $(document).on('submit', '#PersonalProfileForm', function(event){
     })
 })
 
+//shipping address form submit handle
 $(document).on('submit', '#ShippingAddressForm', function(event){
     event.preventDefault()
     var shippingAddress = $('#edit-shipping-address-field').val()
@@ -289,6 +301,7 @@ $(document).on('submit', '#ShippingAddressForm', function(event){
     })
 })
 
+//billing address form submit handle
 $(document).on('submit', '#BillingAddressForm', function(event){
     event.preventDefault()
     var billingAddress = $('#edit-billing-address-field').val()
@@ -319,6 +332,7 @@ $(document).on('submit', '#BillingAddressForm', function(event){
     })
 })
 
+//show edit personal profile form
 $(document).on('click', '#edit-personal-profile', function(){
     var root = $('#root').html()
     $.ajax({
@@ -333,6 +347,7 @@ $(document).on('click', '#edit-personal-profile', function(){
     })
 })
 
+//show edit shipping address form
 $(document).on('click', '#edit-shipping-address', function(){
     var root = $('#root').html()
     $.ajax({
@@ -347,6 +362,7 @@ $(document).on('click', '#edit-shipping-address', function(){
     })
 })
 
+//show edit billing address form
 $(document).on('click', '#edit-billing-address', function(){
     var root = $('#root').html()
     $.ajax({
