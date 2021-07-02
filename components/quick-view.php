@@ -23,7 +23,7 @@
                                     <del id="view-product-original-price" style="display:none">${Original Price}</del>
                                     <ins id="view-product-current-price">${Current Price}</ins>
                                 </p>
-                                <a href="product-detail-layout-01.html" class="rating_sp_kl dib">
+                                <a href="#" class="rating_sp_kl dib">
                                     <div class="kalles-rating-result">
                                         <span class="kalles-rating-result__number" id="view-product-review-count">12 reviews</span>
                                     </div>
@@ -89,8 +89,8 @@
                                 <img class="lazyload img_tr_s1 w__100" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%202244%20285%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/assets/images/trust_img2.png" alt="">
                             </div>
                             <div class="product_meta">
-                                <span class="posted_in" id="view-product-categories-container"><span class="cb">Categories:</span> <a href="shop-filter-options.html" class="cg" title="Women">${Categories}</a></span>
-                                <span class="tagged_as" id="view-product-tags-container"><span class="cb">Tags:</span> <a href="shop-filter-options.html" class="cg" title="Color Black">${Tags}</a></span>
+                                <span class="posted_in" id="view-product-categories-container"><span class="cb">Categories:</span> <a href="#" class="cg" title="Women">${Categories}</a></span>
+                                <span class="tagged_as" id="view-product-tags-container"><span class="cb">Tags:</span> <a href="#" class="cg" title="Color Black">${Tags}</a></span>
                             </div>
                             <a id="view-product-view-full-details" href="#" class="btn fwsb detail_link p-0 fs__14">View full details<i class="facl facl-right"></i></a>
                         </div>

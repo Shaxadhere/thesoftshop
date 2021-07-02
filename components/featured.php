@@ -92,9 +92,6 @@
             ?>
         </div>
 
-        <div class="products-footer tc mt__40">
-            <a class="se_cat_lm pr nt_cat_lm button button_default br_rd_true btn_icon_false" href="#">Load More</a>
-        </div>
     </div>
 </div>
 <!-- end featured collection -->

@@ -111,11 +111,11 @@ $(document).on('mouseover', '.quick-view-product', function() {
                     index++
                     if (count == index) {
                         $('#view-product-tags-container').append(
-                            "<a href='/thesoftshop/products?tags=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
+                            "<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
                         )
                     } else {
                         $('#view-product-tags-container').append(
-                            "<a href='/thesoftshop/products?tags=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
+                            "<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
                         )
                     }
                 });
