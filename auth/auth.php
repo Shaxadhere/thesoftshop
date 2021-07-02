@@ -146,6 +146,15 @@ if(isset($_POST['UpdateProfile'])){
   if(empty($Email)){
     array_push($errors, "Email is required");
   }
+  if(isHTML($FullName)){
+    array_push($errors, "Invalid name");
+  }
+  if(isHTML($Email)){
+    array_push($errors, "Invalid email");
+  }
+  if(isHTML($Contact)){
+    array_push($errors, "Invalid contact");
+  }
   if($errors == null){
     editData(
       "tbl_customer",
