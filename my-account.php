@@ -39,7 +39,7 @@ if (!isset($Customer)) {
             </div>
             <div class="col-lg-3 col-md-6 col-12 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
                 <div class="product-inner pr">
-                    <div class="card" style="width: 18rem; height:175px">
+                    <div class="card" style="width: 18rem; height:185px">
                         <div class="card-body">
                             <div style="display:flex">
                                 <h5 class="card-title">Shipping Address</h5><a id="edit-shipping-address" style="padding: 10px 0px 0px 10px; color:#56cfe1" href="#" class="card-link">Edit</a>
@@ -51,10 +51,22 @@ if (!isset($Customer)) {
             </div>
             <div class="col-lg-3 col-md-6 col-12 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
                 <div class="product-inner pr">
-                    <div class="card" style="width: 18rem; height:175px">
+                    <div class="card" style="width: 18rem; height:185px">
                         <div class="card-body">
                             <div style="display:flex">
                                 <h5 class="card-title">Billing Address</h5><a id="edit-billing-address" style="padding: 10px 0px 0px 10px; color:#56cfe1" href="#" class="card-link">Edit</a>
+                            </div>
+                            <p class="card-text"><?= (empty($Customer['BillingAddress'])) ? "No addresses" : $Customer['BillingAddress'] ?></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-9 col-12 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
+                <div class="product-inner pr">
+                    <div class="card" style="width: 102%; height:185px">
+                        <div class="card-body">
+                            <div style="display:flex">
+                                <h5 class="card-title">Recent Orders</h5><a id="view-recent-orders" style="padding: 10px 0px 0px 10px; color:#56cfe1" href="<?= getHTMLRoot() ?>/my-orders" class="card-link">View All</a>
                             </div>
                             <p class="card-text"><?= (empty($Customer['BillingAddress'])) ? "No addresses" : $Customer['BillingAddress'] ?></p>
                         </div>

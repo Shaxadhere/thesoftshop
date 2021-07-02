@@ -10,26 +10,18 @@ $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['
     <div class="row" style="justify-content: center;">
         <div class="col-12 col-md-6 col-lg-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
             <div class="checkout-section">
-                <h3 class="checkout-section__title">Personal profile</h3>
-                <form id="PersonalProfileForm" method="post">
-                    <div class="alert alert-success" style="display:none" id="edit-profile-success-alert">
-                        Profile updated successfully
+                <h3 class="checkout-section__title">Shipping Address</h3>
+                <form id="ShippingAddressForm" method="post">
+                    <div class="alert alert-success" style="display:none" id="edit-shipping-address-success-alert">
+                        Shipiing Address updated successfully
                     </div>
-                    <div class="alert alert-danger" style="display:none" id="edit-profile-error-alert">
+                    <div class="alert alert-danger" style="display:none" id="edit-shipping-address-error-alert">
 
                     </div>
                     <div class="row">
                         <p class="checkout-section__field col-12">
-                            <label for="FullName">Full Name</label>
-                            <input required placeholder="Please enter your name" type="text" id="edit-profile-full-name" value="<?= $Customer['FullName'] ?>">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="Email">Email</label>
-                            <input required placeholder="Please enter your email" type="text" id="edit-profile-email" value="<?= $Customer['Email'] ?>">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="Contact">Contact</label>
-                            <input placeholder="Please enter your contact" type="text" id="edit-profile-contact" value="<?= $Customer['Contact'] ?>">
+                            <label for="ShippingAddress">Shipping Address</label>
+                            <input required placeholder="Please enter your shipping address" type="text" id="edit-shipping-address-field" value="<?= $Customer['ShippingAddress'] ?>">
                         </p>
                         <p class="checkout-section__field col-12">
                             <button type="submit">Save</button>
@@ -43,9 +35,11 @@ $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['
                 <div class="card" style="width: 100%; height:175px">
                     <div class="card-body">
                         <div style="display:flex">
-                            <h5 class="card-title">Shipping Address</h5><a id="edit-shipping-address" style="padding: 10px 0px 0px 10px; color:#56cfe1" href="#" class="card-link">Edit</a>
+                            <h5 class="card-title">Personal Profile</h5><a id="edit-personal-profile" style="padding: 10px 0px 0px 10px; color:#56cfe1" href="#" class="card-link">Edit</a>
                         </div>
-                        <p class="card-text"><?= (empty($Customer['ShippingAddress'])) ? "No addresses" : $Customer['ShippingAddress'] ?></p>
+                        <p class="card-text" style="margin-bottom:1px !important"><?= $Customer['FullName'] ?></p>
+                        <p class="card-text" style="margin-bottom:1px !important"><?= $Customer['Email'] ?></p>
+                        <p class="card-text" style="margin-bottom:1px !important"><?= $Customer['Contact'] ?></p>
                     </div>
                 </div>
             </div>

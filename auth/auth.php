@@ -133,7 +133,6 @@ if(isset($_POST['UpdateProfile'])){
   session_start();
   if(!isset($_SESSION['USER'])){
     echo false;
-    echo "request confirm";
     exit();
   }
   $errors = array();
@@ -165,6 +164,66 @@ if(isset($_POST['UpdateProfile'])){
         $Email,
         "Contact",
         $Contact
+      ),
+      "PK_ID",
+      $_SESSION['USER']['PK_ID'],
+      connect()
+    );
+    echo true;
+  }
+  else{
+    echo json_encode($errors);
+  }
+}
+
+//Request from update shipping address confirm
+if(isset($_POST['UpdateShippingAddress'])){
+  session_start();
+  if(!isset($_SESSION['USER'])){
+    echo false;
+    exit();
+  }
+  $errors = array();
+  $ShippingAddress = mysqli_real_escape_string(connect(), $_POST['ShippingAddress']);
+  if(isHTML($ShippingAddress)){
+    array_push($errors, "Invalid shipping address");
+  }
+  if($errors == null){
+    editData(
+      "tbl_customer",
+      array(
+        "ShippingAddress",
+        $ShippingAddress
+      ),
+      "PK_ID",
+      $_SESSION['USER']['PK_ID'],
+      connect()
+    );
+    echo true;
+  }
+  else{
+    echo json_encode($errors);
+  }
+}
+
+//Request from update billing address confirm
+if(isset($_POST['UpdateBillingAddress'])){
+  session_start();
+  if(!isset($_SESSION['USER'])){
+    echo false;
+    exit();
+  }
+  $errors = array();
+  $BillingAddress = mysqli_real_escape_string(connect(), $_POST['BillingAddress']);
+  if(isHTML($BillingAddress)){
+    array_push($errors, "Invalid billing address");
+  }
+  if($errors == null){
+    editData(
+      "tbl_customer",
+      array(
+        "BillingAddress",
+        $BillingAddress
       ),
       "PK_ID",
       $_SESSION['USER']['PK_ID'],
@@ -378,6 +437,7 @@ if (isset($_POST['reset'])) {
   }
 }
 
+//Request from save password confirm
 if (isset($_POST['SavePassword'])) {
   if (isset($_REQUEST['token']) && isset($_REQUEST['uuid'])) {
     $antiForgeryToken = $_REQUEST['token'];

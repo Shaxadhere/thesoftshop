@@ -259,11 +259,99 @@ $(document).on('submit', '#PersonalProfileForm', function(event){
     })
 })
 
+$(document).on('submit', '#ShippingAddressForm', function(event){
+    event.preventDefault()
+    var shippingAddress = $('#edit-shipping-address-field').val()
+    $.ajax({
+        type: "POST",
+        url: "/thesoftshop/auth/auth",
+        data: {
+            UpdateShippingAddress: true,
+            ShippingAddress : shippingAddress
+        },
+        success: function(response) {
+            if(response == true){
+                $('#edit-shipping-address-error-alert').hide()
+                $('#edit-shipping-address-success-alert').show()
+                setTimeout(function() {
+                    location.reload()
+                }, 1000)
+            }
+            else{
+                var error = JSON.parse(response)
+                $('#edit-shipping-address-error-alert').html(error[0])
+                $('#edit-shipping-address-error-alert').show()
+            }
+        },
+        error: function(error){
+            console.log("Error in connection: " + error)
+        }
+    })
+})
+
+$(document).on('submit', '#BillingAddressForm', function(event){
+    event.preventDefault()
+    var billingAddress = $('#edit-billing-address-field').val()
+    $.ajax({
+        type: "POST",
+        url: "/thesoftshop/auth/auth",
+        data: {
+            UpdateBillingAddress: true,
+            BillingAddress : billingAddress
+        },
+        success: function(response) {
+            if(response == true){
+                $('#edit-billing-address-error-alert').hide()
+                $('#edit-billing-address-success-alert').show()
+                setTimeout(function() {
+                    location.reload()
+                }, 1000)
+            }
+            else{
+                var error = JSON.parse(response)
+                $('#edit-billing-address-error-alert').html(error[0])
+                $('#edit-billing-address-error-alert').show()
+            }
+        },
+        error: function(error){
+            console.log("Error in connection: " + error)
+        }
+    })
+})
+
 $(document).on('click', '#edit-personal-profile', function(){
     var root = $('#root').html()
     $.ajax({
         type: "GET",
         url: "/thesoftshop/components/edit-personal-profile",
+        success: function(response){
+            $('#root').html(response)
+        },
+        error: function(error){
+            console.log("Error in connection: " + error)
+        }
+    })
+})
+
+$(document).on('click', '#edit-shipping-address', function(){
+    var root = $('#root').html()
+    $.ajax({
+        type: "GET",
+        url: "/thesoftshop/components/edit-shipping-address",
+        success: function(response){
+            $('#root').html(response)
+        },
+        error: function(error){
+            console.log("Error in connection: " + error)
+        }
+    })
+})
+
+$(document).on('click', '#edit-billing-address', function(){
+    var root = $('#root').html()
+    $.ajax({
+        type: "GET",
+        url: "/thesoftshop/components/edit-billing-address",
         success: function(response){
             $('#root').html(response)
         },
