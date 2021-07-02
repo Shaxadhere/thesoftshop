@@ -276,11 +276,20 @@ getHeader("Shop", "includes/header.php");
                                 if (isset($_REQUEST['page'])) {
                                     $page = $_REQUEST['page'];
                                     $URL = $_SERVER['QUERY_STRING'];
-                                    $NewUrl = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
+                                    $NewUrl = str_replace("&page=$page", "&page=" . intval($page) + 1, $URL);
+                                    if(empty($URL)){
+                                        echo "<script>alert('asdsa')</script>";
+                                        $NewUrl = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
+                                    }
                                 } else {
                                     $page = 1;
                                     $URL = $_SERVER['QUERY_STRING'];
-                                    $NewUrl = $URL . "page=2";
+                                    if(empty($URL)){
+                                        $NewUrl = $URL . "page=2";
+                                    }
+                                    else{
+                                        $NewUrl = $URL . "&page=2";
+                                    }
                                 }
 
                                 for ($i = 1; $i < $PageNumbers; $i++) {
@@ -288,7 +297,12 @@ getHeader("Shop", "includes/header.php");
                                     if (isset($_REQUEST['page'])) {
                                         $NewUrl = str_replace("page=$page", "page=" . $i, $URL);
                                     } else {
-                                        $NewUrl = $URL . "page=" . $i;
+                                        if(empty($URL)){
+                                            $NewUrl = $URL . "page=" . $i;
+                                        }
+                                        else{
+                                            $NewUrl = $URL . "&page=" . $i;
+                                        }
                                     }
 
                                     if (isset($_REQUEST['page'])) {
