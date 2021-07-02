@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Products", "includes/header.php");
+getHeader("Search products", "includes/header.php");
 ?>
 <!--category menu-->
 <div class="kalles-section cat-shop pr tc">

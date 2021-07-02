@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Home", "includes/header.php");
+getHeader("Cart", "includes/header.php");
 ?>
 <!--cart section-->
 <div class="kalles-section cart_page_section container mt__60">

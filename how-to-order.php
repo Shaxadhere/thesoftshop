@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Home", "includes/header.php");
+getHeader("How to order", "includes/header.php");
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
 include_once('components/quick-shop.php');

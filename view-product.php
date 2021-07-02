@@ -152,7 +152,15 @@ getHeader($Product['ProductName'], "includes/header.php");
                                                             <i class="facl facl-heart-o"></i>
                                                         </a>
                                                     </div>
-                                                    <button type="submit" data-time="6000" data-ani="shake" class="single_add_to_cart_button button truncate w__100 mt__20 order-4 d-inline-block animated">
+                                                    <style>
+                                                    .btn-add-to-cart{
+                                                        
+                                                    }
+                                                    </style>
+                                                    <button data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="6000" data-ani="shake" class="button truncate w__100 mt__20 order-4 d-inline-block animated btn-add-to-cart">
+                                                        <span class="txt_add ">Add to cart</span>
+                                                    </button>
+                                                    <button data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="6000" data-ani="shake" class="single_add_to_cart_button button truncate w__100 mt__20 order-4 d-inline-block animated btn-add-to-cart">
                                                         <span class="txt_add ">Add to cart</span>
                                                     </button>
                                                 </div>

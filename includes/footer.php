@@ -168,7 +168,7 @@ include_once('web-config.php');
                                 <a href="<?= getHTMLRoot() ?>/about-us">About Us</a>
                             </li>
                             <li class="menu-item">
-                                <a href="<?= getHTMLRoot() ?>/contact">Contact</a>
+                                <a href="<?= getHTMLRoot() ?>/contact-us">Contact</a>
                             </li>
                             <li class="menu-item">
                                 <a href="<?= getHTMLRoot() ?>/blog">Blog</a>

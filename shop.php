@@ -139,34 +139,27 @@ getHeader("Shop", "includes/header.php");
                     <?php
                     include_once('models/product-model.php');
                     $ProductModel = new Product();
-                    if(isset($_REQUEST['name']) && isset($_REQUEST['category'])){
-                        if(isset($_REQUEST['sort'])){
+                    if (isset($_REQUEST['name']) && isset($_REQUEST['category'])) {
+                        if (isset($_REQUEST['sort'])) {
                             $Products = $ProductModel->List(0, 4, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
-                        }
-                        else{
+                        } else {
                             $Products = $ProductModel->List(0, 4, $_REQUEST['name'], $_REQUEST['category']);
                         }
-                    }
-                    else if(isset($_REQUEST['name'])){
-                        if(isset($_REQUEST['sort'])){
+                    } else if (isset($_REQUEST['name'])) {
+                        if (isset($_REQUEST['sort'])) {
                             $Products = $ProductModel->List(0, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
-                        }
-                        else{
+                        } else {
                             $Products = $ProductModel->List(0, 4, $_REQUEST['name']);
                         }
-                    }
-                    else if(isset($_REQUEST['category'])){
-                        if(isset($_REQUEST['sort'])){
+                    } else if (isset($_REQUEST['category'])) {
+                        if (isset($_REQUEST['sort'])) {
                             $Products = $ProductModel->List(0, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
-                        }
-                        else{
+                        } else {
                             $Products = $ProductModel->List(0, 4, $_REQUEST['name']);
                         }
-                    }
-                    else if(isset($_REQUEST['sort'])){
+                    } else if (isset($_REQUEST['sort'])) {
                         $Products = $ProductModel->List(0, 4, "", "", $_REQUEST['sort']);
-                    }
-                    else{
+                    } else {
                         $Products = $ProductModel->List(0, 4, "", "", "");
                     }
                     while ($row = mysqli_fetch_array($Products)) {
@@ -212,86 +205,136 @@ getHeader("Shop", "includes/header.php");
                         <ul class="pagination-page page-numbers">
                             <li>
                                 <?php
-                                if(isset($_REQUEST['page'])){
-                                    if($_REQUEST['page'] == 1){
-                                        echo "<span class='prev page-numbers' style='color:grey'>Prev</span></li>";
+                                 $CurrentPage = 1;
+                                 if(isset($_REQUEST['page'])){
+                                     $CurrentPage = $_REQUEST['page'];
+                                 }
+
+                                //Pagination values
+                                if (isset($_REQUEST['name']) && isset($_REQUEST['category'])) {
+                                    if (isset($_REQUEST['sort'])) {
+                                        $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
+                                    } else {
+                                        $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], $_REQUEST['category']);
                                     }
-                                    else{
-                                        echo "<a class='prev page-numbers' href='#' style='color:grey'>Prev</a></li>";
+                                } else if (isset($_REQUEST['name'])) {
+                                    if (isset($_REQUEST['sort'])) {
+                                        $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], "", $_REQUEST['sort']);
+                                    } else {
+                                        $Products = $ProductModel->List(0, 9999999, $_REQUEST['name']);
+                                    }
+                                } else if (isset($_REQUEST['category'])) {
+                                    if (isset($_REQUEST['sort'])) {
+                                        $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], "", $_REQUEST['sort']);
+                                    } else {
+                                        $Products = $ProductModel->List(0, 9999999, $_REQUEST['name']);
+                                    }
+                                } else if (isset($_REQUEST['sort'])) {
+                                    $Products = $ProductModel->List(0, 9999999, "", "", $_REQUEST['sort']);
+                                } else {
+                                    $Products = $ProductModel->List(0, 9999999, "", "", "");
+                                }
+                                $NumberOfProducts = mysqli_num_rows($Products);
+                                $PageNumbers = (intval($NumberOfProducts) / 4) + 1;
+
+                                //Previous Button URL
+                                if (isset($_REQUEST['page'])) {
+                                    $page = $_REQUEST['page'];
+                                    $URL = $_SERVER['QUERY_STRING'];
+                                    $PrevURL = str_replace("page=$page", "page=" . intval($page) - 1, $URL);
+                                } else {
+                                    $URL = $_SERVER['QUERY_STRING'];
+                                    if (empty($URL)) {
+                                        $PrevURL = "page=2";
+                                    } else {
+                                        $PrevURL = $URL . "&page=2";
                                     }
                                 }
+
+                                if($CurrentPage == 1){
+                                    echo "<li>";
+                                    echo "<span class='prev page-numbers' style='color:grey'>Prev</span>";
+                                    echo "</li>";
+                                }
                                 else{
-                                    echo "<span class='prev page-numbers' style='color:grey'>Prev</span></li>";
+                                    echo "<li>";
+                                    echo "<a class='prev page-numbers' href='". getHTMLRoot() . "/shop?$PrevURL'>Prev</a>";
+                                    echo "</li>";
+                                }
+
+                                //Pagination
+                                if (isset($_REQUEST['page'])) {
+                                    $page = $_REQUEST['page'];
+                                    $URL = $_SERVER['QUERY_STRING'];
+                                    $NewUrl = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
+                                } else {
+                                    $page = 1;
+                                    $URL = $_SERVER['QUERY_STRING'];
+                                    $NewUrl = $URL . "page=2";
+                                }
+
+                                for ($i = 1; $i < $PageNumbers; $i++) {
+
+                                    if (isset($_REQUEST['page'])) {
+                                        $NewUrl = str_replace("page=$page", "page=" . $i, $URL);
+                                    } else {
+                                        $NewUrl = $URL . "page=" . $i;
+                                    }
+
+                                    if (isset($_REQUEST['page'])) {
+                                        if ($_REQUEST['page'] == $i) {
+                                            echo "<li><a href='" . getHTMLRoot() . "/shop?$NewUrl' class='page-numbers current'>$i</a></li>";
+                                        } else {
+                                            echo "<li><a href='" . getHTMLRoot() . "/shop?$NewUrl' class='page-numbers'>$i</a></li>";
+                                        }
+                                    } else {
+                                        if ($i == "1") {
+                                            echo "<li><a href='" . getHTMLRoot() . "/shop?$NewUrl' class='page-numbers current'>$i</a></li>";
+                                        } else {
+                                            echo "<li><a href='" . getHTMLRoot() . "/shop?$NewUrl' class='page-numbers'>$i</a></li>";
+                                        }
+                                    }
+                                }
+                                $NextURL = getHTMLRoot() . "/shop?" . $URL;
+                                if (isset($_REQUEST['page'])) {
+                                    if ($_REQUEST['page'] != $NumberOfProducts) {
+                                        $PageNumber = intval($_REQUEST['page']) + 1;
+                                        $NextURL .= "page=" . $PageNumber;
+                                    }
+                                } else {
+                                    if (1 != $NumberOfProducts) {
+                                        $PageNumber = 2;
+                                        $NextURL .= "page=" . $PageNumber;
+                                    }
+                                }
+
+                                //Next Button URL
+                                if (isset($_REQUEST['page'])) {
+                                    $page = $_REQUEST['page'];
+                                    $URL = $_SERVER['QUERY_STRING'];
+                                    $NextURL = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
+                                } else {
+                                    $URL = $_SERVER['QUERY_STRING'];
+                                    if (empty($URL)) {
+                                        $NextURL = "page=2";
+                                    } else {
+                                        $NextURL = $URL . "&page=2";
+                                    }
+                                }
+
+                               
+                                
+                                if($CurrentPage == intval($PageNumbers)){
+                                    echo "<li>";
+                                    echo "<span class='next page-numbers' style='color:grey'>Next</span>";
+                                    echo "</li>";
+                                }
+                                else{
+                                    echo "<li>";
+                                    echo "<a class='next page-numbers' href='". getHTMLRoot() . "/shop?$NextURL'>Next</a>";
+                                    echo "</li>";
                                 }
                                 ?>
-                            <?php
-                            if(isset($_REQUEST['name']) && isset($_REQUEST['category'])){
-                                if(isset($_REQUEST['sort'])){
-                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
-                                }
-                                else{
-                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], $_REQUEST['category']);
-                                }
-                            }
-                            else if(isset($_REQUEST['name'])){
-                                if(isset($_REQUEST['sort'])){
-                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], "", $_REQUEST['sort']);
-                                }
-                                else{
-                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name']);
-                                }
-                            }
-                            else if(isset($_REQUEST['category'])){
-                                if(isset($_REQUEST['sort'])){
-                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name'], "", $_REQUEST['sort']);
-                                }
-                                else{
-                                    $Products = $ProductModel->List(0, 9999999, $_REQUEST['name']);
-                                }
-                            }
-                            else if(isset($_REQUEST['sort'])){
-                                $Products = $ProductModel->List(0, 9999999, "", "", $_REQUEST['sort']);
-                            }
-                            else{
-                                $Products = $ProductModel->List(0, 9999999, "", "", "");
-                            }
-                            $NumberOfProducts = mysqli_num_rows($Products);
-                            $PageNumbers = (intval($NumberOfProducts) / 4) + 1;
-                            $URL = $_SERVER['QUERY_STRING'];
-                            $URL = preg_replace('~(\?|&)page=[^&]*~', '$1', $URL);
-                            for ($i=1; $i < $PageNumbers; $i++) { 
-                                if(isset($_REQUEST['page'])){
-                                    if($_REQUEST['page'] == $i){
-                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers current'>$i</a></li>";
-                                    }
-                                    else{
-                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers'>$i</a></li>";
-                                    }
-                                }
-                                else{
-                                    if($i == "1"){
-                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers current'>$i</a></li>";
-                                    }
-                                    else{
-                                        echo "<li><a href='".getHTMLRoot() . "/shop?". $URL."&page=". $i ."' class='page-numbers'>$i</a></li>";
-                                    }
-                                }
-                            }
-                            $NextURL = getHTMLRoot() . "/shop?" .$URL;
-                            if(isset($_REQUEST['page'])){
-                                if($_REQUEST['page'] != $NumberOfProducts){
-                                    $PageNumber = intval($_REQUEST['page']) + 1;
-                                    $NextURL .= "page=".$PageNumber;
-                                }
-                            }
-                            else{
-                                if(1 != $NumberOfProducts){
-                                    $PageNumber = 2;
-                                    $NextURL .= "page=".$PageNumber;
-                                }
-                            }
-                            ?>
-                            <li><a class="next page-numbers" href="<?= $NextURL ?>">Next</a></li>
                         </ul>
                     </nav>
                 </div>
