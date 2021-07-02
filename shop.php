@@ -139,28 +139,38 @@ getHeader("Shop", "includes/header.php");
                     <?php
                     include_once('models/product-model.php');
                     $ProductModel = new Product();
+
+                    $CurrentPage = 1;
+                    if(isset($_REQUEST['page'])){
+                        $CurrentPage = $_REQUEST['page'];
+                    }
+                    $ProductIndex = (intval($CurrentPage) * 4) - 4;
+                    if($CurrentPage == 1){
+                        $ProductIndex = 0;
+                    }
+
                     if (isset($_REQUEST['name']) && isset($_REQUEST['category'])) {
                         if (isset($_REQUEST['sort'])) {
-                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
+                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
                         } else {
-                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], $_REQUEST['category']);
+                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], $_REQUEST['category']);
                         }
                     } else if (isset($_REQUEST['name'])) {
                         if (isset($_REQUEST['sort'])) {
-                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
+                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
                         } else {
-                            $Products = $ProductModel->List(0, 4, $_REQUEST['name']);
+                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name']);
                         }
                     } else if (isset($_REQUEST['category'])) {
                         if (isset($_REQUEST['sort'])) {
-                            $Products = $ProductModel->List(0, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
+                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
                         } else {
-                            $Products = $ProductModel->List(0, 4, $_REQUEST['name']);
+                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name']);
                         }
                     } else if (isset($_REQUEST['sort'])) {
-                        $Products = $ProductModel->List(0, 4, "", "", $_REQUEST['sort']);
+                        $Products = $ProductModel->List($ProductIndex, 4, "", "", $_REQUEST['sort']);
                     } else {
-                        $Products = $ProductModel->List(0, 4, "", "", "");
+                        $Products = $ProductModel->List($ProductIndex, 4, "", "", "");
                     }
                     while ($row = mysqli_fetch_array($Products)) {
                         $ProductImages = json_decode($row['ProductImages']);
