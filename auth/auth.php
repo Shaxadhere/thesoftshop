@@ -128,6 +128,46 @@ if (isset($_POST['AuthenticateUser'])) {
   }
 }
 
+//Request from update profile confirm
+if(isset($_POST['UpdateProfile'])){
+  session_start();
+  if(!isset($_SESSION['USER'])){
+    echo false;
+    echo "request confirm";
+    exit();
+  }
+  $errors = array();
+  $FullName = mysqli_real_escape_string(connect(), $_POST['FullName']);
+  $Email = mysqli_real_escape_string(connect(), $_POST['Email']);
+  $Contact = mysqli_real_escape_string(connect(), $_POST['Contact']);
+  if(empty($FullName)){
+    array_push($errors, "Full name is required");
+  }
+  if(empty($Email)){
+    array_push($errors, "Email is required");
+  }
+  if($errors == null){
+    editData(
+      "tbl_customer",
+      array(
+        "FullName",
+        $FullName,
+        "Email",
+        $Email,
+        "Contact",
+        $Contact
+      ),
+      "PK_ID",
+      $_SESSION['USER']['PK_ID'],
+      connect()
+    );
+    echo true;
+  }
+  else{
+    echo json_encode($errors);
+  }
+}
+
 //Request from forgot confirm
 if (isset($_POST['reset'])) {
   //if it contains email in POST
