@@ -1,7 +1,9 @@
 <?php
 include_once('web-config.php');
 getHeader("My Account", "includes/header.php");
-
+if (!isset($_SESSION['USER'])) {
+    redirectWindow(getHTMLRoot());
+}
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
