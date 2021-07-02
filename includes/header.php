@@ -90,12 +90,21 @@ session_start();
                                             <i class="iccl iccl-search"></i></a>
                                         <div class="my-account ts__05 position-relative dn db_md">
                                             <?php
-                                            if(isset($_SESSION['USER'])){
-                                                echo "<a class='cb chp db push_side' href='".getHTMLRoot()."/my-account'>";
-                                                echo "<i class='iccl iccl-user'></i>";
-                                                echo "</a>";
-                                            }
-                                            else{
+                                            if (isset($_SESSION['USER'])) {
+                                                // echo "<a class='cb chp db push_side' href='".getHTMLRoot()."/my-account'>";
+                                                // echo "<i class='iccl iccl-user'></i>";
+                                                // echo "</a>";
+                                            ?>
+                                                <a class='cb chp db push_side' href='#'>
+                                                    <i class='iccl iccl-user'></i>
+                                                </a>
+                                                <ul class="pa pe_none ts__03 bgbl ul_none tl op__0 z_100 r__0 pt__15 pb__15 pr__15 pl__15">
+                                                    <li><a class="cg db" href="<?= getHTMLRoot() ?>/my-account">My Account</a></li>
+                                                    <li><a class="cg db" href="<?= getHTMLRoot() ?>/logout">Logout</a>
+                                                    </li>
+                                                </ul>
+                                            <?php
+                                            } else {
                                                 echo "<a class='cb chp db push_side' href='#' data-id='#nt_login_canvas'>";
                                                 echo "<i class='iccl iccl-user'></i>";
                                                 echo "</a>";

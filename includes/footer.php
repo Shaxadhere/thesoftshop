@@ -382,7 +382,16 @@ include_once('web-config.php');
             },
             success: function(response){
                 if(response == true){
-                    location.reload()
+                    $('#login-error-alert').hide()
+                    $('#login-success-alert').show()
+                    setTimeout(function() {
+                        location.reload()
+                    }, 1000)
+                }
+                else{
+                    var error = JSON.parse(response)
+                    $('#login-error-alert').html(error[0])
+                    $('#login-error-alert').show()
                 }
             },
             error: function(error){

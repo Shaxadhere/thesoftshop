@@ -8,6 +8,12 @@
         <div class="mini_cart_wrap">
             <div class="mini_cart_content fixcl-scroll">
                 <div class="fixcl-scroll-content">
+            <div class="alert alert-success" style="display:none" id="login-success-alert">
+                Successfully logged in!
+            </div>
+            <div class="alert alert-danger" style="display:none" id="login-error-alert">
+                
+            </div>
                     <p class="form-row">
                         <label for="CustomerEmail">Email <span class="required">*</span></label>
                         <input type="email" name="CustomerEmail" id="CustomerEmail" autocomplete="email" autocapitalize="off">
