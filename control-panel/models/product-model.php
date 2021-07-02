@@ -4,7 +4,7 @@ class Product{
     function List(){
         return mysqli_query(
             connect(),
-            "select * from tbl_product where deleted = 0"
+            "select * from tbl_product where deleted = 0 order by PK_ID desc"
         );
     }
 
