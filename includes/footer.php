@@ -399,6 +399,40 @@ include_once('web-config.php');
             }
         })
     })
+
+    $(document).on('submit', '#RegisterForm', function(event){
+        event.preventDefault()
+        var fullName = $('#RegisterFullName').val()
+        var email = $('#RegisterEmail').val()
+        var password = $('#RegisterPassword').val()
+        $.ajax({
+            type: "POST",
+            url: "<?= getHTMLRoot() ?>/auth/auth",
+            data: {
+                RegisterCustomer: true,
+                CustomerName : fullName,
+                CustomerEmail: email,
+                CustomerPassword: password
+            },
+            success: function(response) {
+                if(response == true){
+                    $('#register-error-alert').hide()
+                    $('#register-success-alert').show()
+                    setTimeout(function() {
+                        location.reload()
+                    }, 1000)
+                }
+                else{
+                    var error = JSON.parse(response)
+                    $('#register-error-alert').html(error[0])
+                    $('#register-error-alert').show()
+                }
+            },
+            error: function(error){
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
 </script>
 <?php
 if (isset($_REQUEST['Success'])) {

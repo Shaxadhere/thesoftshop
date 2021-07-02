@@ -3,82 +3,44 @@
 include_once('../web-config.php');
 
 //Request from sign up confirm
-if (isset($_POST['signup'])) {
-  $status = true;
+if (isset($_POST['RegisterCustomer'])) {
+  $errors = array();
+  $FullName = mysqli_real_escape_string(connect(), $_POST['CustomerName']);
+  $CustomerEmail = mysqli_real_escape_string(connect(), $_POST['CustomerEmail']);
+  $CustomerPassword = mysqli_real_escape_string(connect(), $_POST['CustomerPassword']);
 
-  if (empty($_POST['FullName'])) {
-    $status = false;
-    redirectWindow("signup?FullName=Full name is required");
+  if (empty($FullName)) {
+    array_push($errors, "Full name is required");
   }
 
-  if (empty($_POST['CustomerEmail'])) {
-    $status = false;
-    redirectWindow("signup?Email=Email is required");
+  if (empty($CustomerEmail)) {
+    array_push($errors, "Email is required");
   }
 
-  if (checkExistance("tbl_customer", "Email", $_POST['CustomerEmail'], connect())) {
-    $status = false;
-    redirectWindow("signup?Email=Email already exists");
+  if (checkExistance("tbl_customer", "Email", $CustomerEmail, connect())) {
+    array_push($errors, "Email already exists");
   }
 
-  echo "<script>alert('$_POST[Email]')</script>";
-
-  if (!validateEmail($_POST['CustomerEmail'])) {
-    $status = false;
-    redirectWindow("signup?Email=Email is invalid");
+  if (!validateEmail($CustomerEmail)) {
+    array_push($errors, "Email is invalid");
   }
 
-  if (empty($_POST['CustomerPassword'])) {
-    $status = false;
-    redirectWindow("signup?Password=Password is required");
+  if (empty($CustomerPassword)) {
+    array_push($errors, "Password is required");
   }
 
-  if (empty($_POST['Contact'])) {
-    $status = false;
-    redirectWindow("signup?Contact=Contact is required");
-  }
-
-  if (strlen($_POST['Contact']) != 12) {
-    $status = false;
-    redirectWindow("signup?Contact=Contact is invalid");
-  }
-
-  if (empty($_POST['CNIC'])) {
-    $status = false;
-    redirectWindow("signup?CNIC=CNIC is required");
-  }
-
-  if (strlen($_POST['CNIC']) != 15) {
-    $status = false;
-    redirectWindow("signup?CNIC=CNIC is invalid");
-  }
-
-  if ($status) {
-    $FullName = $_POST['FullName'];
-    $Email = $_POST['CustomerEmail'];
-    $Password = $_POST['CustomerPassword'];
-    $Contact = $_POST['Contact'];
-    $CNIC = $_POST['CNIC'];
-
+  if ($errors == null) {
     insertData(
       "tbl_customer",
       array(
         "FullName",
         "Email",
         "Password",
-        "Contact",
-        "FK_UserType",
-        "CreatedAt",
-        "CNIC"
       ),
       array(
         $FullName,
-        $Email,
-        password_hash($Password, 1),
-        $Contact,
-        2,
-        date('Y-m-d H:i:s'),
-        $CNIC
+        $CustomerEmail,
+        password_hash($CustomerPassword, 1),
       ),
       connect()
     );
@@ -87,7 +49,7 @@ if (isset($_POST['signup'])) {
       "tbl_customer",
       array(
         "Email",
-        $Email
+        $CustomerEmail
       ),
       connect()
     );
@@ -97,31 +59,33 @@ if (isset($_POST['signup'])) {
     session_start();
     $_SESSION["USER"] = $User;
 
-    redirectWindow(getHtmlRoot() . "/dashboard");
+    echo true;
   } else {
-    http_response_code(500);
+    echo json_encode($errors);
   }
 }
 
 //Request from login confirm
 if (isset($_POST['AuthenticateUser'])) {
   $errors = array();
+  $CustomerEmail = mysqli_real_escape_string(connect(), $_POST['CustomerEmail']);
+  $CustomerPassword = mysqli_real_escape_string(connect(), $_POST['CustomerPassword']);
   //if it contains email in POST
-  if (isset($_POST['CustomerEmail'])) {
+  if (isset($CustomerEmail)) {
     //if email is empty string
-    if (empty($_POST['CustomerEmail'])) {
+    if (empty($CustomerEmail)) {
       array_push($errors, "Email cannot be empty");
     }
     //if email is invalid
-    else if (!validateEmail($_POST['CustomerEmail'])) {
+    else if (!validateEmail($CustomerEmail)) {
       array_push($errors, "Invalid Email");
     }
   }
 
   //if it contains password in POST
-  if (isset($_POST['CustomerPassword'])) {
+  if (isset($CustomerPassword)) {
     //if password is empty string
-    if (empty($_POST['CustomerPassword'])) {
+    if (empty($CustomerPassword)) {
       array_push($errors, "Password cannot be empty");
     }
   }
@@ -131,7 +95,7 @@ if (isset($_POST['AuthenticateUser'])) {
     "tbl_customer",
     array(
       "Email",
-      $_POST['CustomerEmail']
+      $CustomerEmail
     ),
     connect()
   );
@@ -142,7 +106,7 @@ if (isset($_POST['AuthenticateUser'])) {
   //checking if the account exists
   if (isset($ValidUser)) {
     //checking the password
-    if (password_verify($_POST['CustomerPassword'], $ValidUser['Password'])) {
+    if (password_verify($CustomerPassword, $ValidUser['Password'])) {
       session_start();
       $_SESSION["USER"] = $ValidUser;
     }
@@ -167,13 +131,13 @@ if (isset($_POST['AuthenticateUser'])) {
 //Request from forgot confirm
 if (isset($_POST['reset'])) {
   //if it contains email in POST
-  if (isset($_POST['CustomerEmail'])) {
+  if (isset($CustomerEmail)) {
     //if email is empty string
-    if (empty($_POST['CustomerEmail'])) {
+    if (empty($CustomerEmail)) {
       redirectWindow("index?email=Email cannot be empty");
     }
     //if email is invalid
-    else if (!validateEmail($_POST['CustomerEmail'])) {
+    else if (!validateEmail($CustomerEmail)) {
       redirectWindow("forgotPassword?email=Invalid Email");
     }
   }
@@ -183,7 +147,7 @@ if (isset($_POST['reset'])) {
     "tbl_customer",
     array(
       "Email",
-      $_POST['CustomerEmail']
+      $CustomerEmail
     ),
     connect()
   );

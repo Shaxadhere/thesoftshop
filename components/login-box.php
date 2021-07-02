@@ -8,12 +8,12 @@
         <div class="mini_cart_wrap">
             <div class="mini_cart_content fixcl-scroll">
                 <div class="fixcl-scroll-content">
-            <div class="alert alert-success" style="display:none" id="login-success-alert">
-                Successfully logged in!
-            </div>
-            <div class="alert alert-danger" style="display:none" id="login-error-alert">
-                
-            </div>
+                    <div class="alert alert-success" style="display:none" id="login-success-alert">
+                        Successfully logged in!
+                    </div>
+                    <div class="alert alert-danger" style="display:none" id="login-error-alert">
+
+                    </div>
                     <p class="form-row">
                         <label for="CustomerEmail">Email <span class="required">*</span></label>
                         <input type="email" name="CustomerEmail" id="CustomerEmail" autocomplete="email" autocapitalize="off">
@@ -65,21 +65,23 @@
         <div class="mini_cart_wrap">
             <div class="mini_cart_content fixcl-scroll">
                 <div class="fixcl-scroll-content">
+                    <div class="alert alert-success" style="display:none" id="register-success-alert">
+                        Account successfully registerd!
+                    </div>
+                    <div class="alert alert-danger" style="display:none" id="register-error-alert">
+
+                    </div>
                     <p class="form-row">
-                        <label for="-FirstName">First Name</label>
-                        <input type="text" name="f-name" id="-FirstName" autocomplete="given-name">
+                        <label for="RegisterFullName">Your Name</label>
+                        <input type="text" name="RegisterFullName" id="RegisterFullName" autocomplete="given-name">
                     </p>
                     <p class="form-row">
-                        <label for="-LastName">Last Name</label>
-                        <input type="text" name="last_name" id="-LastName" autocomplete="family-name">
+                        <label for="RegisterEmail">Email <span class="required">*</span></label>
+                        <input type="email" name="RegisterEmail" id="RegisterEmail" class="" autocapitalize="off" autocomplete="email" aria-required="true">
                     </p>
                     <p class="form-row">
-                        <label for="-email">Email <span class="required">*</span></label>
-                        <input type="email" name="email" id="-email" class="" autocapitalize="off" autocomplete="email" aria-required="true">
-                    </p>
-                    <p class="form-row">
-                        <label for="-password">Password <span class="required">*</span></label>
-                        <input type="password" name="password" id="-password" class="" autocomplete="current-password" aria-required="true">
+                        <label for="RegisterPassword">Password <span class="required">*</span></label>
+                        <input type="password" name="RegisterPassword" id="RegisterPassword" class="" autocomplete="current-password" aria-required="true">
                     </p>
                     <input type="submit" value="Register" class="button button_primary w__100 tu js_add_ld">
                     <br>
