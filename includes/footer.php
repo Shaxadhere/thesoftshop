@@ -205,7 +205,12 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/js/theia-sticky-sidebar.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/interface.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/main.js"></script>
-
+<script>
+$(document).on('click', '#btn-add-to-cart', function(){
+    var productId = $(this).data('id');
+    console.log(productId)
+})
+</script>
 <?php
 if (isset($_REQUEST['Success'])) {
     echo "<script>";
