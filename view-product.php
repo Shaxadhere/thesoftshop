@@ -101,7 +101,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                         <div class="variations mb__40 style__circle size_medium style_color des_color_1">
                                             <div class="swatch is-color kalles_swatch_js">
                                                 <h4 class="swatch__title">Color:
-                                                    <span class="nt_name_current user_choose_js"><?= $Colors[0] ?></span>
+                                                    <span class="nt_name_current user_choose_js" id="color-name"><?= $Colors[0] ?></span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr d-flex">
                                                     <?php
@@ -116,7 +116,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                             </div>
                                             <div class="swatch is-label kalles_swatch_js">
                                                 <h4 class="swatch__title">Size:
-                                                    <span class="nt_name_current user_choose_js"><?= $Sizes[0] ?></span>
+                                                    <span class="nt_name_current user_choose_js" id="size-name"><?= $Sizes[0] ?></span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr d-flex">
                                                     <?php
@@ -137,7 +137,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                                 <div class="row">
                                                     <div class="col-md-5 col-5">
                                                         <div class="quantity pr mr__10 qty__true d-inline-block" id="sp_qty_ppr">
-                                                            <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" name="quantity" value="1">
+                                                            <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" name="quantity" value="1" id="quantity">
                                                             <div class="qty tc fs__14">
                                                                 <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
                                                                     <i class="facl facl-plus"></i>
@@ -149,7 +149,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-6">
-                                                        <button style="background-color: var(--main-color);border: none;color: #fff;width: auto;" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="1000" data-ani="shake" class="button truncate d-inline-block animated btn-add-to-cart">
+                                                        <button style="background-color: var(--main-color);border: none;color: #fff;width: auto;" data-location="view-product" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="1000" data-ani="shake" class="button truncate d-inline-block animated btn-add-to-cart">
                                                             <span class="txt_add">Add to cart</span>
                                                         </button>
                                                     </div>

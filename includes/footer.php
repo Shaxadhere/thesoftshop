@@ -207,8 +207,37 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/js/main.js"></script>
 <script>
 $(document).on('click', '.btn-add-to-cart', function(){
-    var productId = $(this).data('product');
-    console.log(productId)
+    var productId = $(this).data('product')
+    var location = $(this).data('location')
+    if(location == "view-product"){
+        var colorName = $('#color-name').html()
+        var sizeName = $('#size-name').html()
+        var quantity = $('#quantity').val()
+    }
+    $.ajax({
+        type: "POST",
+        url: "<?= getHTMLRoot() ?>/controllers/product",
+        data: {
+            AddToCart: true,
+            ProductID: productId,
+            Color: colorName,
+            Size: sizeName,
+            Quantity: quantity
+        },
+        success: function(response){
+            if(response == true){
+                console.log("product added")
+            }
+            else{
+                var result = JSON.parse(response)
+                console.log(result[0])
+            }
+        },
+        error: function(error) {
+            console.log("Error in connection: " + error)
+        }
+    })
+    console.log(productId, colorName, sizeName, quantity)
 })
 </script>
 <?php
