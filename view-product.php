@@ -135,7 +135,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                         <div class="nt_cart_form variations_form variations_form_ppr">
                                             <div class="variations_button in_flex column w__100 buy_qv_false">
                                                 <div class="row">
-                                                    <div class="col-md-5">
+                                                    <div class="col-md-5 col-5">
                                                         <div class="quantity pr mr__10 qty__true d-inline-block" id="sp_qty_ppr">
                                                             <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" name="quantity" value="1">
                                                             <div class="qty tc fs__14">
@@ -148,43 +148,12 @@ getHeader($Product['ProductName'], "includes/header.php");
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <button id="btn-add-to-cart" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="6000" data-ani="shake" class="button truncate d-inline-block animated">
+                                                    <div class="col-md-6 col-6">
+                                                        <button style="background-color: var(--main-color);border: none;color: #fff;width: auto;" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="1000" data-ani="shake" class="button truncate d-inline-block animated btn-add-to-cart">
                                                             <span class="txt_add">Add to cart</span>
                                                         </button>
                                                     </div>
-                                                    <!-- <div class="col-md-2">
-                                                        <a href="#" class="wishlistadd cb chp ttip_nt tooltip_top_left">
-                                                            <span class="tt_txt">Add to Wishlist</span>
-                                                            <i class="facl facl-heart-o"></i>
-                                                        </a>
-                                                    </div> -->
                                                 </div>
-                                                <!-- <div class="flex wrap">
-                                                    <div class="quantity pr mr__10 order-1 qty__true d-inline-block" id="sp_qty_ppr">
-                                                        <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" name="quantity" value="1">
-                                                        <div class="qty tc fs__14">
-                                                            <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
-                                                                <i class="facl facl-plus"></i>
-                                                            </button>
-                                                            <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0">
-                                                                <i class="facl facl-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="nt_add_w ts__03 pa order-4">
-                                                        <button id="btn-add-to-cart" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="6000" data-ani="shake" class="single_add_to_cart_button button truncate w__100 mt__20 order-3 d-inline-block animated">
-                                                            <span class="txt_add">Add to cart</span>
-                                                        </button>
-                                                        <a href="#" class="wishlistadd cb chp ttip_nt tooltip_top_left">
-                                                            <span class="tt_txt">Add to Wishlist</span>
-                                                            <i class="facl facl-heart-o"></i>
-                                                        </a>
-                                                    </div>
-                                                    <button id="btn-add-to-cart" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="6000" data-ani="shake" class="single_add_to_cart_button button truncate w__100 mt__20 order-4 d-inline-block animated btn-add-to-cart">
-                                                        <span class="txt_add">Add to cart</span>
-                                                    </button>
-                                                </div> -->
                                             </div>
                                         </div>
                                     </div>

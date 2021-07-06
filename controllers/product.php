@@ -32,4 +32,14 @@ if(isset($_POST['ViewProduct'])){
     }
 }
 
+if(isset($_POST['AddToCart'])){
+    $ProductID = base64_decode($ProductID);
+    $ProductID = mysqli_real_escape_string(connect(), $_POST['ProductID']);
+    $Color = mysqli_real_escape_string(connect(), $_POST['Color']);
+    $Size = mysqli_real_escape_string(connect(), $_POST['Size']);
+    $Quantity = mysqli_real_escape_string(connect(), $_POST['Quantity']);
+
+    session_start();
+    $_SESSION['CART'] = array();
+}
 ?>

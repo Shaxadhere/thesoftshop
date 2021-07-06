@@ -206,8 +206,8 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/js/interface.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/main.js"></script>
 <script>
-$(document).on('click', '#btn-add-to-cart', function(){
-    var productId = $(this).data('id');
+$(document).on('click', '.btn-add-to-cart', function(){
+    var productId = $(this).data('product');
     console.log(productId)
 })
 </script>
