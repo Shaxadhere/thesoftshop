@@ -1,6 +1,10 @@
 <?php
 include_once('web-config.php');
 session_start();
+if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
+    $Cart = array();
+    $_SESSION['CART'] = $Cart;
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,13 +119,13 @@ session_start();
                                             <a id="cart-nav" class="push_side position-relative cb chp db" href="#" data-id="#nt_cart_canvas">
                                                 <i class="iccl iccl-cart pr">
                                                     <?php
-                                                    if(isset($_SESSION['CART'])){
+                                                    if (isset($_SESSION['CART'])) {
                                                         $Cart = $_SESSION['CART'];
                                                         $ItemCount = 0;
-                                                        foreach($Cart as $cartItem){
+                                                        foreach ($Cart as $cartItem) {
                                                             $ItemCount = $ItemCount + intval($cartItem['productqty']);
                                                         }
-                                                        if(count($_SESSION['CART']) > 0){
+                                                        if (count($_SESSION['CART']) > 0) {
                                                             echo "<span class='op__0 ts_op pa tcount bgb br__50 cw tc'>$ItemCount</span>";
                                                         }
                                                     }

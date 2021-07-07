@@ -13,7 +13,7 @@
         <div class="type_toolbar_wish kalles_toolbar_item">
             <a class="js_link_wis" href="<?= getHTMLRoot() ?>/wishlist">
                 <span class="toolbar_icon">
-                    <span class="jswcount toolbar_count">3</span>
+                    <!-- <span class="jswcount toolbar_count">3</span> -->
                 </span>
                 <span class="kalles_toolbar_label">Wishlist</span>
             </a>

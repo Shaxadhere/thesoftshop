@@ -104,7 +104,7 @@ include_once('web-config.php');
                             <div class="menu_footer widget_footer">
                                 <ul class="menu">
                                     <li class="menu-item">
-                                        <a href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a>
+                                        <a href="<?= getHTMLRoot() ?>/blog">Blog</a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="<?= getHTMLRoot() ?>/file-a-complaint">File a Complaint</a>

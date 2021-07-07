@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Home", "includes/header.php");
+getHeader("Home @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
 include_once('components/slider.php');
 include_once('components/category-banner.php');
 include_once('components/featured.php');

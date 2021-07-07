@@ -1,6 +1,9 @@
 <?php
 include_once('web-config.php');
 getHeader("My Account", "includes/header.php");
+if(!isset($_SESSION['USER'])){
+    redirectWindow(getHTMLRoot());
+}
 include_once('models/customer-model.php');
 $CustomerModel = new Customer();
 $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));

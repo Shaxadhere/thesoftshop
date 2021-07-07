@@ -15,7 +15,6 @@
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/happy-deals">Happy Deals</a></li>
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/category?query=accessories">Accessories</a></li>
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/sale">Sale</a></li>
-                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/how-to-order">How To Order</a></li>
                 <li class="menu-item menu-item-btns menu-item-wishlist">
                     <a class="js_link_wis" href="<?= getHTMLRoot() ?>/wishlist"><span class="iconbtns">Wishlist</span></a>
                 </li>
@@ -28,7 +27,7 @@
                 <li class="menu-item menu-item-infos">
                     <p class="menu_infos_title">Need help?</p>
                     <div class="menu_infos_text">
-                        <i class="pegk pe-7s-call fwb mr__10"></i>+92 303-280-4856<br><i class="pegk pe-7s-mail fwb mr__10"></i><a class="cg" href="mailto:help@thesoftshop.pk">help@thesoftshop.pk</a>
+                        <i class="pegk pe-7s-call fwb mr__10"></i>+92 303-280-4856<br><i class="pegk pe-7s-mail fwb mr__10"></i><a class="cg" href="mailto:contact@thesoftshop.pk">contact@thesoftshop.pk</a>
                     </div>
                 </li>
             </ul>
