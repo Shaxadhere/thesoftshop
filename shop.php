@@ -141,11 +141,11 @@ getHeader("Shop", "includes/header.php");
                     $ProductModel = new Product();
 
                     $CurrentPage = 1;
-                    if(isset($_REQUEST['page'])){
+                    if (isset($_REQUEST['page'])) {
                         $CurrentPage = $_REQUEST['page'];
                     }
                     $ProductIndex = (intval($CurrentPage) * 4) - 4;
-                    if($CurrentPage == 1){
+                    if ($CurrentPage == 1) {
                         $ProductIndex = 0;
                     }
 
@@ -174,6 +174,17 @@ getHeader("Shop", "includes/header.php");
                     }
                     while ($row = mysqli_fetch_array($Products)) {
                         $ProductImages = json_decode($row['ProductImages']);
+
+                        $ProductDetails = $ProductModel->FilterWithAttributesByProductID(base64_encode($row['PK_ID']));
+                        $Colors = array();
+                        $ColorCodes = array();
+                        $Sizes = array();
+
+                        while ($Deatil = mysqli_fetch_array($ProductDetails)) {
+                            array_push($Colors, $Deatil['ColorName']);
+                            array_push($ColorCodes, $Deatil['ColorCode']);
+                            array_push($Sizes, $Deatil['SizeValue']);
+                        }
                     ?>
                         <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
                             <div class="product-inner pr">
@@ -192,7 +203,7 @@ getHeader("Shop", "includes/header.php");
                                         <a href="#" class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"><span class="tt_txt">Quick Shop</span><i class="iccl iccl-cart"></i><span>Quick Shop</span></a>
                                     </div>
                                     <div class="product-attr pa ts__03 cw op__0 tc">
-                                        <p class="truncate mg__0 w__100">S, M, L</p>
+                                        <p class="truncate mg__0 w__100"><?= ($Sizes[0] == "None") ? "" : implode(", ", $Sizes); ?></p>
                                     </div>
                                 </div>
                                 <div class="product-info mt__15">
@@ -200,6 +211,18 @@ getHeader("Shop", "includes/header.php");
                                         <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                                     </h3>
                                     <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
+                                    <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
+                                        <?php
+                                        for ($i = 0; $i < count($Colors); $i++) {
+                                            if ($Colors[$i] != "None") {
+                                                echo "<span ";
+                                                echo "class='lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right'>";
+                                                echo "<span class='tt_txt'>" . $Colors[$i] . "</span>";
+                                                echo "<span class='swatch__value' style='" . $ColorCodes[$i] . "'></span></span>";
+                                            }
+                                        }
+                                        ?>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -215,10 +238,10 @@ getHeader("Shop", "includes/header.php");
                         <ul class="pagination-page page-numbers">
                             <li>
                                 <?php
-                                 $CurrentPage = 1;
-                                 if(isset($_REQUEST['page'])){
-                                     $CurrentPage = $_REQUEST['page'];
-                                 }
+                                $CurrentPage = 1;
+                                if (isset($_REQUEST['page'])) {
+                                    $CurrentPage = $_REQUEST['page'];
+                                }
 
                                 //Pagination values
                                 if (isset($_REQUEST['name']) && isset($_REQUEST['category'])) {
@@ -261,14 +284,13 @@ getHeader("Shop", "includes/header.php");
                                     }
                                 }
 
-                                if($CurrentPage == 1){
+                                if ($CurrentPage == 1) {
                                     echo "<li>";
                                     echo "<span class='prev page-numbers' style='color:grey'>Prev</span>";
                                     echo "</li>";
-                                }
-                                else{
+                                } else {
                                     echo "<li>";
-                                    echo "<a class='prev page-numbers' href='". getHTMLRoot() . "/shop?$PrevURL'>Prev</a>";
+                                    echo "<a class='prev page-numbers' href='" . getHTMLRoot() . "/shop?$PrevURL'>Prev</a>";
                                     echo "</li>";
                                 }
 
@@ -277,17 +299,16 @@ getHeader("Shop", "includes/header.php");
                                     $page = $_REQUEST['page'];
                                     $URL = $_SERVER['QUERY_STRING'];
                                     $NewUrl = str_replace("&page=$page", "&page=" . intval($page) + 1, $URL);
-                                    if(empty($URL)){
+                                    if (empty($URL)) {
                                         echo "<script>alert('asdsa')</script>";
                                         $NewUrl = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
                                     }
                                 } else {
                                     $page = 1;
                                     $URL = $_SERVER['QUERY_STRING'];
-                                    if(empty($URL)){
+                                    if (empty($URL)) {
                                         $NewUrl = $URL . "page=2";
-                                    }
-                                    else{
+                                    } else {
                                         $NewUrl = $URL . "&page=2";
                                     }
                                 }
@@ -297,10 +318,9 @@ getHeader("Shop", "includes/header.php");
                                     if (isset($_REQUEST['page'])) {
                                         $NewUrl = str_replace("page=$page", "page=" . $i, $URL);
                                     } else {
-                                        if(empty($URL)){
+                                        if (empty($URL)) {
                                             $NewUrl = $URL . "page=" . $i;
-                                        }
-                                        else{
+                                        } else {
                                             $NewUrl = $URL . "&page=" . $i;
                                         }
                                     }
@@ -346,16 +366,15 @@ getHeader("Shop", "includes/header.php");
                                     }
                                 }
 
-                               
-                                
-                                if($CurrentPage == intval($PageNumbers)){
+
+
+                                if ($CurrentPage == intval($PageNumbers)) {
                                     echo "<li>";
                                     echo "<span class='next page-numbers' style='color:grey'>Next</span>";
                                     echo "</li>";
-                                }
-                                else{
+                                } else {
                                     echo "<li>";
-                                    echo "<a class='next page-numbers' href='". getHTMLRoot() . "/shop?$NextURL'>Next</a>";
+                                    echo "<a class='next page-numbers' href='" . getHTMLRoot() . "/shop?$NextURL'>Next</a>";
                                     echo "</li>";
                                 }
                                 ?>

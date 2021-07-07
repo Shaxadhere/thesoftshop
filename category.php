@@ -4,7 +4,7 @@ $CategorySlug = $_REQUEST['name'];
 include_once('models/category-model.php');
 $CategoryModel = new Category();
 $Category = $CategoryModel->FilterByCategorySlug($CategorySlug);
-if(mysqli_num_rows($Category) == 0){
+if (mysqli_num_rows($Category) == 0) {
     redirectWindow(getHTMLRoot());
     exit();
 }
@@ -44,6 +44,17 @@ getHeader($Category['CategoryName'], "includes/header.php");
             $Products = $ProductModel->List($ProductIndex, 4, "", $_REQUEST['name'], "new-to-old");
             while ($row = mysqli_fetch_array($Products)) {
                 $ProductImages = json_decode($row['ProductImages']);
+
+                $ProductDetails = $ProductModel->FilterWithAttributesByProductID(base64_encode($row['PK_ID']));
+                $Colors = array();
+                $ColorCodes = array();
+                $Sizes = array();
+
+                while ($Deatil = mysqli_fetch_array($ProductDetails)) {
+                    array_push($Colors, $Deatil['ColorName']);
+                    array_push($ColorCodes, $Deatil['ColorCode']);
+                    array_push($Sizes, $Deatil['SizeValue']);
+                }
             ?>
                 <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
                     <div class="product-inner pr">
@@ -62,7 +73,7 @@ getHeader($Category['CategoryName'], "includes/header.php");
                                 <a href="#" class="pr pr_atc cd br__40 bgw tc dib js__qs cb chp ttip_nt tooltip_top_left"><span class="tt_txt">Quick Shop</span><i class="iccl iccl-cart"></i><span>Quick Shop</span></a>
                             </div>
                             <div class="product-attr pa ts__03 cw op__0 tc">
-                                <p class="truncate mg__0 w__100">S, M, L</p>
+                                <p class="truncate mg__0 w__100"><?= ($Sizes[0] == "None") ? "" : implode(", ", $Sizes); ?></p>
                             </div>
                         </div>
                         <div class="product-info mt__15">
@@ -70,6 +81,18 @@ getHeader($Category['CategoryName'], "includes/header.php");
                                 <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                             </h3>
                             <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
+                            <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
+                                <?php
+                                for ($i = 0; $i < count($Colors); $i++) {
+                                    if ($Colors[$i] != "None") {
+                                        echo "<span ";
+                                        echo "class='lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right'>";
+                                        echo "<span class='tt_txt'>" . $Colors[$i] . "</span>";
+                                        echo "<span class='swatch__value' style='" . $ColorCodes[$i] . "'></span></span>";
+                                    }
+                                }
+                                ?>
+                            </div>
                         </div>
                     </div>
                 </div>
