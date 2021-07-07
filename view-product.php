@@ -16,7 +16,8 @@ while ($Deatil = mysqli_fetch_array($ProductDetails)) {
     array_push($ColorCodes, $Deatil['ColorCode']);
     array_push($Sizes, $Deatil['SizeValue']);
 }
-getHeader($Product['ProductName'], "includes/header.php");
+$Tags = json_decode($Product['ProductTags']);
+getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/header.php");
 ?>
 <div class="sp-single sp-single-1 des_pr_layout_1 mb__60">
 
@@ -190,7 +191,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                     <span class="tagged_as">
                                         <span class="cb">Tags:</span>
                                         <?php
-                                        $Tags = json_decode($Product['ProductTags']);
+                                        
                                         $count = count($Tags);
                                         $index = 0;
                                         foreach ($Tags as $tags) {

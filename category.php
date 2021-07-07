@@ -9,7 +9,8 @@ if (mysqli_num_rows($Category) == 0) {
     exit();
 }
 $Category = mysqli_fetch_array($Category);
-getHeader($Category['CategoryName'], "includes/header.php");
+$Tags = json_decode($Category['CategoryTags']);
+getHeader($Category['CategoryName'] . " - " . implode(",", $Tags), "includes/header.php");
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">

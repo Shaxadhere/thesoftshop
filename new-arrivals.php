@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("New arrivals", "includes/header.php");
+getHeader("New arrivals @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
