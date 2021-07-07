@@ -33,5 +33,5 @@ if(!isset($_SESSION['CART']) || $_SESSION['CART'] == ""){
 // array_push($Cart, $CartItem);
 // $_SESSION['CART'] = json_encode($Cart);
 
-echo $_SESSION['CART'][0]['productId'];
-// echo json_encode($_SESSION['CART']);
+// echo $_SESSION['CART'][0]['productId'];
+echo json_encode($_SESSION['CART']);

@@ -63,25 +63,33 @@ if (isset($_POST['AddToCart'])) {
 
     $Cart = $_SESSION['CART'];
 
-    // foreach($Cart as $item){
-        // $a = json_encode($item);
-        // echo $a;
-        // $b = json_decode($a);
-        // echo $a['productId'];
-        // if($item['productId'] == $Product){
-        //     array_push($errors, "same product");
-        // }
-    // }
     if ($errors == null) {
-        $CartItem = array(
-            "productId" => $ProductID,
-            "productqty" => $Quantity,
-            "productColor" => $Color,
-            "productSize" => $Size
-        );
-        array_push($Cart, $CartItem);
-        $_SESSION['CART'] = $Cart;
-        echo true;
+        $AlreadyExistsInCart = false;
+        $index = 0;
+        foreach($Cart as $item){
+            if($item['productId'] == $ProductID && $item['productColor'] == $Color && $item['productSize'] == $Size){
+                $AlreadyExistsInCart = true;
+                break;
+            }
+            $index++;
+        }
+        if($AlreadyExistsInCart){
+            $Cart = $_SESSION['CART'];
+            $Cart[$index]['productqty'] = intval($Cart[$index]['productqty']) + intval($Quantity);
+            $_SESSION['CART'] = $Cart;
+            echo true;
+        }
+        else{
+            $CartItem = array(
+                "productId" => $ProductID,
+                "productqty" => $Quantity,
+                "productColor" => $Color,
+                "productSize" => $Size
+            );
+            array_push($Cart, $CartItem);
+            $_SESSION['CART'] = $Cart;
+            echo true;
+        }
     } else {
         echo json_encode($errors);
     }
