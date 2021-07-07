@@ -227,10 +227,16 @@ $(document).on('click', '.btn-add-to-cart', function(){
         success: function(response){
             if(response == true){
                 console.log("product added")
+                $('#cart-alert-danger').hide()
+                $('#cart-alert-success').html("Product added to cart successfully!")
+                $('#cart-alert-success').show()
+                $('#cart-nav').click()
             }
             else{
                 var result = JSON.parse(response)
-                console.log(result[0])
+                $('#cart-alert-success').hide()
+                $('#cart-alert-danger').html(result[0])
+                $('#cart-alert-danger').show()
             }
         },
         error: function(error) {

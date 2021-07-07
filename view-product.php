@@ -81,6 +81,8 @@ getHeader($Product['ProductName'], "includes/header.php");
                     <div class="col-md-6 col-12 product-infors pr_sticky_su">
                         <div class="theiaStickySidebar">
                             <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
+                                <div class="alert alert-danger" id="cart-alert-danger" style="display:none"></div>
+                                <div class="alert alert-success" id="cart-alert-success" style="display:none"></div>
                                 <h1 class="product_title entry-title fs__16"><?= $Product['ProductName'] ?></h1>
                                 <div class="flex wrap fl_between al_center price-review">
                                     <p class="price_range" id="price_ppr">Rs. <?= $Product['Price'] ?></p>
@@ -134,6 +136,11 @@ getHeader($Product['ProductName'], "includes/header.php");
                                         </div>
                                         <div class="nt_cart_form variations_form variations_form_ppr">
                                             <div class="variations_button in_flex column w__100 buy_qv_false">
+                                                <div class="row">
+                                                    <div class="col-12 col-md-12">
+
+                                                    </div>
+                                                </div>
                                                 <div class="row">
                                                     <div class="col-md-5 col-5">
                                                         <div class="quantity pr mr__10 qty__true d-inline-block" id="sp_qty_ppr">

@@ -36,7 +36,7 @@ if (isset($_POST['AddToCart'])) {
     session_start();
     if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
         $Cart = array();
-        $_SESSION['CART'] = json_encode($Cart);
+        $_SESSION['CART'] = $Cart;
     }
 
     if (empty($_POST['ProductID'])) {
@@ -61,28 +61,29 @@ if (isset($_POST['AddToCart'])) {
     $Size = mysqli_real_escape_string(connect(), $_POST['Size']);
     $Quantity = mysqli_real_escape_string(connect(), $_POST['Quantity']);
 
-    $Cart = json_decode($_SESSION['CART']);
+    $Cart = $_SESSION['CART'];
 
-    foreach($Cart as $item){
-        $a = json_encode($item);
-        echo $a;
-        $b = json_decode($a);
-        echo $a['productId'];
+    // foreach($Cart as $item){
+        // $a = json_encode($item);
+        // echo $a;
+        // $b = json_decode($a);
+        // echo $a['productId'];
         // if($item['productId'] == $Product){
         //     array_push($errors, "same product");
         // }
-    }
-    // if ($errors == null) {
-    //     $CartItem = array(
-    //         "productId" => $ProductID,
-    //         "productqty" => $Quantity,
-    //         "productColor" => $Color,
-    //         "productSize" => $Size
-    //     );
-    //     array_push($Cart, $CartItem);
-    //     $_SESSION['CART'] = json_encode($Cart);
-    //     echo true;
-    // } else {
-    //     echo json_encode($errors);
     // }
+    if ($errors == null) {
+        $CartItem = array(
+            "productId" => $ProductID,
+            "productqty" => $Quantity,
+            "productColor" => $Color,
+            "productSize" => $Size
+        );
+        array_push($Cart, $CartItem);
+        $_SESSION['CART'] = $Cart;
+        echo true;
+    } else {
+        echo json_encode($errors);
+    }
 }
+ 
