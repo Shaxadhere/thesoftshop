@@ -254,6 +254,25 @@ $(document).on('click', '.remove-cart-item', function(){
         success: function(response) {
             if(response == true){
                 row.remove();
+                var emptyCartMessage = "<div class='kalles-section page_section_heading'>"+
+                "<div class='page-head tc pr oh cat_bg_img page_head_'>"+
+                "<div class='parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0' data-bgset='assets/images/slide/banner21.jpg'></div>"+
+                "<div class='container pr z_100'>"+
+                "<h1 class='mb__5 cw'>Cart</h1>"+
+                "<p class='mg__0'></p>"+
+                "</div>"+
+                "</div>"+
+                "</div>"+
+                "<div class='empty tc mt__60 mb__60'><i class='las la-shopping-bag pr mb__10'></i>"+
+                "<p>Your cart is empty.</p>"+
+                "<p class='return-to-shop mb__15'>"+
+                "<a class='button button_primary tu js_add_ld' href='/thesoftshop/shop'>Return To Shop</a>"+
+                "</p>"+
+                "</div>";
+                if($('.cart_item').length == 0){
+                    $('.cart-items-container').hide()
+                    $('#cart-root').append(emptyCartMessage)
+                }
             }
             else{
                 var result = JSON.parse(response)

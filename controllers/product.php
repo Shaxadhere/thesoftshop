@@ -71,9 +71,11 @@ if (isset($_POST['AddToCart'])) {
 
         $AlreadyExistsInCart = false;
         $index = 0;
+        $key = "";
         foreach ($Cart as $item) {
             if ($item['productId'] == $ProductID && $item['productColor'] == $Color && $item['productSize'] == $Size) {
-                echo json_encode($item);
+                // echo json_encode($item);
+                $key = $item['CartItemId'];
                 $AlreadyExistsInCart = true;
                 break;
             }
@@ -81,13 +83,13 @@ if (isset($_POST['AddToCart'])) {
         }
         if ($AlreadyExistsInCart) {
             $Cart = $_SESSION['CART'];
-            $Cart[$index]['productqty'] = intval($Cart[$index]['productqty']) + intval($Quantity);
+            $Cart[$key]['productqty'] = intval($Cart[$key]['productqty']) + intval($Quantity);
             $_SESSION['CART'] = $Cart;
 
             $result = array(
                 "success" => true
             );
-            // echo json_encode($result);
+            echo json_encode($result);
         } else {
             $cartItemId = random_strings(10);
             $CartItem = array(
@@ -105,7 +107,7 @@ if (isset($_POST['AddToCart'])) {
             $result = array(
                 "success" => true
             );
-            // echo json_encode($result);
+            echo json_encode($result);
         }
     } else {
         echo json_encode($errors);
@@ -125,16 +127,17 @@ if (isset($_POST['RemoveItemFromCart'])) {
         foreach ($Cart as $item) {
             if ($item['CartItemId'] == $_POST['CartItemId']) {
                 $CartIndex = $index;
+                $key = $item['CartItemId'];
                 break;
             }
             $index++;
         }
-        if(isset($Cart[$index])){
-            echo $index;
-            unset($Cart[$CartIndex]);
+        if(isset($Cart[$key])){
+            // echo $index;
+            unset($Cart[$key]);
         }else{
-            echo $index;
-            unset($Cart[strval($index)]);
+            // echo $index;
+            unset($Cart[strval($key)]);
         }
         $_SESSION['CART'] = $Cart;
         echo true;

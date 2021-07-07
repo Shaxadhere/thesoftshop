@@ -5,6 +5,7 @@ include_once('models/product-model.php');
 $ProductModel = new Product();
 $Cart = $_SESSION['CART'];
 ?>
+<div id="cart-root">
 <?php
 if(count($Cart) == 0){
 ?>
@@ -28,7 +29,7 @@ if(count($Cart) == 0){
 else{
 ?>
 <!--cart section-->
-<div class="kalles-section cart_page_section container mt__60">
+<div class="kalles-section cart_page_section container mt__60 cart-items-container">
     <form action="<?= getHTMLRoot() ?>/checkout" method="post" class="frm_cart_ajax_true frm_cart_page nt_js_cart pr oh ">
         <div class="cart_header">
             <div class="row al_center">
@@ -123,6 +124,7 @@ else{
 <?php
 }
 ?>
+</div>
 <?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
