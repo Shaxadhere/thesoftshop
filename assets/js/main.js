@@ -1,22 +1,22 @@
-//add current year in footer
+// add current year in footer
 var d = new Date();
 var n = d.getFullYear();
 document.getElementById("year").innerHTML = n;
 
-//delay function to skip keyup for sometime
+// delay function to skip keyup for sometime
 function delay(callback, ms) {
     var timer = 0;
-    return function() {
+    return function () {
         var context = this,
             args = arguments;
         clearTimeout(timer);
-        timer = setTimeout(function() {
+        timer = setTimeout(function () {
             callback.apply(context, args);
         }, ms || 0);
     };
 }
 
-//parse url query
+// parse url query
 function parse_my_query(variable) {
     var query = window.location.search.substring(1);
     var vars = query.split('&');
@@ -29,8 +29,8 @@ function parse_my_query(variable) {
     console.log('Query variable %s not found', variable);
 }
 
-//quick view modal handle
-$(document).on('mouseover', '.quick-view-product', function() {
+// quick view modal handle
+$(document).on('mouseover', '.quick-view-product', function () {
     var productId = $(this).attr('data-id')
     $.ajax({
         type: "POST",
@@ -39,7 +39,7 @@ $(document).on('mouseover', '.quick-view-product', function() {
             ViewProduct: true,
             ProductID: productId
         },
-        success: function(response) {
+        success: function (response) {
             var result = JSON.parse(response)
             if (result['success'] == true) {
                 var productDetails = result['productDetails']
@@ -52,87 +52,60 @@ $(document).on('mouseover', '.quick-view-product', function() {
                 $('#view-product-name-anchor').attr('href', "/thesoftshop/view-product?name=" + product['ProductSlug'])
                 $('#view-product-image-container').empty()
                 images.forEach(item => {
-                    $('#view-product-image-container').append(
-                        "<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" +
-                        "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='/thesoftshop/uploads/product-images/" + item + "'></span>" +
-                        "</div>"
-                    )
+                    $('#view-product-image-container').append("<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" + "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='/thesoftshop/uploads/product-images/" + item + "'></span>" + "</div>")
                 });
                 $('#view-product-current-price').html("Rs. " + product['Price'])
                 $('#view-product-review-count').html(((reviews != null) ? reviews.length : "0") + " Reviews")
                 $('#view-product-description').html(product['ProductDescription'])
                 $('#view-product-default-color').html(product['ColorName'])
-                $('#view-product-default-size').html(
-                    (product['SizeValue'] != "None") ?
-                    "Size: <span class='nt_name_current user_choose_js'>" + product['SizeValue'] + "</span>" :
-                    ""
-                )
+                $('#view-product-default-size').html((product['SizeValue'] != "None") ? "Size: <span class='nt_name_current user_choose_js' id='view-product-size-value'>" + product['SizeValue'] + "</span>" : "")
                 $('#view-product-colors-container').empty()
                 $('#view-product-sizes-container').empty()
                 productDetails.forEach(item => {
-                    $('#view-product-colors-container').append(
-                        "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" +
-                        "<span class='tt_txt' >" + item['ColorName'] + "</span><span class='swatch__value_pr pr' style='" + item['ColorCode'] + "'></span>" +
-                        "</li>"
-                    )
+                    $('#view-product-colors-container').append("<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" + "<span class='tt_txt' >" + item['ColorName'] + "</span><span class='swatch__value_pr pr' style='" + item['ColorCode'] + "'></span>" + "</li>")
                     if (item['SizeValue'] != "None") {
-                        $('#view-product-sizes-container').append(
-                            "<li class='nt-swatch swatch_pr_item pr' data-escape='" + item['SizeValue'] + "'>" +
-                            "<span class='swatch__value_pr'>" + item['SizeValue'] + "</span>" +
-                            "</li>"
-                        )
+                        $('#view-product-sizes-container').append("<li class='nt-swatch swatch_pr_item pr' data-escape='" + item['SizeValue'] + "'>" + "<span class='swatch__value_pr'>" + item['SizeValue'] + "</span>" + "</li>")
                     }
                 });
                 $('#view-product-categories-container').empty()
-                $('#view-product-categories-container').html(
-                    "<span class='cb'>Categories: </span>"
-                )
+                $('#view-product-categories-container').html("<span class='cb'>Categories: </span>")
                 count = categories.length
                 index = 0;
                 categories.forEach(item => {
-                    index++
+                    index ++
                     if (count == index) {
-                        $('#view-product-categories-container').append(
-                            "<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
-                        )
+                        $('#view-product-categories-container').append("<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
                     } else {
-                        $('#view-product-categories-container').append(
-                            "<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
-                        )
+                        $('#view-product-categories-container').append("<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
                     }
                 });
                 $('#view-product-tags-container').empty()
-                $('#view-product-tags-container').html(
-                    "<span class='cb'>Tags: </span>"
-                )
+                $('#view-product-tags-container').html("<span class='cb'>Tags: </span>")
                 count = tags.length
                 index = 0;
                 tags.forEach(item => {
-                    index++
+                    index ++
                     if (count == index) {
-                        $('#view-product-tags-container').append(
-                            "<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>."
-                        )
+                        $('#view-product-tags-container').append("<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
                     } else {
-                        $('#view-product-tags-container').append(
-                            "<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, "
-                        )
+                        $('#view-product-tags-container').append("<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
                     }
                 });
                 $('#view-product-view-full-details').attr('href', "/thesoftshop/view-product?name=" + product['ProductSlug'])
+                $('#view-product-add-to-cart-button').attr('data-product', btoa(product['ProductID']))
 
 
             } else {
                 console.log(result['error'])
             }
         },
-        error: function(error) {
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//search products function
+// search products function
 function search_products(query, category) {
     const queryString = window.location.search
     const params = new URLSearchParams(queryString)
@@ -148,8 +121,8 @@ function search_products(query, category) {
     location.href = url
 }
 
-//search input on keypress enter handle
-$(document).on('keypress', '.search-input', function(event){
+// search input on keypress enter handle
+$(document).on('keypress', '.search-input', function (event) {
     var query = $(this).val()
     var _category = $(this).parent().prev().children().first().val();
     var category = (_category != undefined) ? _category : "";
@@ -159,16 +132,16 @@ $(document).on('keypress', '.search-input', function(event){
     }
 })
 
-//search button handle
-$(document).on('click', '.btn-search-products', function() {
+// search button handle
+$(document).on('click', '.btn-search-products', function () {
     var query = $(this).prev().val()
     var _category = $(this).parent().prev().children().first().val();
     var category = (_category != undefined) ? _category : "";
     search_products(query, category)
 })
 
-//customer login handle
-$(document).on('submit', '#customer_login', function(event){
+// customer login handle
+$(document).on('submit', '#customer_login', function (event) {
     event.preventDefault()
     var customerEmail = $('#CustomerEmail').val()
     var customerPassword = $('#CustomerPassword').val()
@@ -180,28 +153,27 @@ $(document).on('submit', '#customer_login', function(event){
             CustomerEmail: customerEmail,
             CustomerPassword: customerPassword
         },
-        success: function(response){
-            if(response == true){
+        success: function (response) {
+            if (response == true) {
                 $('#login-error-alert').hide()
                 $('#login-success-alert').show()
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload()
                 }, 1000)
-            }
-            else{
+            } else {
                 var error = JSON.parse(response)
                 $('#login-error-alert').html(error[0])
                 $('#login-error-alert').show()
             }
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//customer register handle
-$(document).on('submit', '#RegisterForm', function(event){
+// customer register handle
+$(document).on('submit', '#RegisterForm', function (event) {
     event.preventDefault()
     var fullName = $('#RegisterFullName').val()
     var email = $('#RegisterEmail').val()
@@ -211,32 +183,31 @@ $(document).on('submit', '#RegisterForm', function(event){
         url: "/thesoftshop/auth/auth",
         data: {
             RegisterCustomer: true,
-            CustomerName : fullName,
+            CustomerName: fullName,
             CustomerEmail: email,
             CustomerPassword: password
         },
-        success: function(response) {
-            if(response == true){
+        success: function (response) {
+            if (response == true) {
                 $('#register-error-alert').hide()
                 $('#register-success-alert').show()
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload()
                 }, 1000)
-            }
-            else{
+            } else {
                 var error = JSON.parse(response)
                 $('#register-error-alert').html(error[0])
                 $('#register-error-alert').show()
             }
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//personal profile form submit handle
-$(document).on('submit', '#PersonalProfileForm', function(event){
+// personal profile form submit handle
+$(document).on('submit', '#PersonalProfileForm', function (event) {
     event.preventDefault()
     var fullName = $('#edit-profile-full-name').val()
     var email = $('#edit-profile-email').val()
@@ -246,32 +217,31 @@ $(document).on('submit', '#PersonalProfileForm', function(event){
         url: "/thesoftshop/auth/auth",
         data: {
             UpdateProfile: true,
-            FullName : fullName,
+            FullName: fullName,
             Email: email,
             Contact: contact
         },
-        success: function(response) {
-            if(response == true){
+        success: function (response) {
+            if (response == true) {
                 $('#edit-profile-error-alert').hide()
                 $('#edit-profile-success-alert').show()
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload()
                 }, 1000)
-            }
-            else{
+            } else {
                 var error = JSON.parse(response)
                 $('#edit-profile-error-alert').html(error[0])
                 $('#edit-profile-error-alert').show()
             }
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//shipping address form submit handle
-$(document).on('submit', '#ShippingAddressForm', function(event){
+// shipping address form submit handle
+$(document).on('submit', '#ShippingAddressForm', function (event) {
     event.preventDefault()
     var shippingAddress = $('#edit-shipping-address-field').val()
     $.ajax({
@@ -279,30 +249,29 @@ $(document).on('submit', '#ShippingAddressForm', function(event){
         url: "/thesoftshop/auth/auth",
         data: {
             UpdateShippingAddress: true,
-            ShippingAddress : shippingAddress
+            ShippingAddress: shippingAddress
         },
-        success: function(response) {
-            if(response == true){
+        success: function (response) {
+            if (response == true) {
                 $('#edit-shipping-address-error-alert').hide()
                 $('#edit-shipping-address-success-alert').show()
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload()
                 }, 1000)
-            }
-            else{
+            } else {
                 var error = JSON.parse(response)
                 $('#edit-shipping-address-error-alert').html(error[0])
                 $('#edit-shipping-address-error-alert').show()
             }
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//billing address form submit handle
-$(document).on('submit', '#BillingAddressForm', function(event){
+// billing address form submit handle
+$(document).on('submit', '#BillingAddressForm', function (event) {
     event.preventDefault()
     var billingAddress = $('#edit-billing-address-field').val()
     $.ajax({
@@ -310,81 +279,86 @@ $(document).on('submit', '#BillingAddressForm', function(event){
         url: "/thesoftshop/auth/auth",
         data: {
             UpdateBillingAddress: true,
-            BillingAddress : billingAddress
+            BillingAddress: billingAddress
         },
-        success: function(response) {
-            if(response == true){
+        success: function (response) {
+            if (response == true) {
                 $('#edit-billing-address-error-alert').hide()
                 $('#edit-billing-address-success-alert').show()
-                setTimeout(function() {
+                setTimeout(function () {
                     location.reload()
                 }, 1000)
-            }
-            else{
+            } else {
                 var error = JSON.parse(response)
                 $('#edit-billing-address-error-alert').html(error[0])
                 $('#edit-billing-address-error-alert').show()
             }
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//show edit personal profile form
-$(document).on('click', '#edit-personal-profile', function(){
+// show edit personal profile form
+$(document).on('click', '#edit-personal-profile', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
         url: "/thesoftshop/components/edit-personal-profile",
-        success: function(response){
+        success: function (response) {
             $('#root').html(response)
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//show edit shipping address form
-$(document).on('click', '#edit-shipping-address', function(){
+// show edit shipping address form
+$(document).on('click', '#edit-shipping-address', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
         url: "/thesoftshop/components/edit-shipping-address",
-        success: function(response){
+        success: function (response) {
             $('#root').html(response)
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//show edit billing address form
-$(document).on('click', '#edit-billing-address', function(){
+// show edit billing address form
+$(document).on('click', '#edit-billing-address', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
         url: "/thesoftshop/components/edit-billing-address",
-        success: function(response){
+        success: function (response) {
             $('#root').html(response)
         },
-        error: function(error){
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
 })
 
-//add to cart button on view product page
-$(document).on('click', '.btn-add-to-cart', function() {
+// add to cart button on view product page
+$(document).on('click', '.btn-add-to-cart', function () {
     var productId = $(this).data('product')
     var location = $(this).data('location')
     if (location == "view-product") {
         var colorName = $('#color-name').html()
         var sizeName = $('#size-name').html()
         var quantity = $('#quantity').val()
+        var redirect = window.location.href = window.location.href + "&added-to-cart=true";
+    } else if (location == "quick-view") {
+        var colorName = $('#view-product-default-color').html() ? $('#view-product-default-color').html() : "None";
+        var sizeName = $('#view-product-size-value').html() ? $('#view-product-size-value').html() : "None";
+        var quantity = $('#view-product-quantity').val()
+        var redirect = window.location.href
     }
     $.ajax({
         type: "POST",
@@ -396,69 +370,16 @@ $(document).on('click', '.btn-add-to-cart', function() {
             Size: sizeName,
             Quantity: quantity
         },
-        success: function(response) {
+        success: function (response) {
             var result = JSON.parse(response)
             if (result['success'] == true) {
-                // console.log("product added")
-                // var image = result['Image']
-                // var productName = result['ProductName']
-                // var productSize = result['ProductSize']
-                // var productColor = result['ProductColor']
-                // var totalPrice = result['Price']
-                // var quantity = result['Quantity']
-                // var cartItem = "<div class='mini_cart_item js_cart_item flex al_center pr oh'>"+
-                // "<div class='ld_cart_bar'></div>"+
-                // "<a href='product-detail-layout-01.html' class='mini_cart_img'>"+
-                // "<img class='w__100 lazyload' data-src='/thesoftshop/uploads/product-images/"+image+"' width='120' height='153' alt='' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTUzIiB2aWV3Qm94PSIwIDAgMTIwIDE1MyI+PC9zdmc+'>"+
-                // "</a>"+
-                // "<div class='mini_cart_info'>"+
-                // "<a href='product-detail-layout-01.html' class='mini_cart_title truncate'>"+productName+"</a>"+
-                // "<div class='mini_cart_meta'>"+
-                // "<p class='cart_meta_variant'>"+productSize+" | "+productColor+"</p>"+
-                // "<div class='cart_meta_price price'>"+
-                // "<div class='cart_price'>"+
-                // "<p class='price_range' id='price_ppr'>Rs. "+totalPrice+"</p>"+
-                // "</div>"+
-                // "</div>"+
-                // "</div>"+
-                // "<div class='mini_cart_actions'>"+
-                // "<div class='quantity pr mr__10 qty__true'>"+
-                // "<input type='number' class='input-text qty text tc qty_cart_js' step='1' min='0' max='9999' value='"+quantity+"'>"+
-                // "<div class='qty tc fs__14'>"+
-                // "<button type='button' class='plus db cb pa pd__0 pr__15 tr r__0'>"+
-                // "<i class='facl facl-plus'></i>"+
-                // "</button>"+
-                // "<button type='button' class='minus db cb pa pd__0 pl__15 tl l__0 qty_1'>"+
-                // "<i class='facl facl-minus'></i>"+
-                // "</button>"+
-                // "</div>"+
-                // "</div>"+
-                // "<a href='#' class='cart_ac_edit js__qs ttip_nt tooltip_top_right'><span class='tt_txt'>Edit this item</span>"+
-                // "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
-                // "<path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path>"+
-                // "<path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path>"+
-                // "</svg>"+
-                // "</a>"+
-                // "<a href='#' class='cart_ac_remove js_cart_rem ttip_nt tooltip_top_right'><span class='tt_txt'>Remove this item</span>"+
-                // "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
-                // "<polyline points='3 6 5 6 21 6'></polyline>"+
-                // "<path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path>"+
-                // "<line x1='10' y1='11' x2='10' y2='17'></line>"+
-                // "<line x1='14' y1='11' x2='14' y2='17'></line>"+
-                // "</svg>"+
-                // "</a>"+
-                // "</div>"+
-                // "</div>"+
-                // "</div>";
-                // $('.mini_cart_items').append(cartItem)
                 $('#cart-alert-danger').hide()
                 $('#cart-alert-success').html("Product added to cart successfully!")
                 $('#cart-alert-success').show()
-                
-                setTimeout(function() {
-                    window.location.href = window.location.href + "&added-to-cart=true";
+
+                setTimeout(function () {
+                    window.location.href = redirect
                 }, 2000)
-                // $('#cart-nav').click()
             } else {
                 var result = JSON.parse(response)
                 $('#cart-alert-success').hide()
@@ -466,15 +387,15 @@ $(document).on('click', '.btn-add-to-cart', function() {
                 $('#cart-alert-danger').show()
             }
         },
-        error: function(error) {
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })
     console.log(productId, colorName, sizeName, quantity)
 })
 
-//remove item from cart
-$(document).on('click', '.remove-cart-item', function(){
+// remove item from cart
+$(document).on('click', '.remove-cart-item', function () {
     var cartItemId = $(this).data('cartitemid')
     var row = $(this).parent().parent().parent().parent().parent().parent()
     $.ajax({
@@ -484,35 +405,20 @@ $(document).on('click', '.remove-cart-item', function(){
             RemoveItemFromCart: true,
             CartItemId: cartItemId
         },
-        success: function(response) {
-            if(response == true){
+        success: function (response) {
+            if (response == true) {
                 row.remove();
-                var emptyCartMessage = "<div class='kalles-section page_section_heading'>"+
-                "<div class='page-head tc pr oh cat_bg_img page_head_'>"+
-                "<div class='parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0' data-bgset='assets/images/slide/banner21.jpg'></div>"+
-                "<div class='container pr z_100'>"+
-                "<h1 class='mb__5 cw'>Cart</h1>"+
-                "<p class='mg__0'></p>"+
-                "</div>"+
-                "</div>"+
-                "</div>"+
-                "<div class='empty tc mt__60 mb__60'><i class='las la-shopping-bag pr mb__10'></i>"+
-                "<p>Your cart is empty.</p>"+
-                "<p class='return-to-shop mb__15'>"+
-                "<a class='button button_primary tu js_add_ld' href='/thesoftshop/shop'>Return To Shop</a>"+
-                "</p>"+
-                "</div>";
-                if($('.cart_item').length == 0){
+                var emptyCartMessage = "<div class='kalles-section page_section_heading'>" + "<div class='page-head tc pr oh cat_bg_img page_head_'>" + "<div class='parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0' data-bgset='assets/images/slide/banner21.jpg'></div>" + "<div class='container pr z_100'>" + "<h1 class='mb__5 cw'>Cart</h1>" + "<p class='mg__0'></p>" + "</div>" + "</div>" + "</div>" + "<div class='empty tc mt__60 mb__60'><i class='las la-shopping-bag pr mb__10'></i>" + "<p>Your cart is empty.</p>" + "<p class='return-to-shop mb__15'>" + "<a class='button button_primary tu js_add_ld' href='/thesoftshop/shop'>Return To Shop</a>" + "</p>" + "</div>";
+                if ($('.cart_item').length == 0) {
                     $('.cart-items-container').hide()
                     $('#cart-root').append(emptyCartMessage)
                 }
-            }
-            else{
+            } else {
                 var result = JSON.parse(response)
                 console.log(result[0])
             }
         },
-        error: function(error) {
+        error: function (error) {
             console.log("Error in connection: " + error)
         }
     })

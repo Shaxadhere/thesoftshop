@@ -51,7 +51,7 @@
                                             </div>
                                             <div class="swatch is-label kalles_swatch_js">
                                                 <h4 class="swatch__title" id="view-product-default-size">Size:
-                                                    <span class="nt_name_current user_choose_js">${Default Size}</span>
+                                                    <span class="nt_name_current user_choose_js" id="view-product-size-value">${Default Size}</span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr" id="view-product-sizes-container">
                                                     <li class="nt-swatch swatch_pr_item pr" data-escape="XS">
@@ -63,7 +63,7 @@
                                         <div class="variations_button in_flex column w__100 buy_qv_false">
                                             <div class="flex wrap">
                                                 <div class="quantity pr mr__10 order-1 qty__true" id="sp_qty_qv">
-                                                    <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" value="1" name="quantity" inputmode="numeric">
+                                                    <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" value="1" name="quantity" inputmode="numeric" id="view-product-quantity">
                                                     <div class="qty tc fs__14">
                                                         <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
                                                             <i class="facl facl-plus"></i>
@@ -76,8 +76,8 @@
                                                 <div class="nt_add_w ts__03 pa order-3">
                                                     <a id="view-product-add-to-wishlist" href="#" class="wishlistadd cb chp ttip_nt tooltip_top_left"><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
                                                 </div>
-                                                <button id="view-product-add-to-cart" type="button" data-time='6000' data-ani='shake' class="single_add_to_cart_button button truncate js_frm_cart w__100 mt__20 order-4">
-                                                    <span class="txt_add ">Add to cart</span>
+                                                <button id="view-product-add-to-cart-button" style="background-color: var(--main-color);border: none;color: #fff;width: auto;margin-right:5px !important" data-location="quick-view" data-product="${ProductId}" type="button" data-time="1000" data-ani="shake" class="button truncate d-inline-block animated btn-add-to-cart">
+                                                    <span class="txt_add">Add to cart</span>
                                                 </button>
                                             </div>
                                         </div>

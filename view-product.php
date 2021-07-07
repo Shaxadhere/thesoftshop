@@ -28,7 +28,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                     <nav class="sp-breadcrumb">
                         <a href="index-2.html">Home</a>
                         <i class="facl facl-angle-right"></i>
-                        <a href="<?= getHTMLRoot() ?>/products">Products</a>
+                        <a href="<?= getHTMLRoot() ?>/shop">Shop</a>
                         <i class="facl facl-angle-right"></i><?= $Product['ProductName'] ?>
                     </nav>
                 </div>
@@ -195,7 +195,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                                         $index = 0;
                                         foreach ($Tags as $tags) {
                                             $index++;
-                                            echo "<a href='" . getHTMLRoot() . "/products?tags=$tags' class='cg'>$tags</a>";
+                                            echo "<a href='" . getHTMLRoot() . "/shop?name=$tags' class='cg'>$tags</a>";
                                             echo ($count == $index) ? "." : ", ";
                                         }
                                         ?>

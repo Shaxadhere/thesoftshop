@@ -35,11 +35,11 @@ $Cart = $_SESSION['CART'];
                             ?>
                                 <div class="mini_cart_item js_cart_item flex al_center pr oh">
                                     <div class="ld_cart_bar"></div>
-                                    <a href="product-detail-layout-01.html" class="mini_cart_img">
+                                    <a href="<?= getHTMLRoot() ?>/view-product?name=<?= $Product['ProductSlug'] ?>" class="mini_cart_img">
                                         <img class="w__100 lazyload" data-src="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>" width="120" height="153" alt="" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTUzIiB2aWV3Qm94PSIwIDAgMTIwIDE1MyI+PC9zdmc+">
                                     </a>
                                     <div class="mini_cart_info">
-                                        <a href="product-detail-layout-01.html" class="mini_cart_title truncate"><?= $Product['ProductName'] ?></a>
+                                        <a href="<?= getHTMLRoot() ?>/view-product?name=<?= $Product['ProductSlug'] ?>" class="mini_cart_title truncate"><?= $Product['ProductName'] ?></a>
                                         <div class="mini_cart_meta">
                                             <p class="cart_meta_variant"><?= $cartItem['productSize'] ?> | <?= $cartItem['productColor'] ?></p>
                                             <div class="cart_meta_price price">

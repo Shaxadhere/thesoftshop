@@ -7,7 +7,6 @@ include_once('components/featured.php');
 include_once('components/two-banners.php');
 include_once('components/bestsellers.php');
 include_once('components/instagram.php');
-include_once('components/shipping-info.php');
 include_once('components/quick-view.php');
 include_once('components/quick-shop.php');
 include_once('components/mini-cart-box.php');
