@@ -82,7 +82,7 @@ getHeader($Product['ProductName'], "includes/header.php");
                         <div class="theiaStickySidebar">
                             <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
                                 <div class="alert alert-danger" id="cart-alert-danger" style="display:none"></div>
-                                <div class="alert alert-success" id="cart-alert-success" style="display:none"></div>
+                                <div class="alert alert-success" id="cart-alert-success" style="display:none">Product added to cart successfully!</div>
                                 <h1 class="product_title entry-title fs__16"><?= $Product['ProductName'] ?></h1>
                                 <div class="flex wrap fl_between al_center price-review">
                                     <p class="price_range" id="price_ppr">Rs. <?= $Product['Price'] ?></p>
@@ -221,4 +221,9 @@ include_once('components/login-box.php');
 include_once('components/mobile-toolbar.php');
 include_once('components/mobile-menu.php');
 include_once('components/back-to-top-button.php');
+?>
+<?php
+if(isset($_REQUEST['added-to-cart'])){
+    echo "<script>$('#card-alert-success').show()</script>";
+}
 ?>

@@ -206,100 +206,7 @@ include_once('web-config.php');
 <script src="<?= getHTMLRoot() ?>/assets/js/interface.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/js/main.js"></script>
 <script>
-$(document).on('click', '.btn-add-to-cart', function(){
-    var productId = $(this).data('product')
-    var location = $(this).data('location')
-    if(location == "view-product"){
-        var colorName = $('#color-name').html()
-        var sizeName = $('#size-name').html()
-        var quantity = $('#quantity').val()
-    }
-    $.ajax({
-        type: "POST",
-        url: "<?= getHTMLRoot() ?>/controllers/product",
-        data: {
-            AddToCart: true,
-            ProductID: productId,
-            Color: colorName,
-            Size: sizeName,
-            Quantity: quantity
-        },
-        success: function(response){
-            var result = JSON.parse(response)
-            if(result['success'] == true){
-                // console.log("product added")
-                // var image = result['Image']
-                // var productName = result['ProductName']
-                // var productSize = result['ProductSize']
-                // var productColor = result['ProductColor']
-                // var totalPrice = result['Price']
-                // var quantity = result['Quantity']
-                // var cartItem = "<div class='mini_cart_item js_cart_item flex al_center pr oh'>"+
-                // "<div class='ld_cart_bar'></div>"+
-                // "<a href='product-detail-layout-01.html' class='mini_cart_img'>"+
-                // "<img class='w__100 lazyload' data-src='/thesoftshop/uploads/product-images/"+image+"' width='120' height='153' alt='' src='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTUzIiB2aWV3Qm94PSIwIDAgMTIwIDE1MyI+PC9zdmc+'>"+
-                // "</a>"+
-                // "<div class='mini_cart_info'>"+
-                // "<a href='product-detail-layout-01.html' class='mini_cart_title truncate'>"+productName+"</a>"+
-                // "<div class='mini_cart_meta'>"+
-                // "<p class='cart_meta_variant'>"+productSize+" | "+productColor+"</p>"+
-                // "<div class='cart_meta_price price'>"+
-                // "<div class='cart_price'>"+
-                // "<p class='price_range' id='price_ppr'>Rs. "+totalPrice+"</p>"+
-                // "</div>"+
-                // "</div>"+
-                // "</div>"+
-                // "<div class='mini_cart_actions'>"+
-                // "<div class='quantity pr mr__10 qty__true'>"+
-                // "<input type='number' class='input-text qty text tc qty_cart_js' step='1' min='0' max='9999' value='"+quantity+"'>"+
-                // "<div class='qty tc fs__14'>"+
-                // "<button type='button' class='plus db cb pa pd__0 pr__15 tr r__0'>"+
-                // "<i class='facl facl-plus'></i>"+
-                // "</button>"+
-                // "<button type='button' class='minus db cb pa pd__0 pl__15 tl l__0 qty_1'>"+
-                // "<i class='facl facl-minus'></i>"+
-                // "</button>"+
-                // "</div>"+
-                // "</div>"+
-                // "<a href='#' class='cart_ac_edit js__qs ttip_nt tooltip_top_right'><span class='tt_txt'>Edit this item</span>"+
-                // "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
-                // "<path d='M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7'></path>"+
-                // "<path d='M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z'></path>"+
-                // "</svg>"+
-                // "</a>"+
-                // "<a href='#' class='cart_ac_remove js_cart_rem ttip_nt tooltip_top_right'><span class='tt_txt'>Remove this item</span>"+
-                // "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' stroke='currentColor' fill='none' stroke-linecap='round' stroke-linejoin='round'>"+
-                // "<polyline points='3 6 5 6 21 6'></polyline>"+
-                // "<path d='M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2'></path>"+
-                // "<line x1='10' y1='11' x2='10' y2='17'></line>"+
-                // "<line x1='14' y1='11' x2='14' y2='17'></line>"+
-                // "</svg>"+
-                // "</a>"+
-                // "</div>"+
-                // "</div>"+
-                // "</div>";
-                // $('.mini_cart_items').append(cartItem)
-                $('#cart-alert-danger').hide()
-                $('#cart-alert-success').html("Product added to cart successfully!")
-                $('#cart-alert-success').show()
-                setTimeout(function() {
-                    location.reload()
-                }, 2000)
-                // $('#cart-nav').click()
-            }
-            else{
-                var result = JSON.parse(response)
-                $('#cart-alert-success').hide()
-                $('#cart-alert-danger').html(result[0])
-                $('#cart-alert-danger').show()
-            }
-        },
-        error: function(error) {
-            console.log("Error in connection: " + error)
-        }
-    })
-    console.log(productId, colorName, sizeName, quantity)
-})
+
 </script>
 <?php
 if (isset($_REQUEST['Success'])) {
@@ -320,7 +227,19 @@ if (isset($_REQUEST['error'])) {
     echo "});";
     echo "</script>";
 }
+
 ?>
+<script>
+    <?php
+    if (isset($_REQUEST['added-to-cart'])) {
+        echo "$(document).ready(function() {";
+        echo "$('#cart-alert-success').fadeTo(2000, 500).slideUp(500, function() {";
+        echo "$('#cart-alert-success').slideUp(500);";
+        echo "});";
+        echo "});";
+    }
+    ?>
+</script>
 </body>
 
 </html>

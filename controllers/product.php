@@ -89,7 +89,7 @@ if (isset($_POST['AddToCart'])) {
             $result = array(
                 "success" => true,
                 "NewItem" => false,
-                "CartItemId" => $cartItemId,
+                // "CartItemId" => $cartItemId,
                 "Image" => $ProductImages[0],
                 "ProductName" => $Product['ProductName'],
                 "ProductColor" => $Color,
