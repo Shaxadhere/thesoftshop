@@ -71,6 +71,7 @@ if (isset($_POST['AddToCart'])) {
         $Product = mysqli_fetch_array($Product);
         $ProductImages = json_decode($Product['ProductImages']);
         
+        
         $AlreadyExistsInCart = false;
         $index = 0;
         foreach($Cart as $item){
@@ -87,6 +88,8 @@ if (isset($_POST['AddToCart'])) {
 
             $result = array(
                 "success" => true,
+                "NewItem" => false,
+                "CartItemId" => $cartItemId,
                 "Image" => $ProductImages[0],
                 "ProductName" => $Product['ProductName'],
                 "ProductColor" => $Color,
@@ -97,7 +100,9 @@ if (isset($_POST['AddToCart'])) {
             echo json_encode($result);
         }
         else{
+            $cartItemId = random_strings(10);
             $CartItem = array(
+                "CartItemId" => $cartItemId,
                 "productId" => $ProductID,
                 "productqty" => $Quantity,
                 "productColor" => $Color,
@@ -108,6 +113,8 @@ if (isset($_POST['AddToCart'])) {
 
             $result = array(
                 "success" => true,
+                "NewItem" => true,
+                "CartItemId" => $cartItemId,
                 "Image" => $ProductImages[0],
                 "ProductName" => $Product['ProductName'],
                 "ProductColor" => $Color,
