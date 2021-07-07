@@ -1,6 +1,9 @@
 <?php
 include_once('web-config.php');
 getHeader("Cart", "includes/header.php");
+include_once('models/product-model.php');
+$ProductModel = new Product();
+$Cart = $_SESSION['CART'];
 ?>
 <!--cart section-->
 <div class="kalles-section cart_page_section container mt__60">
@@ -14,102 +17,66 @@ getHeader("Cart", "includes/header.php");
             </div>
         </div>
         <div class="cart_items js_cat_items">
-            <div class="cart_item js_cart_item">
-                <div class="ld_cart_bar"></div>
-                <div class="row al_center">
-                    <div class="col-12 col-md-12 col-lg-5">
-                        <div class="page_cart_info flex al_center">
-                            <a href="product-detail-layout-01.html">
-                                <img style="width: 140px;height: 140px;object-fit: cover;padding:5px" class="lazyload w__100 lz_op_ef" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201128%201439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/uploads/product-images/MklgPTxq6wUKsbfa8yzu.png" alt="">
-                            </a>
-                            <div class="mini_cart_body ml__15">
-                                <h5 class="mini_cart_title mg__0 mb__5"><a href="product-detail-layout-01.html">Cream women pants</a></h5>
-                                <div class="mini_cart_meta">
-                                    <p class="cart_selling_plan"></p>
-                                </div>
-                                <div class="mini_cart_tool mt__10">
-                                    <a href="#" class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"><span class="tt_txt">Remove this item</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                        </svg>
-                                    </a>
+            <?php
+            foreach ($Cart as $cartItem) {
+            $Product = $ProductModel->FilterByProductID(base64_encode($cartItem['productId']));
+            $Product = mysqli_fetch_array($Product);
+            $ProductImages = json_decode($Product['ProductImages']);
+            echo "<script>console.log('".json_encode($Product)."')</script>"
+            ?>
+                <div class="cart_item js_cart_item">
+                    <div class="ld_cart_bar"></div>
+                    <div class="row al_center">
+                        <div class="col-12 col-md-12 col-lg-5">
+                            <div class="page_cart_info flex al_center">
+                                <a href="product-detail-layout-01.html">
+                                    <img style="width: 140px;height: 140px;object-fit: cover;padding:5px" class="lazyload w__100 lz_op_ef" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201128%201439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>" alt="">
+                                </a>
+                                <div class="mini_cart_body ml__15">
+                                    <h5 class="mini_cart_title mg__0 mb__5"><a href="product-detail-layout-01.html"><?= $Product['ProductName'] ?></a></h5>
+                                    <div class="mini_cart_meta">
+                                        <p class="cart_selling_plan">
+                                            <span>Size: <?= $cartItem['productSize'] ?></span><br>
+                                            <span>Color: <?= $cartItem['productColor'] ?></span>
+                                        </p>
+                                    </div>
+                                    <div class="mini_cart_tool mt__10">
+                                        <a href="#" class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"><span class="tt_txt">Remove this item</span>
+                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
-                        <div class="cart_meta_prices price">
-                            <div class="cart_price">Rs. 35</div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
-                        <div class="quantity pr mr__10 qty__true">
-                            <input type="number" class="input-text qty text tc qty_cart_js" name="updates[]" value="1">
-                            <div class="qty tc fs__14">
-                                <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
-                                    <i class="facl facl-plus"></i></button>
-                                <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0 qty_1">
-                                    <i class="facl facl-minus"></i></button>
+                        <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
+                            <div class="cart_meta_prices price">
+                                <div class="cart_price">Rs. <?= $Product['Price'] ?></div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
-                        <span class="cart-item-price fwm cd js_tt_price_it">Rs. 35</span>
+                        <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
+                            <div class="quantity pr mr__10 qty__true">
+                                <input type="number" class="input-text qty text tc qty_cart_js" name="updates[]" value="<?= $cartItem['productqty'] ?>">
+                                <div class="qty tc fs__14">
+                                    <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
+                                        <i class="facl facl-plus"></i></button>
+                                    <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0 qty_1">
+                                        <i class="facl facl-minus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
+                            <span class="cart-item-price fwm cd js_tt_price_it">Rs. <?= intval($Product['Price']) * intval($cartItem['productqty']) ?></span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="cart_item js_cart_item">
-                <div class="ld_cart_bar"></div>
-                <div class="row al_center">
-                    <div class="col-12 col-md-12 col-lg-5">
-                        <div class="page_cart_info flex al_center">
-                            <a href="product-detail-layout-01.html">
-                                <img style="width: 140px;height: 140px;object-fit: cover;padding:5px"  class="lazyload w__100 lz_op_ef" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201128%201439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/uploads/product-images/uzjFynK3YLfcDbIt6Z12.jfif" alt="">
-                            </a>
-                            <div class="mini_cart_body ml__15">
-                                <h5 class="mini_cart_title mg__0 mb__5">
-                                    <a href="product-detail-layout-01.html">Black mountain hat</a>
-                                </h5>
-                                <div class="mini_cart_meta">
-                                    <p class="cart_selling_plan"></p>
-                                </div>
-                                <div class="mini_cart_tool mt__10">
-                                    <a href="#" class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"><span class="tt_txt">Remove this item</span>
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                            <polyline points="3 6 5 6 21 6"></polyline>
-                                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                            <line x1="10" y1="11" x2="10" y2="17"></line>
-                                            <line x1="14" y1="11" x2="14" y2="17"></line>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
-                        <div class="cart_meta_prices price">
-                            <div class="cart_price">Rs. 50</div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
-                        <div class="quantity pr mr__10 qty__true">
-                            <input type="number" class="input-text qty text tc qty_cart_js" name="updates[]" value="1">
-                            <div class="qty tc fs__14">
-                                <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
-                                    <i class="facl facl-plus"></i></button>
-                                <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0 qty_1">
-                                    <i class="facl facl-minus"></i></button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
-                        <span class="cart-item-price fwm cd js_tt_price_it">Rs. 50</span>
-                    </div>
-                </div>
-            </div>
+            <?php
+            }
+            ?>
         </div>
         <div class="cart__footer mt__60">
             <div class="row">
