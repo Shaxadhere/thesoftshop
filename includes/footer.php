@@ -34,7 +34,7 @@ include_once('web-config.php');
                                             <span class="tt_txt">Follow on Facebook</span>
                                             <i class="facl facl-facebook"></i>
                                         </a>
-                                        <a target="_blank" href="https://twitter.com/thesoftshop.pk" class="twitter cb ttip_nt tooltip_top">
+                                        <a target="_blank" href="https://twitter.com/thesoftshoppk" class="twitter cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Twitter</span>
                                             <i class="facl facl-twitter"></i>
                                         </a>
