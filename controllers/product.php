@@ -63,7 +63,14 @@ if (isset($_POST['AddToCart'])) {
 
     $Cart = $_SESSION['CART'];
 
+    
+
     if ($errors == null) {
+
+        $Product = $ProductModel->FilterByProductID(base64_encode($ProductID));
+        $Product = mysqli_fetch_array($Product);
+        $ProductImages = json_decode($Product['ProductImages']);
+        
         $AlreadyExistsInCart = false;
         $index = 0;
         foreach($Cart as $item){
@@ -77,7 +84,17 @@ if (isset($_POST['AddToCart'])) {
             $Cart = $_SESSION['CART'];
             $Cart[$index]['productqty'] = intval($Cart[$index]['productqty']) + intval($Quantity);
             $_SESSION['CART'] = $Cart;
-            echo true;
+
+            $result = array(
+                "success" => true,
+                "Image" => $ProductImages[0],
+                "ProductName" => $Product['ProductName'],
+                "ProductColor" => $Color,
+                "ProductSize" => $Size,
+                "Quantity" => $Quantity,
+                "Price" => intval($Product['Price']) * intval($Quantity)
+            );
+            echo json_encode($result);
         }
         else{
             $CartItem = array(
@@ -88,7 +105,17 @@ if (isset($_POST['AddToCart'])) {
             );
             array_push($Cart, $CartItem);
             $_SESSION['CART'] = $Cart;
-            echo true;
+
+            $result = array(
+                "success" => true,
+                "Image" => $ProductImages[0],
+                "ProductName" => $Product['ProductName'],
+                "ProductColor" => $Color,
+                "ProductSize" => $Size,
+                "Quantity" => $Quantity,
+                "Price" => intval($Product['Price']) * intval($Quantity)
+            );
+            echo json_encode($result);
         }
     } else {
         echo json_encode($errors);

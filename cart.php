@@ -5,19 +5,9 @@ include_once('models/product-model.php');
 $ProductModel = new Product();
 $Cart = $_SESSION['CART'];
 ?>
-<!--shop banner-->
 <?php
-            if(count($Cart) == 0){
-            ?>
-            <div class="empty tc mt__40"><i class="las la-shopping-bag pr mb__10"></i>
-                <p>Your cart is empty.</p>
-                <p class="return-to-shop mb__15">
-                    <a class="button button_primary tu js_add_ld" href="<?= getHTMLRoot() ?>/shop">Return To Shop</a>
-                </p>
-            </div>
-            <?php
-            }
-            ?>
+if(count($Cart) == 0){
+?>
 <div class="kalles-section page_section_heading">
     <div class="page-head tc pr oh cat_bg_img page_head_">
         <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
@@ -27,7 +17,16 @@ $Cart = $_SESSION['CART'];
         </div>
     </div>
 </div>
-<!--end shop banner-->
+<div class="empty tc mt__60 mb__60"><i class="las la-shopping-bag pr mb__10"></i>
+    <p>Your cart is empty.</p>
+    <p class="return-to-shop mb__15">
+        <a class="button button_primary tu js_add_ld" href="<?= getHTMLRoot() ?>/shop">Return To Shop</a>
+    </p>
+</div>
+<?php
+}
+else{
+?>
 <!--cart section-->
 <div class="kalles-section cart_page_section container mt__60">
     <form action="<?= getHTMLRoot() ?>/checkout" method="post" class="frm_cart_ajax_true frm_cart_page nt_js_cart pr oh ">
@@ -126,6 +125,9 @@ $Cart = $_SESSION['CART'];
     </form>
 </div>
 <!--end cart section-->
+<?php
+}
+?>
 <?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');
