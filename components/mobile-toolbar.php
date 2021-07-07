@@ -10,12 +10,6 @@
                 <span class="kalles_toolbar_label">Shop</span>
             </a>
         </div>
-        <div class="type_toolbar_filter kalles_toolbar_item dn">
-            <a class="dt_trigger_cl" href="<?= getHTMLRoot() ?>/shop" data-trigger=".btn_filter">
-                <span class="toolbar_icon"></span>
-                <span class="kalles_toolbar_label">Filter</span>
-            </a>
-        </div>
         <div class="type_toolbar_wish kalles_toolbar_item">
             <a class="js_link_wis" href="<?= getHTMLRoot() ?>/wishlist">
                 <span class="toolbar_icon">
@@ -27,13 +21,25 @@
         <div class="type_toolbar_cart kalles_toolbar_item">
             <a href="#" class="push_side" data-id="#nt_cart_canvas">
                 <span class="toolbar_icon">
-                    <span class="jsccount toolbar_count">5</span>
+                    <?php
+                    if (isset($_SESSION['CART'])) {
+                        $Cart = $_SESSION['CART'];
+                        $ItemCount = 0;
+                        foreach ($Cart as $cartItem) {
+                            $ItemCount = $ItemCount + intval($cartItem['productqty']);
+                        }
+                        if (count($_SESSION['CART']) > 0) {
+                            echo "<span class='jsccount toolbar_count'>$ItemCount</span>";
+                        }
+                    }
+                    ?>
+                    
                 </span>
                 <span class="kalles_toolbar_label">Cart</span>
             </a>
         </div>
         <div class="type_toolbar_account kalles_toolbar_item">
-            <a href="<?= isset($_SESSION['USER']) ? getHTMLRoot()."my-account" : "#" ?>" class="push_side" data-id="<?= isset($_SESSION['USER']) ? getHTMLRoot()."" : "#nt_login_canvas" ?>">
+            <a href="<?= isset($_SESSION['USER']) ? getHTMLRoot() . "/my-account" : "#" ?>" class="push_side" data-id="<?= isset($_SESSION['USER']) ? getHTMLRoot() . "" : "#nt_login_canvas" ?>">
                 <span class="toolbar_icon"></span>
                 <span class="kalles_toolbar_label">Account</span>
             </a>
