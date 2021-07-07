@@ -5,6 +5,29 @@ include_once('models/product-model.php');
 $ProductModel = new Product();
 $Cart = $_SESSION['CART'];
 ?>
+<!--shop banner-->
+<?php
+            if(count($Cart) == 0){
+            ?>
+            <div class="empty tc mt__40"><i class="las la-shopping-bag pr mb__10"></i>
+                <p>Your cart is empty.</p>
+                <p class="return-to-shop mb__15">
+                    <a class="button button_primary tu js_add_ld" href="<?= getHTMLRoot() ?>/shop">Return To Shop</a>
+                </p>
+            </div>
+            <?php
+            }
+            ?>
+<div class="kalles-section page_section_heading">
+    <div class="page-head tc pr oh cat_bg_img page_head_">
+        <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
+        <div class="container pr z_100">
+            <h1 class="mb__5 cw">Cart</h1>
+            <p class="mg__0"></p>
+        </div>
+    </div>
+</div>
+<!--end shop banner-->
 <!--cart section-->
 <div class="kalles-section cart_page_section container mt__60">
     <form action="<?= getHTMLRoot() ?>/checkout" method="post" class="frm_cart_ajax_true frm_cart_page nt_js_cart pr oh ">
@@ -18,11 +41,11 @@ $Cart = $_SESSION['CART'];
         </div>
         <div class="cart_items js_cat_items">
             <?php
+            $Subtotal = 0;
             foreach ($Cart as $cartItem) {
             $Product = $ProductModel->FilterByProductID(base64_encode($cartItem['productId']));
             $Product = mysqli_fetch_array($Product);
             $ProductImages = json_decode($Product['ProductImages']);
-            echo "<script>console.log('".json_encode($Product)."')</script>"
             ?>
                 <div class="cart_item js_cart_item">
                     <div class="ld_cart_bar"></div>
@@ -75,6 +98,7 @@ $Cart = $_SESSION['CART'];
                     </div>
                 </div>
             <?php
+            $Subtotal = $Subtotal + intval($Product['Price']) * intval($cartItem['productqty']);
             }
             ?>
         </div>
@@ -84,7 +108,7 @@ $Cart = $_SESSION['CART'];
                     <div class="total row in_flex fl_between al_center cd fs__18 tu">
                         <div class="col-auto"><strong>Subtotal:</strong></div>
                         <div class="col-auto tr js_cat_ttprice fs__20 fwm">
-                            <div class="cart_tot_price">Rs. 85</div>
+                            <div class="cart_tot_price">Rs. <?= $Subtotal ?></div>
                         </div>
                     </div>
                     <div class="clearfix"></div>
