@@ -388,7 +388,7 @@ $(document).on('click', '.btn-add-to-cart', function() {
     }
     $.ajax({
         type: "POST",
-        url: "<?= getHTMLRoot() ?>/controllers/product",
+        url: "/thesoftshop/controllers/product",
         data: {
             AddToCart: true,
             ProductID: productId,

@@ -63,13 +63,8 @@ else{
                                         </p>
                                     </div>
                                     <div class="mini_cart_tool mt__10">
-                                        <a href="#" class="cart_ac_remove js_cart_rem ttip_nt tooltip_top_right"><span class="tt_txt">Remove this item</span>
-                                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                                <polyline points="3 6 5 6 21 6"></polyline>
-                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-                                                <line x1="10" y1="11" x2="10" y2="17"></line>
-                                                <line x1="14" y1="11" x2="14" y2="17"></line>
-                                            </svg>
+                                        <a data-cartItemId="<?= $cartItem['CartItemId'] ?>" href="#" class="remove-cart-item"><span class="tt_txt">Remove this item</span>
+                                        <i style="font-size: 20px;" class="pegk pe-7s-trash"></i>
                                         </a>
                                     </div>
                                 </div>

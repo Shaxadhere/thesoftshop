@@ -1,6 +1,8 @@
 <?php
 session_start();
-// $_SESSION['CART'] = "";
+if(isset($_REQUEST['clear'])){
+    $_SESSION['CART'] = "";
+}
 
 if(!isset($_SESSION['CART']) || $_SESSION['CART'] == ""){
     $Cart = array();

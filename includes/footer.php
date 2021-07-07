@@ -240,6 +240,33 @@ if (isset($_REQUEST['error'])) {
     }
     ?>
 </script>
+<script>
+$(document).on('click', '.remove-cart-item', function(){
+    var cartItemId = $(this).data('cartitemid')
+    var row = $(this).parent().parent().parent().parent().parent().parent()
+    $.ajax({
+        type: "POST",
+        url: "/thesoftshop/controllers/product",
+        data: {
+            RemoveItemFromCart: true,
+            CartItemId: cartItemId
+        },
+        success: function(response) {
+            if(response == true){
+                row.remove();
+            }
+            else{
+                var result = JSON.parse(response)
+                console.log(result[0])
+            }
+        },
+        error: function(error) {
+            console.log("Error in connection: " + error)
+        }
+    })
+    console.log(row)
+})
+</script>
 </body>
 
 </html>

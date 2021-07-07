@@ -63,43 +63,32 @@ if (isset($_POST['AddToCart'])) {
 
     $Cart = $_SESSION['CART'];
 
-    
-
     if ($errors == null) {
 
         $Product = $ProductModel->FilterByProductID(base64_encode($ProductID));
         $Product = mysqli_fetch_array($Product);
         $ProductImages = json_decode($Product['ProductImages']);
-        
-        
+
         $AlreadyExistsInCart = false;
         $index = 0;
-        foreach($Cart as $item){
-            if($item['productId'] == $ProductID && $item['productColor'] == $Color && $item['productSize'] == $Size){
+        foreach ($Cart as $item) {
+            if ($item['productId'] == $ProductID && $item['productColor'] == $Color && $item['productSize'] == $Size) {
+                echo json_encode($item);
                 $AlreadyExistsInCart = true;
                 break;
             }
             $index++;
         }
-        if($AlreadyExistsInCart){
+        if ($AlreadyExistsInCart) {
             $Cart = $_SESSION['CART'];
             $Cart[$index]['productqty'] = intval($Cart[$index]['productqty']) + intval($Quantity);
             $_SESSION['CART'] = $Cart;
 
             $result = array(
-                "success" => true,
-                "NewItem" => false,
-                // "CartItemId" => $cartItemId,
-                "Image" => $ProductImages[0],
-                "ProductName" => $Product['ProductName'],
-                "ProductColor" => $Color,
-                "ProductSize" => $Size,
-                "Quantity" => $Quantity,
-                "Price" => intval($Product['Price']) * intval($Quantity)
+                "success" => true
             );
-            echo json_encode($result);
-        }
-        else{
+            // echo json_encode($result);
+        } else {
             $cartItemId = random_strings(10);
             $CartItem = array(
                 "CartItemId" => $cartItemId,
@@ -108,24 +97,46 @@ if (isset($_POST['AddToCart'])) {
                 "productColor" => $Color,
                 "productSize" => $Size
             );
-            array_push($Cart, $CartItem);
+            $count = count($Cart);
+            $count = strval($count);
+            $Cart[$cartItemId] = $CartItem;
             $_SESSION['CART'] = $Cart;
 
             $result = array(
-                "success" => true,
-                "NewItem" => true,
-                "CartItemId" => $cartItemId,
-                "Image" => $ProductImages[0],
-                "ProductName" => $Product['ProductName'],
-                "ProductColor" => $Color,
-                "ProductSize" => $Size,
-                "Quantity" => $Quantity,
-                "Price" => intval($Product['Price']) * intval($Quantity)
+                "success" => true
             );
-            echo json_encode($result);
+            // echo json_encode($result);
         }
     } else {
         echo json_encode($errors);
     }
 }
- 
+
+if (isset($_POST['RemoveItemFromCart'])) {
+    session_start();
+    $errors = array();
+    if (empty($_POST['CartItemId'])) {
+        array_push($errors, "502 - Bad request error");
+    }
+
+    if ($errors == null) {
+        $Cart = $_SESSION['CART'];
+        $index = 0;
+        foreach ($Cart as $item) {
+            if ($item['CartItemId'] == $_POST['CartItemId']) {
+                $CartIndex = $index;
+                break;
+            }
+            $index++;
+        }
+        if(isset($Cart[$index])){
+            echo $index;
+            unset($Cart[$CartIndex]);
+        }else{
+            echo $index;
+            unset($Cart[strval($index)]);
+        }
+        $_SESSION['CART'] = $Cart;
+        echo true;
+    }
+}
