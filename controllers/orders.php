@@ -8,7 +8,7 @@ $ProductModel = new Product();
 
 if (isset($_POST['SubmitOrder'])) {
     session_start();
-    if (!isset($_SESSION['CART'])) {
+    if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
         array_push($errors, "Your cart is empty!");
     } else {
         $Cart = $_SESSION['CART'];
@@ -77,6 +77,21 @@ if (isset($_POST['SubmitOrder'])) {
             "success" => true,
             "OrderNumber" => $OrderNumber
         );
+        $_SESSION['LASTORDER'] = array(
+            $CustomerID,
+            $OrderNumber,
+            $_POST['FullName'],
+            $_POST['Email'],
+            $_POST['Phone'],
+            $_POST['ShippingAddress'],
+            $_POST['ShippingAddress'],
+            $_POST['City'],
+            $_POST['State'],
+            $OrderInvoice,
+            "Recieved",
+            $_POST['OrderNotes']  
+        );
+        unset($_SESSION['CART']);
         echo json_encode($result);
     } else {
         echo json_encode($errors);

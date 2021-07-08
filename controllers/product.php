@@ -61,6 +61,7 @@ if (isset($_POST['AddToCart'])) {
     $Size = mysqli_real_escape_string(connect(), $_POST['Size']);
     $Quantity = mysqli_real_escape_string(connect(), $_POST['Quantity']);
 
+    
     $Cart = $_SESSION['CART'];
 
     if ($errors == null) {

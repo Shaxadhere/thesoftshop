@@ -264,7 +264,7 @@ if (isset($_REQUEST['error'])) {
             success: function(response) {
                 var result = JSON.parse(response)
                 if(result['success'] == true){
-                    
+                    window.location.href = '/thesoftshop/thank-you';
                 }
             },
             error: function(error) {

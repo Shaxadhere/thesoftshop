@@ -1,6 +1,9 @@
 <?php
 include_once('web-config.php');
 getHeader("Checkout", "includes/header.php");
+if(!isset($_SESSION['CART']) || $_SESSION['CART'] == "" || $_SESSION['CART'] == null){
+    redirectWindow(getHTMLRoot()."?error=Your cart is empty!");
+}
 if (isset($_SESSION['USER'])) {
     include_once('models/customer-model.php');
     $CustomerModel = new Customer();
