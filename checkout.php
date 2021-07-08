@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
 getHeader("Checkout", "includes/header.php");
+if (isset($_SESSION['USER'])) {
+    include_once('models/customer-model.php');
+    $CustomerModel = new Customer();
+    $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));
+}
+include_once('models/product-model.php');
+$ProductModel = new Product();
+$Cart = $_SESSION['CART'];
 ?>
 <!--cart section-->
 <div class="kalles-section cart_page_section container mt__60">
@@ -10,48 +18,35 @@ getHeader("Checkout", "includes/header.php");
                 <div class="checkout-section">
                     <h3 class="checkout-section__title">Billing details</h3>
                     <div class="row">
-                        <p class="checkout-section__field col-lg-6 col-12">
-                            <label for="f-name">First name</label>
-                            <input type="text" id="f-name" value="">
-                        </p>
-                        <p class="checkout-section__field col-lg-6 col-12">
-                            <label for="l-name">Last name</label>
-                            <input type="text" id="l-name" value="">
+                        <p class="checkout-section__field col-lg-12 col-12">
+                            <label for="f-name">Full name *</label>
+                            <input required type="text" id="checkout-full-name" value="<?= (isset($Customer)) ? $Customer['FullName'] : "" ?>">
                         </p>
                         <p class="checkout-section__field col-12">
-                            <label for="company">Company name (optional)</label>
-                            <input type="text" id="company" value="">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_01">Street address *</label>
-                            <input type="text" id="address_01" value="" class="mb__20" placeholder="House number and street name">
-                            <input type="text" id="address_02" value="" placeholder="Apartment, suite, unit, etc. (optional)">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_03">Town / City</label>
-                            <input type="text" id="address_03" value="">
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_province_ship" id="address_province_label">State *</label>
-                            <select disabled id="address_province_ship">
-                                <option value="Pakistan" selected>Sindh</option>
-                                <option value="Pakistan" selected>Punjab</option>
-                                <option value="Pakistan" selected>Pakistan</option>
-                                <option value="Pakistan" selected>Pakistan</option>
-                                <option value="Pakistan" selected>Pakistan</option>
-                            </select>
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_zip_ship_2">Postal/Zip Code</label>
-                            <input type="text" id="address_zip_ship_2" />
-                        </p>
-                        <p class="checkout-section__field col-12">
-                            <label for="address_phone">Phone</label>
-                            <input type="text" id="address_phone" />
+                            <label for="address_phone">Phone *</label>
+                            <input required type="text" id="address_phone" value="<?= (isset($Customer)) ? $Customer['Contact'] : "" ?>" />
                         </p>
                         <p class="checkout-section__field col-12">
                             <label for="address_amail">Email</label>
-                            <input type="text" id="address_amail" />
+                            <input type="text" id="address_amail" value="<?= (isset($Customer)) ? $Customer['Email'] : "" ?>" />
+                        </p>
+                        <p class="checkout-section__field col-12">
+                            <label for="address_01">Shipping address *</label>
+                            <input required type="text" id="checkout-address-1" value="<?= (isset($Customer)) ? $Customer['ShippingAddress'] : "" ?>" class="mb__20" placeholder="House number and street name">
+                        </p>
+                        <p class="checkout-section__field col-12">
+                            <label for="address_province_ship" id="address_province_label">State *</label>
+                            <select required id="address_province_ship">
+                                <option value="">Select state</option>
+                                <option value="Azad Kashmir">Azad Kashmir</option>
+                                <option value="Balochistan">Balochistan</option>
+                                <option value="Fedrally Administrated Tribal Areas">Fedrally Administrated Tribal Areas</option>
+                                <option value="Sindh">Sindh</option>
+                                <option value="Punjab">Punjab</option>
+                                <option value="Gilgit Baltistan">Gilgit Baltistan</option>
+                                <option value="Islamabad">Islamabad</option>
+                                <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
+                            </select>
                         </p>
                     </div>
                 </div>
@@ -78,29 +73,32 @@ getHeader("Checkout", "includes/header.php");
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="cart_item">
-                                    <td class="product-name">Black mountain hat<strong class="product-quantity">× 1</strong>
-                                    </td>
-                                    <td class="product-total"><span class="cart_price">$50.00</span></td>
-                                </tr>
-                                <tr class="cart_item">
-                                    <td class="product-name">Cream women pants<strong class="product-quantity">× 1</strong>
-                                    </td>
-                                    <td class="product-total"><span class="cart_price">$35.00</span></td>
-                                </tr>
+                                <?php
+                                $Subtotal = 0;
+                                foreach ($Cart as $cartItem) {
+                                    $Product = $ProductModel->FilterByProductID(base64_encode($cartItem['productId']));
+                                    $Product = mysqli_fetch_array($Product);
+                                    echo "<tr class='cart_item'>";
+                                    echo "<td class='product-name'>$Product[ProductName]<strong class='product-quantity'>× $cartItem[productqty]</strong>";
+                                    echo "</td>";
+                                    echo "<td class='product-total'><span class='cart_price'>Rs. ".intval($Product['Price']) * intval($cartItem['productqty'])."</span></td>";
+                                    echo "</tr>";
+                                    $Subtotal = $Subtotal + intval($Product['Price']) * intval($cartItem['productqty']);
+                                }
+                                ?>
                             </tbody>
                             <tfoot>
                                 <tr class="cart-subtotal cart_item">
                                     <th>Subtotal</th>
-                                    <td><span class="cart_price">$85.00</span></td>
+                                    <td><span class="cart_price">Rs. <?= $Subtotal ?></span></td>
                                 </tr>
                                 <tr class="cart_item">
                                     <th>Shipping</th>
-                                    <td><span class="cart_price">$50.00</span></td>
+                                    <td><span class="cart_price">Rs. 170</span></td>
                                 </tr>
                                 <tr class="order-total cart_item">
                                     <th>Total</th>
-                                    <td><strong><span class="cart_price amount">$145.00</span></strong></td>
+                                    <td><strong><span class="cart_price amount">Rs. <?= $Subtotal + 170 ?></span></strong></td>
                                 </tr>
                             </tfoot>
                         </table>
@@ -117,7 +115,7 @@ getHeader("Checkout", "includes/header.php");
                             <p class="checkout-payment__policy-text">Your personal data will be used to process your order, support your experience throughout shipping process, and for other purposes described in our<a href="<?= getHTMLRoot() ?>/privacy-policy"> privacy policy</a>.
                             </p>
                             <label class="checkout-payment__confirm-terms-and-conditions">
-                                <span>By proceeding means you have read and agree to our <a href="<?= getHTMLRoot()?>/terms-and-conditions" class="terms-and-conditions-link">terms and conditions</a></span>&nbsp;<span class="required">*</span>
+                                <span>By proceeding means you have read and agree to our <a href="<?= getHTMLRoot() ?>/terms-and-conditions" class="terms-and-conditions-link">terms and conditions</a></span>&nbsp;<span class="required">*</span>
                             </label>
                             <button type="button" class="button button_primary btn checkout-payment__btn-place-order">Place order</button>
                         </div>
