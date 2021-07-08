@@ -1,4 +1,5 @@
 <?php
+include_once('web-config.php');
 session_start();
 if(isset($_REQUEST['clear'])){
     $_SESSION['CART'] = "";

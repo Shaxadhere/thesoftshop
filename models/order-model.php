@@ -9,7 +9,7 @@ class Order {
         );
     }
 
-    function Add($CustomerID, $CustomerName, $CustomerEmail, $CustomerContact, $CustomerBillingAddress, $CustomerShippingAddress, $CustomerCity, $State, $ProductsWithQuantity, $OrderStatus){
+    function Add($CustomerID, $OrderNumber, $CustomerName, $CustomerEmail, $CustomerContact, $CustomerBillingAddress, $CustomerShippingAddress, $CustomerCity, $State, $ProductsWithQuantity, $OrderStatus, $OrderNotes){
         $CustomerID = mysqli_real_escape_string(connect(), $CustomerID);
         $CustomerName = mysqli_real_escape_string(connect(), $CustomerName);
         $CustomerEmail = mysqli_real_escape_string(connect(), $CustomerEmail);
@@ -24,6 +24,7 @@ class Order {
             "tbl_orders",
             array(
                 "CustomerID",
+                "OrderNumber",
                 "CustomerName",
                 "CustomerEmail",
                 "CustomerContact",
@@ -32,10 +33,12 @@ class Order {
                 "CustomerCity",
                 "State",
                 "ProductsWithQuantity", 
-                "OrderStatus"
+                "OrderStatus",
+                "OrderNotes"
             ),
             array(
                 $CustomerID,
+                $OrderNumber,
                 $CustomerName,
                 $CustomerEmail,
                 $CustomerContact,
@@ -44,7 +47,8 @@ class Order {
                 $CustomerCity,
                 $State,
                 $ProductsWithQuantity, 
-                $OrderStatus
+                $OrderStatus,
+                $OrderNotes
             ),
             connect()
         );

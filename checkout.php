@@ -20,22 +20,22 @@ $Cart = $_SESSION['CART'];
                     <div class="row">
                         <p class="checkout-section__field col-lg-12 col-12">
                             <label for="f-name">Full name *</label>
-                            <input required type="text" id="checkout-full-name" value="<?= (isset($Customer)) ? $Customer['FullName'] : "" ?>">
+                            <input required placeholder="Please type your name" type="text" id="checkout-full-name" value="<?= (isset($Customer)) ? $Customer['FullName'] : "" ?>">
                         </p>
                         <p class="checkout-section__field col-12">
                             <label for="address_phone">Phone *</label>
-                            <input required type="text" id="address_phone" value="<?= (isset($Customer)) ? $Customer['Contact'] : "" ?>" />
+                            <input required placeholder="Please type your phone number" type="text" id="checkout-phone" value="<?= (isset($Customer)) ? $Customer['Contact'] : "" ?>" />
                         </p>
                         <p class="checkout-section__field col-12">
-                            <label for="address_amail">Email</label>
-                            <input type="text" id="address_amail" value="<?= (isset($Customer)) ? $Customer['Email'] : "" ?>" />
+                            <label for="address_email">Email</label>
+                            <input type="text" id="checkout-email" value="<?= (isset($Customer)) ? $Customer['Email'] : "" ?>" />
                         </p>
                         <p class="checkout-section__field col-12">
                             <label for="address_01">Shipping address *</label>
-                            <input required type="text" id="checkout-address-1" value="<?= (isset($Customer)) ? $Customer['ShippingAddress'] : "" ?>" class="mb__20" placeholder="House number and street name">
+                            <input required type="text" id="checkout-shipping-address" value="<?= (isset($Customer)) ? $Customer['ShippingAddress'] : "" ?>" class="mb__20" placeholder="House number and street name">
                         </p>
                         <p class="checkout-section__field col-12">
-                            <label for="address_province_ship" id="address_province_label">State *</label>
+                            <label for="address_province_ship" id="checkout-state">State *</label>
                             <select required id="address_province_ship">
                                 <option value="">Select state</option>
                                 <option value="Azad Kashmir">Azad Kashmir</option>
@@ -48,6 +48,10 @@ $Cart = $_SESSION['CART'];
                                 <option value="Khyber Pakhtunkhwa">Khyber Pakhtunkhwa</option>
                             </select>
                         </p>
+                        <p class="checkout-section__field col-lg-12 col-12">
+                            <label for="f-name">City *</label>
+                            <input required placeholder="Please type your city name" type="text" id="checkout-city" value="<?= (isset($Customer)) ? $Customer['City'] : "" ?>">
+                        </p>
                     </div>
                 </div>
                 <div class="checkout-section">
@@ -55,7 +59,7 @@ $Cart = $_SESSION['CART'];
                     <div class="row">
                         <p class="checkout-section__field col-12">
                             <label for="order_comments" class="">Order notes (optional)</label>
-                            <textarea id="order_comments" name="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5"></textarea>
+                            <textarea id="checkout-order-notes" name="order_comments" placeholder="Notes about your order, e.g. special notes for delivery." rows="2" cols="5"></textarea>
                         </p>
                     </div>
                 </div>
@@ -117,7 +121,7 @@ $Cart = $_SESSION['CART'];
                             <label class="checkout-payment__confirm-terms-and-conditions">
                                 <span>By proceeding means you have read and agree to our <a href="<?= getHTMLRoot() ?>/terms-and-conditions" class="terms-and-conditions-link">terms and conditions</a></span>&nbsp;<span class="required">*</span>
                             </label>
-                            <button type="button" class="button button_primary btn checkout-payment__btn-place-order">Place order</button>
+                            <button type="button" id="checkout-btn" class="button button_primary btn checkout-payment__btn-place-order">Place order</button>
                         </div>
                     </div>
                 </div>

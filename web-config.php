@@ -192,3 +192,10 @@ function getSMTPCredentials(){
 function isHtml($string){
   return preg_match("/<[^<]+>/",$string,$m) != 0;
 }
+
+//generate random numeric string
+function generateNumericString ($min, $max) 
+{
+    $str_result = '0123456789'; 
+	return substr(str_shuffle($str_result),$min, $max); 
+}

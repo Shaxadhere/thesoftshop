@@ -239,6 +239,39 @@ if (isset($_REQUEST['error'])) {
         echo "});";
     }
     ?>
+    $(document).on('click', '#checkout-btn', function(){
+        var fullName = $('#checkout-full-name').val()
+        var phone = $('#checkout-phone').val()
+        var email = $('#checkout-email').val()
+        var shippingAddress = $('#checkout-shipping-address').val()
+        var state = $('#checkout-state').val()
+        var city = $('#checkout-city').val()
+        var orderNotes = $('#checkout-order-notes').val()
+
+        $.ajax({
+            type: "POST",
+            url: "/thesoftshop/controllers/orders",
+            data: {
+                SubmitOrder: true,
+                FullName: fullName,
+                Email: email,
+                Phone: phone,
+                ShippingAddress: shippingAddress,
+                City: city,
+                State: state,
+                OrderNotes: orderNotes,
+            },
+            success: function(response) {
+                var result = JSON.parse(response)
+                if(result['success'] == true){
+                    
+                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
 </script>
 <script>
 
