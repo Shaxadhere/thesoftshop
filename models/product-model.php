@@ -118,5 +118,13 @@ class Product{
         );
     }
 
-    function InventoryByAttributes
+    function InventoryByAttributes($ProductID, $SizeID, $ColorID){
+        $ProductID = mysqli_real_escape_string(connect(), $ProductID);
+        $SizeID = mysqli_real_escape_string(connect(), $SizeID);
+        $ColorID = mysqli_real_escape_string(connect(), $ColorID);
+        return mysqli_query(
+            connect(),
+            "SELECT * from tbl_inventory where ProductID = $ProductID and SizeID = $SizeID and ColorID = $ColorID"
+        );
+    }
 }
