@@ -35,8 +35,8 @@ $Cart = $_SESSION['CART'];
                             <input required type="text" id="checkout-shipping-address" value="<?= (isset($Customer)) ? $Customer['ShippingAddress'] : "" ?>" class="mb__20" placeholder="House number and street name">
                         </p>
                         <p class="checkout-section__field col-12">
-                            <label for="address_province_ship" id="checkout-state">State *</label>
-                            <select required id="address_province_ship">
+                            <label for="address_province_ship" id="checkout-state-label">State *</label>
+                            <select required id="checkout-state">
                                 <option value="">Select state</option>
                                 <option value="Azad Kashmir">Azad Kashmir</option>
                                 <option value="Balochistan">Balochistan</option>
