@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2021 at 02:04 PM
+-- Generation Time: Jul 08, 2021 at 01:52 PM
 -- Server version: 10.4.19-MariaDB
--- PHP Version: 7.3.28
+-- PHP Version: 8.0.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -103,6 +103,7 @@ CREATE TABLE `tbl_customer` (
   `Password` varchar(1000) DEFAULT NULL,
   `BillingAddress` varchar(500) DEFAULT NULL,
   `ShippingAddress` varchar(500) DEFAULT NULL,
+  `State` varchar(100) DEFAULT NULL,
   `City` varchar(100) DEFAULT NULL,
   `OrderHistory` text DEFAULT NULL,
   `CreatedAt` datetime DEFAULT current_timestamp(),
@@ -110,6 +111,14 @@ CREATE TABLE `tbl_customer` (
   `Status` bit(1) DEFAULT b'1',
   `Deleted` bit(1) DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_customer`
+--
+
+INSERT INTO `tbl_customer` (`PK_ID`, `FullName`, `Contact`, `Email`, `Password`, `BillingAddress`, `ShippingAddress`, `State`, `City`, `OrderHistory`, `CreatedAt`, `CreatedBy`, `Status`, `Deleted`) VALUES
+(1, 'Murtaza', '0303030303', 'murtaza@mail.com', '$2y$10$Af2hpJvf11gPQ0mVCJxSB.D2Mk08t5gjv1VDKuT7I67WNHdu.T4RS', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', NULL, NULL, NULL, '2021-07-01 17:03:08', NULL, b'1', b'0'),
+(3, 'Shehzad Ahmed', '03032804822', 'shehzad@mail.com', '$2y$10$B2.YFdUJodmJvLIrp/vXFeJgSE9QZA4e7.75sikZVLx3CdvSFtBd6', '143/03, Main waterpump, korangi creek, karachi', '143/03, main waterpump, korangi creek, karachi.', NULL, NULL, NULL, '2021-07-02 12:07:10', NULL, b'1', b'0');
 
 -- --------------------------------------------------------
 
@@ -162,20 +171,36 @@ INSERT INTO `tbl_inventory` (`PK_ID`, `ProductID`, `SizeID`, `ColorID`, `Quantit
 
 CREATE TABLE `tbl_orders` (
   `PK_ID` int(11) NOT NULL,
+  `OrderNumber` varchar(100) DEFAULT NULL,
   `CustomerID` int(11) DEFAULT NULL,
   `CustomerName` varchar(100) DEFAULT NULL,
   `CustomerEmail` varchar(200) DEFAULT NULL,
   `CustomerContact` varchar(100) DEFAULT NULL,
   `CustomerBillingAddress` varchar(500) DEFAULT NULL,
   `CustomerShippingAddress` varchar(500) DEFAULT NULL,
+  `State` varchar(100) DEFAULT NULL,
   `CustomerCity` varchar(100) DEFAULT NULL,
   `ProductsWithQuantity` text DEFAULT NULL,
   `OrderStatus` varchar(100) DEFAULT NULL,
+  `OrderNotes` text DEFAULT NULL,
   `CreatedAt` datetime DEFAULT current_timestamp(),
   `CreatedBy` int(11) DEFAULT NULL,
   `Status` bit(1) DEFAULT b'1',
   `Deleted` bit(1) DEFAULT b'0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `tbl_orders`
+--
+
+INSERT INTO `tbl_orders` (`PK_ID`, `OrderNumber`, `CustomerID`, `CustomerName`, `CustomerEmail`, `CustomerContact`, `CustomerBillingAddress`, `CustomerShippingAddress`, `State`, `CustomerCity`, `ProductsWithQuantity`, `OrderStatus`, `OrderNotes`, `CreatedAt`, `CreatedBy`, `Status`, `Deleted`) VALUES
+(1, '7961805432', 1, 'Murtaza', 'murtaza@mail.com', '0303030303', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Sindh', 'Karachi', '[{\"ProductId\":\"23\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"},{\"ProductId\":\"16\",\"ProductColor\":\"Light Brown\",\"ProductSize\":\"Small\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"120\"}]', 'Recieved', '', '2021-07-08 12:04:21', NULL, b'1', b'0'),
+(2, '5897403612', 1, 'Murtaza', 'murtaza@mail.com', '0303030303', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Fedrally Administrated Tribal Areas', 'ads', '[{\"ProductId\":\"23\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"},{\"ProductId\":\"16\",\"ProductColor\":\"Light Brown\",\"ProductSize\":\"Small\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"120\"}]', 'Recieved', '', '2021-07-08 12:09:50', NULL, b'1', b'0'),
+(3, '8260495731', 1, 'Murtaza', 'murtaza@mail.com', '0303030303', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Punjab', 'asd', '[{\"ProductId\":\"23\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"},{\"ProductId\":\"16\",\"ProductColor\":\"Light Brown\",\"ProductSize\":\"Small\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"120\"}]', 'Recieved', '', '2021-07-08 12:10:52', NULL, b'1', b'0'),
+(4, '9283165470', 1, 'Murtaza', 'murtaza@mail.com', '0303030303', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Balochistan', 'asdsad', '[{\"ProductId\":\"23\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"},{\"ProductId\":\"24\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"999\"},{\"ProductId\":\"24\",\"ProductColor\":\"Golden\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"999\"}]', 'Recieved', '', '2021-07-08 12:33:44', NULL, b'1', b'0'),
+(5, '8326759410', 1, 'Murtaza', 'murtaza@mail.com', '0303030303', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Sindh', 'asd', '[{\"ProductId\":\"23\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"},{\"ProductId\":\"21\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"499\"}]', 'Recieved', '', '2021-07-08 12:36:52', NULL, b'1', b'0'),
+(6, '7490128563', 1, 'Shehzad', 'murtaza@mail.com', '0303030303', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Balochistan', 'sadsa', '[{\"ProductId\":\"23\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"},{\"ProductId\":\"23\",\"ProductColor\":\"Black\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"}]', 'Recieved', '', '2021-07-08 12:40:29', NULL, b'1', b'0'),
+(7, '5064231978', 1, 'Murtaza', 'murtaza@mail.com', '0303030303', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Block 6, Street 34, Shahra-e-faisal Karachi.', 'Sindh', 'Karachi', '[{\"ProductId\":\"23\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"399\"},{\"ProductId\":\"21\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"499\"},{\"ProductId\":\"24\",\"ProductColor\":\"Golden\",\"ProductSize\":\"None\",\"ProductQuantity\":\"1\",\"PricePerUnit\":\"999\"},{\"ProductId\":\"24\",\"ProductColor\":\"White\",\"ProductSize\":\"None\",\"ProductQuantity\":\"4\",\"PricePerUnit\":\"999\"}]', 'Recieved', 'dont do it bhai lol wtf', '2021-07-08 13:34:51', NULL, b'1', b'0');
 
 -- --------------------------------------------------------
 
@@ -387,7 +412,7 @@ ALTER TABLE `tbl_color`
 -- AUTO_INCREMENT for table `tbl_customer`
 --
 ALTER TABLE `tbl_customer`
-  MODIFY `PK_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PK_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tbl_inventory`
@@ -399,13 +424,13 @@ ALTER TABLE `tbl_inventory`
 -- AUTO_INCREMENT for table `tbl_orders`
 --
 ALTER TABLE `tbl_orders`
-  MODIFY `PK_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `PK_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `tbl_product`
 --
 ALTER TABLE `tbl_product`
-  MODIFY `PK_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `PK_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT for table `tbl_purchased`
