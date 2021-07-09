@@ -62,6 +62,7 @@
                                                 </ul>
                                             </div>
                                         </div>
+                                        
                                         <div class="variations_button in_flex column w__100 buy_qv_false">
                                             <div class="flex wrap">
                                                 <div class="quantity pr mr__10 order-1 qty__true" id="sp_qty_qv">

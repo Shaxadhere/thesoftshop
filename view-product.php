@@ -155,22 +155,6 @@ $Inventory = mysqli_fetch_array($Inventory);
                                             <div class="variations_button in_flex column w__100 buy_qv_false">
                                                 <div class="row">
                                                     <div class="col-12 col-md-12">
-                                                        <?php
-                                                        $Cart = $_SESSION['CART'];
-                                                        foreach ($Cart as $item) {
-                                                            if ($item['productId'] == $Product['ProductID'] && $item['productColor'] == $ColorDetails['PK_ID'] && $item['productSize'] == $SizeDetails['PK_ID']) {
-                                                                // echo json_encode($item);
-                                                                $key = $item['CartItemId'];
-                                                                $AlreadyExistsInCart = true;
-                                                                if ($Inventory['Quantity'] < (intval($item['productqty']) + intval($Quantity))) {
-                                                                    array_push($errors, "Quantity must be lesser than available stocks");
-                                                                    echo json_encode($errors);
-                                                                    exit();
-                                                                }
-                                                                break;
-                                                            }
-                                                        }
-                                                        ?>
                                                         <p id="quantity-available"><?= $Inventory['Quantity'] . " pieces available." ?></p>
                                                     </div>
                                                 </div>
