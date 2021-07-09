@@ -2,7 +2,11 @@
 include_once('web-config.php');
 $ProductSlug = $_REQUEST['name'];
 include_once('models/product-model.php');
+include_once('models/color-model.php');
+include_once('models/size-model.php');
 $ProductModel = new Product();
+$ColorModel = new Color();
+$SizeModel = new Size();
 
 $Product = $ProductModel->FilterByProductSlug($ProductSlug);
 $Product = mysqli_fetch_array($Product);
@@ -18,6 +22,18 @@ while ($Deatil = mysqli_fetch_array($ProductDetails)) {
 }
 $Tags = json_decode($Product['ProductTags']);
 getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/header.php");
+
+$ColorDetails = $ColorModel->FilterByColorName($Colors[0]);
+$ColorDetails = mysqli_fetch_array($ColorDetails);
+$SizeDetails = $SizeModel->FilterBySizeName($Sizes[0]);
+$SizeDetails = mysqli_fetch_array($SizeDetails);
+
+$Inventory = $ProductModel->InventoryByAttributes(
+    $Product['ProductID'],
+    $SizeDetails['PK_ID'],
+    $ColorDetails['PK_ID']
+);
+$Inventory = mysqli_fetch_array($Inventory);
 ?>
 <div class="sp-single sp-single-1 des_pr_layout_1 mb__60">
 
@@ -111,7 +127,7 @@ getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/heade
                                                     for ($i = 0; $i < count($Colors); $i++) {
                                                         echo "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='$Colors[$i]'>";
                                                         echo "<span class='tt_txt'>$Colors[$i]</span>";
-                                                        echo "<span class='swatch__value_pr pr lazyload' style='$ColorCodes[$i]'></span>";
+                                                        echo "<span class='swatch__value_pr pr lazyload color-switch' style='$ColorCodes[$i]'></span>";
                                                         echo "</li>";
                                                     }
                                                     ?>
@@ -126,7 +142,7 @@ getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/heade
                                                     for ($i = 0; $i < count($Sizes); $i++) {
                                                         if ($Sizes[$i] != "None") {
                                                             echo "<li class='nt-swatch swatch_pr_item pr' data-escape='$Sizes[$i]'>";
-                                                            echo "<span class='swatch__value_pr'>$Sizes[$i]</span>";
+                                                            echo "<span class='swatch__value_pr size-switch'>$Sizes[$i]</span>";
                                                             echo "</li>";
                                                         }
                                                     }
@@ -139,7 +155,23 @@ getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/heade
                                             <div class="variations_button in_flex column w__100 buy_qv_false">
                                                 <div class="row">
                                                     <div class="col-12 col-md-12">
-
+                                                        <?php
+                                                        $Cart = $_SESSION['CART'];
+                                                        foreach ($Cart as $item) {
+                                                            if ($item['productId'] == $Product['ProductID'] && $item['productColor'] == $ColorDetails['PK_ID'] && $item['productSize'] == $SizeDetails['PK_ID']) {
+                                                                // echo json_encode($item);
+                                                                $key = $item['CartItemId'];
+                                                                $AlreadyExistsInCart = true;
+                                                                if ($Inventory['Quantity'] < (intval($item['productqty']) + intval($Quantity))) {
+                                                                    array_push($errors, "Quantity must be lesser than available stocks");
+                                                                    echo json_encode($errors);
+                                                                    exit();
+                                                                }
+                                                                break;
+                                                            }
+                                                        }
+                                                        ?>
+                                                        <p id="quantity-available"><?= $Inventory['Quantity'] . " pieces available." ?></p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -191,7 +223,7 @@ getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/heade
                                     <span class="tagged_as">
                                         <span class="cb">Tags:</span>
                                         <?php
-                                        
+
                                         $count = count($Tags);
                                         $index = 0;
                                         foreach ($Tags as $tags) {
@@ -224,7 +256,7 @@ include_once('components/mobile-menu.php');
 include_once('components/back-to-top-button.php');
 ?>
 <?php
-if(isset($_REQUEST['added-to-cart'])){
+if (isset($_REQUEST['added-to-cart'])) {
     echo "<script>$('#card-alert-success').show()</script>";
 }
 ?>

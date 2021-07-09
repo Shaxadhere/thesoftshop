@@ -17,6 +17,8 @@
                 <div class="summary-inner gecko-scroll-quick">
                     <div class="gecko-scroll-content-quick">
                         <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
+                            <div class="alert alert-danger" id="cart-alert-danger" style="display:none"></div>
+                            <div class="alert alert-success" id="cart-alert-success" style="display:none">Product added to cart successfully!</div>
                             <h1 class="product_title entry-title fs__16"><a id="view-product-name-anchor" href="#">${Product Name}</a></h1>
                             <div class="flex wrap fl_between al_center price-review">
                                 <p class="price_range" id="price_qv">

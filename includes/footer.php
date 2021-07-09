@@ -272,6 +272,39 @@ if (isset($_REQUEST['error'])) {
             }
         })
     })
+
+    function check_stocks(product, size, color){
+        $.ajax({
+            type: "POST",
+            url: "/thesoftshop/controllers/product",
+            data: {
+                CheckQuantity: true,
+                ProductID: product,
+                Size: size,
+                Color: color
+            },
+            success: function(response){
+                $('#quantity-available').html(response)
+            },
+            error: function(error) {
+
+            }
+        })
+    }
+
+    $(document).on('click', '.size-switch', function(){
+        var product = $('.btn-add-to-cart').data('product')
+        var colorName = $('#color-name').html()
+        var sizeName = $('#size-name').html()
+        check_stocks(product, sizeName, colorName)
+    })
+
+    $(document).on('click', '.color-switch', function(){
+        var product = $('.btn-add-to-cart').data('product')
+        var colorName = $('#color-name').html()
+        var sizeName = $('#size-name').html()
+        check_stocks(product, sizeName, colorName)
+    })
 </script>
 <script>
 

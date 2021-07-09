@@ -65,7 +65,7 @@ if (isset($_POST['AddToCart'])) {
     $Size = mysqli_real_escape_string(connect(), $_POST['Size']);
     $Quantity = mysqli_real_escape_string(connect(), $_POST['Quantity']);
 
-    
+
     $Cart = $_SESSION['CART'];
 
     if ($errors == null) {
@@ -85,10 +85,16 @@ if (isset($_POST['AddToCart'])) {
             $ColorDetails['PK_ID']
         );
         $Inventory = mysqli_fetch_array($Inventory);
-        if($Inventory['Quantity'] < $Quantity){
+        if ($Inventory == null) {
             array_push($errors, "Quantity must be lesser than available stocks");
             echo json_encode($errors);
             exit();
+        } else {
+            if ($Inventory['Quantity'] < $Quantity) {
+                array_push($errors, "Quantity must be lesser than available stocks");
+                echo json_encode($errors);
+                exit();
+            }
         }
         $AlreadyExistsInCart = false;
         $index = 0;
@@ -98,6 +104,11 @@ if (isset($_POST['AddToCart'])) {
                 // echo json_encode($item);
                 $key = $item['CartItemId'];
                 $AlreadyExistsInCart = true;
+                if ($Inventory['Quantity'] < (intval($item['productqty']) + intval($Quantity))) {
+                    array_push($errors, "Quantity must be lesser than available stocks");
+                    echo json_encode($errors);
+                    exit();
+                }
                 break;
             }
             $index++;
@@ -135,6 +146,47 @@ if (isset($_POST['AddToCart'])) {
     }
 }
 
+if (isset($_POST['CheckQuantity'])) {
+    $errors = array();
+
+    if (empty($_POST['ProductID'])) {
+        array_push($errors, "502 - Bad request error");
+    }
+
+    if (empty($_POST['Color'])) {
+        array_push($errors, "Please choose a color");
+    }
+
+    if (empty($_POST['Size'])) {
+        array_push($errors, "Please choose a size");
+    }
+
+    $ProductID = base64_decode($_POST['ProductID']);
+    $ProductID = mysqli_real_escape_string(connect(), $ProductID);
+    $Color = mysqli_real_escape_string(connect(), $_POST['Color']);
+    $Size = mysqli_real_escape_string(connect(), $_POST['Size']);
+
+    $Product = $ProductModel->FilterByProductID(base64_encode($ProductID));
+    $Product = mysqli_fetch_array($Product);
+
+    $ColorDetails = $ColorModel->FilterByColorName($Color);
+    $ColorDetails = mysqli_fetch_array($ColorDetails);
+    $SizeDetails = $SizeModel->FilterBySizeName($Size);
+    $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+    $Inventory = $ProductModel->InventoryByAttributes(
+        $ProductID,
+        $SizeDetails['PK_ID'],
+        $ColorDetails['PK_ID']
+    );
+    $Inventory = mysqli_fetch_array($Inventory);
+    if ($Inventory != null) {
+        echo $Inventory['Quantity'] . " pieces available.";
+    } else {
+        echo "<span class='text-danger'>Out of stock</span>";
+    }
+}
+
 if (isset($_POST['RemoveItemFromCart'])) {
     session_start();
     $errors = array();
@@ -153,10 +205,10 @@ if (isset($_POST['RemoveItemFromCart'])) {
             }
             $index++;
         }
-        if(isset($Cart[$key])){
+        if (isset($Cart[$key])) {
             // echo $index;
             unset($Cart[$key]);
-        }else{
+        } else {
             // echo $index;
             unset($Cart[strval($key)]);
         }
