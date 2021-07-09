@@ -22,4 +22,13 @@ class Color
         );
     }
 
+    function FilterByColorName($ColorName)
+    {
+        $ColorName = mysqli_real_escape_string(connect(), $ColorName);
+        return mysqli_query(
+            connect(),
+            "SELECT * FROM `tbl_color` where `tbl_color`.`ColorName` = '$ColorName'"
+        );
+    }
+
 }

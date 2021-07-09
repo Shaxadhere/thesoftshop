@@ -1,8 +1,12 @@
 <?php
 include_once('../web-config.php');
 include_once('../models/product-model.php');
+include_once('../models/color-model.php');
+include_once('../models/size-model.php');
 
 $ProductModel = new Product();
+$ColorModel = new Color();
+$SizeModel = new Size();
 
 if (isset($_POST['ViewProduct'])) {
     $errors = array();
@@ -70,6 +74,22 @@ if (isset($_POST['AddToCart'])) {
         $Product = mysqli_fetch_array($Product);
         $ProductImages = json_decode($Product['ProductImages']);
 
+        $ColorDetails = $ColorModel->FilterByColorName($Color);
+        $ColorDetails = mysqli_fetch_array($ColorDetails);
+        $SizeDetails = $SizeModel->FilterBySizeName($Size);
+        $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+        $Inventory = $ProductModel->InventoryByAttributes(
+            $ProductID,
+            $SizeDetails['PK_ID'],
+            $ColorDetails['PK_ID']
+        );
+        $Inventory = mysqli_fetch_array($Inventory);
+        if($Inventory['Quantity'] < $Quantity){
+            array_push($errors, "Quantity must be lesser than available stocks");
+            echo json_encode($errors);
+            exit();
+        }
         $AlreadyExistsInCart = false;
         $index = 0;
         $key = "";
