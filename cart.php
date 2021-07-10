@@ -77,12 +77,14 @@ $Cart = $_SESSION['CART'];
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
                                     <div class="quantity pr mr__10 qty__true">
-                                        <input type="number" class="input-text qty text tc qty_cart_js" name="updates[]" value="<?= $cartItem['productqty'] ?>">
+                                        <input type="number" data-product="<?= $cartItem['productId'] ?>" data-size="<?= $cartItem['productSize'] ?>" data-color="<?= $cartItem['productColor'] ?>" data-session-id="<?= $cartItem['CartItemId'] ?>" data-location="cart" class="input-text qty text tc qty_cart_js quantity-field" name="updates[]" value="<?= $cartItem['productqty'] ?>">
                                         <div class="qty tc fs__14">
-                                            <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
-                                                <i class="facl facl-plus"></i></button>
-                                            <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0 qty_1">
-                                                <i class="facl facl-minus"></i></button>
+                                            <button data-location="cart" type="button" class="plus db cb pa pd__0 pr__15 tr r__0 plus-quantity">
+                                                <i class="facl facl-plus"></i>
+                                            </button>
+                                            <button data-location="cart" type="button" class="minus db cb pa pd__0 pl__15 tl l__0 qty_1 minus-quantity">
+                                                <i class="facl facl-minus"></i>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

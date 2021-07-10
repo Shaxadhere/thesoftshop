@@ -239,7 +239,13 @@ if (isset($_REQUEST['error'])) {
         echo "});";
     }
     ?>
-    
+    $(document).on('change', '.quantity-field', function(){
+        var productId = $(this).data('product')
+        var color = $(this).data('color')
+        var size = $(this).data('size')
+        var sessionId = $(this).data('session-id')
+        console.log(productId, color, size, sessionId)
+    })
 </script>
 </body>
 
