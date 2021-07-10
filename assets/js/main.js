@@ -43,6 +43,8 @@ $(document).on('mouseover', '.quick-view-product', function () {
             var result = JSON.parse(response)
             if (result['success'] == true) {
                 var productDetails = result['productDetails']
+                var inventory = result['inventory']
+                $('#quantity-available').html(inventory['Quantity'] + " pieces available")
                 var product = productDetails[0]
                 var images = JSON.parse(product['ProductImages'])
                 var reviews = JSON.parse(product['Reviews'])
@@ -62,9 +64,9 @@ $(document).on('mouseover', '.quick-view-product', function () {
                 $('#view-product-colors-container').empty()
                 $('#view-product-sizes-container').empty()
                 productDetails.forEach(item => {
-                    $('#view-product-colors-container').append("<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" + "<span class='tt_txt' >" + item['ColorName'] + "</span><span class='swatch__value_pr pr' style='" + item['ColorCode'] + "'></span>" + "</li>")
+                    $('#view-product-colors-container').append("<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" + "<span class='tt_txt' >" + item['ColorName'] + "</span><span data-location='quick-view' class='swatch__value_pr pr color-switch' style='" + item['ColorCode'] + "'></span>" + "</li>")
                     if (item['SizeValue'] != "None") {
-                        $('#view-product-sizes-container').append("<li class='nt-swatch swatch_pr_item pr' data-escape='" + item['SizeValue'] + "'>" + "<span class='swatch__value_pr'>" + item['SizeValue'] + "</span>" + "</li>")
+                        $('#view-product-sizes-container').append("<li class='nt-swatch swatch_pr_item pr' data-escape='" + item['SizeValue'] + "'>" + "<span data-location='quick-view' class='swatch__value_pr size-switch'>" + item['SizeValue'] + "</span>" + "</li>")
                     }
                 });
                 $('#view-product-categories-container').empty()

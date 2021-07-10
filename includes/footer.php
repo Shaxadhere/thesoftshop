@@ -293,16 +293,20 @@ if (isset($_REQUEST['error'])) {
     }
 
     $(document).on('click', '.size-switch', function(){
+        var location = $(this).data('location')
+        console.log(location)
         var product = $('.btn-add-to-cart').data('product')
-        var colorName = $('#color-name').html()
-        var sizeName = $('#size-name').html()
+        var colorName = (location == "view-product") ?  $('#color-name').html() : $('#view-product-default-color').html()
+        var sizeName = (location == "view-product") ? $('#size-name').html() : $('#view-product-size-value').html()
         check_stocks(product, sizeName, colorName)
     })
 
     $(document).on('click', '.color-switch', function(){
+        var location = $(this).data('location')
+        console.log(location)
         var product = $('.btn-add-to-cart').data('product')
-        var colorName = $('#color-name').html()
-        var sizeName = $('#size-name').html()
+        var colorName = (location == "view-product") ?  $('#color-name').html() : $('#view-product-default-color').html()
+        var sizeName = (location == "view-product") ? $('#size-name').html() : $('#view-product-size-value').html()
         check_stocks(product, sizeName, colorName)
     })
 </script>

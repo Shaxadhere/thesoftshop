@@ -21,9 +21,23 @@ if (isset($_POST['ViewProduct'])) {
         while ($row = mysqli_fetch_array($Product)) {
             array_push($ProductDetailsArray, $row);
         }
+
+        $ColorDetails = $ColorModel->FilterByColorName($ProductDetailsArray[0]['ColorName']);
+        $ColorDetails = mysqli_fetch_array($ColorDetails);
+        $SizeDetails = $SizeModel->FilterBySizeName($ProductDetailsArray[0]['SizeValue']);
+        $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+        $Inventory = $ProductModel->InventoryByAttributes(
+            $ProductDetailsArray[0]['ProductID'],
+            $SizeDetails['PK_ID'],
+            $ColorDetails['PK_ID']
+        );
+        $Inventory = mysqli_fetch_array($Inventory);
+
         $result = array(
             "success" => true,
-            "productDetails" => $ProductDetailsArray
+            "productDetails" => $ProductDetailsArray,
+            "inventory" => $Inventory
         );
         echo json_encode($result);
     } else {

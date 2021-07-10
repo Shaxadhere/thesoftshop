@@ -127,7 +127,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                     for ($i = 0; $i < count($Colors); $i++) {
                                                         echo "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='$Colors[$i]'>";
                                                         echo "<span class='tt_txt'>$Colors[$i]</span>";
-                                                        echo "<span class='swatch__value_pr pr lazyload color-switch' style='$ColorCodes[$i]'></span>";
+                                                        echo "<span data-location='view-product' class='swatch__value_pr pr lazyload color-switch' style='$ColorCodes[$i]'></span>";
                                                         echo "</li>";
                                                     }
                                                     ?>
@@ -142,7 +142,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                     for ($i = 0; $i < count($Sizes); $i++) {
                                                         if ($Sizes[$i] != "None") {
                                                             echo "<li class='nt-swatch swatch_pr_item pr' data-escape='$Sizes[$i]'>";
-                                                            echo "<span class='swatch__value_pr size-switch'>$Sizes[$i]</span>";
+                                                            echo "<span data-location='view-product' class='swatch__value_pr size-switch'>$Sizes[$i]</span>";
                                                             echo "</li>";
                                                         }
                                                     }

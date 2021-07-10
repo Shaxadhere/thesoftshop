@@ -53,7 +53,7 @@
                                             </div>
                                             <div class="swatch is-label kalles_swatch_js">
                                                 <h4 class="swatch__title" id="view-product-default-size">Size:
-                                                    <span class="nt_name_current user_choose_js" id="view-product-size-value">${Default Size}</span>
+                                                    <span class="nt_name_current user_choose_js" id="view-product-size-value" id="">${Default Size}</span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr" id="view-product-sizes-container">
                                                     <li class="nt-swatch swatch_pr_item pr" data-escape="XS">
@@ -62,7 +62,13 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        
+
+                                        <div class="row">
+                                            <div class="col-12 col-md-12">
+                                                <p id="quantity-available"></p>
+                                            </div>
+                                        </div>
+
                                         <div class="variations_button in_flex column w__100 buy_qv_false">
                                             <div class="flex wrap">
                                                 <div class="quantity pr mr__10 order-1 qty__true" id="sp_qty_qv">
