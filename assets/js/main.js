@@ -510,3 +510,18 @@ $(document).on('click', '.color-switch', function(){
     var sizeName = (location == "view-product") ? $('#size-name').html() : $('#view-product-size-value').html()
     check_stocks(product, sizeName, colorName)
 })
+
+//handle quantity change
+$(document).on('change', '.quantity-field', function(){
+    var parent = $(this).parent().parent().parent()
+    var quantity = $(this).val()
+    var totalPrice = parent.children().find('.cart-item-price')
+    var productId = $(this).data('product')
+    var color = $(this).data('color')
+    var size = $(this).data('size')
+    var sessionId = $(this).data('session-id')
+    var unitPrice = $(this).data('unit-price')
+    $('#btn-update-cart').show()
+    totalPrice.html("Rs. " + parseInt(unitPrice) * parseInt(quantity))
+    console.log(productId, color, size, sessionId, totalPrice)
+})
