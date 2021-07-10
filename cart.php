@@ -77,7 +77,7 @@ $Cart = $_SESSION['CART'];
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
                                     <div class="quantity pr mr__10 qty__true">
-                                        <input type="number" data-product="<?= $cartItem['productId'] ?>" data-size="<?= $cartItem['productSize'] ?>" data-color="<?= $cartItem['productColor'] ?>" data-session-id="<?= $cartItem['CartItemId'] ?>" data-location="cart" class="input-text qty text tc qty_cart_js quantity-field" name="updates[]" value="<?= $cartItem['productqty'] ?>">
+                                        <input type="number" data-product="<?= $cartItem['productId'] ?>" data-size="<?= $cartItem['productSize'] ?>" data-color="<?= $cartItem['productColor'] ?>" data-session-id="<?= $cartItem['CartItemId'] ?>" data-unit-price="<?= $Product['Price'] ?>" data-location="cart" class="input-text qty text tc qty_cart_js quantity-field" name="updates[]" value="<?= $cartItem['productqty'] ?>">
                                         <div class="qty tc fs__14">
                                             <button data-location="cart" type="button" class="plus db cb pa pd__0 pr__15 tr r__0 plus-quantity">
                                                 <i class="facl facl-plus"></i>
@@ -110,7 +110,7 @@ $Cart = $_SESSION['CART'];
                             <div class="clearfix"></div>
                             <p class="db txt_tax_ship mb__5">Taxes, shipping and discounts codes calculated at checkout</p>
                             <div class="clearfix"></div>
-                            <button type="submit" name="update" class="button btn_update mt__10 mb__10 js_add_ld w__100">Update Cart</button>
+                            <button type="submit" name="update" class="button btn_update mt__10 mb__10 js_add_ld w__100" id="btn-update-cart" style="display:none">Update Cart</button>
                             <button type="submit" onclick="location.href='<?= getHTMLRoot() ?>/checkout'" data-confirm="ck_lumise" name="checkout" class="btn_checkout button button_primary tu mt__10 mb__10 js_add_ld w__100">Check Out</button>
                             <div class="clearfix"></div>
                             <div class="cat_img_trust mt__10">
