@@ -51,7 +51,7 @@ $Cart = $_SESSION['CART'];
                                             </div>
                                         </div>
                                         <div class="mini_cart_actions">
-                                            <a data-cartItemId="<?= $cartItem['CartItemId'] ?>" href="<?= getHTMLRoot() ?>/cart" class="remove-cart-item"><span class="tt_txt">Edit this item</span>
+                                            <a data-cartItemId="<?= $cartItem['CartItemId'] ?>" href="<?= getHTMLRoot() ?>/cart" class="edit-cart-item"><span class="tt_txt">Edit this item</span>
                                                 <i style="font-size: 20px;" class="pegk pe-7s-note"></i>
                                             </a>
                                             <a data-cartItemId="<?= $cartItem['CartItemId'] ?>" href="#" data-location="mini-cart" class="remove-cart-item"><span class="tt_txt">Remove this item</span>
@@ -79,6 +79,7 @@ $Cart = $_SESSION['CART'];
                     </div>
                 </div>
                 <p class="txt_tax_ship mb__5 fs__12">Taxes, shipping and discounts codes will be calculated at checkout</p>
+                <a href="#" class="button mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center cd-imp dn">Update Cart</a>
                 <a href="<?= getHTMLRoot() ?>/cart" class="button btn-cart mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center cd-imp">View cart</a>
                 <a href="<?= getHTMLRoot() ?>/checkout" class="button btn-checkout mt__10 mb__10 js_add_ld d-inline-flex justify-content-center align-items-center text-white">Check Out</a>
             </div>
