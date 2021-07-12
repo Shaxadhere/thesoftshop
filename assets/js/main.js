@@ -527,5 +527,7 @@ $(document).on('change', '.quantity-field', function(){
 })
 
 $(document).on('click', '.update-cart-btn', function(){
+    var sessionIds = $('.cart-item-single').data('cartItemId')
+    var qtys = $('.cart-item-single').children().find('.quantity-field').val();
     
 })

@@ -46,7 +46,7 @@ $Cart = $_SESSION['CART'];
                         $Product = mysqli_fetch_array($Product);
                         $ProductImages = json_decode($Product['ProductImages']);
                     ?>
-                        <div class="cart_item js_cart_item">
+                        <div class="cart_item js_cart_item cart-item-single" data-cartItemId="<?= $cartItem['CartItemId'] ?>">
                             <div class="ld_cart_bar"></div>
                             <div class="row al_center">
                                 <div class="col-12 col-md-12 col-lg-5">
@@ -58,8 +58,8 @@ $Cart = $_SESSION['CART'];
                                             <h5 class="mini_cart_title mg__0 mb__5"><a href="product-detail-layout-01.html"><?= $Product['ProductName'] ?></a></h5>
                                             <div class="mini_cart_meta">
                                                 <p class="cart_selling_plan">
-                                                    <span>Size: <?= $cartItem['productSize'] ?></span><br>
-                                                    <span>Color: <?= $cartItem['productColor'] ?></span>
+                                                    <span class="product-size">Size: <?= $cartItem['productSize'] ?></span><br>
+                                                    <span class="product-color">Color: <?= $cartItem['productColor'] ?></span>
                                                 </p>
                                             </div>
                                             <div class="mini_cart_tool mt__10">
