@@ -527,3 +527,9 @@ $(document).on('change', '.quantity-field', function(){
     totalPrice.html("Rs. " + parseInt(unitPrice) * parseInt(quantity))
     console.log(productId, color, size, sessionId, totalPrice)
 })
+
+$(document).on('click', '.update-cart-btn', function(){
+    var sessionIds = $('.cart-item-single').data('cartItemId')
+    var qtys = $('.cart-item-single').children().find('.quantity-field').val();
+    
+})
