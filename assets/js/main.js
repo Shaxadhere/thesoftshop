@@ -60,11 +60,13 @@ $(document).on('mouseover', '.quick-view-product', function () {
                 $('#view-product-review-count').html(((reviews != null) ? reviews.length : "0") + " Reviews")
                 $('#view-product-description').html(product['ProductDescription'])
                 $('#view-product-default-color').html(product['ColorName'])
-                $('#view-product-default-size').html((product['SizeValue'] != "None") ? "Size: <span class='nt_name_current user_choose_js' id='view-product-size-value'>" + product['SizeValue'] + "</span>" : "")
+                $('#view-product-default-size').html("Size: <span class='nt_name_current user_choose_js' id='view-product-size-value'>" + product['SizeValue'] + "</span>")
                 $('#view-product-colors-container').empty()
                 $('#view-product-sizes-container').empty()
                 productDetails.forEach(item => {
-                    $('#view-product-colors-container').append("<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" + "<span class='tt_txt' >" + item['ColorName'] + "</span><span data-location='quick-view' class='swatch__value_pr pr color-switch' style='" + item['ColorCode'] + "'></span>" + "</li>")
+                    if (item['ColorName'] != "None") {
+                        $('#view-product-colors-container').append("<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" + "<span class='tt_txt' >" + item['ColorName'] + "</span><span data-location='quick-view' class='swatch__value_pr pr color-switch' style='" + item['ColorCode'] + "'></span>" + "</li>")
+                    }
                     if (item['SizeValue'] != "None") {
                         $('#view-product-sizes-container').append("<li class='nt-swatch swatch_pr_item pr' data-escape='" + item['SizeValue'] + "'>" + "<span data-location='quick-view' class='swatch__value_pr size-switch'>" + item['SizeValue'] + "</span>" + "</li>")
                     }
