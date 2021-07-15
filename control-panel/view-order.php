@@ -101,6 +101,9 @@ for ($i = 0; $i < count($Products); $i++) {
                                     <option value="Delivered" <?= ($OrderDetails['OrderStatus'] == "Delivered") ? "selected" : "" ?>>Delivered</option>
                                 </select>
                             </div>
+                            <div class="col-md-6 col-sm-12">
+                                <button style="width:100%" type="button" class="btn btn-primary">Update</button>
+                            </div>
                         </div>
                     </div>
                 </div>
