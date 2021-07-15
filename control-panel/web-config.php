@@ -201,3 +201,7 @@ function slugify($text, string $divider = '-')
 
   return $text;
 }
+
+function getShippingCharges(){
+  return 170;
+}

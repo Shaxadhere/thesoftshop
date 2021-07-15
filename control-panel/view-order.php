@@ -16,10 +16,17 @@ $OrderDetails = $OrderModel->View($OrderID);
 $OrderDetails = mysqli_fetch_array($OrderDetails);
 $ProductsWithQuantity = json_decode($OrderDetails['ProductsWithQuantity'], true);
 $Products = array();
+$Subtotal = 0;
 foreach ($ProductsWithQuantity as $product) {
     $SingleProduct = $ProductModel->View(base64_encode($product['ProductId']));
     $SingleProduct = mysqli_fetch_array($SingleProduct);
+    $Subtotal = $Subtotal + (intval($product['PricePerUnit']) * intval($product['ProductQuantity']));
     array_push($Products, $SingleProduct);
+}
+
+
+for ($i = 0; $i < count($Products); $i++) {
+
 }
 ?>
 
@@ -97,18 +104,18 @@ foreach ($ProductsWithQuantity as $product) {
                         <h6 class="card-title mb-4">Price</h6>
                         <div class="row justify-content-center mb-3">
                             <div class="col-6 text-end">Sub Total :</div>
-                            <div class="col-6" id="sub-total">Rs. 1500</div>
+                            <div class="col-6" id="sub-total">Rs. <?= $Subtotal ?></div>
                         </div>
                         <div class="row justify-content-center mb-3">
                             <div class="col-6 text-end">Shipping :</div>
-                            <div class="col-6" id="shipping-price">Rs. 170</div>
+                            <div class="col-6" id="shipping-price">Rs. <?= getShippingCharges() ?></div>
                         </div>
                         <div class="row justify-content-center">
                             <div class="col-6 text-end">
                                 <strong>Total :</strong>
                             </div>
                             <div class="col-6">
-                                <strong id="total-price">Rs. 1670</strong>
+                                <strong id="total-price">Rs. <?= $Subtotal + getShippingCharges() ?></strong>
                             </div>
                         </div>
                     </div>
