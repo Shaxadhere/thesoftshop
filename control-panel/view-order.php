@@ -26,7 +26,6 @@ foreach ($ProductsWithQuantity as $product) {
 
 
 for ($i = 0; $i < count($Products); $i++) {
-
 }
 ?>
 
@@ -82,7 +81,7 @@ for ($i = 0; $i < count($Products); $i++) {
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-12">
+                            <div class="col-md-6 col-sm-12 mb-3">
                                 <div class="card">
                                     <div class="card-body d-flex flex-column gap-3">
                                         <div class="d-flex justify-content-between">
@@ -93,6 +92,14 @@ for ($i = 0; $i < count($Products); $i++) {
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <select class="custom-select">
+                                    <option value="Recieved" <?= ($OrderDetails['OrderStatus'] == "Recieved") ? "selected" : "" ?>>Recieved</option>
+                                    <option value="Preparing" <?= ($OrderDetails['OrderStatus'] == "Preparing") ? "selected" : "" ?>>Preparing</option>
+                                    <option value="Shipped" <?= ($OrderDetails['OrderStatus'] == "Shipped") ? "selected" : "" ?>>Shipped</option>
+                                    <option value="Delivered" <?= ($OrderDetails['OrderStatus'] == "Delivered") ? "selected" : "" ?>>Delivered</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -120,7 +127,7 @@ for ($i = 0; $i < count($Products); $i++) {
                         </div>
                     </div>
                 </div>
-                <div class="card">
+                <div class="card mb-4">
                     <div class="card-body">
                         <h6 class="card-title mb-4">Order Notes</h6>
                         <span id="order-notes">
