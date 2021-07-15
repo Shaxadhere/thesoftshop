@@ -3,65 +3,70 @@
 include_once('assets/vendor/phprapid/rapid.php');
 
 //get application root address
-function getHTMLRoot(){
-	return "/thesoftshop";
+function getHTMLRoot()
+{
+  return "/thesoftshop";
 }
 
 //get application host
-function getServerRoot(){
-	return $_SERVER['HTTP_HOST'];
+function getServerRoot()
+{
+  return $_SERVER['HTTP_HOST'];
 }
 
 //database connection
-function connect(){
-	$server = "localhost";
-	$usr = "root";
-	$pass = "";
-	$data = "thesoftshop.pk";
-	$connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
-	return ($connection);
+function connect()
+{
+  $server = "localhost";
+  $usr = "root";
+  $pass = "";
+  $data = "thesoftshop.pk";
+  $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
+  return ($connection);
 }
 
 //html toast
-function HTMLToast(){
-	if (isset($_REQUEST['Success'])) {
-		echo "<div class='sa4d25'>";
-		echo "<div class='container-fluid'>";
-		echo "<div class='row'>";
-		echo "<div class='col-lg-12'>";
-		echo "<div class='alert alert-success' id='alert'>";
-		echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
-		echo "<strong>Success! </strong> $_REQUEST[Success]";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-	}
+function HTMLToast()
+{
+  if (isset($_REQUEST['Success'])) {
+    echo "<div class='sa4d25'>";
+    echo "<div class='container-fluid'>";
+    echo "<div class='row'>";
+    echo "<div class='col-lg-12'>";
+    echo "<div class='alert alert-success' id='alert'>";
+    echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
+    echo "<strong>Success! </strong> $_REQUEST[Success]";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+  }
 
-	if (isset($_REQUEST['error'])) {
-		echo "<div class='sa4d25'>";
-		echo "<div class='container-fluid'>";
-		echo "<div class='row'>";
-		echo "<div class='col-lg-12'>";
-		echo "<div class='alert alert-danger' id='alertdanger'>";
-		echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
-		if ($_REQUEST['error'] == 401) {
-			echo "<strong>Error! </strong> Access Unauthorized! You are not allowed to visit the page you are trying to access";
-		} else {
-			echo "<strong>Error! </strong> $_REQUEST[error]";
-		}
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-		echo "</div>";
-	}
+  if (isset($_REQUEST['error'])) {
+    echo "<div class='sa4d25'>";
+    echo "<div class='container-fluid'>";
+    echo "<div class='row'>";
+    echo "<div class='col-lg-12'>";
+    echo "<div class='alert alert-danger' id='alertdanger'>";
+    echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
+    if ($_REQUEST['error'] == 401) {
+      echo "<strong>Error! </strong> Access Unauthorized! You are not allowed to visit the page you are trying to access";
+    } else {
+      echo "<strong>Error! </strong> $_REQUEST[error]";
+    }
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+  }
 }
 
 //email body
-function getEmailBody($RecipentName, $Message, $AdditionalInformation, $FromName){
-	return "<!DOCTYPE html
+function getEmailBody($RecipentName, $Message, $AdditionalInformation, $FromName)
+{
+  return "<!DOCTYPE html
         PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
       <html xmlns='http://www.w3.org/1999/xhtml'>
       
@@ -178,24 +183,53 @@ function getEmailBody($RecipentName, $Message, $AdditionalInformation, $FromName
 }
 
 //smtp mailing credentials
-function getSMTPCredentials(){
-	return array(
-		"host" => "mail.artt.edu.pk",
-		"port" => "587",
-		"protocol" => "tls",
-		"username" => "admissions@artt.edu.pk",
-		"password" => "admissions_artt123"
-	);
+function getSMTPCredentials()
+{
+  return array(
+    "host" => "mail.artt.edu.pk",
+    "port" => "587",
+    "protocol" => "tls",
+    "username" => "admissions@artt.edu.pk",
+    "password" => "admissions_artt123"
+  );
 }
 
 //check if string have html tags
-function isHtml($string){
-  return preg_match("/<[^<]+>/",$string,$m) != 0;
+function isHtml($string)
+{
+  return preg_match("/<[^<]+>/", $string, $m) != 0;
 }
 
 //generate random numeric string
-function generateNumericString ($min, $max) 
+function generateNumericString($min, $max)
 {
-    $str_result = '0123456789'; 
-	return substr(str_shuffle($str_result),$min, $max); 
+  $str_result = '0123456789';
+  return substr(str_shuffle($str_result), $min, $max);
+}
+
+function resizeImageT()
+{
+  $filename = 'uploads/product-images/qrban85h1Y7dIPTB4N2S.jfif';
+  $percent = 0.5;
+
+  // Content type
+  // header('Content-Type: image/jpeg');
+
+  // Get new sizes
+  list($width, $height) = getimagesize($filename);
+  $newwidth = $width * $percent;
+  $newheight = 600;
+
+  // Load
+  $thumb = imagecreatetruecolor($newwidth, $newheight);
+  $source = imagecreatefromjpeg($filename);
+
+  // Resize
+  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+  // Output
+  // imagejpeg($thumb);
+  $randomStrings = random_strings(14);
+  echo $randomStrings;
+  imagepng($thumb, 'uploads/product-images/'.$randomStrings.'.png');
 }
