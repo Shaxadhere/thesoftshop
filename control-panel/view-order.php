@@ -23,10 +23,6 @@ foreach ($ProductsWithQuantity as $product) {
     $Subtotal = $Subtotal + (intval($product['PricePerUnit']) * intval($product['ProductQuantity']));
     array_push($Products, $SingleProduct);
 }
-
-
-for ($i = 0; $i < count($Products); $i++) {
-}
 ?>
 
 <div class="content-body">
