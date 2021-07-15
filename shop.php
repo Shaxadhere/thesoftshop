@@ -274,7 +274,8 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                                 if (isset($_REQUEST['page'])) {
                                     $page = $_REQUEST['page'];
                                     $URL = $_SERVER['QUERY_STRING'];
-                                    $PrevURL = str_replace("page=$page", "page=" . intval($page) - 1, $URL);
+                                    $prevPage = intval($page) - 1;
+                                    $PrevURL = str_replace("page=$page", "page=" . $prevPage, $URL);
                                 } else {
                                     $URL = $_SERVER['QUERY_STRING'];
                                     if (empty($URL)) {
@@ -298,7 +299,8 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                                 if (isset($_REQUEST['page'])) {
                                     $page = $_REQUEST['page'];
                                     $URL = $_SERVER['QUERY_STRING'];
-                                    $NewUrl = str_replace("&page=$page", "&page=" . intval($page) + 1, $URL);
+                                    $nextPage = intval($page) + 1;
+                                    $NewUrl = str_replace("&page=$page", "&page=" . $nextPage, $URL);
                                     if (empty($URL)) {
                                         echo "<script>alert('asdsa')</script>";
                                         $NewUrl = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
@@ -356,7 +358,8 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                                 if (isset($_REQUEST['page'])) {
                                     $page = $_REQUEST['page'];
                                     $URL = $_SERVER['QUERY_STRING'];
-                                    $NextURL = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
+                                    $newPage =  intval($page) + 1;
+                                    $NextURL = str_replace("page=$page", "page=" . $nextPage, $URL);
                                 } else {
                                     $URL = $_SERVER['QUERY_STRING'];
                                     if (empty($URL)) {
