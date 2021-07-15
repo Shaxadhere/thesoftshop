@@ -20,6 +20,16 @@ class Order
         );
     }
 
+    function UpdateOrderStatus($OrderID, $OrderStatus){
+        $OrderID = base64_decode($OrderID);
+        $OrderID = mysqli_real_escape_string(connect(), $OrderID);
+        $OrderStatus = mysqli_real_escape_string(connect(), $OrderStatus);
+        return mysqli_query(
+            connect(),
+            "UPDATE `tbl_orders` SET OrderStatus = '$OrderStatus' where `tbl_orders`.`PK_ID` = $OrderID"
+        );
+    }
+
     function Edit($CategoryID, $CategoryName, $CategorySlug, $CategoryImagesArray, $CategoryTagsArray)
     {
         $CategoryID = base64_decode($CategoryID);

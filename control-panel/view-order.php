@@ -94,15 +94,16 @@ for ($i = 0; $i < count($Products); $i++) {
                                 </div>
                             </div>
                             <div class="col-md-6 col-sm-12">
-                                <select class="custom-select">
+                                <select class="custom-select" id="orderstatus">
                                     <option value="Recieved" <?= ($OrderDetails['OrderStatus'] == "Recieved") ? "selected" : "" ?>>Recieved</option>
                                     <option value="Preparing" <?= ($OrderDetails['OrderStatus'] == "Preparing") ? "selected" : "" ?>>Preparing</option>
                                     <option value="Shipped" <?= ($OrderDetails['OrderStatus'] == "Shipped") ? "selected" : "" ?>>Shipped</option>
                                     <option value="Delivered" <?= ($OrderDetails['OrderStatus'] == "Delivered") ? "selected" : "" ?>>Delivered</option>
                                 </select>
                             </div>
+                            <input type="hidden" value="<?= base64_encode($OrderDetails['PK_ID']) ?>" id="order-id"/>
                             <div class="col-md-6 col-sm-12">
-                                <button style="width:100%" type="button" class="btn btn-primary">Update</button>
+                                <button id="btn-update-order-status" style="width:100%" type="button" class="btn btn-primary">Update</button>
                             </div>
                         </div>
                     </div>
@@ -192,3 +193,26 @@ for ($i = 0; $i < count($Products); $i++) {
 <?php
 getFooter("includes/footer.php");
 ?>
+<script>
+    $(document).on('click', '#btn-update-order-status', function(){
+        var orderId = $('#order-id').val()
+        var orderStatus = $('#orderstatus').find(":selected").val();
+        $.ajax({
+            type: "POST",
+            url: "controllers/order",
+            data: {
+                UpdateOrderStatus: true,
+                OrderID: orderId,
+                OrderStatus: orderStatus
+            },
+            success: function(response) {
+                if(response == true){
+                    window.location.reload()
+                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+</script>
