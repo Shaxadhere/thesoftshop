@@ -97,19 +97,19 @@ $User = mysqli_fetch_array($User);
                 </li>
                 <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/categories") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/categories" class="nav-link">
-                        <i data-feather="layers"></i>
+                        <i data-feather="package"></i>
                         <span>Categories</span>
                     </a>
                 </li>
                 <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/colors") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/colors" class="nav-link">
-                        <i data-feather="layers"></i>
+                        <i data-feather="droplet"></i>
                         <span>Colors</span>
                     </a>
                 </li>
                 <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/sizes") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/sizes" class="nav-link">
-                        <i data-feather="layers"></i>
+                        <i data-feather="bar-chart-2"></i>
                         <span>Sizes</span>
                     </a>
                 </li>
