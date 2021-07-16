@@ -1,7 +1,3 @@
-<?php
-include_once('../web-config.php');
-?>
-<!--page content-->
 <div class="kalles-section container mb__50 cb">
     <div class="row fl_center">
         <div class="contact-form col-12 col-md-6 order-1 order-md-0">
@@ -40,4 +36,3 @@ include_once('../web-config.php');
         </div>
     </div>
 </div>
-<!--end page content-->
