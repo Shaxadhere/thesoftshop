@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Orders", "includes/header.php");
+getHeader("View Order", "includes/header.php");
 include_once('models/order-model.php');
 include_once('models/product-model.php');
 

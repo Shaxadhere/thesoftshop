@@ -32,7 +32,6 @@ if (!isset($Customer)) {
     </div>
 </div>
 <!--end shop banner-->
-<!-- featured collection -->
 <div class="nt_section type_featured_collection tp_se_cdt">
     <div class="kalles-otp-01__feature container">
         <div id="root" class="products nt_products_holder row fl_center row_pr_1 cdt_des_5 round_cd_true nt_cover ratio_nt position_8 space_30">
@@ -96,19 +95,34 @@ if (!isset($Customer)) {
                                     $OrderHistory = json_decode($Customer['OrderHistory']);
                                     $OrderHistory = array_reverse($OrderHistory);
                                     include_once('models/order-model.php');
+                                    include_once('models/product-model.php');
+
                                     $OrderModel = new Order();
+                                    $ProductModel = new Product();
+                                    $index = 0;
                                     foreach ($OrderHistory as $item) {
                                         $Order = $OrderModel->FilterByOrderNumber($item);
                                         $Order = mysqli_fetch_array($Order);
+                                        $ProductsWithQuantity = json_decode($Order['ProductsWithQuantity'], true);
+                                        $Subtotal = 0;
+                                        foreach ($ProductsWithQuantity as $product) {
+                                            $SingleProduct = $ProductModel->View(base64_encode($product['ProductId']));
+                                            $SingleProduct = mysqli_fetch_array($SingleProduct);
+                                            $Subtotal = $Subtotal + (intval($product['PricePerUnit']) * intval($product['ProductQuantity']));
+                                        }
                                     ?>
                                         <tr>
                                             <td><?= $Order['OrderNumber'] ?></td>
                                             <td><?= date('D d m, Y h:i A', strtotime($Order['CreatedAt'])) ?></td>
                                             <td><?= $Order['OrderStatus'] ?></td>
-                                            <td>Rs. 999<?= "" ?></td>
+                                            <td>Rs. <?= $Subtotal ?></td>
                                             <td><a href="view-order?order-number=<?= $Order['OrderNumber'] ?>">View</a></td>
                                         </tr>
                                     <?php
+                                        $index++;
+                                        if ($index == 5) {
+                                            break;
+                                        }
                                     }
                                     ?>
                                 </tbody>
@@ -120,7 +134,6 @@ if (!isset($Customer)) {
         </div>
     </div>
 </div>
-<!-- end featured collection -->
 <?php
 getFooter("includes/footer.php");
 include_once('components/quick-view.php');

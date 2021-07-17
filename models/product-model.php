@@ -64,6 +64,16 @@ class Product{
             );
     }
 
+    function View($ProductID)
+    {
+        $ProductID = base64_decode($ProductID);
+        $ProductID = mysqli_real_escape_string(connect(), $ProductID);
+        return mysqli_query(
+            connect(),
+            "SELECT * FROM `tbl_product` where `tbl_product`.`PK_ID` = $ProductID"
+        );
+    }
+
     function ListRandom($limit){
         $limit = mysqli_real_escape_string(connect(), $limit);
         return mysqli_query(
