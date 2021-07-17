@@ -115,7 +115,6 @@ if (isset($_POST['AddToCart'])) {
         $key = "";
         foreach ($Cart as $item) {
             if ($item['productId'] == $ProductID && $item['productColor'] == $Color && $item['productSize'] == $Size) {
-                // echo json_encode($item);
                 $key = $item['CartItemId'];
                 $AlreadyExistsInCart = true;
                 if ($Inventory['Quantity'] < (intval($item['productqty']) + intval($Quantity))) {
@@ -248,18 +247,16 @@ if (isset($_POST['AddToWishList'])) {
     if ($errors == null) {
         $Wishlist = $_SESSION['WISHLIST'];
         if ($Wishlist == null) {
-            array_push($Wishlist, $_POST['ProductID']);
+            $Wishlist[$_POST['ProductID']] = $_POST['ProductID'];
         } else {
-            $index = 0;
             foreach ($Wishlist as $item) {
                 if ($item != $_POST['ProductID']) {
-                    array_push($Wishlist, $_POST['ProductID']);
+                    $Wishlist[$_POST['ProductID']] = $_POST['ProductID'];
                 } else {
                     if ($_POST['WishAdded']) {
-                        unset($Wishlist[$index]);
+                        unset($Wishlist[$_POST['ProductID']]);
                     }
                 }
-                $index++;
             }
         }
         $_SESSION['WISHLIST'] = $Wishlist;
