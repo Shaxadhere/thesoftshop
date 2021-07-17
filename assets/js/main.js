@@ -528,6 +528,7 @@ $(document).on('change', '.quantity-field', function(){
     console.log(productId, color, size, sessionId, totalPrice)
 })
 
+//handle update cart button
 $(document).on('click', '#btn-update-cart', function(){
     var sessionIds = []
     var qtys = []
