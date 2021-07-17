@@ -54,13 +54,19 @@ if (!isset($Customer)) {
                                 <tbody id="orders">
                                     <?php
                                     $OrderHistory = json_decode($Customer['OrderHistory']);
+                                    if($OrderHistory == null || $OrderHistory == ""){
+                                        $OrderHistory = array();
+                                    }
                                     $OrderHistory = array_reverse($OrderHistory);
+                                    
                                     include_once('models/order-model.php');
                                     include_once('models/product-model.php');
 
                                     $OrderModel = new Order();
                                     $ProductModel = new Product();
-                                    
+                                    if(count($OrderHistory) == 0){
+                                        echo " <tr><td>You do not have any orders yet</td></tr>";
+                                    }
                                     foreach ($OrderHistory as $item) {
                                         $Order = $OrderModel->FilterByOrderNumber($item);
                                         $Order = mysqli_fetch_array($Order);
