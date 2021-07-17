@@ -110,7 +110,7 @@ $Cart = $_SESSION['CART'];
                             <div class="clearfix"></div>
                             <p class="db txt_tax_ship mb__5">Taxes, shipping and discounts codes calculated at checkout</p>
                             <div class="clearfix"></div>
-                            <button type="submit" name="update" class="button btn_update mt__10 mb__10 js_add_ld w__100" id="btn-update-cart" style="display:none">Update Cart</button>
+                            <button type="button" name="update" class="button btn_update mt__10 mb__10 js_add_ld w__100" id="btn-update-cart" style="display:none;width: auto;">Update Cart</button>
                             <button type="submit" onclick="location.href='<?= getHTMLRoot() ?>/checkout'" data-confirm="ck_lumise" name="checkout" class="btn_checkout button button_primary tu mt__10 mb__10 js_add_ld w__100">Check Out</button>
                             <div class="clearfix"></div>
                             <div class="cat_img_trust mt__10">

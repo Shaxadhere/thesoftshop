@@ -528,8 +528,31 @@ $(document).on('change', '.quantity-field', function(){
     console.log(productId, color, size, sessionId, totalPrice)
 })
 
-$(document).on('click', '.update-cart-btn', function(){
-    var sessionIds = $('.cart-item-single').data('cartItemId')
-    var qtys = $('.cart-item-single').children().find('.quantity-field').val();
-    
+$(document).on('click', '#btn-update-cart', function(){
+    var sessionIds = []
+    var qtys = []
+    $('.cart-item-single').each(function(i, obj) {
+        var sessionId = $(this).attr('data-cartItemId')
+        sessionIds.push(sessionId)
+        var qty = $(this).children().find('.quantity-field').val();
+        qtys.push(qty)
+    });
+    console.log(sessionIds, qtys)
+    $.ajax({
+        type: "POST",
+        url: "/thesoftshop/controllers/orders",
+        data: {
+            UpdateCart: true,
+            SessionIDs: sessionIds,
+            Quantities: qtys
+        },
+        success: function (response) {
+            if(response == true){
+                window.location.reload()
+            }
+        },
+        error: function (error){
+            console.log("Error in connection: " + error)
+        }
+    })
 })

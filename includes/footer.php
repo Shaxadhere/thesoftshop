@@ -239,7 +239,6 @@ if (isset($_REQUEST['error'])) {
         echo "});";
     }
     ?>
-    
 </script>
 </body>
 

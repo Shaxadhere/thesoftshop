@@ -12,9 +12,9 @@ if(!isset($_SESSION['CART']) || $_SESSION['CART'] == ""){
 
 echo json_encode($_SESSION['CART']);
 
-if(isset($_REQUEST['clear'])){
-    $_SESSION['LASTORDER'] = "";
-}
+// if(isset($_REQUEST['clear'])){
+//     $_SESSION['LASTORDER'] = "";
+// }
 
 // if(!isset($_SESSION['LASTORDER']) || $_SESSION['LASTORDER'] == ""){
 //     $Cart = array();

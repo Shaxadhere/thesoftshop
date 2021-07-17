@@ -5,7 +5,6 @@ include_once('../models/product-model.php');
 include_once('../models/color-model.php');
 include_once('../models/size-model.php');
 
-
 $OrderModel = new Order();
 $ProductModel = new Product();
 $ColorModel = new Color();
@@ -117,5 +116,31 @@ if (isset($_POST['SubmitOrder'])) {
         echo json_encode($result);
     } else {
         echo json_encode($errors);
+    }
+}
+
+if (isset($_POST['UpdateCart'])) {
+    session_start();
+    if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
+        array_push($errors, "Your cart is empty!");
+    } else {
+        $Cart = $_SESSION['CART'];
+        $SessionIDs = $_POST['SessionIDs'];
+        $Quantities = $_POST['Quantities'];
+        $index = 0;
+        foreach ($Cart as $item) {
+            $item['productqty'] = $Quantities[$index];
+            foreach ($Cart as $key) {
+                if($Cart[$item['CartItemId']]){
+                    $Cart[$item['CartItemId']] = $item;
+                }
+                if($item['productqty'] == 0){
+                    unset($Cart[$item['CartItemId']]);
+                }
+            }
+            $index++;
+        }
+        $_SESSION['CART'] = $Cart;
+        echo true;
     }
 }
