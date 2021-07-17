@@ -263,7 +263,7 @@ if (isset($_POST['AddToWishList'])) {
         }
         if (isset($_SESSION['USER'])) {
             $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));
-            $WishlistCustomer = json_decode($Customer['WishList']);
+            $WishlistCustomer = json_decode($Customer['WishList'], true);
 
             if ($WishlistCustomer == null) {
                 $WishlistCustomer[$_POST['ProductID']] = $_POST['ProductID'];

@@ -26,7 +26,6 @@ class Customer
     function UpdateWishlist($CustomerID, $Wishlist){
         $CustomerID = mysqli_real_escape_string(connect(), $CustomerID);
         $Wishlist = mysqli_real_escape_string(connect(), $Wishlist);
-        echo  "UPDATE tbl_customer set WishList = '$Wishlist' where PK_ID = $CustomerID";
         return mysqli_query(
             connect(),
             "UPDATE tbl_customer set WishList = '$Wishlist' where PK_ID = $CustomerID"

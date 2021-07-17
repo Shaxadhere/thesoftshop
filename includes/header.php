@@ -6,8 +6,19 @@ if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
     $_SESSION['CART'] = $Cart;
 }
 
-if(!isset($_SESSION['WISHLIST']) || $_SESSION['WISHLIST'] == ""){
+if (!isset($_SESSION['WISHLIST']) || $_SESSION['WISHLIST'] == "") {
     $Wishlist = array();
+    $_SESSION['WISHLIST'] = $Wishlist;
+}
+
+if (isset($_SESSION['USER'])) {
+    include_once('models/customer-model.php');
+    $CustomerModel = new Customer();
+    $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));
+    $Wishlist = json_decode($Customer['WishList'], true);
+    if ($Wishlist == null || $Wishlist == "") {
+        $Wishlist = array();
+    }
     $_SESSION['WISHLIST'] = $Wishlist;
 }
 ?>
@@ -124,7 +135,7 @@ if(!isset($_SESSION['WISHLIST']) || $_SESSION['WISHLIST'] == ""){
                                                 if (isset($_SESSION['WISHLIST'])) {
                                                     $Wishlist = $_SESSION['WISHLIST'];
                                                     $ItemCount = count($Wishlist);
-                                                    
+
                                                     if (count($_SESSION['WISHLIST']) > 0) {
                                                         echo "<span class='op__0 ts_op pa tcount bgb br__50 cw tc'>$ItemCount</span>";
                                                     }
