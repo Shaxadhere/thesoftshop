@@ -1,6 +1,12 @@
 <?php
 include_once('web-config.php');
 getHeader("Products", "includes/header.php");
+$ProductID = $_REQUEST['product'];
+include_once('models/product-model.php');
+$ProductModel = new Product();
+$Product = $ProductModel->View($ProductID);
+$Product = mysqli_fetch_array($Product);
+$ProductImages = json_decode($Product['ProductImages']);
 ?>
 <div class="content-body">
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
@@ -8,7 +14,8 @@ getHeader("Products", "includes/header.php");
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                     <li class="breadcrumb-item"><a href="<?= getHTMLRoot() . "/dashboard" ?>">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Products</li>
+                    <li class="breadcrumb-item"><a href="<?= getHTMLRoot() . "/products" ?>">Products</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">View Product</li>
                 </ol>
             </nav>
         </div>
@@ -19,26 +26,25 @@ getHeader("Products", "includes/header.php");
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add Product</h5>
                 <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label for="ProductName">Product Name</label>
-                            <input required type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name">
+                            <input required type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name" value="<?= $Product['ProductName'] ?>">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Price">Price (in rupees)</label>
-                            <input required type="number" name="Price" class="form-control" id="Price" placeholder="Please type price">
+                            <input required type="number" name="Price" class="form-control" id="Price" placeholder="Please type price" value="<?= $Product['Price'] ?>">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="ProductDescription">Product Description</label>
-                            <textarea name="ProductDescription" id="ProductDescription" class="form-control" rows="2" placeholder="Please type product description.."></textarea>
+                            <textarea name="ProductDescription" id="ProductDescription" class="form-control" rows="2" placeholder="Please type product description.."><?= $Product['ProductDescription'] ?></textarea>
                         </div>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-4">
                             <label for="ProductSlug">Product Slug</label>
-                            <input required type="text" name="ProductSlug" class="form-control" id="ProductSlug" placeholder="Please type product slug">
+                            <input required type="text" name="ProductSlug" class="form-control" id="ProductSlug" placeholder="Please type product slug" value="<?= $Product['ProductSlug'] ?>">
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Categories">Select Categories</label>
@@ -55,18 +61,36 @@ getHeader("Products", "includes/header.php");
                             </select>
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="ProductImages">Product Images</label>
-                            <div class="custom-file">
-                                <input required type="file" name="ProductImages[]" class="custom-file-input" id="ProductImages" multiple>
-                                <label class="custom-file-label" for="customFile">Upload Product Images</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
                             <label for="ProductTags">Product Tags (Comma Seperated)</label>
                             <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary">
                         </div>
+                    </div>
+                    <div class="form-row mb-1">
+                        <div class="col-md-2 col-4">
+                            <label for="ProductTags">Product Images</label>
+                        </div>
+                    </div>
+                    <div class="form-row mb-3">
+                        <?php
+                        foreach ($ProductImages as $item) {
+                        ?>
+                            <div class="col-md-2 col-6" style="padding-bottom: 5px;">
+                                <figure class="pos-relative mg-b-0 wd-lg-50p">
+                                    <img style="height: 100px;object-fit: cover;width:100%;padding 1px"  src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
+                                    <figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
+                                        <div class="btn-group">
+                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="download"></i></a>
+                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="edit-2"></i></a>
+                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="maximize-2"></i></a>
+                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="trash-2"></i></a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                                <!-- <img style="height: 100px;object-fit: cover;width:100%" src="../uploads/product-images/<?= $item ?>" class="img-thumbnail" alt="Responsive image"> -->
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-12">
