@@ -3,7 +3,9 @@ include_once('../web-config.php');
 include_once('../models/product-model.php');
 include_once('../models/color-model.php');
 include_once('../models/size-model.php');
+include_once('../models/customer-model.php');
 
+$CustomerModel = new Customer();
 $ProductModel = new Product();
 $ColorModel = new Color();
 $SizeModel = new Size();
@@ -258,6 +260,25 @@ if (isset($_POST['AddToWishList'])) {
                     }
                 }
             }
+        }
+        if (isset($_SESSION['USER'])) {
+            $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));
+            $WishlistCustomer = json_decode($Customer['WishList']);
+
+            if ($WishlistCustomer == null) {
+                $WishlistCustomer[$_POST['ProductID']] = $_POST['ProductID'];
+            } else {
+                foreach ($WishlistCustomer as $item) {
+                    if ($item != $_POST['ProductID']) {
+                        $WishlistCustomer[$_POST['ProductID']] = $_POST['ProductID'];
+                    } else {
+                        if ($_POST['WishAdded']) {
+                            unset($WishlistCustomer[$_POST['ProductID']]);
+                        }
+                    }
+                }
+            }
+            $CustomerModel->UpdateWishlist($Customer['PK_ID'], json_encode($WishlistCustomer));
         }
         $_SESSION['WISHLIST'] = $Wishlist;
         echo true;
