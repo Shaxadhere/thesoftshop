@@ -78,10 +78,10 @@
                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                             <tbody>
                                 <tr>
-                                    <td valign="top" style="width: 172.797px;"><a href="//thesoftshop.shaxad.com/products/i205430353-s1409020065.html?urlFlag=true&amp;mp=1/?" target="_blank"><img src="https://ci5.googleusercontent.com/proxy/RIEm-5PIcpitig1BtH8-HljlgLLH31bKqW8Cg09Dw1gkiP8tf-v6nVP1-YnprBe-8-pmRgDYTOm1JSwuLyWI6QUh7BPvLjvvq38gBUNW-6A1Dop-=s0-d-e1-ft#https://static-01.thesoftshop.shaxad.com/p/cc9cd5b26ee1c02fab4f330211cd7113.jpg" width="160px" class="gmail-CToWUd"></a></td>
+                                    <td valign="top" style="width: 172.797px;"><a href="//thesoftshop.shaxad.com/shop?name=productname" target="_blank"><img src="//thesoftshop/uploads/products/asdas.jpg" width="160px" class="gmail-CToWUd"></a></td>
                                     <td valign="top" style="padding-left: 50px;">
-                                        <p style="margin: 0px; color: rgb(15, 20, 109);"><a href="//thesoftshop.shaxad.com/products/i205430353-s1409020065.html?urlFlag=true&amp;mp=1/?" target="_blank" style="text-decoration-line: none;">Huawei Nova 7i Stylish Ladies Cartoon Cat Kitty Cover - Black</a></p>
-                                        <p style="margin: 0px; color: rgb(243, 109, 46);">Rs 375</p>
+                                        <p style="margin: 0px; color: rgb(15, 20, 109);"><a href="//thesoftshop.shaxad.com/shop?name=productname" target="_blank" style="text-decoration-line: none;">Silk Scrunchie</a></p>
+                                        <p style="margin: 0px; color: rgb(243, 109, 46);">Rs 100</p>
                                         <p style="margin: 0px; color: rgb(83, 83, 83);">Quantity: 1</p>
                                     </td>
                                 </tr>
@@ -93,7 +93,7 @@
                             <tbody>
                                 <tr>
                                     <td style="color: rgb(83, 83, 83);">Price</td>
-                                    <td align="right">Rs 375</td>
+                                    <td align="right">Rs 100</td>
                                 </tr>
                                 <tr>
                                     <td style="color: rgb(83, 83, 83);">Discount</td>
@@ -101,11 +101,11 @@
                                 </tr>
                                 <tr>
                                     <td style="color: rgb(83, 83, 83);">Delivery fee</td>
-                                    <td align="right">Rs 69</td>
+                                    <td align="right">Rs 170</td>
                                 </tr>
                                 <tr>
                                     <td style="color: rgb(83, 83, 83);">Total</td>
-                                    <td align="right">Rs 444</td>
+                                    <td align="right">Rs 270</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -170,7 +170,7 @@
                                                 <td align="center" colspan="2">
                                                     <p style="margin: 0px;">&nbsp;</p><a href="//thesoftshop.shaxad.com/contact-us/?spm=a2a0e.helpcenter.more-options.1.4a5f3722ZJL6PD&amp;hybrid=1" target="_blank" style="text-decoration-line: none;"><span style="font-weight: bold; color: rgb(15, 20, 109);">HELP CENTER</span></a>&nbsp;<span style="font-weight: bold; color: rgb(15, 20, 109);">|&nbsp;</span><a href="//thesoftshop.shaxad.com/contact-us/?spm=a2a0e.helpcenter.more-options.1.4a5f3722ZJL6PD&amp;hybrid=1" target="_blank" style="text-decoration-line: none;"><span style="font-weight: bold; color: rgb(15, 20, 109);">CONTACT US</span></a>
                                                     <div style="font-size: 10px; line-height: 20px; height: 15px;">&nbsp;</div>
-                                                    <div style="font-size: 10px; line-height: 20px; height: 15px;">&nbsp;</div><a href="//thesoftshop.shaxad.com/" target="_blank"><img src="https://ci6.googleusercontent.com/proxy/H1JSwPJRi8Fehr6zCFUpkCMYlw6g3bmWdeJkn-l8cJQtJgWRrtR-7KV3zi8j8_Yq20LTL_oNbisUA5tX_9XGeJv8uV6fK_zNlxOzU9vESQGDpBk=s0-d-e1-ft#https://img.alicdn.com/tfs/TB101RWRVT7gK0jSZFpXXaTkpXa-67-21.png" class="gmail-CToWUd"></a>
+                                                    <div style="font-size: 10px; line-height: 20px; height: 15px;">&nbsp;</div><a href="//thesoftshop.shaxad.com/" target="_blank"><img src="/thesoftshop/assets/logo.png" class="gmail-CToWUd"></a>
                                                     <div style="font-size: 10px; line-height: 20px; height: 15px;">&nbsp;</div>
                                                     <p style="font-size: 10px;">This is an automatically generated <span zeum4c2="PR_5_0" data-ddnwab="PR_5_0" aria-invalid="spelling" class="LI ng">e-mail</span> from our subscription list. Please do not reply to this <span zeum4c2="PR_6_0" data-ddnwab="PR_6_0" aria-invalid="spelling" class="LI ng">e-mail</span>.</p>
                                                     <div style="font-size: 10px; line-height: 20px; height: 15px;">&nbsp;</div>
