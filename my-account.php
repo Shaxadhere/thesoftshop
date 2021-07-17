@@ -94,7 +94,7 @@ if (!isset($Customer)) {
                                 <tbody id="orders">
                                     <?php
                                     $OrderHistory = json_decode($Customer['OrderHistory']);
-                                    array_reverse($OrderHistory);
+                                    $OrderHistory = array_reverse($OrderHistory);
                                     include_once('models/order-model.php');
                                     $OrderModel = new Order();
                                     foreach ($OrderHistory as $item) {
