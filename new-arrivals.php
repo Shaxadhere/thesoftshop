@@ -27,12 +27,12 @@ getHeader("New arrivals @TheSoftShop.pk Instagram Shop, cute, fancy, good qualit
             if (isset($_REQUEST['page'])) {
                 $CurrentPage = $_REQUEST['page'];
             }
-            $ProductIndex = (intval($CurrentPage) * 4) - 4;
+            $ProductIndex = (intval($CurrentPage) * 24) - 24;
             if ($CurrentPage == 1) {
                 $ProductIndex = 0;
             }
 
-            $Products = $ProductModel->List($ProductIndex, 4, "", "new arrivals", "new-to-old");
+            $Products = $ProductModel->List($ProductIndex, 24, "", "new arrivals", "new-to-old");
             while ($row = mysqli_fetch_array($Products)) {
                 $ProductImages = json_decode($row['ProductImages']);
 
@@ -107,7 +107,7 @@ getHeader("New arrivals @TheSoftShop.pk Instagram Shop, cute, fancy, good qualit
                         //Pagination values
                         $Products = $ProductModel->List(0, 9999999, "", "new arrivals", "new-to-old");
                         $NumberOfProducts = mysqli_num_rows($Products);
-                        $PageNumbers = (intval($NumberOfProducts) / 4) + 1;
+                        $PageNumbers = (intval($NumberOfProducts) / 24) + 1;
 
                         //Previous Button URL
                         if (isset($_REQUEST['page'])) {

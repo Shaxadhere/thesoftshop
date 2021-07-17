@@ -144,33 +144,33 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                     if (isset($_REQUEST['page'])) {
                         $CurrentPage = $_REQUEST['page'];
                     }
-                    $ProductIndex = (intval($CurrentPage) * 4) - 4;
+                    $ProductIndex = (intval($CurrentPage) * 24) - 24;
                     if ($CurrentPage == 1) {
                         $ProductIndex = 0;
                     }
 
                     if (isset($_REQUEST['name']) && isset($_REQUEST['category'])) {
                         if (isset($_REQUEST['sort'])) {
-                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
+                            $Products = $ProductModel->List($ProductIndex, 24, $_REQUEST['name'], $_REQUEST['category'], $_REQUEST['sort']);
                         } else {
-                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], $_REQUEST['category']);
+                            $Products = $ProductModel->List($ProductIndex, 24, $_REQUEST['name'], $_REQUEST['category']);
                         }
                     } else if (isset($_REQUEST['name'])) {
                         if (isset($_REQUEST['sort'])) {
-                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
+                            $Products = $ProductModel->List($ProductIndex, 24, $_REQUEST['name'], "", $_REQUEST['sort']);
                         } else {
-                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name']);
+                            $Products = $ProductModel->List($ProductIndex, 24, $_REQUEST['name']);
                         }
                     } else if (isset($_REQUEST['category'])) {
                         if (isset($_REQUEST['sort'])) {
-                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name'], "", $_REQUEST['sort']);
+                            $Products = $ProductModel->List($ProductIndex, 24, $_REQUEST['name'], "", $_REQUEST['sort']);
                         } else {
-                            $Products = $ProductModel->List($ProductIndex, 4, $_REQUEST['name']);
+                            $Products = $ProductModel->List($ProductIndex, 24, $_REQUEST['name']);
                         }
                     } else if (isset($_REQUEST['sort'])) {
-                        $Products = $ProductModel->List($ProductIndex, 4, "", "", $_REQUEST['sort']);
+                        $Products = $ProductModel->List($ProductIndex, 24, "", "", $_REQUEST['sort']);
                     } else {
-                        $Products = $ProductModel->List($ProductIndex, 4, "", "", "");
+                        $Products = $ProductModel->List($ProductIndex, 24, "", "", "");
                     }
                     while ($row = mysqli_fetch_array($Products)) {
                         $ProductImages = json_decode($row['ProductImages']);
@@ -268,7 +268,7 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                                     $Products = $ProductModel->List(0, 9999999, "", "", "");
                                 }
                                 $NumberOfProducts = mysqli_num_rows($Products);
-                                $PageNumbers = (intval($NumberOfProducts) / 4) + 1;
+                                $PageNumbers = (intval($NumberOfProducts) / 24) + 1;
 
                                 //Previous Button URL
                                 if (isset($_REQUEST['page'])) {
