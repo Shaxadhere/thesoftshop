@@ -2127,17 +2127,17 @@
         /**********************************************
          * Wishlist button
          * ********************************************/
-        body.on( 'click', '.nt_add_w', function ( e ) {
-            e.preventDefault();
-            e.stopPropagation();
-            let wrap$ = $( this ),
-                btn$  = wrap$.find( '.wishlistadd' );
-            btn$.addClass( 'loading' );
-            setTimeout( () => {
-                btn$.removeClass( 'loading' );
-                wrap$.toggleClass( 'wis_added' );
-            }, 500 );
-        } );
+        // body.on( 'click', '.nt_add_w', function ( e ) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        //     let wrap$ = $( this ),
+        //         btn$  = wrap$.find( '.wishlistadd' );
+        //     btn$.addClass( 'loading' );
+        //     setTimeout( () => {
+        //         btn$.removeClass( 'loading' );
+        //         wrap$.toggleClass( 'wis_added' );
+        //     }, 500 );
+        // } );
 
         /**********************************************
          * Back to top

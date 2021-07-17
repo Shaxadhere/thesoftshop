@@ -186,7 +186,7 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                             array_push($Sizes, $Deatil['SizeValue']);
                         }
                     ?>
-                        <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
+                        <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1" data-id="<?= base64_encode($row['PK_ID']) ?>">
                             <div class="product-inner pr">
                                 <div class="product-image pr oh lazyload">
                                     <a class="d-block" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>">
@@ -196,7 +196,7 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                                         <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= isset($ProductImages[1]) ? $ProductImages[1] : $ProductImages[0] ?>"></div>
                                     </div>
                                     <div class="nt_add_w ts__03 pa ">
-                                        <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
+                                        <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right "><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
                                     </div>
                                     <div class="hover_button op__0 tc pa flex column ts__03">
                                         <a data-id="<?= base64_encode($row['PK_ID']) ?>" class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left quick-view-product" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>

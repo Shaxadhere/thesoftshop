@@ -230,3 +230,36 @@ if (isset($_POST['RemoveItemFromCart'])) {
         echo true;
     }
 }
+
+if(isset($_POST['AddToWishList'])){
+    $errors = array();
+    session_start();
+    if (!isset($_SESSION['WISHLIST']) || $_SESSION['WISHLIST'] == "") {
+        $Wishlist = array();
+        $_SESSION['WISHLIST'] = $Wishlist;
+    }
+    if(empty($_POST['ProductID'])){
+        array_push($errors, "502 - Bad request error");
+    }
+
+    if($errors == null){
+        $Wishlist = $_SESSION['WISHLIST'];
+        if($Wishlist == null){
+
+        }
+        else{
+            
+        }
+        foreach($Wishlist as $item){
+            if($item != $_POST['ProductID']){
+                array_push($Wishlist, $_POST['ProductID']);
+            }
+        }
+        $_SESSION['WISHLIST'] = $Wishlist;
+        echo true;
+    }
+    else{
+        echo json_encode($errors);
+    }
+
+}
