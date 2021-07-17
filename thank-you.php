@@ -33,7 +33,7 @@ foreach ($Invoice as $invoiceItem) {
                         <div class="checkout-section__field col-lg-12 col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 style="font-weight: 400;">Your order# <?= $LastOrder[1] ?> is confirmed</h5>
+                                    <h5 style="font-weight: 400;">Your order #<?= $LastOrder[1] ?> is confirmed</h5>
                                     You’ll receive an email when your order is ready.
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 <?php
 include_once('web-config.php');
 getHeader("My Account", "includes/header.php");
-if(!isset($_SESSION['USER'])){
+if (!isset($_SESSION['USER'])) {
     redirectWindow(getHTMLRoot());
 }
 include_once('models/customer-model.php');
@@ -11,6 +11,16 @@ if (!isset($Customer)) {
     redirectWindow(getHTMLRoot());
 }
 ?>
+<style>
+    table,
+    td {
+        border: unset !important;
+    }
+
+    tr {
+        border-bottom: 1px solid #dee2e6 !important;
+    }
+</style>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
     <div class="page-head tc pr oh cat_bg_img page_head_">
@@ -66,12 +76,43 @@ if (!isset($Customer)) {
             </div>
             <div class="col-lg-9 col-md-9 col-12 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
                 <div class="product-inner pr">
-                    <div class="card" style="width: 102%; height:185px">
+                    <div class="card" style="width: 102%;">
                         <div class="card-body">
                             <div style="display:flex">
                                 <h5 class="card-title">Recent Orders</h5><a id="view-recent-orders" style="padding: 10px 0px 0px 10px; color:#56cfe1" href="<?= getHTMLRoot() ?>/my-orders" class="card-link">View All</a>
                             </div>
-                            <p class="card-text"><?= (empty($Customer['BillingAddress'])) ? "No addresses" : $Customer['BillingAddress'] ?></p>
+                            <table class="table table-custom mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Order Number</th>
+                                        <th>Placed On</th>
+                                        <th>Status</th>
+                                        <th>Total</th>
+                                        <th>View</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="orders">
+                                    <?php
+                                    $OrderHistory = json_decode($Customer['OrderHistory']);
+                                    array_reverse($OrderHistory);
+                                    include_once('models/order-model.php');
+                                    $OrderModel = new Order();
+                                    foreach ($OrderHistory as $item) {
+                                        $Order = $OrderModel->FilterByOrderNumber($item);
+                                        $Order = mysqli_fetch_array($Order);
+                                    ?>
+                                        <tr>
+                                            <td><?= $Order['OrderNumber'] ?></td>
+                                            <td><?= date('D d m, Y h:i A', strtotime($Order['CreatedAt'])) ?></td>
+                                            <td><?= $Order['OrderStatus'] ?></td>
+                                            <td>Rs. 999<?= "" ?></td>
+                                            <td><a href="view-order?order-number=<?= $Order['OrderNumber'] ?>">View</a></td>
+                                        </tr>
+                                    <?php
+                                    }
+                                    ?>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

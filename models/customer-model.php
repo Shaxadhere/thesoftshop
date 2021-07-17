@@ -13,4 +13,13 @@ class Customer
             )
         );
     }
+
+    function UpdateOrders($CustomerID, $OrderHistory){
+        $CustomerID = mysqli_real_escape_string(connect(), $CustomerID);
+        $OrderHistory = mysqli_real_escape_string(connect(), $OrderHistory);
+        return mysqli_query(
+            connect(),
+            "UPDATE tbl_customer set OrderHistory = '$OrderHistory' where PK_ID = $CustomerID"
+        );
+    }
 }

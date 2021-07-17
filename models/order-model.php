@@ -53,4 +53,12 @@ class Order {
             connect()
         );
     }
+
+    function FilterByOrderNumber($OrderNumber){
+        $OrderNumber = mysqli_real_escape_string(connect(), $OrderNumber);
+        return mysqli_query(
+            connect(),
+            "SELECT * from tbl_orders where OrderNumber = $OrderNumber"
+        );
+    }
 }

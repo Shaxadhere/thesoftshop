@@ -4,7 +4,9 @@ include_once('../models/order-model.php');
 include_once('../models/product-model.php');
 include_once('../models/color-model.php');
 include_once('../models/size-model.php');
+include_once('../models/customer-model.php');
 
+$CustomerModel = new Customer();
 $OrderModel = new Order();
 $ProductModel = new Product();
 $ColorModel = new Color();
@@ -79,7 +81,8 @@ if (isset($_POST['SubmitOrder'])) {
     $CustomerID = (isset($_SESSION['USER'])) ? $_SESSION['USER']['PK_ID'] : "";
 
     if ($errors == null) {
-        $OrderNumber = generateNumericString(0, 17);
+        $OrderNumber = generateNumericString(0, 22);
+        
         $OrderModel->Add(
             $CustomerID,
             $OrderNumber,
@@ -113,6 +116,15 @@ if (isset($_POST['SubmitOrder'])) {
             $_POST['OrderNotes']
         );
         unset($_SESSION['CART']);
+        if (isset($_SESSION['USER'])) {
+            $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));
+            $OrderHistory = json_decode($Customer['OrderHistory']);
+            if(!isset($OrderHistory) || $OrderHistory == "" || $OrderHistory == null){
+                $OrderHistory = array();
+            }
+            array_push($OrderHistory, $OrderNumber);
+            $CustomerModel->UpdateOrders($Customer['PK_ID'], json_encode($OrderHistory));
+        }
         echo json_encode($result);
     } else {
         echo json_encode($errors);
@@ -171,7 +183,7 @@ if (isset($_POST['UpdateCart'])) {
         $_SESSION['CART'] = $Cart;
         echo true;
     }
-    if($errors != null){
+    if ($errors != null) {
         echo json_encode($errors);
     }
 }
