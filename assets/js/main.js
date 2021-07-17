@@ -550,6 +550,11 @@ $(document).on('click', '#btn-update-cart', function(){
             if(response == true){
                 window.location.reload()
             }
+            else{
+                var result = JSON.parse(response)
+                $('#errors').html(result[0])
+                $('#errors').show()
+            }
         },
         error: function (error){
             console.log("Error in connection: " + error)

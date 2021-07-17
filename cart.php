@@ -2,7 +2,11 @@
 include_once('web-config.php');
 getHeader("Cart", "includes/header.php");
 include_once('models/product-model.php');
+include_once('models/color-model.php');
+include_once('models/size-model.php');
 $ProductModel = new Product();
+$ColorModel = new Color();
+$SizeModel = new Size();
 $Cart = $_SESSION['CART'];
 ?>
 <div id="cart-root">
@@ -45,21 +49,41 @@ $Cart = $_SESSION['CART'];
                         $Product = $ProductModel->FilterByProductID(base64_encode($cartItem['productId']));
                         $Product = mysqli_fetch_array($Product);
                         $ProductImages = json_decode($Product['ProductImages']);
+
+                        $Color = $cartItem['productColor'];
+                        $Size = $cartItem['productSize'];
+
+                        $ColorDetails = $ColorModel->FilterByColorName($Color);
+                        $ColorDetails = mysqli_fetch_array($ColorDetails);
+                        $SizeDetails = $SizeModel->FilterBySizeName($Size);
+                        $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                        $Inventory = $ProductModel->InventoryByAttributes(
+                            $Product['ProductID'],
+                            $SizeDetails['PK_ID'],
+                            $ColorDetails['PK_ID']
+                        );
+                        $Inventory = mysqli_fetch_array($Inventory);
                     ?>
                         <div class="cart_item js_cart_item cart-item-single" data-cartItemId="<?= $cartItem['CartItemId'] ?>">
                             <div class="ld_cart_bar"></div>
                             <div class="row al_center">
                                 <div class="col-12 col-md-12 col-lg-5">
                                     <div class="page_cart_info flex al_center">
-                                        <a href="product-detail-layout-01.html">
+                                        <a href="<?= getHTMLRoot() ?>/view-product?name=<?= $Product['ProductSlug'] ?>">
                                             <img style="width: 140px;height: 140px;object-fit: cover;padding:5px" class="lazyload w__100 lz_op_ef" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201128%201439%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>" alt="">
                                         </a>
                                         <div class="mini_cart_body ml__15">
-                                            <h5 class="mini_cart_title mg__0 mb__5"><a href="product-detail-layout-01.html"><?= $Product['ProductName'] ?></a></h5>
+                                            <h5 class="mini_cart_title mg__0 mb__5">
+                                                <a href="<?= getHTMLRoot() ?>/view-product?name=<?= $Product['ProductSlug'] ?>">
+                                                    <?= $Product['ProductName'] ?>
+                                                </a>
+                                            </h5>
                                             <div class="mini_cart_meta">
                                                 <p class="cart_selling_plan">
                                                     <span class="product-size">Size: <?= $cartItem['productSize'] ?></span><br>
-                                                    <span class="product-color">Color: <?= $cartItem['productColor'] ?></span>
+                                                    <span class="product-color">Color: <?= $cartItem['productColor'] ?></span><br>
+                                                    <span class="qty"><?= $Inventory['Quantity'] ?> pieces available</span>
                                                 </p>
                                             </div>
                                             <div class="mini_cart_tool mt__10">
@@ -109,6 +133,7 @@ $Cart = $_SESSION['CART'];
                             </div>
                             <div class="clearfix"></div>
                             <p class="db txt_tax_ship mb__5">Taxes, shipping and discounts codes calculated at checkout</p>
+                            <p class="db txt_tax_ship mb__5 text-danger" id="errors" style="display:none"></p>
                             <div class="clearfix"></div>
                             <button type="button" name="update" class="button btn_update mt__10 mb__10 js_add_ld w__100" id="btn-update-cart" style="display:none;width: auto;">Update Cart</button>
                             <button type="submit" onclick="location.href='<?= getHTMLRoot() ?>/checkout'" data-confirm="ck_lumise" name="checkout" class="btn_checkout button button_primary tu mt__10 mb__10 js_add_ld w__100">Check Out</button>

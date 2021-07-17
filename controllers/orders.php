@@ -120,6 +120,7 @@ if (isset($_POST['SubmitOrder'])) {
 }
 
 if (isset($_POST['UpdateCart'])) {
+    $errors = array();
     session_start();
     if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
         array_push($errors, "Your cart is empty!");
@@ -129,12 +130,39 @@ if (isset($_POST['UpdateCart'])) {
         $Quantities = $_POST['Quantities'];
         $index = 0;
         foreach ($Cart as $item) {
+            $ProductID = $item['productId'];
+            $Color = $item['productColor'];
+            $Size = $item['productSize'];
+
+            $ColorDetails = $ColorModel->FilterByColorName($Color);
+            $ColorDetails = mysqli_fetch_array($ColorDetails);
+            $SizeDetails = $SizeModel->FilterBySizeName($Size);
+            $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+            $Inventory = $ProductModel->InventoryByAttributes(
+                $ProductID,
+                $SizeDetails['PK_ID'],
+                $ColorDetails['PK_ID']
+            );
+            $Inventory = mysqli_fetch_array($Inventory);
+            if ($Inventory == null) {
+                array_push($errors, "Quantity must be lesser than available stocks");
+                echo json_encode($errors);
+                exit();
+            } else {
+                if ($Inventory['Quantity'] < $Quantities[$index]) {
+                    array_push($errors, "Quantity must be lesser than available stocks");
+                    echo json_encode($errors);
+                    exit();
+                }
+            }
+
             $item['productqty'] = $Quantities[$index];
             foreach ($Cart as $key) {
-                if($Cart[$item['CartItemId']]){
+                if ($Cart[$item['CartItemId']]) {
                     $Cart[$item['CartItemId']] = $item;
                 }
-                if($item['productqty'] == 0){
+                if ($item['productqty'] == 0) {
                     unset($Cart[$item['CartItemId']]);
                 }
             }
@@ -142,5 +170,8 @@ if (isset($_POST['UpdateCart'])) {
         }
         $_SESSION['CART'] = $Cart;
         echo true;
+    }
+    if($errors != null){
+        echo json_encode($errors);
     }
 }
