@@ -185,6 +185,12 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                             array_push($ColorCodes, $Deatil['ColorCode']);
                             array_push($Sizes, $Deatil['SizeValue']);
                         }
+                        $Wishlist = $_SESSION['WISHLIST'];
+                        foreach($Wishlist as $item){
+                            if($item == base64_encode($row['PK_ID'])){
+                                
+                            }
+                        }
                     ?>
                         <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1" data-id="<?= base64_encode($row['PK_ID']) ?>">
                             <div class="product-inner pr">
@@ -195,7 +201,7 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
                                     <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                                         <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= isset($ProductImages[1]) ? $ProductImages[1] : $ProductImages[0] ?>"></div>
                                     </div>
-                                    <div class="nt_add_w ts__03 pa ">
+                                    <div class="nt_add_w ts__03 pa <?= $_SESSION['WISHLIST'] ?>">
                                         <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right "><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
                                     </div>
                                     <div class="hover_button op__0 tc pa flex column ts__03">

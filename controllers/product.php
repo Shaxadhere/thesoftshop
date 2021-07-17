@@ -231,35 +231,40 @@ if (isset($_POST['RemoveItemFromCart'])) {
     }
 }
 
-if(isset($_POST['AddToWishList'])){
+if (isset($_POST['AddToWishList'])) {
     $errors = array();
     session_start();
     if (!isset($_SESSION['WISHLIST']) || $_SESSION['WISHLIST'] == "") {
         $Wishlist = array();
         $_SESSION['WISHLIST'] = $Wishlist;
     }
-    if(empty($_POST['ProductID'])){
+    if (empty($_POST['ProductID'])) {
+        array_push($errors, "502 - Bad request error");
+    }
+    if (empty($_POST['WishAdded'])) {
         array_push($errors, "502 - Bad request error");
     }
 
-    if($errors == null){
+    if ($errors == null) {
         $Wishlist = $_SESSION['WISHLIST'];
-        if($Wishlist == null){
-
-        }
-        else{
-            
-        }
-        foreach($Wishlist as $item){
-            if($item != $_POST['ProductID']){
-                array_push($Wishlist, $_POST['ProductID']);
+        if ($Wishlist == null) {
+            array_push($Wishlist, $_POST['ProductID']);
+        } else {
+            $index = 0;
+            foreach ($Wishlist as $item) {
+                if ($item != $_POST['ProductID']) {
+                    array_push($Wishlist, $_POST['ProductID']);
+                } else {
+                    if ($_POST['WishAdded']) {
+                        unset($Wishlist[$index]);
+                    }
+                }
+                $index++;
             }
         }
         $_SESSION['WISHLIST'] = $Wishlist;
         echo true;
-    }
-    else{
+    } else {
         echo json_encode($errors);
     }
-
 }

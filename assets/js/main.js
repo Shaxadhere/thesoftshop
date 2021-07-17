@@ -566,13 +566,15 @@ $('body').on('click', '.nt_add_w', function (e) {
         wrap$.toggleClass('wis_added');
     }, 500);
     var productItem = $(this).parent().parent().parent()
+    var wis_added = $(this).hasClass("wis_added")
     var productId = productItem.attr('data-id')
     $.ajax({
         type: "POST",
         url: "/thesoftshop/controllers/product",
         data: {
             AddToWishList: true,
-            ProductID: productId
+            ProductID: productId,
+            WishAdded: wis_added
         },
         success: function (response) {
         },
