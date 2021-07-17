@@ -127,4 +127,14 @@ class Product{
             "SELECT * from tbl_inventory where ProductID = $ProductID and SizeID = $SizeID and ColorID = $ColorID"
         );
     }
+
+    function UpdateInventory($InverntoryID, $Quantity){
+        $InverntoryID = base64_decode($InverntoryID);
+        $InverntoryID = mysqli_real_escape_string(connect(), $InverntoryID);
+        $Quantity = mysqli_real_escape_string(connect(), $Quantity);
+        return mysqli_query(
+            connect(),
+            "UPDATE `tbl_inventory` SET `Quantity` = '$Quantity' WHERE `tbl_inventory`.`PK_ID` = $InverntoryID"
+        );
+    }
 }

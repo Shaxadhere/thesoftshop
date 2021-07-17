@@ -2,9 +2,14 @@
 include_once('../web-config.php');
 include_once('../models/order-model.php');
 include_once('../models/product-model.php');
+include_once('../models/color-model.php');
+include_once('../models/size-model.php');
+
 
 $OrderModel = new Order();
 $ProductModel = new Product();
+$ColorModel = new Color();
+$SizeModel = new Size();
 
 if (isset($_POST['SubmitOrder'])) {
     session_start();
@@ -25,6 +30,23 @@ if (isset($_POST['SubmitOrder'])) {
                 "PricePerUnit" => $Product['Price']
             );
             array_push($OrderInvoice, $ProductItem);
+
+            $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
+            $ColorDetails = mysqli_fetch_array($ColorDetails);
+            $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
+            $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+            $Inventory = $ProductModel->InventoryByAttributes(
+                $item['productId'],
+                $SizeDetails['PK_ID'],
+                $ColorDetails['PK_ID']
+            );
+            $Inventory = mysqli_fetch_array($Inventory);
+            $NewQty = intval($Inventory['Quantity']) - intval($item['productqty']);
+            $ProductModel->UpdateInventory(
+                base64_encode($Inventory['PK_ID']),
+                $NewQty
+            );
         }
     }
     $errors = array();
@@ -89,7 +111,7 @@ if (isset($_POST['SubmitOrder'])) {
             $_POST['State'],
             $OrderInvoice,
             "Recieved",
-            $_POST['OrderNotes']  
+            $_POST['OrderNotes']
         );
         unset($_SESSION['CART']);
         echo json_encode($result);
