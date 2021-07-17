@@ -113,7 +113,19 @@ if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
                                             }
                                             ?>
                                         </div>
-                                        <a class="icon_like cb chp position-relative dn db_md js_link_wis" href="<?= getHTMLRoot() ?>/wishlist"><i class="iccl iccl-heart pr"><span class="op__0 ts_op pa tcount bgb br__50 cw tc">3</span></i>
+                                        <a class="icon_like cb chp position-relative dn db_md js_link_wis" href="<?= getHTMLRoot() ?>/wishlist">
+                                            <i class="iccl iccl-heart pr">
+                                                <?php
+                                                if (isset($_SESSION['WISHLIST'])) {
+                                                    $Wishlist = $_SESSION['WISHLIST'];
+                                                    $ItemCount = count($Wishlist);
+                                                    
+                                                    if (count($_SESSION['WISHLIST']) > 0) {
+                                                        echo "<span class='op__0 ts_op pa tcount bgb br__50 cw tc'>$ItemCount</span>";
+                                                    }
+                                                }
+                                                ?>
+                                            </i>
                                         </a>
                                         <div class="icon_cart pr">
                                             <a id="cart-nav" class="push_side position-relative cb chp db" href="#" data-id="#nt_cart_canvas">
