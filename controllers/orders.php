@@ -101,12 +101,12 @@ if (isset($_POST['SubmitOrder'])) {
             "success" => true,
             "OrderNumber" => $OrderNumber
         );
-
+        $Subtotal = 0;
         //calculating subtotal
         foreach ($OrderInvoice as $invoiceItem) {
             $Subtotal = $Subtotal + intval($invoiceItem['PricePerUnit']) * intval($invoiceItem['ProductQuantity']);
         }
-
+        $SMTPCredentials = getSMTPCredentials();
         include_once('../assets/vendor/phprapid/assets/class.phpmailer.php');
         $mail = new PHPMailer();
         $message = getEmailBody(
@@ -121,14 +121,14 @@ if (isset($_POST['SubmitOrder'])) {
             "Thank you for ordering from Moreo.pk!"
         );
         $mail->IsSMTP();
-        $mail->Host = 'a2plcpnl0202.prod.iad2.secureserver.net';
-        $mail->Port = '465';
+        $mail->Host = $SMTPCredentials['host'];
+        $mail->Port = $SMTPCredentials['port'];
         $mail->SMTPAuth = true;
-        $mail->Username = 'admin@shaxad.com';
-        $mail->Password = '786786PkPk';
-        $mail->SMTPSecure = 'ssl';
-        $mail->From = "admin@shaxad.com";
-        $mail->FromName = "Moreo.pk";
+        $mail->Username = $SMTPCredentials['username'];
+        $mail->Password = $SMTPCredentials['password'];
+        $mail->SMTPSecure = $SMTPCredentials['protocol'];
+        $mail->From = $SMTPCredentials['username'];
+        $mail->FromName = $SMTPCredentials['username'];
         $mail->AddAddress($_POST['Email']);
         $mail->WordWrap = 50;
         $mail->IsHTML(true);

@@ -74,15 +74,14 @@ function HTMLToast()
 }
 
 //email body
-function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Amount, $DeliveryCharges, $Total, $Message)
-{
+function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Amount, $DeliveryCharges, $Total, $Message){
   return "<style>
-  * {
-      font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif
-  }
-</style>
-<center>
-  <table border='0' cellpadding='0' cellspacing='0' width='80%'>
+    * {
+        font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif
+    }
+    </style>
+    <center>
+    <table border='0' cellpadding='0' cellspacing='0' width='80%'>
       <tbody>
           <tr>
               <td>
@@ -151,7 +150,7 @@ function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Am
                           <tbody>
                               <tr>
                                   <td style='color: rgb(83, 83, 83);'>Shipping Option</td>
-                                  <td align='right'>CODE</td>
+                                  <td align='right'>COD</td>
                               </tr>
                           </tbody>
                       </table>
@@ -211,8 +210,8 @@ function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Am
               </td>
           </tr>
       </tbody>
-  </table>
-</center>";
+    </table>
+    </center>";
 }
 
 //smtp mailing credentials
@@ -227,17 +226,20 @@ function getSMTPCredentials(){
 }
 
 //check if string have html tags
-function isHtml($string){
+function isHtml($string)
+{
   return preg_match("/<[^<]+>/", $string, $m) != 0;
 }
 
 //generate random numeric string
-function generateNumericString($min, $max){
+function generateNumericString($min, $max)
+{
   $str_result = '0123456789';
   return substr(str_shuffle($str_result), $min, $max);
 }
 
-function resizeImageT(){
+function resizeImageT()
+{
   $filename = 'uploads/product-images/qrban85h1Y7dIPTB4N2S.jfif';
   $percent = 0.5;
 
