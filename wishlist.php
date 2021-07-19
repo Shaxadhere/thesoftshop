@@ -7,8 +7,7 @@ getHeader("Wishlist", "includes/header.php");
     <div class="page-head tc pr oh cat_bg_img page_head_">
         <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
         <div class="container pr z_100">
-            <h1 class="mb__5 cw"><?= $Category['CategoryName'] ?></h1>
-            <p class="mg__0">Trendy new products with very unique style and design for your unique experience.</p>
+            <h1 class="mb__5 cw">Wishlist</h1>
         </div>
     </div>
 </div>
@@ -22,14 +21,24 @@ getHeader("Wishlist", "includes/header.php");
             <?php
             include_once('models/product-model.php');
             $ProductModel = new Product();
-
-            foreach($Wishlist as $item){
-                
+            $Wishlist = $_SESSION['WISHLIST'];
+            if (count($Wishlist) == 0) {
+            ?>
+                <div class="post-content mt__50 inl_cnt_js">
+                    <article class="post type-post">
+                        <p>You do not have any items in your wishlist. Once you add products to your wishlist, you will see them here.</p>
+                    </article>
+                </div>
+            <?php
+            include_once('components/featured.php');
             }
-            while ($row = mysqli_fetch_array($Products)) {
-                $ProductImages = json_decode($row['ProductImages']);
+            foreach ($Wishlist as $item) {
+                $Product = $ProductModel->View($item);
+                $Product = mysqli_fetch_array($Product);
 
-                $ProductDetails = $ProductModel->FilterWithAttributesByProductID(base64_encode($row['PK_ID']));
+                $ProductImages = json_decode($Product['ProductImages']);
+
+                $ProductDetails = $ProductModel->FilterWithAttributesByProductID(base64_encode($Product['PK_ID']));
                 $Colors = array();
                 $ColorCodes = array();
                 $Sizes = array();
@@ -40,18 +49,18 @@ getHeader("Wishlist", "includes/header.php");
                     array_push($Sizes, $Deatil['SizeValue']);
                 }
 
-                $Wishlist = $_SESSION['WISHLIST'];
+
                 $IsWish = false;
                 foreach ($Wishlist as $item) {
-                    if ($item == base64_encode($row['PK_ID'])) {
+                    if ($item == base64_encode($Product['PK_ID'])) {
                         $IsWish = true;
                     }
                 }
             ?>
-                <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1" data-id="<?= base64_encode($row['PK_ID']) ?>">
+                <div class="col-lg-3 col-md-3 col-6 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1" data-id="<?= base64_encode($Product['PK_ID']) ?>">
                     <div class="product-inner pr">
                         <div class="product-image pr oh lazyload">
-                            <a class="d-block" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>">
+                            <a class="d-block" href="<?= getHTMLRoot() ?>/view-product?name=<?= $Product['ProductSlug'] ?>">
                                 <div class="pr_lazy_img main-img nt_img_ratio nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>"></div>
                             </a>
                             <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
@@ -61,7 +70,7 @@ getHeader("Wishlist", "includes/header.php");
                                 <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
                             </div>
                             <div class="hover_button op__0 tc pa flex column ts__03">
-                                <a data-id="<?= base64_encode($row['PK_ID']) ?>" class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left quick-view-product" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>
+                                <a data-id="<?= base64_encode($Product['PK_ID']) ?>" class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left quick-view-product" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>
                             </div>
                             <div class="product-attr pa ts__03 cw op__0 tc">
                                 <p class="truncate mg__0 w__100"><?= ($Sizes[0] == "None") ? "" : implode(", ", $Sizes); ?></p>
@@ -69,9 +78,9 @@ getHeader("Wishlist", "includes/header.php");
                         </div>
                         <div class="product-info mt__15">
                             <h3 class="product-title pr fs__14 mg__0 fwm">
-                                <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
+                                <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $Product['ProductSlug'] ?>"><?= $Product['ProductName'] ?></a>
                             </h3>
-                            <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
+                            <span class="price dib mb__5">Rs. <?= $Product['Price'] ?></span>
                             <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                                 <?php
                                 for ($i = 0; $i < count($Colors); $i++) {
@@ -92,138 +101,6 @@ getHeader("Wishlist", "includes/header.php");
             ?>
         </div>
         <!--end products list-->
-
-        <!--navigation-->
-        <div class="products-footer tc mt__40">
-            <nav class="nt-pagination w__100 tc paginate_ajax">
-                <ul class="pagination-page page-numbers">
-                    <li>
-                        <?php
-                        $CurrentPage = 1;
-                        if (isset($_REQUEST['page'])) {
-                            $CurrentPage = $_REQUEST['page'];
-                        }
-
-                        //Pagination values
-                        $Products = $ProductModel->List(0, 9999999, "", $_REQUEST['name'], "new-to-old");
-                        $NumberOfProducts = mysqli_num_rows($Products);
-                        $PageNumbers = (intval($NumberOfProducts) / 24) + 1;
-
-                        //Previous Button URL
-                        if (isset($_REQUEST['page'])) {
-                            $page = $_REQUEST['page'];
-                            $URL = $_SERVER['QUERY_STRING'];
-                            $prevPage = intval($page) - 1;
-                            $PrevURL = str_replace("page=$page", "page=" . $prevPage, $URL);
-                        } else {
-                            $URL = $_SERVER['QUERY_STRING'];
-                            if (empty($URL)) {
-                                $PrevURL = "page=2";
-                            } else {
-                                $PrevURL = $URL . "&page=2";
-                            }
-                        }
-
-                        if ($CurrentPage == 1) {
-                            echo "<li>";
-                            echo "<span class='prev page-numbers' style='color:grey'>Prev</span>";
-                            echo "</li>";
-                        } else {
-                            echo "<li>";
-                            echo "<a class='prev page-numbers' href='" . getHTMLRoot() . "/category?$PrevURL'>Prev</a>";
-                            echo "</li>";
-                        }
-
-                        //Pagination
-                        if (isset($_REQUEST['page'])) {
-                            $page = $_REQUEST['page'];
-                            $URL = $_SERVER['QUERY_STRING'];
-                            $nextPage = intval($page) + 1;
-                            $NewUrl = str_replace("&page=$page", "&page=" . $nextPage, $URL);
-                            if (empty($URL)) {
-                                echo "<script>alert('asdsa')</script>";
-                                $NewUrl = str_replace("page=$page", "page=" . intval($page) + 1, $URL);
-                            }
-                        } else {
-                            $page = 1;
-                            $URL = $_SERVER['QUERY_STRING'];
-                            if (empty($URL)) {
-                                $NewUrl = $URL . "page=2";
-                            } else {
-                                $NewUrl = $URL . "&page=2";
-                            }
-                        }
-
-                        for ($i = 1; $i < $PageNumbers; $i++) {
-
-                            if (isset($_REQUEST['page'])) {
-                                $NewUrl = str_replace("page=$page", "page=" . $i, $URL);
-                            } else {
-                                if (empty($URL)) {
-                                    $NewUrl = $URL . "page=" . $i;
-                                } else {
-                                    $NewUrl = $URL . "&page=" . $i;
-                                }
-                            }
-
-                            if (isset($_REQUEST['page'])) {
-                                if ($_REQUEST['page'] == $i) {
-                                    echo "<li><a href='" . getHTMLRoot() . "/category?$NewUrl' class='page-numbers current'>$i</a></li>";
-                                } else {
-                                    echo "<li><a href='" . getHTMLRoot() . "/category?$NewUrl' class='page-numbers'>$i</a></li>";
-                                }
-                            } else {
-                                if ($i == "1") {
-                                    echo "<li><a href='" . getHTMLRoot() . "/category?$NewUrl' class='page-numbers current'>$i</a></li>";
-                                } else {
-                                    echo "<li><a href='" . getHTMLRoot() . "/category?$NewUrl' class='page-numbers'>$i</a></li>";
-                                }
-                            }
-                        }
-                        $NextURL = getHTMLRoot() . "/category?" . $URL;
-                        if (isset($_REQUEST['page'])) {
-                            if ($_REQUEST['page'] != $NumberOfProducts) {
-                                $PageNumber = intval($_REQUEST['page']) + 1;
-                                $NextURL .= "page=" . $PageNumber;
-                            }
-                        } else {
-                            if (1 != $NumberOfProducts) {
-                                $PageNumber = 2;
-                                $NextURL .= "page=" . $PageNumber;
-                            }
-                        }
-
-                        //Next Button URL
-                        if (isset($_REQUEST['page'])) {
-                            $page = $_REQUEST['page'];
-                            $URL = $_SERVER['QUERY_STRING'];
-                            $nextPage = intval($page) + 1;
-                            $NextURL = str_replace("page=$page", "page=" . $nextPage, $URL);
-                        } else {
-                            $URL = $_SERVER['QUERY_STRING'];
-                            if (empty($URL)) {
-                                $NextURL = "page=2";
-                            } else {
-                                $NextURL = $URL . "&page=2";
-                            }
-                        }
-
-
-
-                        if ($CurrentPage == intval($PageNumbers)) {
-                            echo "<li>";
-                            echo "<span class='next page-numbers' style='color:grey'>Next</span>";
-                            echo "</li>";
-                        } else {
-                            echo "<li>";
-                            echo "<a class='next page-numbers' href='" . getHTMLRoot() . "/category?$NextURL'>Next</a>";
-                            echo "</li>";
-                        }
-                        ?>
-                </ul>
-            </nav>
-        </div>
-        <!--end navigation-->
     </div>
 </div>
 <!-- end featured collection -->
