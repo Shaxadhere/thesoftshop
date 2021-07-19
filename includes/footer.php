@@ -19,26 +19,26 @@ include_once('web-config.php');
                                 <div class="footer-contact">
                                     <p>
                                         <a class="d-block" href="<?= getHTMLRoot() ?>">
-                                            <img class="w__100 mb__15 lz_op_ef lazyload" style="width:200px !important" alt="TheSoftShop" data-src="<?= getHTMLRoot() ?>/assets/logo.png">
+                                            <img class="w__100 mb__15 lz_op_ef lazyload" style="width:200px !important" alt="<?= getAppName() ?>" data-src="<?= getHTMLRoot() ?>/assets/logo.png">
                                         </a>
                                     </p>
                                     <p>
                                         <i class="pegk pe-7s-map-marker"> </i><span>Karachi, Pakistan</span></span>
                                     </p>
                                     <p><i class="pegk pe-7s-mail"></i>
-                                        <span><a href="mailto:contact@thesoftshop.pk"><span class="__cf_email__" data-cfemail="15767a7b6174766155767a7865747b6c3b767a78">contact@thesoftshop.pk</span></a></span>
+                                        <span><a href="mailto:contact@<?= getSiteDomain() ?>"><span class="__cf_email__" data-cfemail="15767a7b6174766155767a7865747b6c3b767a78">contact@<?= getSiteDomain() ?></span></a></span>
                                     </p>
                                     <a href="tel:923032804856"><i class="pegk pe-7s-call"></i> <span>+92 (303) 280 4856</span></a>
                                     <div class="nt-social">
-                                        <a target="_blank" href="https://www.facebook.com/thesoftshop.pk" class="facebook cb ttip_nt tooltip_top">
+                                        <a target="_blank" href="https://www.facebook.com/moreo.pk" class="facebook cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Facebook</span>
                                             <i class="facl facl-facebook"></i>
                                         </a>
-                                        <a target="_blank" href="https://twitter.com/thesoftshoppk" class="twitter cb ttip_nt tooltip_top">
+                                        <a target="_blank" href="https://twitter.com/moreopk" class="twitter cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Twitter</span>
                                             <i class="facl facl-twitter"></i>
                                         </a>
-                                        <a target="_blank" href="https://www.instagram.com/thesoftshop.pk" class="instagram cb ttip_nt tooltip_top">
+                                        <a target="_blank" href="https://www.instagram.com/moreo.pk" class="instagram cb ttip_nt tooltip_top">
                                             <span class="tt_txt">Follow on Instagram</span>
                                             <i class="facl facl-instagram"></i>
                                         </a>
@@ -104,7 +104,7 @@ include_once('web-config.php');
                             <div class="menu_footer widget_footer">
                                 <ul class="menu">
                                     <li class="menu-item">
-                                        <a href="<?= getHTMLRoot() ?>/blog">Blog</a>
+                                        <a href="<?= getHTMLRoot() ?>/shop">Shop</a>
                                     </li>
                                     <li class="menu-item">
                                         <a href="<?= getHTMLRoot() ?>/file-a-complaint">File a Complaint</a>
@@ -157,7 +157,7 @@ include_once('web-config.php');
             <div class="container pr tc">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-12 col_1">Copyright © <span id="year"></span>
-                        <span class="cp">TheSoftShop</span> all rights reserved.
+                        <span class="cp"><?= getAppName() ?></span> all rights reserved.
                     </div>
                     <div class="col-lg-6 col-md-12 col-12 col_2">
                         <ul id="footer-menu" class="clearfix">

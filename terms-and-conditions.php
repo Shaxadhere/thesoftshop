@@ -18,11 +18,11 @@ getHeader("Terms and conditions", "includes/header.php");
     <div class="terms cb">
         <div class="kalles-term-exp mb__20">
             <h3 class="fs__18 mt-0">These Terms and Conditions May Change</h3>
-            <p>We reserve the right to update or modify these terms and conditions at any time without prior notice. &nbsp;Your use of www.thesoftshop.pk following any such change constitutes your agreement to follow and be bound by the terms and conditions as changed. For this reason, we encourage you to review these terms and conditions whenever you use this website.</p>
+            <p>We reserve the right to update or modify these terms and conditions at any time without prior notice. &nbsp;Your use of www.Moreo.pk following any such change constitutes your agreement to follow and be bound by the terms and conditions as changed. For this reason, we encourage you to review these terms and conditions whenever you use this website.</p>
         </div>
         <div class="kalles-term-exp mb__20">
             <h3 class="fs__18 mt-0">Copyright and Trademark</h3>
-            <p>Unless otherwise indicated, material on this website, including but not limited to texts, images, product details is subject to the copyright and trademark rights of TheSoftShop.pk. Consequently, the material on this website may not be copied, reproduced, modified, posted, transmitted, distributed, in whole or in part in any form whatsoever, without the prior written consent of TheSoftShop.pk. All rights reserved.</p>
+            <p>Unless otherwise indicated, material on this website, including but not limited to texts, images, product details is subject to the copyright and trademark rights of Moreo.pk. Consequently, the material on this website may not be copied, reproduced, modified, posted, transmitted, distributed, in whole or in part in any form whatsoever, without the prior written consent of Moreo.pk. All rights reserved.</p>
         </div>
         <div class="kalles-term-exp mb__20">
             <h3 class="fs__18 mt-0">Products, Content and Specifications</h3>
@@ -38,7 +38,7 @@ getHeader("Terms and conditions", "includes/header.php");
         </div>
         <div class="kalles-term-exp mb__20">
             <h3 class="fs__18 mt-0">Your Account</h3>
-            <p>You are responsible for maintaining the confidentiality of your account and password information, and you agree to accept responsibility for all activities that occur under your account and password. &nbsp;This www.thesoftshop.pk and TheSoftShop reserves the right to refuse service, terminate accounts remove or edit content or cancel orders.<br>By placing an order, you warrant that you are are providing www.thesoftshop.pk with accurate, truthful information and that you have the authority to place the order.</p>
+            <p>You are responsible for maintaining the confidentiality of your account and password information, and you agree to accept responsibility for all activities that occur under your account and password. &nbsp;This www.Moreo.pk and Moreo reserves the right to refuse service, terminate accounts remove or edit content or cancel orders.<br>By placing an order, you warrant that you are are providing www.Moreo.pk with accurate, truthful information and that you have the authority to place the order.</p>
         </div>
     </div>
 </div>

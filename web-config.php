@@ -8,6 +8,14 @@ function getHTMLRoot()
   return "/thesoftshop";
 }
 
+function getAppName(){
+  return "Moreo";
+}
+
+function getSiteDomain(){
+  return "moreo.pk";
+}
+
 //get application host
 function getServerRoot()
 {

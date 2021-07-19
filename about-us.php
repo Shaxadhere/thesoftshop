@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("About us @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
+getHeader("About us @".getAppName().".pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
 ?>
 <!--hero banner-->
 <div class="kalles-section page_section_heading">
@@ -20,7 +20,7 @@ getHeader("About us @TheSoftShop.pk Instagram Shop, cute, fancy, good quality an
         <div class=" col-12 col-md-12 txtn mt__25">
             <h3 class="fs__20">WHO WE ARE AND WHAT WE STAND FOR</h3>
             <p class="mg__0">
-                TheSoftShop.pk was built off the idea that items should be loved and used in a sustainable way. Our journey began in 2020 and we have not stopped curating products since! We pride ourselves on selecting and stocking products that are beautiful but also serve purpose.
+                <?= getAppName() ?>.pk was built off the idea that items should be loved and used in a sustainable way. Our journey began in 2020 and we have not stopped curating products since! We pride ourselves on selecting and stocking products that are beautiful but also serve purpose.
                 By handpicking all of our products in-house, our team has increased and expanded our selection of organic, handcrafted, sustainably sourced products. There's a story behind everything we sell - from the artisan who crafts it to the individual who uses it!
             </p>
         </div>

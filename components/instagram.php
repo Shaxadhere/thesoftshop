@@ -3,7 +3,7 @@
     <div class="nt_full">
         <div class="wrap_title mb__20 des_title_2">
             <h3 class="section-title tc pr flex fl_center al_center fs__24 title_2">
-                <span class="mr__10 ml__10">@TheSoftShop.PK ON INSTAGRAM</span>
+                <span class="mr__10 ml__10"><a href="//instagram.com/moreo.pk">@Moreo.PK</a> ON INSTAGRAM</span>
             </h3>
             <span class="dn tt_divider"><span></span>
                 <i class="dn clprfalse title_2 la-gem"></i>
