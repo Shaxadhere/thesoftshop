@@ -3,13 +3,10 @@
     <div class="product-quickview single-product-content img_action_zoom kalles-quick-view-tpl">
         <div class="row product-image-summary">
             <div class="col-lg-7 col-md-6 col-12 product-images pr oh">
-                <!-- Need to check if sale is available -->
                 <span style="display:none" class="tc nt_labels pa pe_none cw"><span class="onsale nt_label"><span id="view-product-discount-percentage">-34%</span></span></span>
                 <div class="images">
                     <div id="view-product-image-container" class="product-images-slider tc equal_nt nt_slider nt_carousel_qv p-thumb_qv nt_contain ratio_imgtrue position_8" data-flickity='{ "fade":true,"cellSelector": ".q-item:not(.is_varhide)","cellAlign": "center","wrapAround": true,"autoPlay": false,"prevNextButtons":true,"adaptiveHeight": true,"imagesLoaded": false, "lazyLoad": 0,"dragThreshold" : 0,"pageDots": true,"rightToLeft": false }'>
-                        <!-- <div data-grname="not4" data-grpvl="ntt4" class="js-sl-item q-item sp-pr-gallery__img w__100" data-mdtype="image">
-                            <span class="nt_bg_lz lazyload" data-bgset="<?= getHTMLRoot() ?>/assets/images/quick_view/pr-01.jpg"></span>
-                        </div> -->
+                        
                     </div>
                 </div>
             </div>
@@ -43,12 +40,7 @@
                                                     <span class="nt_name_current user_choose_js" id="view-product-default-color">${Default Color}</span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr" id="view-product-colors-container">
-                                                    <!-- <li class="ttip_nt tooltip_top_right nt-swatch swatch_pr_item is-selected" data-escape="Pink">
-                                                        <span class="tt_txt">Pink</span><span class="swatch__value_pr pr bg_color_pink"></span>
-                                                    </li>
-                                                    <li class="ttip_nt tooltip_top nt-swatch swatch_pr_item" data-escape="Black">
-                                                        <span class="tt_txt">Black</span><span class="swatch__value_pr pr bg_color_black"></span>
-                                                    </li> -->
+                                                    
                                                 </ul>
                                             </div>
                                             <div class="swatch is-label kalles_swatch_js">
@@ -82,9 +74,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="nt_add_w ts__03 pa order-3">
-                                                    <a id="view-product-add-to-wishlist" href="#" class="wishlistadd cb chp ttip_nt tooltip_top_left"><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
-                                                </div>
+                                                
                                                 <button id="view-product-add-to-cart-button" style="background-color: var(--main-color);border: none;color: #fff;width: auto;margin-right:5px !important" data-location="quick-view" data-product="${ProductId}" type="button" data-time="1000" data-ani="shake" class="button truncate d-inline-block animated btn-add-to-cart">
                                                     <span class="txt_add">Add to cart</span>
                                                 </button>
@@ -92,10 +82,6 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div id="trust_seal_qv" class="pr_trust_seal tl">
-                                <p class="mess_cd cb mb__10 fwm tu fs_16"></p>
-                                <img class="lazyload img_tr_s1 w__100" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%202244%20285%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" data-src="<?= getHTMLRoot() ?>/assets/images/trust_img2.png" alt="">
                             </div>
                             <div class="product_meta">
                                 <span class="posted_in" id="view-product-categories-container"><span class="cb">Categories:</span> <a href="#" class="cg" title="Women">${Categories}</a></span>

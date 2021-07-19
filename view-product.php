@@ -125,10 +125,12 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                 <ul class="swatches-select swatch__list_pr d-flex">
                                                     <?php
                                                     for ($i = 0; $i < count($Colors); $i++) {
-                                                        echo "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='$Colors[$i]'>";
-                                                        echo "<span class='tt_txt'>$Colors[$i]</span>";
-                                                        echo "<span data-location='view-product' class='swatch__value_pr pr lazyload color-switch' style='$ColorCodes[$i]'></span>";
-                                                        echo "</li>";
+                                                        if ($Colors[$i] != "None") {
+                                                            echo "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='$Colors[$i]'>";
+                                                            echo "<span class='tt_txt'>$Colors[$i]</span>";
+                                                            echo "<span data-location='view-product' class='swatch__value_pr pr lazyload color-switch' style='$ColorCodes[$i]'></span>";
+                                                            echo "</li>";
+                                                        }
                                                     }
                                                     ?>
                                                 </ul>
@@ -181,14 +183,6 @@ $Inventory = mysqli_fetch_array($Inventory);
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div id="trust_seal_ppr" class="pr_trust_seal tl_md tc">
-                                    <img class="img_tr_s1 lazyload w__100 max-width__330px" src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%202244%20285%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" alt="" data-srcset="assets/images/single-product/trust_img2.png" />
-                                </div>
-                                <div class="extra-link mt__35 fwsb">
-                                    <a class="ajax_pp_js cd chp mr__20" href="#" data-id="#popup-size-guide">Size Guide</a>
-                                    <a class="ajax_pp_js cd chp mr__20" href="#" data-id="#popup-delivery-and-return">Delivery &amp; Return</a>
-                                    <a class="ajax_pp_js cd chp" href="#" data-id="#popup-ask-a-question">Ask a Question</a>
                                 </div>
                                 <div class="product_meta">
                                     <span class="posted_in">
