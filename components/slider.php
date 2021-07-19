@@ -21,7 +21,7 @@ include_once('web-config.php');
                             </div>
                         </div>
                     </div>
-                    <a href="shop.html" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
+                    <a href="<?= getHTMLRoot() ?>/new-arrivals" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
                 </div>
             </div>
             <!-- end first slide -->
@@ -37,11 +37,11 @@ include_once('web-config.php');
                             <div class="right_left">
                                 <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">NEW SEASON</h4>
                                 <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Scrunchies Collection</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?name=Scrunchies">Explore Now</a>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?name=Scrunchie">Explore Now</a>
                             </div>
                         </div>
                     </div>
-                    <a href="shop.html" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
+                    <a href="<?= getHTMLRoot() ?>/category?name=Scrunchie" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
                 </div>
             </div>
             <!-- end second slide -->
@@ -61,7 +61,7 @@ include_once('web-config.php');
                             </div>
                         </div>
                     </div>
-                    <a href="shop.html" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
+                    <a href="<?= getHTMLRoot() ?>/happy-deals" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
                 </div>
             </div>
             <!-- end third slide -->
