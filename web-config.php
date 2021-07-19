@@ -74,7 +74,7 @@ function HTMLToast()
 }
 
 //email body
-function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $EstDelivery, $Amount, $DeliveryCharges, $Total)
+function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Amount, $DeliveryCharges, $Total, $Message)
 {
   return "<style>
   * {
@@ -110,7 +110,7 @@ function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Es
                       <div style='color: rgb(1 1 1); text-align: center; font-weight: bold;'><span style='font-size: 24px;'>Your order is placed!</span></div>
                       <div>
                           <p style='font-size: 18px;'>Hi $RecipentName,</p>
-                          <p>Thank you for ordering from Moreo.pk!</p>
+                          <p>$Message</p>
                           <p>We're excited for you to receive your order&nbsp;<b>#$OrderNumber</b>&nbsp;and will notify you once it's on its way. We hope you had a great shopping experience! You can check your order status here.</p>
                           <div style='font-size: 10px; line-height: 20px; height: 20px;'>&nbsp;</div>
                           <table align='center' border='0' cellpadding='0' cellspacing='0' style='width: 200px; height: 50px;'>
@@ -145,12 +145,6 @@ function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Es
                               </tr>
                           </tbody>
                       </table>
-                  </div>
-                  <div>
-                      <p style='color: rgb(1 1 1); font-weight: bold; font-size: 15px;'>ORDER DETAIL</p>
-                      <div style='padding-bottom: 10px; margin-top: 10px;'>
-                          <p style='margin: 0px;'>Estimated delivery: $EstDelivery</p>
-                      </div>
                   </div>
                   <div>
                       <table width='100%' style='width: 691.188px; min-width: 100%;'>

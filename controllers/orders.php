@@ -102,11 +102,24 @@ if (isset($_POST['SubmitOrder'])) {
             "OrderNumber" => $OrderNumber
         );
 
-
+        //calculating subtotal
+        foreach ($OrderInvoice as $invoiceItem) {
+            $Subtotal = $Subtotal + intval($invoiceItem['PricePerUnit']) * intval($invoiceItem['ProductQuantity']);
+        }
 
         include_once('../assets/vendor/phprapid/assets/class.phpmailer.php');
         $mail = new PHPMailer();
-        $message = getEmailBody($_POST['FullName'], $OrderNumber, $_POST['ShippingAddress'], $_POST['Phone'], $_POST['Email'], date('Y m d'), 1000, 170, 1070);
+        $message = getEmailBody(
+            $_POST['FullName'],
+            $OrderNumber, 
+            $_POST['ShippingAddress'], 
+            $_POST['Phone'], 
+            $_POST['Email'], 
+            $Subtotal, 
+            170, 
+            intval($Subtotal) + 170, 
+            "Thank you for ordering from Moreo.pk!"
+        );
         $mail->IsSMTP();
         $mail->Host = 'a2plcpnl0202.prod.iad2.secureserver.net';
         $mail->Port = '465';                                //Sets the default SMTP server port
