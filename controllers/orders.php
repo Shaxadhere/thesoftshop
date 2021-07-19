@@ -82,7 +82,7 @@ if (isset($_POST['SubmitOrder'])) {
 
     if ($errors == null) {
         $OrderNumber = generateNumericString(0, 22);
-        
+
         $OrderModel->Add(
             $CustomerID,
             $OrderNumber,
@@ -101,6 +101,28 @@ if (isset($_POST['SubmitOrder'])) {
             "success" => true,
             "OrderNumber" => $OrderNumber
         );
+
+
+
+        include_once('../assets/vendor/phprapid/assets/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $message = getEmailBody($_POST['FullName'], $OrderNumber, $_POST['ShippingAddress'], $_POST['Phone'], $_POST['Email'], date('Y m d'), 1000, 170, 1070);
+        $mail->IsSMTP();
+        $mail->Host = 'a2plcpnl0202.prod.iad2.secureserver.net';
+        $mail->Port = '465';                                //Sets the default SMTP server port
+        $mail->SMTPAuth = true;                            //Sets SMTP authentication. Utilizes the Username and Password variables
+        $mail->Username = 'admin@shaxad.com';                    //Sets SMTP username
+        $mail->Password = '786786PkPk';                    //Sets SMTP password
+        $mail->SMTPSecure = 'ssl';
+        $mail->From = "admin@shaxad.com";
+        $mail->FromName = "Moreo.pk";                //Sets the From name of the message
+        $mail->AddAddress($_POST['Email']);
+        $mail->WordWrap = 50;
+        $mail->IsHTML(true);
+        $mail->Subject = "Your order is recieved";
+        $mail->Body = $message;
+        $mail->Send();
+
         $_SESSION['LASTORDER'] = array(
             $CustomerID,
             $OrderNumber,
@@ -119,7 +141,7 @@ if (isset($_POST['SubmitOrder'])) {
         if (isset($_SESSION['USER'])) {
             $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));
             $OrderHistory = json_decode($Customer['OrderHistory']);
-            if(!isset($OrderHistory) || $OrderHistory == "" || $OrderHistory == null){
+            if (!isset($OrderHistory) || $OrderHistory == "" || $OrderHistory == null) {
                 $OrderHistory = array();
             }
             array_push($OrderHistory, $OrderNumber);
