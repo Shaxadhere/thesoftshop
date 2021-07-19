@@ -122,13 +122,13 @@ if (isset($_POST['SubmitOrder'])) {
         );
         $mail->IsSMTP();
         $mail->Host = 'a2plcpnl0202.prod.iad2.secureserver.net';
-        $mail->Port = '465';                                //Sets the default SMTP server port
-        $mail->SMTPAuth = true;                            //Sets SMTP authentication. Utilizes the Username and Password variables
-        $mail->Username = 'admin@shaxad.com';                    //Sets SMTP username
-        $mail->Password = '786786PkPk';                    //Sets SMTP password
+        $mail->Port = '465';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'admin@shaxad.com';
+        $mail->Password = '786786PkPk';
         $mail->SMTPSecure = 'ssl';
         $mail->From = "admin@shaxad.com";
-        $mail->FromName = "Moreo.pk";                //Sets the From name of the message
+        $mail->FromName = "Moreo.pk";
         $mail->AddAddress($_POST['Email']);
         $mail->WordWrap = 50;
         $mail->IsHTML(true);
