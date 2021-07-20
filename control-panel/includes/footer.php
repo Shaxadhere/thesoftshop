@@ -4,6 +4,7 @@ include_once('web-config.php');
 </div>
 
 <script src="<?= getHTMLRoot() ?>/assets/lib/jquery/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/lib/feather-icons/feather.min.js"></script>
 <script src="<?= getHTMLRoot() ?>/assets/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>

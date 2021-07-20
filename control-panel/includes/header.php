@@ -30,7 +30,9 @@ $User = mysqli_fetch_array($User);
     <link href="<?= getHTMLRoot() ?>/assets/lib/select2/css/select2.min.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/lib/spectrum-colorpicker/spectrum.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/css/bootstrap-tagsinput.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
+        .ui-state-highlight { height: 100px; line-height: 1.2em; }
         .select2-selection__choice {
             background-color: #0168fa !important;
             border: transparent !important;

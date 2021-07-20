@@ -79,13 +79,13 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                             <label for="ProductTags">Product Images</label>
                         </div>
                     </div>
-                    <div class="form-row mb-3">
+                    <div class="form-row mb-3" id="images-container">
                         <?php
                         foreach ($ProductImages as $item) {
                         ?>
-                            <div class="col-md-2 col-6" style="padding-bottom: 10px;">
+                            <div class="col-md-2 col-6 single-image" style="padding-bottom: 10px;">
                                 <img style="height: 100px;object-fit: cover;width:100%;padding 1px" src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
-                                <div class="btn-group" style="width:100%;">
+                                <div class="btn-group" style="width:100%">
                                     <a download target="_blank" href="../uploads/product-images/<?= $item ?>" class="btn btn-dark btn-icon download-image"><i data-feather="download"></i></a>
                                     <a href="" class="btn btn-dark btn-icon move-image"><i data-feather="move"></i></a>
                                     <a href="" class="btn btn-dark btn-icon delete-image"><i data-feather="trash-2"></i></a>
@@ -116,17 +116,16 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                     ?>
                                         <div class="form-row">
                                             <div class="form-group col-md-4">
-                                                <select data-select2-id="Size<?= $index ?>" required id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
+                                                <select data-select2-id="Size<?= $index ?>" required id="Sizes<?= $index ?>" name="Sizes[]" style="color:blue" class="form-control sizes-input">
                                                     <option label="Select Size"></option>
                                                     <?php
                                                     include_once('models/size-model.php');
                                                     $SizeModel = new Size();
                                                     $SizesList = $SizeModel->List();
                                                     while ($row = mysqli_fetch_array($SizesList)) {
-                                                        if($inventoryItem['SizeID'] == $row['PK_ID']){
+                                                        if ($inventoryItem['SizeID'] == $row['PK_ID']) {
                                                             echo "<option selected value='$row[PK_ID]'>$row[SizeValue]</option>";
-                                                        }
-                                                        else{
+                                                        } else {
                                                             echo "<option value='$row[PK_ID]'>$row[SizeValue]</option>";
                                                         }
                                                     }
@@ -134,17 +133,16 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <select data-select2-id="Color<?= $index ?>" required id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
+                                                <select data-select2-id="Color<?= $index ?>" required id="Colors<?= $index ?>" name="Colors[]" style="color:blue" class="form-control colors-input">
                                                     <option label="Select Color"></option>
                                                     <?php
                                                     include_once('models/color-model.php');
                                                     $ColorModel = new Color();
                                                     $ColorList = $ColorModel->List();
                                                     while ($row = mysqli_fetch_array($ColorList)) {
-                                                        if($inventoryItem['ColorID'] == $row['PK_ID']){
+                                                        if ($inventoryItem['ColorID'] == $row['PK_ID']) {
                                                             echo "<option selected value='$row[PK_ID]'>$row[ColorName]</option>";
-                                                        }
-                                                        else{
+                                                        } else {
                                                             echo "<option value='$row[PK_ID]'>$row[ColorName]</option>";
                                                         }
                                                     }
@@ -152,11 +150,11 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-4">
-                                                <input  value="<?= $inventoryItem['Quantity'] ?>" required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
+                                                <input value="<?= $inventoryItem['Quantity'] ?>" required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity<?= $index ?>" placeholder="Enter quantity">
                                             </div>
                                         </div>
                                     <?php
-                                    $index++;
+                                        $index++;
                                     }
                                     ?>
                                 </li>
@@ -230,4 +228,11 @@ getFooter("includes/footer.php");
             }
         })
     })
+
+    $(function() {
+        $("#images-container").sortable({
+            placeholder: "ui-state-highlight"
+        });
+        $("#images-container").disableSelection();
+    });
 </script>
