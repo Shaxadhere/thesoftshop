@@ -51,7 +51,7 @@ getHeader("FAQs", "includes/header.php");
                     <a class="tab-heading flex al_center fl_between pr cd chp fwm" href="#tab_faqs-3"><span class="txt_h_tab">How do I pay for my orders?</span><span class="nav_link_icon ml__5"></span></a>
                 </div>
                 <div class="sp-tab-content">
-                    <p class="mb-0">We accept payments via Paypal and all major credit and debit cards such as Mastercard, VISA and American Express.</p>
+                    <p class="mb-0">We accept payments via COD (Cash on delivery). It allows you to pay the courior at your doorstep.</p>
                 </div>
             </div>
             <div class="panel entry-content sp-tab des_mb_2 des_style_2 dn" id="tab_1600934637620">
@@ -60,16 +60,7 @@ getHeader("FAQs", "includes/header.php");
                     <a class="tab-heading flex al_center fl_between pr cd chp fwm" href="#tab_1600934637620"><span class="txt_h_tab">Can I amend and cancel my order?</span><span class="nav_link_icon ml__5"></span></a>
                 </div>
                 <div class="sp-tab-content">
-                    <p class="mb-0">Unfortunately we are unable to cancel an order once it has been placed. This will allow us to pack your orders efficiently and to minimize errors. It is advisable to check your order before placing it.</p>
-                </div>
-            </div>
-            <div class="panel entry-content sp-tab des_mb_2 des_style_2 dn" id="tab_1600934655033">
-                <div class="js_ck_view"></div>
-                <div class="heading bgbl dn">
-                    <a class="tab-heading flex al_center fl_between pr cd chp fwm" href="#tab_1600934655033"><span class="txt_h_tab">I have a discount code, how can I use it?</span><span class="nav_link_icon ml__5"></span></a>
-                </div>
-                <div class="sp-tab-content">
-                    <p class="mb-0">Key in the voucher code at the field “Voucher Code” and click “Add” in your Shopping Cart page before proceeding to check out. Please note that we are unable to manually apply the voucher code to your order if you have missed keying it during check out. Kindly ensure that all information is correct before confirming your purchase.</p>
+                    <p class="mb-0">Call our helpline <a href="tel:923032804856">+92 (303) 280 4856</a> and ask to cancel your order. you must have order details i.e Order Number, Customer Name etc to cancel the order</p>
                 </div>
             </div>
             <div class="panel entry-content sp-tab des_mb_2 des_style_2 dn" id="tab_1600934674204">
@@ -78,23 +69,13 @@ getHeader("FAQs", "includes/header.php");
                     <a class="tab-heading flex al_center fl_between pr cd chp fwm" href="#tab_1600934674204"><span class="txt_h_tab">How will I know if my order is confirmed?</span><span class="nav_link_icon ml__5"></span></a>
                 </div>
                 <div class="sp-tab-content">
-                    <p class="mb-0">After you have placed your order, you will receive an acknowledgement e-mail from us to confirm that your orders have been received. However, do note that orders will only be shipped when your credit card payment has been approved and billing and delivery address is verified. Alternatively, you may check the status of your order in “My Account” if you are a registered user.</p>
-                </div>
-            </div>
-            <div class="panel entry-content sp-tab des_mb_2 des_style_2 dn" id="tab_1600935417107">
-                <div class="js_ck_view"></div>
-                <div class="heading bgbl dn">
-                    <a class="tab-heading flex al_center fl_between pr cd chp fwm" href="#tab_1600935417107"><span class="txt_h_tab">I have problems adding items to my shopping cart?</span><span class="nav_link_icon ml__5"></span></a>
-                </div>
-                <div class="sp-tab-content">
-                    <p class="mb-0">You will be able to add the items as long as it is available. There could be an instance where the item is in someone else’s shopping cart hence the status of the items is reflected as “Temporarily Unavailable”.</p>
+                    <p class="mb-0">After you have placed your order, you will receive an acknowledgement e-mail from us to confirm that your orders have been received. However, do note that orders will only be shipped when your delivery address is verified. Alternatively, you may check the status of your order in “My Account” if you are a registered user or you can track your order from <a style="color:var(--main-color)" href="<?= getHTMLRoot() ?>/track-order">here</a>.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 <?php
-getFooter("includes/footer.php");
 include_once('components/quick-view.php');
 include_once('components/quick-shop.php');
 include_once('components/mini-cart-box.php');
@@ -103,4 +84,5 @@ include_once('components/login-box.php');
 include_once('components/mobile-toolbar.php');
 include_once('components/mobile-menu.php');
 include_once('components/back-to-top-button.php');
+getFooter("includes/footer.php");
 ?>

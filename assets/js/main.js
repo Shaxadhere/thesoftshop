@@ -434,6 +434,7 @@ $(document).on('click', '.remove-cart-item', function () {
 
 // checkout button handle
 $(document).on('click', '#checkout-btn', function () {
+    $(this).attr('disabled', true);
     var fullName = $('#checkout-full-name').val()
     var phone = $('#checkout-phone').val()
     var email = $('#checkout-email').val()
@@ -460,6 +461,7 @@ $(document).on('click', '#checkout-btn', function () {
             if (result['success'] == true) {
                 window.location.href = '/thesoftshop/thank-you';
             }
+            $(this).attr('disabled', false);
         },
         error: function (error) {
             console.log("Error in connection: " + error)

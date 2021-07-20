@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
+getHeader("Shop @".getAppName().".pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
@@ -399,7 +399,6 @@ getHeader("Shop @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and ch
 
 </div>
 <?php
-getFooter("includes/footer.php");
 include_once('components/quick-view.php');
 include_once('components/quick-shop.php');
 include_once('components/mini-cart-box.php');
@@ -408,4 +407,5 @@ include_once('components/login-box.php');
 include_once('components/mobile-toolbar.php');
 include_once('components/mobile-menu.php');
 include_once('components/back-to-top-button.php');
+getFooter("includes/footer.php");
 ?>

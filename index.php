@@ -1,10 +1,10 @@
 <?php
 include_once('web-config.php');
-getHeader("Home @TheSoftShop.pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
+getHeader("Home @".getAppName().".pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
 include_once('components/slider.php');
 include_once('components/category-banner.php');
 include_once('components/featured.php');
-include_once('components/two-banners.php');
+include_once('components/single-banner.php');
 include_once('components/bestsellers.php');
 include_once('components/instagram.php');
 include_once('components/quick-view.php');

@@ -31,7 +31,7 @@ if (isset($_SESSION['USER'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/images/k_favicon_32x.png">
-    <title>TheSoftShop.pk</title>
+    <title><?= getSiteDomain() ?></title>
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i&amp;display=swap" rel="stylesheet">
@@ -73,8 +73,8 @@ if (isset($_SESSION['USER'])) {
                                 <div class="col-lg-2 col-md-4 col-6 tc tl_lg">
                                     <div class=" branding ts__05 lh__1">
                                         <a class="dib" href="<?= getHTMLRoot() ?>">
-                                            <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="TheSoftShop">
-                                            <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="TheSoftShop">
+                                            <img style="width: 160px" class="dn db_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="<?= getSiteDomain() ?>">
+                                            <img style="width: 140px" class="logo_mobile dn_lg" src="<?= getHTMLRoot() ?>/assets/logo.png" alt="<?= getSiteDomain() ?>">
                                         </a>
                                     </div>
                                 </div>
