@@ -17,6 +17,15 @@ class Inventory{
         );
     }
 
+    function FilterByProductID($ProductID){
+        $ProductID = base64_decode($ProductID);
+        $ProductID = mysqli_real_escape_string(connect(), $ProductID);
+        return mysqli_query(
+            connect(),
+            "SELECT tbl_product.PK_ID as ProductID, tbl_inventory.PK_ID as InventoryID, tbl_product.ProductName, tbl_product.ProductDescription, tbl_product.ProductImages, tbl_inventory.Quantity, tbl_inventory.CreatedAt, tbl_inventory.CreatedBy, tbl_color.PK_ID as ColorID, tbl_color.ColorName, tbl_size.PK_ID as SizeID, tbl_size.SizeValue FROM `tbl_inventory` inner join tbl_product on tbl_inventory.ProductID = tbl_product.PK_ID inner join tbl_color on tbl_inventory.ColorID = tbl_color.PK_ID inner join tbl_size on tbl_inventory.SizeID = tbl_size.PK_ID where tbl_product.Deleted = 0 and tbl_inventory.ProductID = $ProductID"
+        );
+    }
+
     function Add($ProductID, $SizeID, $ColorID, $Quantity){
         $ProductID = mysqli_real_escape_string(connect(), $ProductID);
         $SizeID = mysqli_real_escape_string(connect(), $SizeID);

@@ -4,9 +4,14 @@ getHeader("Products", "includes/header.php");
 $ProductID = $_REQUEST['product'];
 include_once('models/product-model.php');
 $ProductModel = new Product();
+include_once('models/inventory-model.php');
+$InventoryModel = new Inventory();
 $Product = $ProductModel->View($ProductID);
 $Product = mysqli_fetch_array($Product);
 $ProductImages = json_decode($Product['ProductImages']);
+$Categories = json_decode($Product['Categories']);
+$Tags = json_decode($Product['ProductTags']);
+$Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID']));
 ?>
 <div class="content-body">
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
@@ -55,14 +60,18 @@ $ProductImages = json_decode($Product['ProductImages']);
                                 $CategoryModel = new Category();
                                 $CategoryList = $CategoryModel->List();
                                 while ($row = mysqli_fetch_array($CategoryList)) {
-                                    echo "<option value='$row[CategoryName]'>$row[CategoryName]</option>";
+                                    if (in_array($row['CategoryName'], $Categories)) {
+                                        echo "<option value='$row[CategoryName]' selected>$row[CategoryName]</option>";
+                                    } else {
+                                        echo "<option value='$row[CategoryName]'>$row[CategoryName]</option>";
+                                    }
                                 }
                                 ?>
                             </select>
                         </div>
                         <div class="form-group col-md-4">
                             <label for="ProductTags">Product Tags (Comma Seperated)</label>
-                            <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary">
+                            <input type="text" name="ProductTags" class="form-control" id="ProductTags" placeholder="watch, earring, diary" value="<?= implode(", ", $Tags); ?>">
                         </div>
                     </div>
                     <div class="form-row mb-1">
@@ -74,19 +83,13 @@ $ProductImages = json_decode($Product['ProductImages']);
                         <?php
                         foreach ($ProductImages as $item) {
                         ?>
-                            <div class="col-md-2 col-6" style="padding-bottom: 5px;">
-                                <figure class="pos-relative mg-b-0 wd-lg-50p">
-                                    <img style="height: 100px;object-fit: cover;width:100%;padding 1px"  src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
-                                    <figcaption class="pos-absolute b-0 l-0 wd-100p pd-20 d-flex justify-content-center">
-                                        <div class="btn-group">
-                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="download"></i></a>
-                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="edit-2"></i></a>
-                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="maximize-2"></i></a>
-                                            <a href="" class="btn btn-dark btn-icon"><i data-feather="trash-2"></i></a>
-                                        </div>
-                                    </figcaption>
-                                </figure>
-                                <!-- <img style="height: 100px;object-fit: cover;width:100%" src="../uploads/product-images/<?= $item ?>" class="img-thumbnail" alt="Responsive image"> -->
+                            <div class="col-md-2 col-6" style="padding-bottom: 10px;">
+                                <img style="height: 100px;object-fit: cover;width:100%;padding 1px" src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
+                                <div class="btn-group" style="width:100%;">
+                                    <a download target="_blank" href="../uploads/product-images/<?= $item ?>" class="btn btn-dark btn-icon download-image"><i data-feather="download"></i></a>
+                                    <a href="" class="btn btn-dark btn-icon move-image"><i data-feather="move"></i></a>
+                                    <a href="" class="btn btn-dark btn-icon delete-image"><i data-feather="trash-2"></i></a>
+                                </div>
                             </div>
                         <?php
                         }
@@ -106,37 +109,56 @@ $ProductImages = json_decode($Product['ProductImages']);
                                     </div>
                                 </li>
                                 <li id="QtyRowContainer" class="list-group-item">
-                                    <div class="form-row">
-                                        <div class="form-group col-md-4">
-                                            <select required id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
-                                                <option label="Select Size"></option>
-                                                <?php
-                                                include_once('models/size-model.php');
-                                                $SizeModel = new Size();
-                                                $SizesList = $SizeModel->List();
-                                                while ($row = mysqli_fetch_array($SizesList)) {
-                                                    echo "<option value='$row[PK_ID]'>$row[SizeValue]</option>";
-                                                }
-                                                ?>
-                                            </select>
+                                    <?php
+                                    $index = 1;
+                                    while ($inventoryItem = mysqli_fetch_array($Inventory)) {
+                                        // echo $inventoryItem['SizeID'];
+                                    ?>
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <select data-select2-id="Size<?= $index ?>" required id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
+                                                    <option label="Select Size"></option>
+                                                    <?php
+                                                    include_once('models/size-model.php');
+                                                    $SizeModel = new Size();
+                                                    $SizesList = $SizeModel->List();
+                                                    while ($row = mysqli_fetch_array($SizesList)) {
+                                                        if($inventoryItem['SizeID'] == $row['PK_ID']){
+                                                            echo "<option selected value='$row[PK_ID]'>$row[SizeValue]</option>";
+                                                        }
+                                                        else{
+                                                            echo "<option value='$row[PK_ID]'>$row[SizeValue]</option>";
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <select data-select2-id="Color<?= $index ?>" required id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
+                                                    <option label="Select Color"></option>
+                                                    <?php
+                                                    include_once('models/color-model.php');
+                                                    $ColorModel = new Color();
+                                                    $ColorList = $ColorModel->List();
+                                                    while ($row = mysqli_fetch_array($ColorList)) {
+                                                        if($inventoryItem['ColorID'] == $row['PK_ID']){
+                                                            echo "<option selected value='$row[PK_ID]'>$row[ColorName]</option>";
+                                                        }
+                                                        else{
+                                                            echo "<option value='$row[PK_ID]'>$row[ColorName]</option>";
+                                                        }
+                                                    }
+                                                    ?>
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <input  value="<?= $inventoryItem['Quantity'] ?>" required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-4">
-                                            <select required id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
-                                                <option label="Select Color"></option>
-                                                <?php
-                                                include_once('models/color-model.php');
-                                                $ColorModel = new Color();
-                                                $ColorList = $ColorModel->List();
-                                                while ($row = mysqli_fetch_array($ColorList)) {
-                                                    echo "<option value='$row[PK_ID]'>$row[ColorName]</option>";
-                                                }
-                                                ?>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-4">
-                                            <input required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
-                                        </div>
-                                    </div>
+                                    <?php
+                                    $index++;
+                                    }
+                                    ?>
                                 </li>
                             </ul>
                         </div>
@@ -150,3 +172,62 @@ $ProductImages = json_decode($Product['ProductImages']);
 <?php
 getFooter("includes/footer.php");
 ?>
+<script>
+    //get product slug
+    $(document).on('keyup', '#ProductName', function() {
+        var product = $(this).val()
+        $.ajax({
+            type: "POST",
+            url: "Controllers/Product",
+            data: {
+                GenerateSlug: true,
+                ProductName: product
+            },
+            success: function(response) {
+                var result = JSON.parse(response)
+                if (result['success'] == true) {
+                    if (result['slug'] != "n-a") {
+                        $('#ProductSlug').val(result['slug'])
+                    } else {
+                        $('#ProductSlug').val("")
+                    }
+                } else {
+                    console.log("Error in generating slug")
+                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+
+    //Add Row
+    $(document).on('click', '#AddRowBtn', function() {
+        var index = $('#QtyRowContainer .form-row').length
+        $.ajax({
+            type: "GET",
+            url: "Components/ProductQuantityRow",
+            data: {
+                Index: index
+            },
+            success: function(response) {
+                $('#QtyRowContainer').append(response)
+                $('.sizes-input').select2({
+                    placeholder: 'Select Size',
+                    searchInputPlaceholder: 'Search options'
+                });
+                $('.colors-input').select2({
+                    placeholder: 'Select Color',
+                    searchInputPlaceholder: 'Search options'
+                });
+                $('.categories-input').select2({
+                    placeholder: 'Select Categories',
+                    searchInputPlaceholder: 'Search options'
+                });
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
+    })
+</script>

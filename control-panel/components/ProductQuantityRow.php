@@ -1,6 +1,7 @@
 <?php
 include_once('../web-config.php');
 $Index = $_REQUEST['Index'];
+$Index = intval($Index) + 1;
 ?>
 <div class="form-row">
     <div class="form-group col-md-4">
