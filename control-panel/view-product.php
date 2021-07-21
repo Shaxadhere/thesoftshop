@@ -32,8 +32,10 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
         <div class="card">
             <div class="card-body">
                 <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
+                
                     <div class="form-row">
-                        <input type="hidden" name="ProductID" value="<?= base64_encode($row['PK_ID']) ?>" />
+                        <input type="hidden" name="CurrentUrl" id="CurrentUrl" value=""/>
+                        <input type="hidden" name="ProductID" value="<?= base64_encode($Product['PK_ID']) ?>" />
                         <div class="form-group col-md-8">
                             <label for="ProductName">Product Name</label>
                             <input required type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name" value="<?= $Product['ProductName'] ?>">
@@ -233,9 +235,10 @@ getFooter("includes/footer.php");
     })
 
     $('body').on('DOMSubtreeModified', '#images-container', function() {
-        var productIds = $('.productIds').map(function() {
+        var productImagesArray = $('.product-images').map(function() {
             return $(this).val();
         }).get();
+        console.log(productImagesArray)
         $('#ProductImages').val(productImagesArray)
     });
 
@@ -245,4 +248,6 @@ getFooter("includes/footer.php");
         });
         $("#images-container").disableSelection();
     });
+    var url = window.location.href;
+    $('#CurrentUrl').val(url)
 </script>

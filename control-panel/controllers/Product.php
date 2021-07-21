@@ -107,16 +107,16 @@ if (isset($_POST['SaveProduct'])) {
 
 //Confirm request from update product
 if (isset($_POST['UpdateProduct'])) {
+    $PrevUrl = $_SERVER['HTTP_REFERER'];
     //check if user is admin
     if (!isset($_SESSION['ADMIN'])) {
         exit();
     }
     //initialise erros arary
     $errors = array();
-    $CurrentURL = $_REQUEST['CurrentURL'];
     if(empty($_POST['ProductID'])){
         array_push($errors, "502 - Bad request error");
-        redirectWindow("$CurrentURL&error=$errors[0]");
+        redirectWindow("$PrevUrl&error=$errors[0]");
         exit();
     }
     $Product = $ProductModel->View($_POST['ProductID']);
@@ -125,22 +125,26 @@ if (isset($_POST['UpdateProduct'])) {
     //empty input validation
     if (empty($_POST['ProductName'])) {
         array_push($errors, "Product name is required");
-        redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
+        redirectWindow("$PrevUrl&error=$errors[0]");
+        exit();
     }
     if (empty($_POST['ProductSlug'])) {
         array_push($errors, "Product slug is required");
-        redirectWindow("$CurrentURL&error=$errors[0]");
+        redirectWindow("$PrevUrl&error=$errors[0]");
+        exit();
     }
     //check if slug already exists
     if (checkExistance("tbl_Product", "ProductSlug", mysqli_real_escape_string(connect(), $_POST['ProductSlug']), connect())) {
         if($_POST['ProductSlug'] != $Product['ProductSlug']){
             array_push($errors, "Product slug is should be unique");
-            redirectWindow("$CurrentURL&error=$errors[0]");
+            redirectWindow("$PrevUrl&error=$errors[0]");
+            exit();
         }
     }
 
     //Explode comma string input
-    $TagsArray = explode(",", $_POST['ProductTags']);
+    $TagsArray = explode(", ", $_POST['ProductTags']);
+    $ProductImages = explode(",", $_POST['ProductImages']);
 
     // //Check if at least one image is there and add images
     // if ($_FILES['ProductImages'] != null) {
@@ -173,31 +177,32 @@ if (isset($_POST['UpdateProduct'])) {
 
     //Check if there are no errors, finally add the product
     if ($errors == null) {
-        $ProductModel->Add(
+        $ProductModel->Edit(
+            $_POST['ProductID'],
             $_POST['ProductName'],
             $_POST['Price'],
             $_POST['ProductDescription'],
             json_encode($_POST['Categories']),
             $_POST['ProductSlug'],
-            json_encode($ImageNamesArray),
-            json_encode($TagsArray),
-            $_SESSION['ADMIN']['PK_ID']
+            json_encode($ProductImages),
+            json_encode($TagsArray)
         );
         
-        ///Add inventory
-        $LastProduct = $ProductModel->LastProduct();
-        $LastProduct = mysqli_fetch_array($LastProduct);
-        include_once('../models/inventory-model.php');
-        $InventoryModel = new Inventory();
-        for ($i=0; $i < count($_POST['Quantity']) ; $i++) {
-            $InventoryModel->Add(
-                $LastProduct['PK_ID'],
-                $_POST['Sizes'][$i],
-                $_POST['Colors'][$i],
-                $_POST['Quantity'][$i],
-            );
-        }
-        redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");
+        // ///Add inventory
+        // $LastProduct = $ProductModel->LastProduct();
+        // $LastProduct = mysqli_fetch_array($LastProduct);
+        // include_once('../models/inventory-model.php');
+        // $InventoryModel = new Inventory();
+        // for ($i=0; $i < count($_POST['Quantity']) ; $i++) {
+        //     $InventoryModel->Add(
+        //         $LastProduct['PK_ID'],
+        //         $_POST['Sizes'][$i],
+        //         $_POST['Colors'][$i],
+        //         $_POST['Quantity'][$i],
+        //     );
+        // }
+        $PrevUrl = $_SERVER['HTTP_REFERER'];
+        redirectWindow($PrevUrl."&success=Product updated successfully");
     }
 }
 
