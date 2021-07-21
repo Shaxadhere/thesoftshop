@@ -32,7 +32,12 @@ $User = mysqli_fetch_array($User);
     <link href="<?= getHTMLRoot() ?>/assets/css/bootstrap-tagsinput.css" rel="stylesheet">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
-        .ui-state-highlight { height: 100px; line-height: 1.2em; }
+        .ui-state-highlight {
+            max-width: 16.66667% !important;
+            width: 100%;
+            height: 138px !important;
+        }
+
         .select2-selection__choice {
             background-color: #0168fa !important;
             border: transparent !important;
@@ -43,6 +48,7 @@ $User = mysqli_fetch_array($User);
         .select2-search select2-search--inline {
             padding: 0 0 0 13px !important;
         }
+
         td {
             vertical-align: middle !important;
             display: table-cell !important;

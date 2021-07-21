@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Products", "includes/header.php");
+getHeader("View Product", "includes/header.php");
 $ProductID = $_REQUEST['product'];
 include_once('models/product-model.php');
 $ProductModel = new Product();
