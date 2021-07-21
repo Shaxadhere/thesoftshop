@@ -33,6 +33,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
             <div class="card-body">
                 <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
                     <div class="form-row">
+                        <input type="hidden" name="ProductID" value="<?= base64_encode($row['PK_ID']) ?>" />
                         <div class="form-group col-md-8">
                             <label for="ProductName">Product Name</label>
                             <input required type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name" value="<?= $Product['ProductName'] ?>">
@@ -79,11 +80,13 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                             <label for="ProductTags">Product Images</label>
                         </div>
                     </div>
+                    <input type="hidden" name="ProductImages" id="ProductImages" value="" />
                     <div class="form-row mb-3" id="images-container">
                         <?php
                         foreach ($ProductImages as $item) {
                         ?>
                             <div class="col-md-2 col-6 single-image" style="padding-bottom: 10px;">
+                                <input type="hidden" name="image-single-item[]" class='product-images' value="<?= $item ?>"/>
                                 <img style="height: 100px;object-fit: cover;width:100%;padding 1px" src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
                                 <div class="btn-group" style="width:100%">
                                     <a download target="_blank" href="../uploads/product-images/<?= $item ?>" class="btn btn-dark btn-icon download-image"><i data-feather="download"></i></a>
@@ -161,7 +164,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                             </ul>
                         </div>
                     </div>
-                    <button name="SaveProduct" type="submit" class="btn btn-primary">Save Product</button>
+                    <button name="UpdateProduct" type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
             </div>
         </div>
@@ -228,6 +231,13 @@ getFooter("includes/footer.php");
             }
         })
     })
+
+    $('body').on('DOMSubtreeModified', '#images-container', function() {
+        var productIds = $('.productIds').map(function() {
+            return $(this).val();
+        }).get();
+        $('#ProductImages').val(productImagesArray)
+    });
 
     $(function() {
         $("#images-container").sortable({
