@@ -11,10 +11,10 @@ if (isset($_SESSION['ADMIN'])) {
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="TheSoftShop.pk Admin Panel">
+  <meta name="description" content="Moreo.pk Admin Panel">
   <meta name="author" content="Shehzad Ahmed">
   <link rel="shortcut icon" type="image/x-icon" href="<?= getHTMLRoot() ?>/assets/img/favicon.png">
-  <title>Login | TheSoftShop.pk</title>
+  <title>Login | Moreo.pk</title>
   <link href="<?= getHTMLRoot() ?>/assets/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="<?= getHTMLRoot() ?>/assets/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= getHTMLRoot() ?>/assets/css/dashforge.css">
@@ -25,11 +25,11 @@ if (isset($_SESSION['ADMIN'])) {
   <header class="navbar navbar-header navbar-header-fixed">
     <a href="index" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
     <div class="navbar-brand">
-      <a href="index" class="df-logo">TheSoft<span>Shop</span></a>
+      <a href="index" class="df-logo">Moroe<span>.pk</span></a>
     </div>
     <div id="navbarMenu" class="navbar-menu-wrapper">
       <div class="navbar-menu-header">
-        <a href="index" class="df-logo">TheSoft<span>Shop</span></a>
+        <a href="index" class="df-logo">Moreo<span>.pk</span></a>
         <a id="mainMenuClose" href="index"><i data-feather="x"></i></a>
       </div>
     </div>

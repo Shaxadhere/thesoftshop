@@ -16,10 +16,10 @@ $User = mysqli_fetch_array($User);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="TheSoftShop.pk Admin Panel">
+    <meta name="description" content="Moreo.pk Admin Panel">
     <meta name="author" content="Shehzad Ahmed">
     <link rel="shortcut icon" type="image/x-icon" href="<?= getHTMLRoot() ?>/assets/img/favicon.png">
-    <title>Dashboard | TheSoftShop</title>
+    <title>Dashboard | Moreo.pk</title>
     <link href="<?= getHTMLRoot() ?>/assets/lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
     <link href="<?= getHTMLRoot() ?>/assets/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
@@ -59,7 +59,7 @@ $User = mysqli_fetch_array($User);
 <body>
     <aside class="aside aside-fixed">
         <div class="aside-header">
-            <a href="<?= getHTMLRoot() ?>" class="aside-logo">TheSoft<span>Shop</span>
+            <a href="<?= getHTMLRoot() ?>" class="aside-logo">Moreo<span>.pk</span>
             </a>
             <a href="<?= getHTMLRoot() ?>" class="aside-menu-link">
                 <i data-feather="menu"></i>
