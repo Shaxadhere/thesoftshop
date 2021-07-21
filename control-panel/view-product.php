@@ -34,7 +34,6 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                 <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
                 
                     <div class="form-row">
-                        <input type="hidden" name="CurrentUrl" id="CurrentUrl" value=""/>
                         <input type="hidden" name="ProductID" value="<?= base64_encode($Product['PK_ID']) ?>" />
                         <div class="form-group col-md-8">
                             <label for="ProductName">Product Name</label>
@@ -92,8 +91,8 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                 <img style="height: 100px;object-fit: cover;width:100%;padding 1px" src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
                                 <div class="btn-group" style="width:100%">
                                     <a download target="_blank" href="../uploads/product-images/<?= $item ?>" class="btn btn-dark btn-icon download-image"><i data-feather="download"></i></a>
-                                    <a href="" class="btn btn-dark btn-icon move-image"><i data-feather="move"></i></a>
-                                    <a href="" class="btn btn-dark btn-icon delete-image"><i data-feather="trash-2"></i></a>
+                                    <a href="#" class="btn btn-dark btn-icon move-image"><i data-feather="move"></i></a>
+                                    <a href="#" class="btn btn-dark btn-icon delete-image"><i data-feather="trash-2"></i></a>
                                 </div>
                             </div>
                         <?php
@@ -248,6 +247,9 @@ getFooter("includes/footer.php");
         });
         $("#images-container").disableSelection();
     });
-    var url = window.location.href;
-    $('#CurrentUrl').val(url)
+
+    $(document).on('click', '.delete-image', function() {
+        var parent = $(this).parent().parent()
+        parent.remove()
+    })
 </script>
