@@ -89,7 +89,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                             <div class="col-md-2 col-6 single-image" style="padding-bottom: 10px;">
                                 <input type="hidden" name="image-single-item[]" class='product-images' value="<?= $item ?>"/>
                                 <img style="height: 100px;object-fit: cover;width:100%;padding 1px" src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
-                                <div class="btn-group" style="width:100%">
+                                <div class="btn-group w-100">
                                     <a download target="_blank" href="../uploads/product-images/<?= $item ?>" class="btn btn-dark btn-icon download-image"><i data-feather="download"></i></a>
                                     <a href="#" class="btn btn-dark btn-icon move-image"><i data-feather="move"></i></a>
                                     <a href="#" class="btn btn-dark btn-icon delete-image"><i data-feather="trash-2"></i></a>
@@ -116,9 +116,9 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                     <?php
                                     $index = 1;
                                     while ($inventoryItem = mysqli_fetch_array($Inventory)) {
-                                        // echo $inventoryItem['SizeID'];
                                     ?>
                                         <div class="form-row">
+                                            <input type="hidden" name="InventoryIDs[]" value="<?= base64_encode($inventoryItem['InventoryID']) ?>"/>
                                             <div class="form-group col-md-4">
                                                 <select data-select2-id="Size<?= $index ?>" required id="Sizes<?= $index ?>" name="Sizes[]" style="color:blue" class="form-control sizes-input">
                                                     <option label="Select Size"></option>
@@ -208,7 +208,7 @@ getFooter("includes/footer.php");
         var index = $('#QtyRowContainer .form-row').length
         $.ajax({
             type: "GET",
-            url: "Components/ProductQuantityRow",
+            url: "Components/QtyRowAddMore",
             data: {
                 Index: index
             },

@@ -64,6 +64,26 @@ class Inventory{
             connect()
         );
     }
-}
 
-?>
+    function UpdateInventory($InventoryID, $ColorID, $SizeID, $Quantity){
+        $InventoryID = base64_decode($InventoryID);
+        $InventoryID = mysqli_real_escape_string(connect(), $InventoryID);
+        $ColorID = mysqli_real_escape_string(connect(), $ColorID);
+        $SizeID = mysqli_real_escape_string(connect(), $SizeID);
+        $Quantity = mysqli_real_escape_string(connect(), $Quantity);
+        editData(
+            "tbl_inventory",
+            array(
+                "ColorID",
+                $ColorID,
+                "SizeID",
+                $SizeID,
+                "Quantity",
+                $Quantity
+            ),
+            "PK_ID",
+            $InventoryID,
+            connect()
+        );
+    }
+}

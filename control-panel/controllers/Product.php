@@ -145,6 +145,7 @@ if (isset($_POST['UpdateProduct'])) {
     //Explode comma string input
     $TagsArray = explode(", ", $_POST['ProductTags']);
     $ProductImages = explode(",", $_POST['ProductImages']);
+    
 
     // //Check if at least one image is there and add images
     // if ($_FILES['ProductImages'] != null) {
@@ -188,19 +189,27 @@ if (isset($_POST['UpdateProduct'])) {
             json_encode($TagsArray)
         );
         
-        // ///Add inventory
-        // $LastProduct = $ProductModel->LastProduct();
-        // $LastProduct = mysqli_fetch_array($LastProduct);
-        // include_once('../models/inventory-model.php');
-        // $InventoryModel = new Inventory();
-        // for ($i=0; $i < count($_POST['Quantity']) ; $i++) {
-        //     $InventoryModel->Add(
-        //         $LastProduct['PK_ID'],
-        //         $_POST['Sizes'][$i],
-        //         $_POST['Colors'][$i],
-        //         $_POST['Quantity'][$i],
-        //     );
-        // }
+        ///Add inventory
+        include_once('../models/inventory-model.php');
+        $InventoryModel = new Inventory();
+        for ($i=0; $i < count($_POST['Quantity']) ; $i++) {
+            $InventoryModel->UpdateInventory(
+                $_POST['InventoryIDs'][$i],
+                $_POST['Colors'][$i],
+                $_POST['Sizes'][$i],
+                $_POST['Quantity'][$i]
+            );
+        }
+        if(isset($_POST['NewQuantity'])){
+            for ($i=0; $i < count($_POST['NewQuantity']) ; $i++) {
+                $InventoryModel->Add(
+                    base64_decode($_POST['ProductID']),
+                    $_POST['NewSizes'][$i],
+                    $_POST['NewColors'][$i],
+                    $_POST['NewQuantity'][$i]
+                );
+            }
+        }
         $PrevUrl = $_SERVER['HTTP_REFERER'];
         redirectWindow($PrevUrl."&success=Product updated successfully");
     }
