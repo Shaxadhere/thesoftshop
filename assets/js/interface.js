@@ -2202,24 +2202,24 @@
         /**********************************************
          * Quick view / Quick Shop
          * ********************************************/
-        body.on( 'click', '.js_add_qv , .js__qs', function ( e ) {
-            e.preventDefault();
-            e.stopPropagation();
-            let $this = $( this ),
-                delay = 500;
-            $this.addClass( 'loading' );
-            if ( $.magnificPopup.instance.isOpen ) {
-                $.magnificPopup.close();
-                delay = $.magnificPopup.instance.st.removalDelay + 10;
-            }
-            setTimeout( function () {
-                if ( $this.hasClass( 'js__qs' ) ) {
-                    $this.kallesLoadQuikShop();
-                } else {
-                    $this.kallesLoadQuickView();
-                }
-            }, delay );
-        } );
+        // body.on( 'click', '.js_add_qv , .js__qs', function ( e ) {
+        //     e.preventDefault();
+        //     e.stopPropagation();
+        //     let $this = $( this ),
+        //         delay = 500;
+        //     $this.addClass( 'loading' );
+        //     if ( $.magnificPopup.instance.isOpen ) {
+        //         $.magnificPopup.close();
+        //         delay = $.magnificPopup.instance.st.removalDelay + 10;
+        //     }
+        //     setTimeout( function () {
+        //         if ( $this.hasClass( 'js__qs' ) ) {
+        //             $this.kallesLoadQuikShop();
+        //         } else {
+        //             $this.kallesLoadQuickView();
+        //         }
+        //     }, delay );
+        // } );
 
         /**********************************************
          * Reply comment form
