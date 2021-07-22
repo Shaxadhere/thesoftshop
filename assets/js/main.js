@@ -29,9 +29,6 @@ function parse_my_query(variable) {
     console.log('Query variable %s not found', variable);
 }
 
-// quick view modal handle
-$(document).on('mouseover', '.quick-view-product', function () {})
-
 // search products function
 function search_products(query, category) {
     const queryString = window.location.search
@@ -508,6 +505,7 @@ $('body').on('click', '.nt_add_w', function (e) {
     })
 });
 
+// quick view modal handle
 $('body').on('click', '.js_add_qv , .js__qs', function (e) {
     e.preventDefault();
     e.stopPropagation();

@@ -56,3 +56,20 @@ if (isset($_POST['UpdateInventory'])) {
         echo json_encode($errors);
     }
 }
+
+if(isset($_POST['DeleteInventory'])){
+    $errors = array();
+    if(!isset($_SESSION['ADMIN'])){
+        exit();
+    }
+    if(empty($_POST['InventoryID'])){
+        array_push($errors, "502 - Bad request error");
+    }
+    if($errors == null){
+        $InventoryModel->Delete($_POST['InventoryID']);
+        echo true;
+    }
+    else{
+        echo json_encode($errors);
+    }
+}

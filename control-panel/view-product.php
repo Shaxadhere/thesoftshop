@@ -32,7 +32,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
         <div class="card">
             <div class="card-body">
                 <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
-                
+
                     <div class="form-row">
                         <input type="hidden" name="ProductID" value="<?= base64_encode($Product['PK_ID']) ?>" />
                         <div class="form-group col-md-8">
@@ -87,7 +87,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                         foreach ($ProductImages as $item) {
                         ?>
                             <div class="col-md-2 col-6 single-image" style="padding-bottom: 10px;">
-                                <input type="hidden" name="image-single-item[]" class='product-images' value="<?= $item ?>"/>
+                                <input type="hidden" name="image-single-item[]" class='product-images' value="<?= $item ?>" />
                                 <img style="height: 100px;object-fit: cover;width:100%;padding 1px" src="../uploads/product-images/<?= $item ?>" class="img-fit-cover" alt="Responsive image">
                                 <div class="btn-group w-100">
                                     <a download target="_blank" href="../uploads/product-images/<?= $item ?>" class="btn btn-dark btn-icon download-image"><i data-feather="download"></i></a>
@@ -117,8 +117,8 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                     $index = 1;
                                     while ($inventoryItem = mysqli_fetch_array($Inventory)) {
                                     ?>
-                                        <div class="form-row">
-                                            <input type="hidden" name="InventoryIDs[]" value="<?= base64_encode($inventoryItem['InventoryID']) ?>"/>
+                                        <div class="form-row" id="<?= $inventoryItem['InventoryID'] ?>">
+                                            <input type="hidden" name="InventoryIDs[]" value="<?= base64_encode($inventoryItem['InventoryID']) ?>" />
                                             <div class="form-group col-md-4">
                                                 <select data-select2-id="Size<?= $index ?>" required id="Sizes<?= $index ?>" name="Sizes[]" style="color:blue" class="form-control sizes-input">
                                                     <option label="Select Size"></option>
@@ -153,8 +153,11 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3">
                                                 <input value="<?= $inventoryItem['Quantity'] ?>" required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity<?= $index ?>" placeholder="Enter quantity">
+                                            </div>
+                                            <div class="form-group col-md-1">
+                                                <a href="#DeleteQtyRow" data-id='<?= base64_encode($inventoryItem['InventoryID']) ?>' data-toggle="modal" type="button" style="height:28px !important; padding: 3px;" class="btn btn-outline-danger w-100">Remove</a>
                                             </div>
                                         </div>
                                     <?php
@@ -167,6 +170,22 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                     </div>
                     <button name="UpdateProduct" type="submit" class="btn btn-primary">Save Changes</button>
                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="DeleteQtyRow" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title" id="ModalTitle">Are you sure you want to delete this?</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="ModalCancelButton" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
+                <button type="button" data-id="" id="DeleteRowConfirm" class="btn btn-primary tx-13">Yes, Delete</button>
             </div>
         </div>
     </div>
@@ -233,14 +252,15 @@ getFooter("includes/footer.php");
         })
     })
 
+    //Fill image input field with images
     $('body').on('DOMSubtreeModified', '#images-container', function() {
         var productImagesArray = $('.product-images').map(function() {
             return $(this).val();
         }).get();
-        console.log(productImagesArray)
         $('#ProductImages').val(productImagesArray)
     });
 
+    //initialise sortable
     $(function() {
         $("#images-container").sortable({
             placeholder: "ui-state-highlight"
@@ -248,8 +268,41 @@ getFooter("includes/footer.php");
         $("#images-container").disableSelection();
     });
 
+    //delete image statically
     $(document).on('click', '.delete-image', function() {
         var parent = $(this).parent().parent()
         parent.remove()
+    })
+
+    //remove row show modal
+    $('#DeleteQtyRow').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var inventoryId = button.data('id')
+        $('#DeleteRowConfirm').attr('data-id', inventoryId)
+    })
+
+    $(document).on('click', '#DeleteRowConfirm', function(){
+        var id = $(this).attr('data-id')
+        var row = atob(id)
+        $.ajax({
+            type: "POST",
+            url: "controllers/Inventory",
+            data: {
+                DeleteInventory: true,
+                InventoryID: id
+            },
+            success: function(response){
+                if(response == true){
+                    $('#ModalCancelButton').click()
+                    $('#'+row).remove()
+                }
+                else{
+                    var result = JSON.parse(response)
+                }
+            },
+            error: function (error){
+                console.log("Error in connection: "+ error)
+            }
+        })
     })
 </script>

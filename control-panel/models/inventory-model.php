@@ -86,4 +86,10 @@ class Inventory{
             connect()
         );
     }
+
+    function Delete($InventoryID){
+        $InventoryID = base64_decode($InventoryID);
+        $InventoryID = mysqli_real_escape_string(connect(), $InventoryID);
+        deleteDataById("tbl_inventory", "PK_ID", $InventoryID, connect());
+    }
 }
