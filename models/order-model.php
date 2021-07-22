@@ -9,7 +9,7 @@ class Order {
         );
     }
 
-    function Add($CustomerID, $OrderNumber, $CustomerName, $CustomerEmail, $CustomerContact, $CustomerBillingAddress, $CustomerShippingAddress, $CustomerCity, $State, $ProductsWithQuantity, $OrderStatus, $OrderNotes){
+    function Add($CustomerID, $OrderNumber, $CustomerName, $CustomerEmail, $CustomerContact, $CustomerBillingAddress, $CustomerShippingAddress, $CustomerCity, $State, $ProductsWithQuantity, $OrderStatus, $OrderNotes, $DeliveryCost, $Amount){
         $CustomerID = mysqli_real_escape_string(connect(), $CustomerID);
         $CustomerName = mysqli_real_escape_string(connect(), $CustomerName);
         $CustomerEmail = mysqli_real_escape_string(connect(), $CustomerEmail);
@@ -20,6 +20,8 @@ class Order {
         $State = mysqli_real_escape_string(connect(), $State);
         $ProductsWithQuantity = mysqli_real_escape_string(connect(), $ProductsWithQuantity);
         $OrderStatus = mysqli_real_escape_string(connect(), $OrderStatus);
+        $DeliveryCost = mysqli_real_escape_string(connect(), $DeliveryCost);
+        $Amount = mysqli_real_escape_string(connect(), $Amount);
         insertData(
             "tbl_orders",
             array(
@@ -34,7 +36,9 @@ class Order {
                 "State",
                 "ProductsWithQuantity", 
                 "OrderStatus",
-                "OrderNotes"
+                "OrderNotes",
+                "DeliveryCost",
+                "Amount"
             ),
             array(
                 $CustomerID,
@@ -48,7 +52,9 @@ class Order {
                 $State,
                 $ProductsWithQuantity, 
                 $OrderStatus,
-                $OrderNotes
+                $OrderNotes,
+                $DeliveryCost, 
+                $Amount
             ),
             connect()
         );
