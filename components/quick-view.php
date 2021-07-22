@@ -16,20 +16,20 @@
                         <div class="kalles-section-pr_summary kalles-section summary entry-summary mt__30">
                             <div class="alert alert-danger" id="cart-alert-danger" style="display:none"></div>
                             <div class="alert alert-success" id="cart-alert-success" style="display:none">Product added to cart successfully!</div>
-                            <h1 class="product_title entry-title fs__16"><a id="view-product-name-anchor" href="#">${Product Name}</a></h1>
+                            <h1 class="product_title entry-title fs__16"><a id="view-product-name-anchor" href="#"></a></h1>
                             <div class="flex wrap fl_between al_center price-review">
                                 <p class="price_range" id="price_qv">
-                                    <del id="view-product-original-price" style="display:none">${Original Price}</del>
-                                    <ins id="view-product-current-price">${Current Price}</ins>
+                                    <del id="view-product-original-price" style="display:none"></del>
+                                    <ins id="view-product-current-price"></ins>
                                 </p>
                                 <a href="#" class="rating_sp_kl dib">
                                     <div class="kalles-rating-result">
-                                        <span class="kalles-rating-result__number" id="view-product-review-count">12 reviews</span>
+                                        <span class="kalles-rating-result__number" id="view-product-review-count"></span>
                                     </div>
                                 </a>
                             </div>
                             <div class="pr_short_des">
-                                <p class="mg__0" id="view-product-description">${Product Description}</p>
+                                <p class="mg__0" id="view-product-description"></p>
                             </div>
                             <div class="btn-atc atc-slide btn_des_1 btn_txt_3">
                                 <div id="callBackVariant_qv" class="nt_pink nt1_ nt2_">
@@ -37,7 +37,7 @@
                                         <div class="variations mb__40 style__circle size_medium style_color des_color_1">
                                             <div class="swatch is-color kalles_swatch_js">
                                                 <h4 class="swatch__title">Color:
-                                                    <span class="nt_name_current user_choose_js" id="view-product-default-color">${Default Color}</span>
+                                                    <span class="nt_name_current user_choose_js" id="view-product-default-color"></span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr" id="view-product-colors-container">
                                                     
@@ -45,12 +45,9 @@
                                             </div>
                                             <div class="swatch is-label kalles_swatch_js">
                                                 <h4 class="swatch__title" id="view-product-default-size">Size:
-                                                    <span class="nt_name_current user_choose_js" id="view-product-size-value" id="">${Default Size}</span>
+                                                    <span class="nt_name_current user_choose_js" id="view-product-size-value" id=""></span>
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr" id="view-product-sizes-container">
-                                                    <li class="nt-swatch swatch_pr_item pr" data-escape="XS">
-                                                        <span class="swatch__value_pr">XS</span>
-                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -84,8 +81,8 @@
                                 </div>
                             </div>
                             <div class="product_meta">
-                                <span class="posted_in" id="view-product-categories-container"><span class="cb">Categories:</span> <a href="#" class="cg" title="Women">${Categories}</a></span>
-                                <span class="tagged_as" id="view-product-tags-container"><span class="cb">Tags:</span> <a href="#" class="cg" title="Color Black">${Tags}</a></span>
+                                <span class="posted_in" id="view-product-categories-container"><span class="cb">Categories:</span> <a href="#" class="cg" title="Women"></a></span>
+                                <span class="tagged_as" id="view-product-tags-container"><span class="cb">Tags:</span> <a href="#" class="cg" title="Color Black"></a></span>
                             </div>
                             <a id="view-product-view-full-details" href="#" class="btn fwsb detail_link p-0 fs__14">View full details<i class="facl facl-right"></i></a>
                         </div>
