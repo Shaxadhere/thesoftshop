@@ -9,6 +9,13 @@ class Order
             "SELECT * FROM `tbl_orders` where Deleted = 0 order by PK_ID desc"
         );
     }
+
+    function ListFromDateToDate($fromDate, $toDate){
+        return mysqli_query(
+            connect(),
+            "SELECT * FROM `tbl_orders` where CreatedAt between '$fromDate' and '$toDate'"
+        );
+    }
     
     function View($OrderID)
     {

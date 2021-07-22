@@ -215,3 +215,20 @@ if (isset($_POST['UpdateProduct'])) {
     }
 }
 
+//Confirm request from delete product
+if(isset($_POST['DeleteProduct'])){
+    $errors = array();
+    if(!isset($_SESSION['ADMIN'])){
+        exit();
+    }
+    if(empty($_POST['ProductID'])){
+        array_push($errors, "502 - Bad request error");
+    }
+    if($errors == null){
+        $ProductModel->Delete($_POST['ProductID']);
+        echo true;
+    }
+    else{
+        echo json_encode($errors);
+    }
+}

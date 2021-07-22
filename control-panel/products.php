@@ -154,7 +154,7 @@ getHeader("Products", "includes/header.php");
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item text-primary" href="view-product?product=<?= base64_encode($row['PK_ID']) ?>">View Details</a>
-                                    <a class="dropdown-item text-danger" href="#DeletProduct" data-toggle="modal">Delete</a>
+                                    <a class="dropdown-item text-danger" href="#DeletProduct" data-toggle="modal" data-id="<?= base64_encode($row['PK_ID']) ?>">Delete</a>
                                     <div class="wd-200 pd-15">
                                         <p><strong>Created By: </strong>System</p>
                                         <p class="mb-0"><strong>Created At: </strong><?= date('D, d M, Y', strtotime($row['CreatedAt'])) ?></p>
@@ -182,7 +182,7 @@ getHeader("Products", "includes/header.php");
             </div>
             <div class="modal-footer">
                 <button type="button" id="ModalCancelButton" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
-                <button type="button" data-id="" id="ModalSaveChanges" class="btn btn-primary tx-13">Yes, Delete</button>
+                <button type="button" data-id="" id="ConfirmDeleteProduct" class="btn btn-danger tx-13">Yes, Delete</button>
             </div>
         </div>
     </div>
@@ -252,7 +252,31 @@ getFooter("includes/footer.php");
     //delete product confirmation modal
     $('#DeletProduct').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
-        var inventoryId = button.data('id')
-        
+        var productId = button.data('id')
+        $('#ConfirmDeleteProduct').attr('data-id', productId)
+    })
+
+    //confirm deletion of product
+    $(document).on('click', '#ConfirmDeleteProduct', function() {
+        var productId = $(this).data('id')
+        $.ajax({
+            type: "POST",
+            url: "controllers/Product",
+            data: {
+                DeleteProduct: true,
+                ProductID: productId
+            },
+            success: function(response) {
+                if (response == true) {
+                    window.location.reload()
+                } else {
+                    var result = JSON.parse(response)
+                    $('#errors').html(result[0])
+                }
+            },
+            error: function(error) {
+                console.log("Error in connection: " + error)
+            }
+        })
     })
 </script>
