@@ -20,7 +20,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                     <li class="breadcrumb-item"><a href="<?= getHTMLRoot() . "/dashboard" ?>">Dashboard</a></li>
                     <li class="breadcrumb-item"><a href="<?= getHTMLRoot() . "/products" ?>">Products</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">View Product</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="../view-product?name=<?= $Product['ProductSlug'] ?>"><?= $Product['ProductName'] ?></a></li>
                 </ol>
             </nav>
         </div>
@@ -185,7 +185,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
             </div>
             <div class="modal-footer">
                 <button type="button" id="ModalCancelButton" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
-                <button type="button" data-id="" id="DeleteRowConfirm" class="btn btn-primary tx-13">Yes, Delete</button>
+                <button type="button" data-id="" id="DeleteRowConfirm" class="btn btn-danger tx-13">Yes, Delete</button>
             </div>
         </div>
     </div>
@@ -281,6 +281,7 @@ getFooter("includes/footer.php");
         $('#DeleteRowConfirm').attr('data-id', inventoryId)
     })
 
+    //confirm deletion of a qty row
     $(document).on('click', '#DeleteRowConfirm', function(){
         var id = $(this).attr('data-id')
         var row = atob(id)

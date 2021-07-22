@@ -154,7 +154,7 @@ getHeader("Products", "includes/header.php");
                                 </button>
                                 <div class="dropdown-menu">
                                     <a class="dropdown-item text-primary" href="view-product?product=<?= base64_encode($row['PK_ID']) ?>">View Details</a>
-                                    <a class="dropdown-item text-danger" href="#">Delete</a>
+                                    <a class="dropdown-item text-danger" href="#DeletProduct" data-toggle="modal">Delete</a>
                                     <div class="wd-200 pd-15">
                                         <p><strong>Created By: </strong>System</p>
                                         <p class="mb-0"><strong>Created At: </strong><?= date('D, d M, Y', strtotime($row['CreatedAt'])) ?></p>
@@ -168,6 +168,22 @@ getHeader("Products", "includes/header.php");
                     ?>
                 </tbody>
             </table>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="DeletProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel5" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content tx-14">
+            <div class="modal-header">
+                <h6 class="modal-title" id="ModalTitle">Are you sure you want to delete this?</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="ModalCancelButton" class="btn btn-secondary tx-13" data-dismiss="modal">Close</button>
+                <button type="button" data-id="" id="ModalSaveChanges" class="btn btn-primary tx-13">Yes, Delete</button>
+            </div>
         </div>
     </div>
 </div>
@@ -231,5 +247,12 @@ getFooter("includes/footer.php");
                 console.log("Error in connection: " + error)
             }
         })
+    })
+
+    //delete product confirmation modal
+    $('#DeletProduct').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget)
+        var inventoryId = button.data('id')
+        
     })
 </script>
