@@ -146,6 +146,12 @@ $User = mysqli_fetch_array($User);
                         <span>Sales</span>
                     </a>
                 </li>
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/investments") ? "active" : "" ?>">
+                    <a href="<?= getHTMLRoot() ?>/investments" class="nav-link">
+                        <i data-feather="dollar-sign"></i>
+                        <span>Investments</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </aside>

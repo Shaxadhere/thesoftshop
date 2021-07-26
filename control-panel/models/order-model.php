@@ -17,6 +17,13 @@ class Order
         );
     }
     
+    function ListFrequentCities(){
+        return mysqli_query(
+            connect(),
+            "SELECT CustomerCity, COUNT(`CustomerCity`) AS `value_occurrence` FROM `tbl_orders` GROUP BY `CustomerCity` ORDER BY `value_occurrence` DESC LIMIT 4"
+        );
+    }
+
     function View($OrderID)
     {
         $OrderID = base64_decode($OrderID);
