@@ -13,18 +13,45 @@ include_once('models/product-model.php');
 $ProductModel = new Product();
 $Cart = $_SESSION['CART'];
 ?>
-<!--shop banner-->
-<div class="kalles-section page_section_heading">
-    <div class="page-head tc pr oh cat_bg_img page_head_">
-        <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
-        <div class="container pr z_100">
-            <h1 class="mb__5 cw">Track Order</h1>
+<div class="mb-5">
+    <div class="wrap_title des_title_2 mt__50">
+        <h3 class="section-title tc position-relative flex fl_center al_center fs__24 title_2">
+            <span class="mr__10 ml__10">Track Order</span>
+        </h3>
+        <span class="dn tt_divider">
+            <span></span>
+            <i class="dn clprfalse title_2 la-gem"></i>
+            <span></span>
+        </span>
+        <span class="section-subtitle db tc sub-title">Please enter you order number or <a>login</a> to check your order status</span>
+    </div>
+    <div class="kalles-section cart_page_section container mt__60">
+        <div class="frm_cart_page check-out_calculator">
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="checkout-section">
+                        <div class="row" style="text-align: -webkit-center;">
+                            <div class="checkout-section__field col-lg-12 col-12">
+                                <div class="mc4wp-form-fields"  style="width:50%" >
+                                    <div class="signup-newsletter-form row no-gutters pr oh ">
+                                        <div class="col col_email">
+                                            <input type="text" name="order-number" placeholder="Please enter your order number"  value="" class="tc tl_md input-text" required="required">
+                                        </div>
+                                        <div class="col-auto">
+                                            <button name="AddNewsletter" type="submit" class="btn_new_icon_false w__100 submit-btn truncate">
+                                                <span>Track</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-<!--end shop banner-->
-<!--cart section-->
-<div class="kalles-section cart_page_section container mt__60">
+    <div class="kalles-section cart_page_section container mt__60">
     <div class="frm_cart_page check-out_calculator">
         <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -92,7 +119,6 @@ $Cart = $_SESSION['CART'];
     </div>
 </div>
 </div>
-<!--end cart section-->
 <?php
 include_once('components/quick-view.php');
 include_once('components/quick-shop.php');
