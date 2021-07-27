@@ -600,3 +600,11 @@ $('body').on('click', '.js_add_qv , .js__qs', function (e) {
         }
     }, delay);
 });
+
+//track order
+$(document).on('click', '#btn-track', function(){
+    var order = $('#order-number').val()
+    if(order != ''){
+        window.location.href="/thesoftshop/track-order?order="+order
+    }
+})
