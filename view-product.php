@@ -15,11 +15,14 @@ $ProductDetails = $ProductModel->FilterWithAttributesByProductSlug($ProductSlug)
 $Colors = array();
 $ColorCodes = array();
 $Sizes = array();
+$PriceVarient = array();
 while ($Deatil = mysqli_fetch_array($ProductDetails)) {
     array_push($Colors, $Deatil['ColorName']);
     array_push($ColorCodes, $Deatil['ColorCode']);
     array_push($Sizes, $Deatil['SizeValue']);
+    array_push($PriceVarient, $Deatil['PriceVarient']);
 }
+$ProductDetailsCount = count($PriceVarient);
 $Tags = json_decode($Product['ProductTags']);
 getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/header.php");
 
@@ -102,7 +105,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                                 <div class="alert alert-success" id="cart-alert-success" style="display:none">Product added to cart successfully!</div>
                                 <h1 class="product_title entry-title fs__16"><?= $Product['ProductName'] ?></h1>
                                 <div class="flex wrap fl_between al_center price-review">
-                                    <p class="price_range" id="price_ppr">Rs. <?= $Product['Price'] ?></p>
+                                    <p class="price_range" id="price_ppr">Rs. <?= ($Product['PriceVary'] != 1) ? $Product['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></p>
                                     <a href="#tab_reviews_product" class="rating_sp_kl dib">
                                         <div class="kalles-rating-result">
                                             <?php

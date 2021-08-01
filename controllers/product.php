@@ -195,8 +195,14 @@ if (isset($_POST['CheckQuantity'])) {
         $ColorDetails['PK_ID']
     );
     $Inventory = mysqli_fetch_array($Inventory);
-    if ($Inventory != null) {
-        echo $Inventory['Quantity'] . " pieces available.";
+    if ($Inventory != null && $Inventory['Quantity'] != 0) {
+        $result = array(
+            "Inventory" => $Inventory['Quantity'] . " pieces available.",
+            "InventoryPrice" => $Inventory['Price'],
+            "PriceVary" => $Product['PriceVary']
+        );
+        echo json_encode($result);
+        // echo $Inventory['Quantity'] . " pieces available.";
     } else {
         echo "<span class='text-danger'>Out of stock</span>";
     }

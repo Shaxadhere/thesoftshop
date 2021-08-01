@@ -2230,7 +2230,12 @@
                         images.forEach(item => {
                             $('#view-product-image-container').append("<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" + "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='/thesoftshop/uploads/product-images/" + item + "'></span>" + "</div>")
                         });
-                        $('#view-product-current-price').html("Rs. " + product['Price'])
+                        if(product['PriceVary'] != "1"){
+                            $('#view-product-current-price').html("Rs. " + product['Price'])
+                        }
+                        else{
+                            $('#view-product-current-price').html("Rs. " + productDetails[0]['PriceVarient'] + " - " + productDetails[(parseInt(productDetails.length) - 1)]['PriceVarient'])
+                        }
                         $('#view-product-review-count').html(((reviews != null) ? reviews.length : "0") + " Reviews")
                         $('#view-product-description').html(product['ProductDescription'])
                         $('#view-product-default-color').html(product['ColorName'])

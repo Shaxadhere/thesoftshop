@@ -481,7 +481,12 @@ function check_stocks(product, size, color) {
             Color: color
         },
         success: function (response) {
-            $('#quantity-available').html(response)
+            var result = JSON.parse(response)
+            $('#quantity-available').html(result['Inventory'])
+            if(result['PriceVary'] == "1"){
+                $('#price_ppr').html("Rs. " + result['InventoryPrice'])
+                $('#view-product-current-price').html("Rs. " + result['InventoryPrice'])
+            }
         },
         error: function (error) {}
     })
