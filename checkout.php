@@ -1,8 +1,8 @@
 <?php
 include_once('web-config.php');
 getHeader("Checkout", "includes/header.php");
-if(!isset($_SESSION['CART']) || $_SESSION['CART'] == "" || $_SESSION['CART'] == null){
-    redirectWindow(getHTMLRoot()."?error=Your cart is empty!");
+if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "" || $_SESSION['CART'] == null) {
+    redirectWindow(getHTMLRoot() . "?error=Your cart is empty!");
 }
 if (isset($_SESSION['USER'])) {
     include_once('models/customer-model.php');
@@ -10,7 +10,11 @@ if (isset($_SESSION['USER'])) {
     $Customer = $CustomerModel->FilterCustomerByID(base64_encode($_SESSION['USER']['PK_ID']));
 }
 include_once('models/product-model.php');
+include_once('models/color-model.php');
+include_once('models/size-model.php');
 $ProductModel = new Product();
+$ColorModel = new Color();
+$SizeModel = new Size();
 $Cart = $_SESSION['CART'];
 ?>
 <!--cart section-->
@@ -85,12 +89,31 @@ $Cart = $_SESSION['CART'];
                                 foreach ($Cart as $cartItem) {
                                     $Product = $ProductModel->FilterByProductID(base64_encode($cartItem['productId']));
                                     $Product = mysqli_fetch_array($Product);
+
+                                    $Color = $cartItem['productColor'];
+                                    $Size = $cartItem['productSize'];
+
+                                    $ColorDetails = $ColorModel->FilterByColorName($Color);
+                                    $ColorDetails = mysqli_fetch_array($ColorDetails);
+                                    $SizeDetails = $SizeModel->FilterBySizeName($Size);
+                                    $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                                    $Inventory = $ProductModel->InventoryByAttributes(
+                                        $Product['ProductID'],
+                                        $SizeDetails['PK_ID'],
+                                        $ColorDetails['PK_ID']
+                                    );
+                                    $Inventory = mysqli_fetch_array($Inventory);
+
                                     echo "<tr class='cart_item'>";
                                     echo "<td class='product-name'>$Product[ProductName]<strong class='product-quantity'>× $cartItem[productqty]</strong>";
                                     echo "</td>";
-                                    echo "<td class='product-total'><span class='cart_price'>Rs. ".intval($Product['Price']) * intval($cartItem['productqty'])."</span></td>";
+                                    echo "<td class='product-total'><span class='cart_price'>Rs. ";
+                                    echo ($Product['PriceVary'] != 1) ? intval($Product['Price']) * intval($cartItem['productqty']) : intval($Inventory['Price']) * intval($cartItem['productqty']);
+                                    echo "</span></td>";
                                     echo "</tr>";
-                                    $Subtotal = $Subtotal + intval($Product['Price']) * intval($cartItem['productqty']);
+                                    $Sub = ($Product['PriceVary'] != 1) ? intval($Product['Price']) * intval($cartItem['productqty']) : intval($Inventory['Price']) * intval($cartItem['productqty']);
+                                    $Subtotal = $Subtotal + $Sub;
                                 }
                                 ?>
                             </tbody>

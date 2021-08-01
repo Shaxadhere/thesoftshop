@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Shop @".getAppName().".pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
+getHeader("Shop @" . getAppName() . ".pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
@@ -179,16 +179,19 @@ getHeader("Shop @".getAppName().".pk Instagram Shop, cute, fancy, good quality a
                         $Colors = array();
                         $ColorCodes = array();
                         $Sizes = array();
+                        $PriceVarient = array();
 
                         while ($Deatil = mysqli_fetch_array($ProductDetails)) {
                             array_push($Colors, $Deatil['ColorName']);
                             array_push($ColorCodes, $Deatil['ColorCode']);
                             array_push($Sizes, $Deatil['SizeValue']);
+                            array_push($PriceVarient, $Deatil['PriceVarient']);
                         }
+                        $ProductDetailsCount = count($PriceVarient);
                         $Wishlist = $_SESSION['WISHLIST'];
                         $IsWish = false;
-                        foreach($Wishlist as $item){
-                            if($item == base64_encode($row['PK_ID'])){
+                        foreach ($Wishlist as $item) {
+                            if ($item == base64_encode($row['PK_ID'])) {
                                 $IsWish = true;
                             }
                         }
@@ -216,7 +219,7 @@ getHeader("Shop @".getAppName().".pk Instagram Shop, cute, fancy, good quality a
                                     <h3 class="product-title pr fs__14 mg__0 fwm">
                                         <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                                     </h3>
-                                    <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
+                                    <span class="price dib mb__5">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
                                     <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                                         <?php
                                         for ($i = 0; $i < count($Colors); $i++) {

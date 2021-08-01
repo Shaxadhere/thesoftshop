@@ -26,24 +26,27 @@ class Inventory{
         );
     }
 
-    function Add($ProductID, $SizeID, $ColorID, $Quantity){
+    function Add($ProductID, $SizeID, $ColorID, $Quantity, $Price){
         $ProductID = mysqli_real_escape_string(connect(), $ProductID);
         $SizeID = mysqli_real_escape_string(connect(), $SizeID);
         $ColorID = mysqli_real_escape_string(connect(), $ColorID);
         $Quantity = mysqli_real_escape_string(connect(), $Quantity);
+        $Price = mysqli_real_escape_string(connect(), $Price);
         insertData(
             "tbl_inventory",
             array(
                 "ProductID",
                 "SizeID",
                 "ColorID",
-                "Quantity"
+                "Quantity",
+                "Price"
             ),
             array(
                 $ProductID,
                 $SizeID,
                 $ColorID,
-                $Quantity
+                $Quantity,
+                $Price
             ),
             connect()
         );

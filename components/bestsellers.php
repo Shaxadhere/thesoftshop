@@ -28,12 +28,15 @@
                 $Colors = array();
                 $ColorCodes = array();
                 $Sizes = array();
+                $PriceVarient = array();
 
                 while ($Deatil = mysqli_fetch_array($ProductDetails)) {
                     array_push($Colors, $Deatil['ColorName']);
                     array_push($ColorCodes, $Deatil['ColorCode']);
                     array_push($Sizes, $Deatil['SizeValue']);
+                    array_push($PriceVarient, $Deatil['PriceVarient']);
                 }
+                $ProductDetailsCount = count($PriceVarient);
 
                 $Wishlist = $_SESSION['WISHLIST'];
                 $IsWish = false;
@@ -75,7 +78,7 @@
                             <h3 class="product-title position-relative fs__14 mg__0 fwm">
                                 <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                             </h3>
-                            <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
+                            <span class="price dib mb__5">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
                             <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                                 <?php
                                 for ($i = 0; $i < count($Colors); $i++) {

@@ -27,7 +27,7 @@ getHeader("Products", "includes/header.php");
                             <input required type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="Price">Price (in rupees)</label>
+                            <label for="Price">Price (if it doesn't varies with varients)</label>
                             <input required type="number" name="Price" class="form-control" id="Price" placeholder="Please type price">
                         </div>
                         <div class="form-group col-md-12">
@@ -73,17 +73,18 @@ getHeader("Products", "includes/header.php");
                             <ul class="list-group">
                                 <li id="" class="list-group-item">
                                     <div class="row">
-                                        <div class="col-md-4"><strong>Size</strong></div>
-                                        <div class="col-md-4"><strong>Color</strong></div>
-                                        <div class="col-md-4">
-                                            <strong>Quantity</strong>
+                                        <div class="col-md-3"><strong>Size</strong></div>
+                                        <div class="col-md-3"><strong>Color</strong></div>
+                                        <div class="col-md-3"><strong>Quantity</strong></div>
+                                        <div class="col-md-3">
+                                            <strong>Price (if it varies)</strong>
                                             <button class="btn btn-link" type="button" id="AddRowBtn" style="padding:0 !important; float:right !important;">Add Row</button>
                                         </div>
                                     </div>
                                 </li>
                                 <li id="QtyRowContainer" class="list-group-item">
                                     <div class="form-row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <select required id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
                                                 <option label="Select Size"></option>
                                                 <?php
@@ -96,7 +97,7 @@ getHeader("Products", "includes/header.php");
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <select required id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
                                                 <option label="Select Color"></option>
                                                 <?php
@@ -109,8 +110,11 @@ getHeader("Products", "includes/header.php");
                                                 ?>
                                             </select>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-3">
                                             <input required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <input required style="height:28px !important" type="number" name="PriceVarient[]" class="form-control" id="Price" placeholder="Enter price if it varies">
                                         </div>
                                     </div>
                                 </li>

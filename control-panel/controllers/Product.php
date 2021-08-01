@@ -77,9 +77,17 @@ if (isset($_POST['SaveProduct'])) {
 
     //Check if there are no errors, finally add the product
     if ($errors == null) {
+        if(empty($_POST['Price'])){
+            $PriceVary = true;
+        }
+        else{
+            $PriceVary = false;
+        }
+        
         $ProductModel->Add(
             $_POST['ProductName'],
             $_POST['Price'],
+            $PriceVary,
             $_POST['ProductDescription'],
             json_encode($_POST['Categories']),
             $_POST['ProductSlug'],
@@ -99,6 +107,7 @@ if (isset($_POST['SaveProduct'])) {
                 $_POST['Sizes'][$i],
                 $_POST['Colors'][$i],
                 $_POST['Quantity'][$i],
+                $_POST['PriceVarient'][$i]
             );
         }
         redirectWindow(getHTMLRoot() . "/products?success=Product added successfully");

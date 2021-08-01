@@ -129,9 +129,14 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                     <?php
                                                     for ($i = 0; $i < count($Colors); $i++) {
                                                         if ($Colors[$i] != "None") {
-                                                            echo "<li style='padding: 11px;$ColorCodes[$i]' data-location='view-product' class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item color-switch' data-escape='$Colors[$i]'>";
-                                                            echo "<span class='tt_txt'>$Colors[$i]</span>";
-                                                            echo "<span data-location='view-product' class='swatch__value_pr pr lazyload ' style='$ColorCodes[$i]'></span>";
+                                                            // echo "<li style='padding: 11px;$ColorCodes[$i]' data-location='view-product' class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item color-switch' data-escape='$Colors[$i]'>";
+                                                            // echo "<span class='tt_txt'>$Colors[$i]</span>";
+                                                            // echo "<span data-location='view-product' class='swatch__value_pr pr lazyload ' style='$ColorCodes[$i]'></span>";
+                                                            // echo "</li>";
+
+                                                            echo "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='$Colors[$i]'>";
+                                                            echo "<span class='tt_txt' >$Colors[$i]</span>";
+                                                            echo "<span data-location='view-product' class='swatch__value_pr pr color-switch' style='$ColorCodes[$i]'></span>";
                                                             echo "</li>";
                                                         }
                                                     }

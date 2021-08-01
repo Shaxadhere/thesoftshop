@@ -4,7 +4,7 @@ $Index = $_REQUEST['Index'];
 $Index = intval($Index) + 1;
 ?>
 <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <select data-select2-id="Size<?= $Index ?>" id="Sizes" name="Sizes[]" style="color:blue" class="form-control sizes-input">
             <option label="Select Size"></option>
             <?php
@@ -17,7 +17,7 @@ $Index = intval($Index) + 1;
             ?>
         </select>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <select data-select2-id="Color<?= $Index ?>" id="Colors" name="Colors[]" style="color:blue" class="form-control colors-input">
             <option label="Select Color"></option>
             <?php
@@ -30,7 +30,10 @@ $Index = intval($Index) + 1;
             ?>
         </select>
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-3">
         <input style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
+    </div>
+    <div class="form-group col-md-3">
+        <input required style="height:28px !important" type="number" name="PriceVarient[]" class="form-control" id="Price" placeholder="Enter price if it varies">
     </div>
 </div>
