@@ -27,7 +27,7 @@ getHeader("Colors", "includes/header.php");
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Colors</h5>
-                <form action="Controllers/Color" method="post" enctype="multipart/form-data">
+                <form action="controllers/Color" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="ColorName">Color Name</label>

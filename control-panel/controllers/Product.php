@@ -38,7 +38,7 @@ if (isset($_POST['SaveProduct'])) {
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
     }
     //check if slug already exists
-    if (checkExistance("tbl_Product", "ProductSlug", mysqli_real_escape_string(connect(), $_POST['ProductSlug']), connect())) {
+    if (checkExistance("tbl_product", "ProductSlug", mysqli_real_escape_string(connect(), $_POST['ProductSlug']), connect())) {
         array_push($errors, "Product slug is should be unique");
         redirectWindow(getHTMLRoot() . "/products?error=$errors[0]");
     }
@@ -143,7 +143,7 @@ if (isset($_POST['UpdateProduct'])) {
         exit();
     }
     //check if slug already exists
-    if (checkExistance("tbl_Product", "ProductSlug", mysqli_real_escape_string(connect(), $_POST['ProductSlug']), connect())) {
+    if (checkExistance("tbl_product", "ProductSlug", mysqli_real_escape_string(connect(), $_POST['ProductSlug']), connect())) {
         if($_POST['ProductSlug'] != $Product['ProductSlug']){
             array_push($errors, "Product slug is should be unique");
             redirectWindow("$PrevUrl&error=$errors[0]");
@@ -215,7 +215,8 @@ if (isset($_POST['UpdateProduct'])) {
                     base64_decode($_POST['ProductID']),
                     $_POST['NewSizes'][$i],
                     $_POST['NewColors'][$i],
-                    $_POST['NewQuantity'][$i]
+                    $_POST['NewQuantity'][$i],
+                    $_POST['NewPriceVarient'][$i]
                 );
             }
         }

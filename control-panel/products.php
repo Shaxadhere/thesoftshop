@@ -20,7 +20,7 @@ getHeader("Products", "includes/header.php");
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Product</h5>
-                <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
+                <form action="controllers/Product.php" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-8">
                             <label for="ProductName">Product Name</label>
@@ -200,7 +200,7 @@ getFooter("includes/footer.php");
         var product = $(this).val()
         $.ajax({
             type: "POST",
-            url: "Controllers/Product",
+            url: "controllers/Product",
             data: {
                 GenerateSlug: true,
                 ProductName: product
@@ -228,7 +228,7 @@ getFooter("includes/footer.php");
         var index = $('#QtyRowContainer .form-row').length
         $.ajax({
             type: "GET",
-            url: "Components/ProductQuantityRow",
+            url: "components/ProductQuantityRow",
             data: {
                 Index: index
             },

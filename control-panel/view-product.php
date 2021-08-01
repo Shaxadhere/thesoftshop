@@ -227,7 +227,7 @@ getFooter("includes/footer.php");
         var index = $('#QtyRowContainer .form-row').length
         $.ajax({
             type: "GET",
-            url: "Components/QtyRowAddMore",
+            url: "components/QtyRowAddMore",
             data: {
                 Index: index
             },
