@@ -23,4 +23,5 @@ echo json_encode($_SESSION['WISHLIST']);
 
 // echo json_encode($_SESSION['LASTORDER']);
 
+
 ?>

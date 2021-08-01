@@ -2202,24 +2202,98 @@
         /**********************************************
          * Quick view / Quick Shop
          * ********************************************/
-        // body.on( 'click', '.js_add_qv , .js__qs', function ( e ) {
-        //     e.preventDefault();
-        //     e.stopPropagation();
-        //     let $this = $( this ),
-        //         delay = 500;
-        //     $this.addClass( 'loading' );
-        //     if ( $.magnificPopup.instance.isOpen ) {
-        //         $.magnificPopup.close();
-        //         delay = $.magnificPopup.instance.st.removalDelay + 10;
-        //     }
-        //     setTimeout( function () {
-        //         if ( $this.hasClass( 'js__qs' ) ) {
-        //             $this.kallesLoadQuikShop();
-        //         } else {
-        //             $this.kallesLoadQuickView();
-        //         }
-        //     }, delay );
-        // } );
+        body.on( 'click', '.js_add_qv , .js__qs', function ( e ) {
+            e.preventDefault();
+            e.stopPropagation();
+            var productId = $(this).attr('data-id')
+            $.ajax({
+                type: "POST",
+                url: "controllers/product",
+                data: {
+                    ViewProduct: true,
+                    ProductID: productId
+                },
+                success: function (response) {
+                    var result = JSON.parse(response)
+                    if (result['success'] == true) {
+                        var productDetails = result['productDetails']
+                        var inventory = result['inventory']
+                        $('#quantity-available').html(inventory['Quantity'] + " pieces available")
+                        var product = productDetails[0]
+                        var images = JSON.parse(product['ProductImages'])
+                        var reviews = JSON.parse(product['Reviews'])
+                        var categories = JSON.parse(product['Categories'])
+                        var tags = JSON.parse(product['ProductTags'])
+                        $('#view-product-name-anchor').html(product['ProductName'])
+                        $('#view-product-name-anchor').attr('href', "/thesoftshop/view-product?name=" + product['ProductSlug'])
+                        $('#view-product-image-container').empty()
+                        images.forEach(item => {
+                            $('#view-product-image-container').append("<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" + "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='/thesoftshop/uploads/product-images/" + item + "'></span>" + "</div>")
+                        });
+                        $('#view-product-current-price').html("Rs. " + product['Price'])
+                        $('#view-product-review-count').html(((reviews != null) ? reviews.length : "0") + " Reviews")
+                        $('#view-product-description').html(product['ProductDescription'])
+                        $('#view-product-default-color').html(product['ColorName'])
+                        $('#view-product-default-size').html("Size: <span class='nt_name_current user_choose_js' id='view-product-size-value'>" + product['SizeValue'] + "</span>")
+                        $('#view-product-colors-container').empty()
+                        $('#view-product-sizes-container').empty()
+                        productDetails.forEach(item => {
+                            if (item['ColorName'] != "None") {
+                                $('#view-product-colors-container').append("<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='" + item['ColorName'] + "'>" + "<span class='tt_txt' >" + item['ColorName'] + "</span><span data-location='quick-view' class='swatch__value_pr pr color-switch' style='" + item['ColorCode'] + "'></span>" + "</li>")
+                            }
+                            if (item['SizeValue'] != "None") {
+                                $('#view-product-sizes-container').append("<li class='nt-swatch swatch_pr_item pr' data-escape='" + item['SizeValue'] + "'>" + "<span data-location='quick-view' class='swatch__value_pr size-switch'>" + item['SizeValue'] + "</span>" + "</li>")
+                            }
+                        });
+                        $('#view-product-categories-container').empty()
+                        $('#view-product-categories-container').html("<span class='cb'>Categories: </span>")
+                        var count = categories.length
+                        index = 0;
+                        categories.forEach(item => {
+                            index ++
+                            if (count == index) {
+                                $('#view-product-categories-container').append("<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
+                            } else {
+                                $('#view-product-categories-container').append("<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
+                            }
+                        });
+                        $('#view-product-tags-container').empty()
+                        $('#view-product-tags-container').html("<span class='cb'>Tags: </span>")
+                        var count = tags.length
+                        var index = 0;
+                        tags.forEach(item => {
+                            index ++
+                            if (count == index) {
+                                $('#view-product-tags-container').append("<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
+                            } else {
+                                $('#view-product-tags-container').append("<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
+                            }
+                        });
+                        $('#view-product-view-full-details').attr('href', "/thesoftshop/view-product?name=" + product['ProductSlug'])
+                        $('#view-product-add-to-cart-button').attr('data-product', btoa(product['ProductID']))
+                    } else {
+                        console.log(result['error'])
+                    }
+                },
+                error: function (error) {
+                    console.log("Error in connection: " + error)
+                }
+            })
+            let $this = $( this ),
+                delay = 500;
+            $this.addClass( 'loading' );
+            if ( $.magnificPopup.instance.isOpen ) {
+                $.magnificPopup.close();
+                delay = $.magnificPopup.instance.st.removalDelay + 10;
+            }
+            setTimeout( function () {
+                if ( $this.hasClass( 'js__qs' ) ) {
+                    $this.kallesLoadQuikShop();
+                } else {
+                    $this.kallesLoadQuickView();
+                }
+            }, delay );
+        } );
 
         /**********************************************
          * Reply comment form
