@@ -21,18 +21,10 @@ if (isset($_POST['SubmitOrder'])) {
         $OrderInvoice = array();
         $DeliveryCost = 170;
         $Amount = 0;
+
         foreach ($Cart as $item) {
             $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
             $Product = mysqli_fetch_array($Product);
-            $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
-            $ProductItem = array(
-                "ProductId" => $item['productId'],
-                "ProductColor" => $item['productColor'],
-                "ProductSize" => $item['productSize'],
-                "ProductQuantity" => $item['productqty'],
-                "PricePerUnit" => $Product['Price']
-            );
-            array_push($OrderInvoice, $ProductItem);
 
             $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
             $ColorDetails = mysqli_fetch_array($ColorDetails);
@@ -45,6 +37,33 @@ if (isset($_POST['SubmitOrder'])) {
                 $ColorDetails['PK_ID']
             );
             $Inventory = mysqli_fetch_array($Inventory);
+
+            if ($Product['PriceVary'] != 1) {
+                $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
+            }
+            else{
+                $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+            }
+            
+            if ($Product['PriceVary'] != 1) {
+                $ProductItem = array(
+                    "ProductId" => $item['productId'],
+                    "ProductColor" => $item['productColor'],
+                    "ProductSize" => $item['productSize'],
+                    "ProductQuantity" => $item['productqty'],
+                    "PricePerUnit" => $Product['Price']
+                );
+            } else {
+                $ProductItem = array(
+                    "ProductId" => $item['productId'],
+                    "ProductColor" => $item['productColor'],
+                    "ProductSize" => $item['productSize'],
+                    "ProductQuantity" => $item['productqty'],
+                    "PricePerUnit" => $Inventory['Price']
+                );
+            }
+            array_push($OrderInvoice, $ProductItem);
+
             $NewQty = intval($Inventory['Quantity']) - intval($item['productqty']);
             $ProductModel->UpdateInventory(
                 base64_encode($Inventory['PK_ID']),

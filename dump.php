@@ -1,16 +1,16 @@
 <?php
 include_once('web-config.php');
 session_start();
-if(isset($_REQUEST['clear'])){
-    $_SESSION['WISHLIST'] = "";
-}
+// if(isset($_REQUEST['clear'])){
+//     $_SESSION['WISHLIST'] = "";
+// }
 
-if(!isset($_SESSION['WISHLIST']) || $_SESSION['WISHLIST'] == ""){
-    $Wishlist = array();
-    $_SESSION['WISHLIST'] = $Wishlist;
-}
+// if(!isset($_SESSION['WISHLIST']) || $_SESSION['WISHLIST'] == ""){
+//     $Wishlist = array();
+//     $_SESSION['WISHLIST'] = $Wishlist;
+// }
 
-echo json_encode($_SESSION['WISHLIST']);
+// echo json_encode($_SESSION['WISHLIST']);
 
 // if(isset($_REQUEST['clear'])){
 //     $_SESSION['LASTORDER'] = "";
@@ -22,6 +22,17 @@ echo json_encode($_SESSION['WISHLIST']);
 // }
 
 // echo json_encode($_SESSION['LASTORDER']);
+
+if(isset($_REQUEST['clear'])){
+    $_SESSION['CART'] = "";
+}
+
+if(!isset($_SESSION['CART']) || $_SESSION['CART'] == ""){
+    $Cart = array();
+    $_SESSION['CART'] = $Cart;
+}
+
+echo json_encode($_SESSION['CART']);
 
 
 ?>
