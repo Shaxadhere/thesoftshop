@@ -1,6 +1,11 @@
 <?php
 include_once('models/product-model.php');
+include_once('models/product-model.php');
+include_once('models/color-model.php');
+include_once('models/size-model.php');
 $ProductModel = new Product();
+$ColorModel = new Color();
+$SizeModel = new Size();
 $Cart = $_SESSION['CART'];
 ?>
 <!-- mini cart box -->
@@ -32,6 +37,21 @@ $Cart = $_SESSION['CART'];
                                 $Product = $ProductModel->FilterByProductID(base64_encode($cartItem['productId']));
                                 $Product = mysqli_fetch_array($Product);
                                 $ProductImages = json_decode($Product['ProductImages']);
+
+                                $Color = $cartItem['productColor'];
+                                $Size = $cartItem['productSize'];
+
+                                $ColorDetails = $ColorModel->FilterByColorName($Color);
+                                $ColorDetails = mysqli_fetch_array($ColorDetails);
+                                $SizeDetails = $SizeModel->FilterBySizeName($Size);
+                                $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                                $Inventory = $ProductModel->InventoryByAttributes(
+                                    $Product['ProductID'],
+                                    $SizeDetails['PK_ID'],
+                                    $ColorDetails['PK_ID']
+                                );
+                                $Inventory = mysqli_fetch_array($Inventory);
                             ?>
                                 <div class="mini_cart_item js_cart_item flex al_center pr oh cart_item">
                                     <div class="ld_cart_bar"></div>
@@ -45,8 +65,8 @@ $Cart = $_SESSION['CART'];
                                             <div class="cart_meta_price price">
                                                 <div class="cart_price">
                                                     <p class="price_range" id="price_ppr">Quantity: <strong><?= $cartItem['productqty'] ?></strong></p>
-                                                    <p class="price_range" id="price_ppr">Price: Rs. <?= $Product['Price'] ?></p>
-                                                    <p class="price_range" id="price_ppr"><strong>Total: Rs. <?= intval($Product['Price']) * intval($cartItem['productqty']) ?></strong></p>
+                                                    <p class="price_range" id="price_ppr">Price: Rs. <?= ($Product['PriceVary'] != 1) ? $Product['Price'] : $Inventory['Price'] ?></p>
+                                                    <p class="price_range" id="price_ppr"><strong>Total: Rs. <?= ($Product['PriceVary'] != 1) ? intval($Product['Price']) * intval($cartItem['productqty']) : intval($Inventory['Price']) * intval($cartItem['productqty']) ?></strong></p>
                                                 </div>
                                             </div>
                                         </div>
@@ -61,7 +81,8 @@ $Cart = $_SESSION['CART'];
                                     </div>
                                 </div>
                             <?php
-                                $Subtotal = $Subtotal + intval($Product['Price']) * intval($cartItem['productqty']);
+                                $Sub = ($Product['PriceVary'] != 1) ? intval($Product['Price']) * intval($cartItem['productqty']) : intval($Inventory['Price']) * intval($cartItem['productqty']);
+                                $Subtotal = $Subtotal + $Sub;
                             }
                             ?>
                         </div>
