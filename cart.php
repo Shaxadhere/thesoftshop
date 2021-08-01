@@ -96,7 +96,7 @@ $Cart = $_SESSION['CART'];
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-3 tc__ tc_lg">
                                     <div class="cart_meta_prices price">
-                                        <div class="cart_price">Rs. <?= $Product['Price'] ?></div>
+                                        <div class="cart_price">Rs. <?= ($Product['PriceVary'] != 1) ? $Product['Price'] : $Inventory['Price'] ?></div>
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-2 tc mini_cart_actions">
@@ -113,12 +113,13 @@ $Cart = $_SESSION['CART'];
                                     </div>
                                 </div>
                                 <div class="col-12 col-md-4 col-lg-2 tc__ tr_lg">
-                                    <span class="cart-item-price fwm cd js_tt_price_it">Rs. <?= intval($Product['Price']) * intval($cartItem['productqty']) ?></span>
+                                    <span class="cart-item-price fwm cd js_tt_price_it">Rs. <?= ($Product['PriceVary'] != 1) ? intval($Product['Price']) * intval($cartItem['productqty']) : intval($Inventory['Price']) * intval($cartItem['productqty']) ?></span>
                                 </div>
                             </div>
                         </div>
                     <?php
-                        $Subtotal = $Subtotal + intval($Product['Price']) * intval($cartItem['productqty']);
+                        $Sub = ($Product['PriceVary'] != 1) ? intval($Product['Price']) * intval($cartItem['productqty']) : intval($Inventory['Price']) * intval($cartItem['productqty']);
+                        $Subtotal = $Subtotal + $Sub;
                     }
                     ?>
                 </div>
