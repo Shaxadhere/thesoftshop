@@ -22,7 +22,7 @@ class Inventory{
         $ProductID = mysqli_real_escape_string(connect(), $ProductID);
         return mysqli_query(
             connect(),
-            "SELECT tbl_product.PK_ID as ProductID, tbl_inventory.PK_ID as InventoryID, tbl_product.ProductName, tbl_product.ProductDescription, tbl_product.ProductImages, tbl_inventory.Quantity, tbl_inventory.CreatedAt, tbl_inventory.CreatedBy, tbl_color.PK_ID as ColorID, tbl_color.ColorName, tbl_size.PK_ID as SizeID, tbl_size.SizeValue FROM `tbl_inventory` inner join tbl_product on tbl_inventory.ProductID = tbl_product.PK_ID inner join tbl_color on tbl_inventory.ColorID = tbl_color.PK_ID inner join tbl_size on tbl_inventory.SizeID = tbl_size.PK_ID where tbl_product.Deleted = 0 and tbl_inventory.ProductID = $ProductID"
+            "SELECT tbl_product.PK_ID as ProductID, tbl_product.PriceVary, tbl_inventory.Price as PriceVarient, tbl_inventory.PK_ID as InventoryID, tbl_product.ProductName, tbl_product.ProductDescription, tbl_product.ProductImages, tbl_inventory.Quantity, tbl_inventory.CreatedAt, tbl_inventory.CreatedBy, tbl_color.PK_ID as ColorID, tbl_color.ColorName, tbl_size.PK_ID as SizeID, tbl_size.SizeValue FROM `tbl_inventory` inner join tbl_product on tbl_inventory.ProductID = tbl_product.PK_ID inner join tbl_color on tbl_inventory.ColorID = tbl_color.PK_ID inner join tbl_size on tbl_inventory.SizeID = tbl_size.PK_ID where tbl_product.Deleted = 0 and tbl_inventory.ProductID = $ProductID"
         );
     }
 
@@ -68,12 +68,13 @@ class Inventory{
         );
     }
 
-    function UpdateInventory($InventoryID, $ColorID, $SizeID, $Quantity){
+    function UpdateInventory($InventoryID, $ColorID, $SizeID, $Quantity, $Price){
         $InventoryID = base64_decode($InventoryID);
         $InventoryID = mysqli_real_escape_string(connect(), $InventoryID);
         $ColorID = mysqli_real_escape_string(connect(), $ColorID);
         $SizeID = mysqli_real_escape_string(connect(), $SizeID);
         $Quantity = mysqli_real_escape_string(connect(), $Quantity);
+        $Price = mysqli_real_escape_string(connect(), $Price);
         editData(
             "tbl_inventory",
             array(
@@ -82,7 +83,9 @@ class Inventory{
                 "SizeID",
                 $SizeID,
                 "Quantity",
-                $Quantity
+                $Quantity,
+                "Price",
+                $Price
             ),
             "PK_ID",
             $InventoryID,

@@ -206,7 +206,8 @@ if (isset($_POST['UpdateProduct'])) {
                 $_POST['InventoryIDs'][$i],
                 $_POST['Colors'][$i],
                 $_POST['Sizes'][$i],
-                $_POST['Quantity'][$i]
+                $_POST['Quantity'][$i],
+                $_POST['PriceVarient'][$i]
             );
         }
         if(isset($_POST['NewQuantity'])){

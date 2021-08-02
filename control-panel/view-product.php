@@ -104,10 +104,11 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                             <ul class="list-group">
                                 <li id="" class="list-group-item">
                                     <div class="row">
-                                        <div class="col-md-4"><strong>Size</strong></div>
-                                        <div class="col-md-4"><strong>Color</strong></div>
-                                        <div class="col-md-4">
-                                            <strong>Quantity</strong>
+                                        <div class="col-md-3"><strong>Size</strong></div>
+                                        <div class="col-md-3"><strong>Color</strong></div>
+                                        <div class="col-md-3"><strong>Quantity</strong></div>
+                                        <div class="col-md-3">
+                                            <strong>Price (if it varies)</strong>
                                             <button class="btn btn-link" type="button" id="AddRowBtn" style="padding:0 !important; float:right !important;">Add Row</button>
                                         </div>
                                     </div>
@@ -119,7 +120,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                     ?>
                                         <div class="form-row" id="<?= $inventoryItem['InventoryID'] ?>">
                                             <input type="hidden" name="InventoryIDs[]" value="<?= base64_encode($inventoryItem['InventoryID']) ?>" />
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3">
                                                 <select data-select2-id="Size<?= $index ?>" required id="Sizes<?= $index ?>" name="Sizes[]" style="color:blue" class="form-control sizes-input">
                                                     <option label="Select Size"></option>
                                                     <?php
@@ -136,7 +137,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                                     ?>
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-4">
+                                            <div class="form-group col-md-3">
                                                 <select data-select2-id="Color<?= $index ?>" required id="Colors<?= $index ?>" name="Colors[]" style="color:blue" class="form-control colors-input">
                                                     <option label="Select Color"></option>
                                                     <?php
@@ -155,6 +156,9 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <input value="<?= $inventoryItem['Quantity'] ?>" required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity<?= $index ?>" placeholder="Enter quantity">
+                                            </div>
+                                            <div class="form-group col-md-2">
+                                                <input required style="height:28px !important" type="number" name="PriceVarient[]" class="form-control" id="PriceVarient<?= $index ?>" placeholder="Enter price if it varies" value="<?= $inventoryItem['PriceVarient'] ?>">
                                             </div>
                                             <div class="form-group col-md-1">
                                                 <a href="#DeleteQtyRow" data-id='<?= base64_encode($inventoryItem['InventoryID']) ?>' data-toggle="modal" type="button" style="height:28px !important; padding: 3px;" class="btn btn-outline-danger w-100">Remove</a>
@@ -282,7 +286,7 @@ getFooter("includes/footer.php");
     })
 
     //confirm deletion of a qty row
-    $(document).on('click', '#DeleteRowConfirm', function(){
+    $(document).on('click', '#DeleteRowConfirm', function() {
         var id = $(this).attr('data-id')
         var row = atob(id)
         $.ajax({
@@ -292,17 +296,16 @@ getFooter("includes/footer.php");
                 DeleteInventory: true,
                 InventoryID: id
             },
-            success: function(response){
-                if(response == true){
+            success: function(response) {
+                if (response == true) {
                     $('#ModalCancelButton').click()
-                    $('#'+row).remove()
-                }
-                else{
+                    $('#' + row).remove()
+                } else {
                     var result = JSON.parse(response)
                 }
             },
-            error: function (error){
-                console.log("Error in connection: "+ error)
+            error: function(error) {
+                console.log("Error in connection: " + error)
             }
         })
     })
