@@ -19,12 +19,15 @@
                 $Colors = array();
                 $ColorCodes = array();
                 $Sizes = array();
+                $PriceVarient = array();
 
                 while ($Deatil = mysqli_fetch_array($ProductDetails)) {
                     array_push($Colors, $Deatil['ColorName']);
                     array_push($ColorCodes, $Deatil['ColorCode']);
                     array_push($Sizes, $Deatil['SizeValue']);
+                    array_push($PriceVarient, $Deatil['PriceVarient']);
                 }
+                $ProductDetailsCount = count($PriceVarient);
             ?>
                 <div class="col-lg-3 col-md-4 col-12 pr_animated done mt__30 pr_grid_item product nt_pr desgin__1">
                     <div class="product-inner pr">
@@ -36,9 +39,6 @@
                             <div class="hover_img pa pe_none t__0 l__0 r__0 b__0 op__0">
                                 <div class="pr_lazy_img back-img pa nt_bg_lz lazyload padding-top__127_571" data-bgset="<?= getHTMLRoot() ?>/uploads/product-images/<?= (isset($ProductImages[1])) ? $ProductImages[1] : $ProductImages[0] ?>"></div>
                             </div>
-                            <div class="nt_add_w ts__03 pa ">
-                                <a href="#" class="wishlistadd cb chp ttip_nt tooltip_right"><span class="tt_txt">Add to Wishlist</span><i class="facl facl-heart-o"></i></a>
-                            </div>
                             <div class="product-attr pa ts__03 cw op__0 tc">
                                 <p class="truncate mg__0 w__100"><?= ($Sizes[0] == "None") ? "" : implode(", ", $Sizes); ?></p>
                             </div>
@@ -47,7 +47,7 @@
                             <h3 class="product-title pr fs__14 mg__0 fwm">
                                 <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                             </h3>
-                            <span class="price dib mb__5">Rs. <?= $row['Price'] ?></span>
+                            <span class="price dib mb__5">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
                         </div>
                     </div>
                 </div>
