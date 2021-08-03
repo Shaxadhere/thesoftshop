@@ -6,8 +6,22 @@ $OrderModel = new Order();
 $OrderList = $OrderModel->List();
 $TotalAmount = 0;
 $DCAmount = 0;
-$ProfitAmount = 0;
-foreach ($OrderList as $row) {}
+$SalesAmount = 0;
+foreach ($OrderList as $row) {
+    $TotalProductsWithQuantity = json_decode($row['ProductsWithQuantity'], true);
+    $Bill = 0;
+    foreach ($TotalProductsWithQuantity as $item) {
+        $Bill = $Bill + (intval($item['ProductQuantity']) * intval($item['PricePerUnit']));
+    }
+    $BillWithDC = $Bill + intval($row['DeliveryCost']);
+    $TotalAmount = $TotalAmount + $BillWithDC;
+
+    $DCAmount = $DCAmount + intval($row['DeliveryCost']);
+
+    $SalesAmount = $SalesAmount + $Bill;
+
+
+}
 ?>
 
 <div class="content-body">
@@ -27,8 +41,8 @@ foreach ($OrderList as $row) {}
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Profit Amount</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $ProfitAmount ?></h6>
+                        <h5 class="card-title">Sales Amount</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $SalesAmount ?></h6>
                     </div>
                 </div>
             </div>
@@ -72,6 +86,7 @@ foreach ($OrderList as $row) {}
                         foreach ($TotalProductsWithQuantity as $item) {
                             $Bill = $Bill + (intval($item['ProductQuantity']) * intval($item['PricePerUnit']));
                         }
+                        $Bill = $Bill + intval($row['DeliveryCost']);
                     ?>
                         <tr>
                             <td><?= $SNo ?></td>
