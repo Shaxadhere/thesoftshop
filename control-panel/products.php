@@ -146,12 +146,25 @@ getHeader("Products", "includes/header.php");
                     $ProductList = $ProductModel->List();
                     $SNo = 1;
                     while ($row = mysqli_fetch_array($ProductList)) {
+                        $ProductDetails = $ProductModel->FilterWithAttributesByProductID(base64_encode($row['PK_ID']));
+                        $Colors = array();
+                        $ColorCodes = array();
+                        $Sizes = array();
+                        $PriceVarient = array();
+        
+                        while ($Deatil = mysqli_fetch_array($ProductDetails)) {
+                            array_push($Colors, $Deatil['ColorName']);
+                            array_push($ColorCodes, $Deatil['ColorCode']);
+                            array_push($Sizes, $Deatil['SizeValue']);
+                            array_push($PriceVarient, $Deatil['PriceVarient']);
+                        }
+                        $ProductDetailsCount = count($PriceVarient);
                     ?>
                         <tr>
                             <td><?= $SNo ?></td>
                             <td><?= $row['ProductName'] ?></td>
                             <td><?= $row['ProductSlug'] ?></td>
-                            <td><?= $row['Price'] ?></td>
+                            <td><?=($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1]?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Options
