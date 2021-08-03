@@ -1,6 +1,13 @@
 <?php
 include_once('web-config.php');
 getHeader("Orders", "includes/header.php");
+include_once('models/order-model.php');
+$OrderModel = new Order();
+$OrderList = $OrderModel->List();
+$TotalAmount = 0;
+$DCAmount = 0;
+$ProfitAmount = 0;
+foreach ($OrderList as $row) {}
 ?>
 
 <div class="content-body">
@@ -20,24 +27,24 @@ getHeader("Orders", "includes/header.php");
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Total Investment</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= "988" ?></h6>
+                        <h5 class="card-title">Profit Amount</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $ProfitAmount ?></h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Maryam's Investment</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= "9999" ?></h6>
+                        <h5 class="card-title">Delivery Charges Amount</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $DCAmount ?></h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Shehzad's Investment</h5>
-                        <h6 class="card-subtitle mb-2 text-muted"><?= "889" ?></h6>
+                        <h5 class="card-title">Total Amount</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $TotalAmount ?></h6>
                     </div>
                 </div>
             </div>
@@ -58,11 +65,8 @@ getHeader("Orders", "includes/header.php");
                 </thead>
                 <tbody>
                     <?php
-                    include_once('models/order-model.php');
-                    $OrderModel = new Order();
-                    $OrderList = $OrderModel->List();
                     $SNo = 1;
-                    while ($row = mysqli_fetch_array($OrderList)) {
+                    foreach ($OrderList as $row) {
                         $TotalProductsWithQuantity = json_decode($row['ProductsWithQuantity'], true);
                         $Bill = 0;
                         foreach ($TotalProductsWithQuantity as $item) {
