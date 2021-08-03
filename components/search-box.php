@@ -39,13 +39,28 @@
                         $RandomProducts = $ProductModel->ListRandom(4);
                         while ($row = mysqli_fetch_array($RandomProducts)) {
                             $ProductImages = json_decode($row['ProductImages']);
+
+
+                            $ProductDetails = $ProductModel->FilterWithAttributesByProductID(base64_encode($row['PK_ID']));
+                            $Colors = array();
+                            $ColorCodes = array();
+                            $Sizes = array();
+                            $PriceVarient = array();
+
+                            while ($Deatil = mysqli_fetch_array($ProductDetails)) {
+                                array_push($Colors, $Deatil['ColorName']);
+                                array_push($ColorCodes, $Deatil['ColorCode']);
+                                array_push($Sizes, $Deatil['SizeValue']);
+                                array_push($PriceVarient, $Deatil['PriceVarient']);
+                            }
+                            $ProductDetailsCount = count($PriceVarient);
                         ?>
                             <div class="row mb__10 pb__10">
                                 <div class="col widget_img_pr">
                                     <a class="db pr oh" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><img src="data:image/svg+xml,%3Csvg%20viewBox%3D%220%200%201200%201200%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3C%2Fsvg%3E" class="w__100 lz_op_ef lazyload" alt="<?= $row['ProductName'] ?>" data-src="<?= getHTMLRoot() ?>/uploads/product-images/<?= $ProductImages[0] ?>" width="80" height="80"></a>
                                 </div>
                                 <div class="col widget_if_pr">
-                                    <a class="product-title db" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>Rs. <?= $row['Price'] ?>
+                                    <a class="product-title db" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?>
                                 </div>
                             </div>
                         <?php
