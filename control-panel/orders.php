@@ -14,7 +14,34 @@ getHeader("Orders", "includes/header.php");
             </nav>
         </div>
     </div>
+
     <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Investment</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= "988" ?></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Maryam's Investment</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= "9999" ?></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Shehzad's Investment</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?= "889" ?></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
         <h2>Orders</h2>
         <div data-label="Categories" class="normal-table">
             <table id="normal-table" class="table">
