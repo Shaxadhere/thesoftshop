@@ -12,6 +12,21 @@ $Category = mysqli_fetch_array($Category);
 $Tags = json_decode($Category['CategoryTags']);
 getHeader($Category['CategoryName'] . " - " . implode(",", $Tags), "includes/header.php");
 ?>
+<div class="kalles-section cat-shop pr tc">
+    <a href="#" class="has_icon cat_nav_js dib">Categories<i class="facl facl-angle-down"></i></a>
+    <div class="dn" id="cat_kalles">
+        <ul class="cat_lv_0">
+            <?php
+            $RandomeCategories = $CategoryModel->ListRandom($Category['CategoryName'], 11);
+            while ($row = mysqli_fetch_array($RandomeCategories)) {
+            ?>
+                <li class="cat-item"><a class="cat_link dib" href="<?= getHTMLRoot() ?>/category?name=<?= $row['CategorySlug'] ?>"><?= $row['CategoryName'] ?></a></li>
+            <?php
+            }
+            ?>
+        </ul>
+    </div>
+</div>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
     <div class="page-head tc pr oh cat_bg_img page_head_">

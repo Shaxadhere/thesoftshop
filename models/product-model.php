@@ -78,7 +78,7 @@ class Product{
         $limit = mysqli_real_escape_string(connect(), $limit);
         return mysqli_query(
             connect(),
-            "SELECT * FROM tbl_product where Deleted = 0 ORDER BY RAND() LIMIT 4"
+            "SELECT * FROM tbl_product where Deleted = 0 ORDER BY RAND() LIMIT $limit"
         );
     }
 
