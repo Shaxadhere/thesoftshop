@@ -91,7 +91,7 @@ class Product{
     }
 
     function ListByCategoryNameArray($CategoryArray, $limit){
-        $query = "SELECT * from tbl_product where tbl_product.Categories like ";
+        $query = "SELECT * from tbl_product where Deleted = 0 and tbl_product.Categories like ";
         $count = 0;
         foreach($CategoryArray as $item){
             $item = mysqli_real_escape_string(connect(), $item);
@@ -102,7 +102,7 @@ class Product{
             $query .= "'%$item%' or ";
             $count++;
         }
-        $query .= "limit $limit";
+        $query .= " limit $limit";
         return mysqli_query(
             connect(),
             $query
