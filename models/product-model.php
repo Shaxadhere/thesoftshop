@@ -90,6 +90,25 @@ class Product{
         );
     }
 
+    function ListByCategoryNameArray($CategoryArray, $limit){
+        $query = "SELECT * from tbl_product where tbl_product.Categories like ";
+        $count = 0;
+        foreach($CategoryArray as $item){
+            $item = mysqli_real_escape_string(connect(), $item);
+            if($count == count($CategoryArray) -1){
+                $query .= "'%$item%'";
+                break;
+            }
+            $query .= "'%$item%' or ";
+            $count++;
+        }
+        $query .= "limit $limit";
+        return mysqli_query(
+            connect(),
+            $query
+        );
+    }
+
     function FilterByProductID($ProductID)
     {
         $ProductID = base64_decode($ProductID);

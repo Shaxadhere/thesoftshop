@@ -23,16 +23,19 @@ session_start();
 
 // echo json_encode($_SESSION['LASTORDER']);
 
-if(isset($_REQUEST['clear'])){
-    $_SESSION['CART'] = "";
-}
+// if(isset($_REQUEST['clear'])){
+//     $_SESSION['CART'] = "";
+// }
 
-if(!isset($_SESSION['CART']) || $_SESSION['CART'] == ""){
-    $Cart = array();
-    $_SESSION['CART'] = $Cart;
-}
+// if(!isset($_SESSION['CART']) || $_SESSION['CART'] == ""){
+//     $Cart = array();
+//     $_SESSION['CART'] = $Cart;
+// }
 
-echo json_encode($_SESSION['CART']);
+// echo json_encode($_SESSION['CART']);
+
+$cat = ['new-arrivals', 'scrunchies', 'stickers'];
+
 
 
 ?>
