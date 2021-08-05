@@ -5,31 +5,53 @@ include_once('../web-config.php');
 //Request from sign up confirm
 if (isset($_POST['RegisterCustomer'])) {
   $errors = array();
-  $FullName = mysqli_real_escape_string(connect(), $_POST['CustomerName']);
-  $CustomerEmail = mysqli_real_escape_string(connect(), $_POST['CustomerEmail']);
-  $CustomerPassword = mysqli_real_escape_string(connect(), $_POST['CustomerPassword']);
 
-  if (empty($FullName)) {
+  if (empty($_POST['CustomerName'])) {
     array_push($errors, "Full name is required");
+    echo json_encode($errors);
+    exit();
   }
 
-  if (empty($CustomerEmail)) {
+  if (isHtml($_POST['CustomerName'])) {
+    array_push($errors, "Full name must be in letters only");
+    echo json_encode($errors);
+    exit();
+  }
+
+  if (empty($_POST['CustomerEmail'])) {
     array_push($errors, "Email is required");
+    echo json_encode($errors);
+    exit();
   }
 
-  if (checkExistance("tbl_customer", "Email", $CustomerEmail, connect())) {
-    array_push($errors, "Email already exists");
+  if (isHtml($_POST['CustomerEmail'])) {
+    array_push($errors, "Invalid email");
+    echo json_encode($errors);
+    exit();
   }
+
 
   if (!validateEmail($CustomerEmail)) {
     array_push($errors, "Email is invalid");
+    echo json_encode($errors);
+    exit();
   }
 
-  if (empty($CustomerPassword)) {
+  if (empty($_POST['CustomerPassword'])) {
     array_push($errors, "Password is required");
+    echo json_encode($errors);
+    exit();
   }
 
   if ($errors == null) {
+    $FullName = mysqli_real_escape_string(connect(), $_POST['CustomerName']);
+    $CustomerEmail = mysqli_real_escape_string(connect(), $_POST['CustomerEmail']);
+    $CustomerPassword = mysqli_real_escape_string(connect(), $_POST['CustomerPassword']);
+    if (checkExistance("tbl_customer", "Email", $CustomerEmail, connect())) {
+      array_push($errors, "Email already exists");
+      echo json_encode($errors);
+      exit();
+    }
     insertData(
       "tbl_customer",
       array(
@@ -120,18 +142,17 @@ if (isset($_POST['AuthenticateUser'])) {
     array_push($errors, "Email doesnt exists");
   }
 
-  if($errors == null){
+  if ($errors == null) {
     echo true;
-  }
-  else{
+  } else {
     echo json_encode($errors);
   }
 }
 
 //Request from update profile confirm
-if(isset($_POST['UpdateProfile'])){
+if (isset($_POST['UpdateProfile'])) {
   session_start();
-  if(!isset($_SESSION['USER'])){
+  if (!isset($_SESSION['USER'])) {
     echo false;
     exit();
   }
@@ -139,22 +160,22 @@ if(isset($_POST['UpdateProfile'])){
   $FullName = mysqli_real_escape_string(connect(), $_POST['FullName']);
   $Email = mysqli_real_escape_string(connect(), $_POST['Email']);
   $Contact = mysqli_real_escape_string(connect(), $_POST['Contact']);
-  if(empty($FullName)){
+  if (empty($FullName)) {
     array_push($errors, "Full name is required");
   }
-  if(empty($Email)){
+  if (empty($Email)) {
     array_push($errors, "Email is required");
   }
-  if(isHTML($FullName)){
+  if (isHTML($FullName)) {
     array_push($errors, "Invalid name");
   }
-  if(isHTML($Email)){
+  if (isHTML($Email)) {
     array_push($errors, "Invalid email");
   }
-  if(isHTML($Contact)){
+  if (isHTML($Contact)) {
     array_push($errors, "Invalid contact");
   }
-  if($errors == null){
+  if ($errors == null) {
     editData(
       "tbl_customer",
       array(
@@ -170,25 +191,24 @@ if(isset($_POST['UpdateProfile'])){
       connect()
     );
     echo true;
-  }
-  else{
+  } else {
     echo json_encode($errors);
   }
 }
 
 //Request from update shipping address confirm
-if(isset($_POST['UpdateShippingAddress'])){
+if (isset($_POST['UpdateShippingAddress'])) {
   session_start();
-  if(!isset($_SESSION['USER'])){
+  if (!isset($_SESSION['USER'])) {
     echo false;
     exit();
   }
   $errors = array();
   $ShippingAddress = mysqli_real_escape_string(connect(), $_POST['ShippingAddress']);
-  if(isHTML($ShippingAddress)){
+  if (isHTML($ShippingAddress)) {
     array_push($errors, "Invalid shipping address");
   }
-  if($errors == null){
+  if ($errors == null) {
     editData(
       "tbl_customer",
       array(
@@ -200,25 +220,24 @@ if(isset($_POST['UpdateShippingAddress'])){
       connect()
     );
     echo true;
-  }
-  else{
+  } else {
     echo json_encode($errors);
   }
 }
 
 //Request from update billing address confirm
-if(isset($_POST['UpdateBillingAddress'])){
+if (isset($_POST['UpdateBillingAddress'])) {
   session_start();
-  if(!isset($_SESSION['USER'])){
+  if (!isset($_SESSION['USER'])) {
     echo false;
     exit();
   }
   $errors = array();
   $BillingAddress = mysqli_real_escape_string(connect(), $_POST['BillingAddress']);
-  if(isHTML($BillingAddress)){
+  if (isHTML($BillingAddress)) {
     array_push($errors, "Invalid billing address");
   }
-  if($errors == null){
+  if ($errors == null) {
     editData(
       "tbl_customer",
       array(
@@ -230,8 +249,7 @@ if(isset($_POST['UpdateBillingAddress'])){
       connect()
     );
     echo true;
-  }
-  else{
+  } else {
     echo json_encode($errors);
   }
 }
