@@ -34,8 +34,12 @@ session_start();
 
 // echo json_encode($_SESSION['CART']);
 
-$cat = ['new-arrivals', 'scrunchies', 'stickers'];
 
-
+if(validateRegexEmail($_REQUEST['email'])){
+    echo "sahi";
+}
+else{
+    echo "ghalat";
+}
 
 ?>

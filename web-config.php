@@ -264,3 +264,9 @@ function resizeImageT()
   echo $randomStrings;
   imagepng($thumb, 'uploads/product-images/' . $randomStrings . '.png');
 }
+
+function validateRegexEmail($email) {
+    $re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
+    return preg_match($re, strtolower($email));
+    // return re.test(String($email).toLowerCase());
+}

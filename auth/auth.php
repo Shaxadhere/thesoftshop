@@ -24,6 +24,12 @@ if (isset($_POST['RegisterCustomer'])) {
     exit();
   }
 
+  if(!filter_var($_POST['CustomerEmail'], FILTER_VALIDATE_EMAIL)){
+    array_push($errors, "Invalid Email entered");
+    echo json_encode($errors);
+    exit();
+  }
+
   if (isHtml($_POST['CustomerEmail'])) {
     array_push($errors, "Invalid email");
     echo json_encode($errors);
@@ -31,7 +37,7 @@ if (isset($_POST['RegisterCustomer'])) {
   }
 
 
-  if (!validateEmail($CustomerEmail)) {
+  if (!validateEmail($_POST['CustomerEmail'])) {
     array_push($errors, "Email is invalid");
     echo json_encode($errors);
     exit();
@@ -90,27 +96,44 @@ if (isset($_POST['RegisterCustomer'])) {
 //Request from login confirm
 if (isset($_POST['AuthenticateUser'])) {
   $errors = array();
+
+  
+  //validating email in POST
+  if (isset($_POST['CustomerEmail'])) {
+    if(isHtml($_POST['CustomerEmail'])){
+      array_push($errors, "Invalid Email");
+      echo json_encode($errors);
+      exit();
+    }
+    if (empty($_POST['CustomerEmail'])) {
+      array_push($errors, "Email cannot be empty");
+      echo json_encode($errors);
+      exit();
+    }
+    if(!filter_var($_POST['CustomerEmail'], FILTER_VALIDATE_EMAIL)){
+      array_push($errors, "Invalid Email");
+      echo json_encode($errors);
+      exit();
+    }
+    else if (!validateEmail($_POST['CustomerEmail'])) {
+      array_push($errors, "Invalid Email");
+      echo json_encode($errors);
+      exit();
+    }
+  }
+  
+  //validating password password in POST
+  if (isset($_POST['CustomerPassword'])) {
+    //if password is empty string
+    if (empty($_POST['CustomerPassword'])) {
+      array_push($errors, "Password cannot be empty");
+      echo json_encode($errors);
+      exit();
+    }
+  }
+  
   $CustomerEmail = mysqli_real_escape_string(connect(), $_POST['CustomerEmail']);
   $CustomerPassword = mysqli_real_escape_string(connect(), $_POST['CustomerPassword']);
-  //if it contains email in POST
-  if (isset($CustomerEmail)) {
-    //if email is empty string
-    if (empty($CustomerEmail)) {
-      array_push($errors, "Email cannot be empty");
-    }
-    //if email is invalid
-    else if (!validateEmail($CustomerEmail)) {
-      array_push($errors, "Invalid Email");
-    }
-  }
-
-  //if it contains password in POST
-  if (isset($CustomerPassword)) {
-    //if password is empty string
-    if (empty($CustomerPassword)) {
-      array_push($errors, "Password cannot be empty");
-    }
-  }
 
   //verifies the email entered
   $user = verifyValues(
@@ -375,4 +398,4 @@ if (isset($_POST['SavePassword'])) {
   }
 }
 
-include_once("../Errors/errors.php");
+include_once("../errors/errors.php");
