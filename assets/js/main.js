@@ -461,7 +461,11 @@ $(document).on('click', '#checkout-btn', function () {
             if (result['success'] == true) {
                 window.location.href = '/thesoftshop/thank-you';
             }
-            $(this).attr('disabled', false);
+            else{
+                $('#errors').html(result[0])
+                $('#errors').show();
+                $('#checkout-btn').attr('disabled', false);
+            }
         },
         error: function (error) {
             console.log("Error in connection: " + error)

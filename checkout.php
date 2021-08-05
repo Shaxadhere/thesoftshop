@@ -25,6 +25,7 @@ $Cart = $_SESSION['CART'];
                 <div class="checkout-section">
                     <h3 class="checkout-section__title">Billing details</h3>
                     <div class="row">
+                        <div id="errors" class="alert alert-danger checkout-section__field col-lg-12 col-12" style="display: none;"></div>
                         <p class="checkout-section__field col-lg-12 col-12">
                             <label for="f-name">Full name *</label>
                             <input required placeholder="Please type your name" type="text" id="checkout-full-name" value="<?= (isset($Customer)) ? $Customer['FullName'] : "" ?>">

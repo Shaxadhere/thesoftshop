@@ -14,8 +14,85 @@ $SizeModel = new Size();
 
 if (isset($_POST['SubmitOrder'])) {
     session_start();
+    $errors = array();
+    if (empty($_POST['FullName'])) {
+        array_push($errors, "Please enter your name");
+        echo json_encode($errors);
+        exit();
+    }
+    if (isHTML($_POST['FullName'])) {
+        array_push($errors, "Invalid input of data is strictly not allowed");
+        echo json_encode($errors);
+        exit();
+    }
+    if (empty($_POST['Phone'])) {
+        array_push($errors, "Please enter your phone number");
+        echo json_encode($errors);
+        exit();
+    }
+    if (isHTML($_POST['Phone'])) {
+        array_push($errors, "Invalid input of data is strictly not allowed");
+        echo json_encode($errors);
+        exit();
+    }
+    if (empty($_POST['ShippingAddress'])) {
+        array_push($errors, "Please enter your shipping address");
+        echo json_encode($errors);
+        exit();
+    }
+    if (isHTML($_POST['ShippingAddress'])) {
+        array_push($errors, "Invalid input of data is strictly not allowed");
+        echo json_encode($errors);
+        exit();
+    }
+    if (empty($_POST['City'])) {
+        array_push($errors, "Please enter your city name");
+        echo json_encode($errors);
+        exit();
+    }
+    if (isHTML($_POST['City'])) {
+        array_push($errors, "Invalid input of data is strictly not allowed");
+        echo json_encode($errors);
+        exit();
+    }
+    if (empty($_POST['State'])) {
+        array_push($errors, "Please select state");
+        echo json_encode($errors);
+        exit();
+    }
+    if (isHTML($_POST['State'])) {
+        array_push($errors, "Invalid input of data is strictly not allowed");
+        echo json_encode($errors);
+        exit();
+    }
+    if (isHtml($_POST['Email'])) {
+        array_push($errors, "Invalid Email");
+        echo json_encode($errors);
+        exit();
+    }
+    if (empty($_POST['Email'])) {
+        array_push($errors, "Email cannot be empty");
+        echo json_encode($errors);
+        exit();
+    }
+    if (!filter_var($_POST['Email'], FILTER_VALIDATE_EMAIL)) {
+        array_push($errors, "Invalid Email");
+        echo json_encode($errors);
+        exit();
+    } else if (!validateEmail($_POST['Email'])) {
+        array_push($errors, "Invalid Email");
+        echo json_encode($errors);
+        exit();
+    }
+    if (isHTML($_POST['OrderNotes'])) {
+        array_push($errors, "Invalid input of data is strictly not allowed");
+        echo json_encode($errors);
+        exit();
+    }
     if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
         array_push($errors, "Your cart is empty!");
+        echo json_encode($errors);
+        exit();
     } else {
         $Cart = $_SESSION['CART'];
         $OrderInvoice = array();
@@ -40,11 +117,10 @@ if (isset($_POST['SubmitOrder'])) {
 
             if ($Product['PriceVary'] != 1) {
                 $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
-            }
-            else{
+            } else {
                 $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
             }
-            
+
             if ($Product['PriceVary'] != 1) {
                 $ProductItem = array(
                     "ProductId" => $item['productId'],
@@ -71,34 +147,6 @@ if (isset($_POST['SubmitOrder'])) {
             );
         }
     }
-    $errors = array();
-    if (empty($_POST['FullName'])) {
-        array_push($errors, "Please enter your name");
-    }
-    if (empty($_POST['Phone'])) {
-        array_push($errors, "Please enter your phone number");
-    }
-    if (empty($_POST['ShippingAddress'])) {
-        array_push($errors, "Please enter your shipping address");
-    }
-    if (empty($_POST['City'])) {
-        array_push($errors, "Please enter your city name");
-    }
-    if (empty($_POST['State'])) {
-        array_push($errors, "Please select state");
-    }
-    if (
-        isHTML($_POST['FullName'])
-        && isHTML($_POST['Phone'])
-        && isHTML($_POST['ShippingAddress'])
-        && isHTML($_POST['City'])
-        && isHTML($_POST['State'])
-        && isHTML($_POST['Email'])
-        && isHTML($_POST['OrderNotes'])
-    ) {
-        array_push($errors, "Invalid input of data is strictly not allowed");
-    }
-
     $CustomerID = (isset($_SESSION['USER'])) ? $_SESSION['USER']['PK_ID'] : "";
 
     if ($errors == null) {
