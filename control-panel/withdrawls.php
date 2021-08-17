@@ -1,6 +1,20 @@
 <?php
 include_once('web-config.php');
 getHeader("Withdrawls", "includes/header.php");
+include_once('models/order-model.php');
+$OrderModel = new Order();
+$OrderList = $OrderModel->List();
+$SalesAmount = 0;
+foreach ($OrderList as $row) {
+    $TotalProductsWithQuantity = json_decode($row['ProductsWithQuantity'], true);
+    $Bill = 0;
+    foreach ($TotalProductsWithQuantity as $item) {
+        $Bill = $Bill + (intval($item['ProductQuantity']) * intval($item['PricePerUnit']));
+    }
+
+    $SalesAmount = $SalesAmount + $Bill;
+}
+
 include_once('models/withdrawl-model.php');
 $WithdrawlModel = new Withdrawl();
 $MaryamWithdrawl = $WithdrawlModel->WithdrawlCount(base64_encode(2));
@@ -13,7 +27,7 @@ if ($ShehzadWithdrawl != false) {
     $ShehzadWithdrawl = mysqli_fetch_array($ShehzadWithdrawl);
 }
 
-$TotalInvestments = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
+$TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
 ?>
 <div class="content-body">
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
@@ -52,15 +66,34 @@ $TotalInvestments = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Total Investment</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $TotalInvestments ?></h6>
+                        <h5 class="card-title">Sales Amount</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $SalesAmount ?></h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Maryam's Investment</h5>
+                        <h5 class="card-title">Cash Left</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= intval($SalesAmount) - intval($TotalWithdrawls) ?></h6>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <div class="row mt-3">
+                
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Withdrawls</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $TotalWithdrawls ?></h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Maryam's Withdrawls</h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo (empty($MaryamWithdrawl[0])) ? "No Data To Show" : "PKR " . $MaryamWithdrawl[0] ?></h6>
                     </div>
                 </div>
@@ -68,7 +101,7 @@ $TotalInvestments = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Shehzad's Investment</h5>
+                        <h5 class="card-title">Shehzad's Withdrawls</h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo (empty($ShehzadWithdrawl[0])) ? "No Data To Show" : "PKR " . $ShehzadWithdrawl[0] ?></h6>
                     </div>
                 </div>
@@ -94,7 +127,7 @@ $TotalInvestments = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
                     ?>
                         <tr>
                             <td><?= $SNo ?></td>
-                            <td><?= $row['Amount'] ?></td>
+                            <td>PKR <?= $row['Amount'] ?></td>
                             <td><?= ($row['UserID'] == 1) ? "Shehzad" : "Maryam" ?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
