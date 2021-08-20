@@ -1,6 +1,15 @@
 <?php
 include_once('web-config.php');
 getHeader("About us @".getAppName().".pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
+getHeader(
+    $Product['ProductName'] . " - " . implode(",", $Tags),
+    "includes/header.php",
+    "Product Page",
+    implode(",", $Tags),
+    $Product['ProductDescription'],
+    $Product['ProductName'],
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
+);
 ?>
 <!--hero banner-->
 <div class="kalles-section page_section_heading">
