@@ -30,7 +30,7 @@ if (isset($_SESSION['USER'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="shortcut icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/images/k_favicon_32x.png">
+    <link rel="shortcut icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/moreo-icon.png">
     <title><?= getSiteDomain() ?></title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com/">
