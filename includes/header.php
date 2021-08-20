@@ -28,7 +28,7 @@ if (isset($_SESSION['USER'])) {
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
-<meta http-equiv="content-language" content="en">
+    <meta http-equiv="content-language" content="en">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/moreo-icon.png">

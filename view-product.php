@@ -27,7 +27,12 @@ $Tags = json_decode($Product['ProductTags']);
 
 getHeader(
     $Product['ProductName'] . " - " . implode(",", $Tags),
-    "includes/header.php"
+    "includes/header.php",
+    "Product Page",
+    implode(",", $Tags),
+    $Product['ProductDescription'],
+    $Product['ProductName'],
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
 );
 
 $ColorDetails = $ColorModel->FilterByColorName($Colors[0]);
