@@ -28,11 +28,32 @@ if (isset($_SESSION['USER'])) {
 <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
 
 <head>
+<meta http-equiv="content-language" content="en">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="shortcut icon" type="image/png" href="<?= getHTMLRoot() ?>/assets/moreo-icon.png">
+    <meta name="keywords" content="descriiiip" />
+    <meta name="author" content="Shehzad Ahmed" />
+    <meta name="publisher" content="Shehzad Ahmed" />
+    <meta name="copyright" content="moreo.pk" />
+    <meta name="description" content="Explore your aesthetic, Buy scrunchies, stickers, potraits, nostalgic vintage accessories in pakistan" />
+    <meta name="page-topic" content="Home" />
+    <meta name="page-type" content="Homepage" />
+    <meta name="audience" content="Everyone" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:title" content="Moreo.pk" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://localhost/" />
+    <meta property="og:site_name" content="Neoistone: Best Web Development and Hosting services" />
+    <meta property="og:description" content="Explore your aesthetic, Buy scrunchies, stickers, potraits, nostalgic vintage accessories in pakistan" />
+    <meta property="og:image" content="https://moreo.pk/assets/logo.png" />
+    <meta property="og:url" content="https://moreo.pk" />
+    <meta name="twitter:title" content="Moreo.pk" />
+    <meta name="twitter:description" content="Explore your aesthetic, Buy scrunchies, stickers, potraits, nostalgic vintage accessories in pakistan" />
+    <meta name="twitter:image" content="https://moreo.pk/assets/logo.png" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title><?= getSiteDomain() ?></title>
-
     <link rel="preconnect" href="https://fonts.gstatic.com/">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,300i,400,400i,500,500i,600,600i,700,700i,800,800i&amp;display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:300,300i,400,400i,500,500i&amp;display=swap" rel="stylesheet">

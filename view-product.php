@@ -24,7 +24,11 @@ while ($Deatil = mysqli_fetch_array($ProductDetails)) {
 }
 $ProductDetailsCount = count($PriceVarient);
 $Tags = json_decode($Product['ProductTags']);
-getHeader($Product['ProductName'] . " - " . implode(",", $Tags), "includes/header.php");
+
+getHeader(
+    $Product['ProductName'] . " - " . implode(",", $Tags),
+    "includes/header.php"
+);
 
 $ColorDetails = $ColorModel->FilterByColorName($Colors[0]);
 $ColorDetails = mysqli_fetch_array($ColorDetails);

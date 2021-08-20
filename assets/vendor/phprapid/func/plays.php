@@ -20,16 +20,27 @@
  * @param String   $pageName  expects page name
  * @param String   $headerPath  header.php path
  * 
- */ 
-function getHeader(string $pageName, string $headerPath)
+ */
+function getHeader(string $pageName, string $headerPath, string $pageType="Home", string $keywords="", string $description="", string $pageTopic="", string $pageUrl="")
 {
-    ob_start(); 
+    ob_start();
     include($headerPath);
     //include("header.php");
-    $buffer=ob_get_contents();
+    $buffer = ob_get_contents();
     ob_end_clean();
     $title = $pageName;
-    $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . ' - TheSoftShop.pk$3', $buffer);
+    $buffer = preg_replace('/(<meta name="keywords" content=")(.*?)(" \/>)/i', '$1' . $keywords . '$3', $buffer);
+    $buffer = preg_replace('/(<meta name="description" content=")(.*?)(" \/>)/i', '$1' . $description . '$3', $buffer);
+    $buffer = preg_replace('/(<meta name="page-topic" content=")(.*?)(" \/>)/i', '$1' . $pageTopic . '$3', $buffer);
+    $buffer = preg_replace('/(<meta name="page-type" content=")(.*?)(" \/>)/i', '$1' . $pageType . '$3', $buffer);
+    $buffer = preg_replace('/(<meta property="og:title" content=")(.*?)(" \/>)/i', '$1' . $pageName . '$3', $buffer);
+    $buffer = preg_replace('/(<meta property="og:description" content=")(.*?)(" \/>)/i', '$1' . $description . '$3', $buffer);
+    $buffer = preg_replace('/(<meta property="og:url" content=")(.*?)(" \/>)/i', '$1' . $pageUrl . '$3', $buffer);
+    $buffer = preg_replace('/(<meta name="twitter:title" content=")(.*?)(" \/>)/i', '$1' . $pageName . '$3', $buffer);
+    $buffer = preg_replace('/(<meta name="twitter:description" content=")(.*?)(" \/>)/i', '$1' . $description . '$3', $buffer);
+    $buffer = preg_replace('/(<meta property="og:url" content=")(.*?)(" \/>)/i', '$1' . $pageUrl . '$3', $buffer);
+    $buffer = preg_replace('/(<meta property="og:site_name" content=")(.*?)(" \/>)/i', '$1' . "Moreo.pk" . '$3', $buffer);
+    $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . ' - Moreo.pk$3', $buffer);
 
     echo $buffer;
 }
@@ -39,8 +50,9 @@ function getHeader(string $pageName, string $headerPath)
  *
  * @param String   $footerPath  expects footer.php path
  * 
- */ 
-function getFooter(string $footerPath){
+ */
+function getFooter(string $footerPath)
+{
     include($footerPath);
 }
 
@@ -49,7 +61,7 @@ function getFooter(string $footerPath){
  *
  * @param String   $url  expects url
  * 
- */ 
+ */
 function redirectWindow(string $url)
 {
     echo "<script>window.location.href='$url';</script>";
@@ -60,10 +72,8 @@ function redirectWindow(string $url)
  *
  * @param String   $msg  expects message
  * 
- */ 
+ */
 function showAlert(string $msg)
 {
     echo "<script>alert('$msg');</script>";
 }
-
-?>
