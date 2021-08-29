@@ -202,9 +202,13 @@ if (isset($_POST['CheckQuantity'])) {
             "PriceVary" => $Product['PriceVary']
         );
         echo json_encode($result);
-        // echo $Inventory['Quantity'] . " pieces available.";
     } else {
-        echo "<span class='text-danger'>Out of stock</span>";
+        $result = array(
+            "Inventory" => "<span class='text-danger'>Out of stock</span>",
+            "InventoryPrice" => $Inventory['Price'],
+            "PriceVary" => $Product['PriceVary']
+        );
+        echo json_encode($result);
     }
 }
 
