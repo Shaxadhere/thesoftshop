@@ -20,7 +20,7 @@ getHeader("Categories", "includes/header.php");
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Category</h5>
-                <form action="Controllers/Category" method="post" enctype="multipart/form-data">
+                <form action="controllers/Category" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="CategoryName">Category Name</label>
@@ -105,7 +105,7 @@ getFooter("includes/footer.php");
         var category = $(this).val()
         $.ajax({
             type: "POST",
-            url: "Controllers/Category",
+            url: "controllers/Category",
             data: {
                 GenerateSlug: true,
                 CategoryName: category

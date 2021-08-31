@@ -22,11 +22,6 @@
                                     <del id="view-product-original-price" style="display:none"></del>
                                     <ins id="view-product-current-price"></ins>
                                 </p>
-                                <a href="#" class="rating_sp_kl dib">
-                                    <div class="kalles-rating-result">
-                                        <span class="kalles-rating-result__number" id="view-product-review-count"></span>
-                                    </div>
-                                </a>
                             </div>
                             <div class="pr_short_des">
                                 <p class="mg__0" id="view-product-description"></p>

@@ -1,12 +1,12 @@
 <?php
 include_once('web-config.php');
 getHeader(
-    $Product['ProductName'] . " - " . implode(",", $Tags),
+    "About Us @Moreo.pk Instagram Shop, Buy Scrunchies in Pakistan",
     "includes/header.php",
-    "Product Page",
-    implode(",", $Tags),
-    $Product['ProductDescription'],
-    $Product['ProductName'],
+    "About Us",
+    "Moreo.pk buy scruncies in pakistan, scrunchies on sale in pakistan",
+    "About us @ Moreo",
+    "About Us",
     'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
 );
 ?>

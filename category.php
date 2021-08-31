@@ -10,7 +10,15 @@ if (mysqli_num_rows($Category) == 0) {
 }
 $Category = mysqli_fetch_array($Category);
 $Tags = json_decode($Category['CategoryTags']);
-getHeader($Category['CategoryName'] . " - " . implode(",", $Tags), "includes/header.php");
+getHeader(
+    $Category['CategoryName'] . " - " . implode(",", $Tags),//page title
+    "includes/header.php",//header path
+    "Category",//pagetype
+    implode(",", $Tags),//page keywords
+    $Category['CategoryName'] . " - " . implode(",", $Tags),//description
+    $Category['CategoryName'],//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+);
 ?>
 <div class="kalles-section cat-shop pr tc">
     <a href="#" class="has_icon cat_nav_js dib">Categories<i class="facl facl-angle-down"></i></a>
@@ -57,7 +65,7 @@ getHeader($Category['CategoryName'] . " - " . implode(",", $Tags), "includes/hea
                 $ProductIndex = 0;
             }
 
-            $Products = $ProductModel->List($ProductIndex, 24, "", $_REQUEST['name'], "new-to-old");
+            $Products = $ProductModel->List($ProductIndex, 24, "", $Category['CategoryName'], "new-to-old");
             while ($row = mysqli_fetch_array($Products)) {
                 $ProductImages = json_decode($row['ProductImages']);
 
@@ -66,12 +74,14 @@ getHeader($Category['CategoryName'] . " - " . implode(",", $Tags), "includes/hea
                 $ColorCodes = array();
                 $Sizes = array();
                 $PriceVarient = array();
+                $PQuantity = array();
 
                 while ($Deatil = mysqli_fetch_array($ProductDetails)) {
                     array_push($Colors, $Deatil['ColorName']);
                     array_push($ColorCodes, $Deatil['ColorCode']);
                     array_push($Sizes, $Deatil['SizeValue']);
                     array_push($PriceVarient, $Deatil['PriceVarient']);
+                    array_push($PQuantity, $Deatil['Quantity']);
                 }
                 $ProductDetailsCount = count($PriceVarient);
 
@@ -98,6 +108,20 @@ getHeader($Category['CategoryName'] . " - " . implode(",", $Tags), "includes/hea
                             <div class="hover_button op__0 tc pa flex column ts__03">
                                 <a data-id="<?= base64_encode($row['PK_ID']) ?>" class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left quick-view-product" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>
                             </div>
+                            <?php
+                            $OutOfStock = false;
+                            if(max($PQuantity) < 1){
+                                $OutOfStock = true;
+                            }
+                            else{
+                                $OutOfStock = false;
+                            }
+                            if($OutOfStock){
+                                echo "<div style='background: pink; font-weight: 600;' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
+                                echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
+                                echo "</div>";
+                            }
+                            ?>
                             <div class="product-attr pa ts__03 cw op__0 tc">
                                 <p class="truncate mg__0 w__100"><?= ($Sizes[0] == "None") ? "" : implode(", ", $Sizes); ?></p>
                             </div>
@@ -140,7 +164,7 @@ getHeader($Category['CategoryName'] . " - " . implode(",", $Tags), "includes/hea
                         }
 
                         //Pagination values
-                        $Products = $ProductModel->List(0, 9999999, "", $_REQUEST['name'], "new-to-old");
+                        $Products = $ProductModel->List(0, 9999999, "", $Category['CategoryName'], "new-to-old");
                         $NumberOfProducts = mysqli_num_rows($Products);
                         $PageNumbers = (intval($NumberOfProducts) / 24) + 1;
 

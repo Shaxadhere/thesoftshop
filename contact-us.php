@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
-getHeader("Contact us", "includes/header.php");
+getHeader(
+    "Contact us @ Moreo",//page title
+    "includes/header.php",//header path
+    "Contact us",//pagetype
+    "Contact us, buy scrunchies in pakistan",//page keywords
+    "Contact us page buy scrunchies in pakistan",//description
+    "Contact Us",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+);
 ?>
 <!--hero banner-->
 <div class="kalles-section page_section_heading">

@@ -44,7 +44,24 @@ foreach ($ProductsWithQuantity as $product) {
                     <div class="card-body">
                         <div class="mb-3 d-flex align-items-center justify-content-between">
                             <span>Order No : <a href="#" id="order-number">#<?= $OrderDetails['OrderNumber'] ?></a></span>
-                            <span class="badge bg-success" id="order-status"><?= $OrderDetails['OrderStatus'] ?></span>
+                            <?php
+                                if($OrderDetails['OrderStatus'] == "Recieved"){
+                                    echo "<span class='badge badge-primary'>";
+                                }
+                                else if($OrderDetails['OrderStatus'] == "Preparing"){
+                                    echo "<span class='badge badge-warning'>";
+                                }
+                                else if($OrderDetails['OrderStatus'] == "Shipped"){
+                                    echo "<span class='badge badge-info'>";
+                                }
+                                else if($OrderDetails['OrderStatus'] == "Delivered"){
+                                    echo "<span class='badge badge-success'>";
+                                }
+                                else{
+                                    echo "<span class='badge badge-secondary'>";
+                                }
+                                ?>
+                                <?= $OrderDetails['OrderStatus'] ?></span>
                         </div>
                         <div class="row mb-5 g-4">
                             <div class="col-md-3 col-sm-6">

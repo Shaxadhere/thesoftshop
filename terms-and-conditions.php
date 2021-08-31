@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
-getHeader("Terms and conditions", "includes/header.php");
+getHeader(
+    "Terms and conditions - Buy scrunchies in pakistan",//page title
+    "includes/header.php",//header path
+    "Terms and conditions",//pagetype
+    "buy scrunchies in pakistan, buy stickers in pakistan, buy vintage potraits in pakistan, scunchies on sale in pakistan",//page keywords
+    "Terms and conditions - Buy scrunchies in pakistan",//description
+    "Terms and conditions",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+);
 ?>
 <!--hero banner-->
 <div class="kalles-section page_section_heading">

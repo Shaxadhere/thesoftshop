@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
-getHeader("Wishlist", "includes/header.php");
+getHeader(
+    "Wishlist - Buy scrunchies in pakistan",//page title
+    "includes/header.php",//header path
+    "Wishlist",//pagetype
+    "Buy scrunchies in pakistan, wishlist, buy potraits in pakistan",//page keywords
+    "Wishlist",//description
+    "Wishlist",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+);
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">

@@ -20,7 +20,7 @@
  * @param String   $pageName  expects page name
  * @param String   $headerPath  header.php path
  * 
- */
+ */ 
 function getHeader(string $pageName, string $headerPath, string $pageType="Home", string $keywords="", string $description="", string $pageTopic="", string $pageUrl="")
 {
     ob_start();
@@ -50,9 +50,8 @@ function getHeader(string $pageName, string $headerPath, string $pageType="Home"
  *
  * @param String   $footerPath  expects footer.php path
  * 
- */
-function getFooter(string $footerPath)
-{
+ */ 
+function getFooter(string $footerPath){
     include($footerPath);
 }
 
@@ -61,7 +60,7 @@ function getFooter(string $footerPath)
  *
  * @param String   $url  expects url
  * 
- */
+ */ 
 function redirectWindow(string $url)
 {
     echo "<script>window.location.href='$url';</script>";
@@ -72,8 +71,10 @@ function redirectWindow(string $url)
  *
  * @param String   $msg  expects message
  * 
- */
+ */ 
 function showAlert(string $msg)
 {
     echo "<script>alert('$msg');</script>";
 }
+
+?>

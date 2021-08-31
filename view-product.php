@@ -24,7 +24,6 @@ while ($Deatil = mysqli_fetch_array($ProductDetails)) {
 }
 $ProductDetailsCount = count($PriceVarient);
 $Tags = json_decode($Product['ProductTags']);
-
 getHeader(
     $Product['ProductName'] . " - " . implode(",", $Tags),
     "includes/header.php",
@@ -115,14 +114,6 @@ $Inventory = mysqli_fetch_array($Inventory);
                                 <h1 class="product_title entry-title fs__16"><?= $Product['ProductName'] ?></h1>
                                 <div class="flex wrap fl_between al_center price-review">
                                     <p class="price_range" id="price_ppr">Rs. <?= ($Product['PriceVary'] != 1) ? $Product['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></p>
-                                    <a href="#tab_reviews_product" class="rating_sp_kl dib">
-                                        <div class="kalles-rating-result">
-                                            <?php
-                                            $Reviews = json_decode($Product['Reviews']);
-                                            ?>
-                                            <span class="kalles-rating-result__number">(<?= (($Reviews != null) ? count($Reviews) : "0") ?> reviews)</span>
-                                        </div>
-                                    </a>
                                 </div>
                                 <div class="pr_short_des">
                                     <p class="mg__0"><?= $Product['ProductDescription'] ?></p>
@@ -138,11 +129,6 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                     <?php
                                                     for ($i = 0; $i < count($Colors); $i++) {
                                                         if ($Colors[$i] != "None") {
-                                                            // echo "<li style='padding: 11px;$ColorCodes[$i]' data-location='view-product' class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item color-switch' data-escape='$Colors[$i]'>";
-                                                            // echo "<span class='tt_txt'>$Colors[$i]</span>";
-                                                            // echo "<span data-location='view-product' class='swatch__value_pr pr lazyload ' style='$ColorCodes[$i]'></span>";
-                                                            // echo "</li>";
-
                                                             echo "<li class='ttip_nt tooltip_top_right nt-swatch swatch_pr_item' data-escape='$Colors[$i]'>";
                                                             echo "<span class='tt_txt' >$Colors[$i]</span>";
                                                             echo "<span data-location='view-product' class='swatch__value_pr pr color-switch' style='$ColorCodes[$i]'></span>";
@@ -174,7 +160,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                                             <div class="variations_button in_flex column w__100 buy_qv_false">
                                                 <div class="row">
                                                     <div class="col-12 col-md-12">
-                                                        <p id="quantity-available"><?= $Inventory['Quantity'] . " pieces available." ?></p>
+                                                        <p id="quantity-available"><?= (intval($Inventory['Quantity']) < 1) ? "<span class='text-danger'>Out of stock</span>" : $Inventory['Quantity'] . " pieces available." ?></p>
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -233,7 +219,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                         </div>
                     </div>
                     <!-- end product detail -->
-
+                    
                     <!-- related collection -->
                     <div class="nt_section type_featured_collection tp_se_cdt mt-5">
                         <div class="kalles-otp-01__feature container">

@@ -28,7 +28,7 @@ getHeader("Products", "includes/header.php");
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Price">Price (if it doesn't varies with varients)</label>
-                            <input required type="number" name="Price" class="form-control" id="Price" placeholder="Please type price">
+                            <input type="number" name="Price" class="form-control" id="Price" placeholder="Please type price">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="ProductDescription">Product Description</label>
@@ -114,7 +114,7 @@ getHeader("Products", "includes/header.php");
                                             <input required style="height:28px !important" type="number" name="Quantity[]" class="form-control" id="Quantity" placeholder="Enter quantity">
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <input required style="height:28px !important" type="number" name="PriceVarient[]" class="form-control" id="Price" placeholder="Enter price if it varies">
+                                            <input style="height:28px !important" type="number" name="PriceVarient[]" class="form-control" id="Price" placeholder="Enter price if it varies">
                                         </div>
                                     </div>
                                 </li>

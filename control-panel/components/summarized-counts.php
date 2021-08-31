@@ -1,4 +1,5 @@
 <?php
+include_once('web-config.php');
 include_once('models/order-model.php');
 $OrderModel = new Order();
 $Orders = $OrderModel->List();

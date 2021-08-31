@@ -4,7 +4,7 @@ include_once('assets/vendor/phprapid/rapid.php');
 
 //get application root address
 function getHTMLRoot(){
-	return "/thesoftshop/control-panel";
+	return "//moreo.pk/control-panel";
 }
 
 //get application host
@@ -15,11 +15,11 @@ function getServerRoot(){
 //database connection
 function connect(){
 	$server = "localhost";
-	$usr = "root";
-	$pass = "";
-	$data = "thesoftshop.pk";
-	$connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
-	return ($connection);
+    $usr = "moreopk_moreopk";
+    $pass = "Tk#UZy6$?8]q";
+    $data = "moreopk_moreopk";
+    $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
+    return ($connection);
 }
 
 //html toast
@@ -42,131 +42,154 @@ function HTMLToast(){
 }
 
 //email body
-function getEmailBody($RecipentName, $Message, $AdditionalInformation, $FromName){
-	return "<!DOCTYPE html
-        PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-      <html xmlns='http://www.w3.org/1999/xhtml'>
-      
-      <head>
-        <meta http-equiv='Content-Type' content='text/html; charset=UTF-8' />
-        <title>Password Reset Email Template</title>
-        <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <link href='https://fonts.googleapis.com/css?family=Open+Sans&display=swap' rel='stylesheet'>
-      </head>
-      <style>
-        body {
-          height: 100%;
-          width: 100%;
-          margin: 0;
-          padding: 0;
-          font-family: 'Open Sans', sans-serif;
-          font-size: 16px;
-          background-color: #F6F9FC;
-        }
-        table {
-          border-collapse: collapse;
-          width: 100%;
-          max-width: 600px;
-          font-size: inherit;
-          margin-top: 40px;
-        }
-        thead {}
-        tbody {
-          border-top: 3px solid #0B79D9;
-          background-color: #FFFFFF;
-        }
-        th {
-          height: 60px;
-          padding: 10px 20px;
-        }
-        td {
-          font-size: 14px;
-          line-height: 1.8;
-          padding: 10px 20px;
-        }
-        .center {
-          text-align: center;
-        }
-        .space-y {
-          padding-top: 40px;
-          padding-bottom: 40px;
-        }
-        .text-muted {
-          color: #8898AA;
-        }
-        .text-primary {
-          color: #0B79D9;
-        }
-        .disregard {
-          font-size: 12px;
-        }
-        .disregard__text {
-          width: 50%;
-        }
-        .brand__name {
-          text-align: left;
-        }
-        .button--reset {
-          padding: 12px 20px;
-          border-radius: 5px;
-          background-color: #0B79D9;
-          color: white;
-          font-size: 14px;
-          letter-spacing: 0.25px;
-          text-decoration: none;
-          text-transform: uppercase;
-          border: 1px solid #0B79D9;
-        }
-      </style>
-      <body>
-        <table align='center' cellpadding='0' cellspacing='0'>
-          <thead>
-            <tr>
-              <th class='brand__name'></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class='center'>
-                <h2>Welcome to ARTT</h2>
+function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Amount, $DeliveryCharges, $Total, $Message){
+  return "<style>
+    * {
+        font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif
+    }
+    </style>
+    <center>
+    <table border='0' cellpadding='0' cellspacing='0' width='80%'>
+      <tbody>
+          <tr>
+              <td>
+                  <div style='margin-bottom: 0px;'>
+                      <div>
+                          <table align='left' border='0' cellpadding='0' cellspacing='0' width='100%' style='width: 691.188px; min-width: 100%; padding: 10px;'>
+                              <tbody>
+                                  <tr>
+                                      <td align='center' valign='bottom'>
+                                          <table align='left' border='0' cellpadding='0' cellspacing='0' valign='bottom' width='100%' style='width: 671.188px; min-width: 100%;'>
+                                              <tbody>
+                                                  <tr>
+                                                      <td align='center' valign='bottom' style='padding-top: 4px; padding-right: 0px; padding-bottom: 10px;'><a href='//moreo.pk' title='' target='_blank'><img height='auto' src='/moreo.pk/assets/logo.png' width='170' class='gmail-CToWUd' style='width: 170px; height: auto;'></a></td>
+                                                  </tr>
+                                              </tbody>
+                                          </table>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+                  <div style='padding-top: 100px;'>
+                      <div style='font-size: 10px; line-height: 20px; height: 20px;'>&nbsp;</div>
+                      <div style='color: rgb(1 1 1); text-align: center; font-weight: bold;'><span style='font-size: 24px;'>Your order is placed!</span></div>
+                      <div>
+                          <p style='font-size: 18px;'>Hi $RecipentName,</p>
+                          <p>$Message</p>
+                          <p>We're excited for you to receive your order&nbsp;<b>#$OrderNumber</b>&nbsp;and will notify you once it's on its way. We hope you had a great shopping experience! You can check your order status here.</p>
+                          <div style='font-size: 10px; line-height: 20px; height: 20px;'>&nbsp;</div>
+                          <table align='center' border='0' cellpadding='0' cellspacing='0' style='width: 200px; height: 50px;'>
+                              <tbody>
+                                  <tr>
+                                      <td align='center'><a href='//moreo.pk/track-order?order=$OrderNumber' target='_blank' style='color: #fff; text-decoration-line: none; background: #222222; font-weight: bold; font-size: 16px; width: 1080px; padding: 12px;'>ORDER STATUS</a></td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                          <div style='font-size: 10px; line-height: 20px; height: 20px;'>&nbsp;</div>
+                      </div>
+                  </div>
+                  <div>
+                      <p style='color: rgb(1 1 1); font-weight: bold; font-size: 15px;'>DELIVERY DETAILS</p>
+                      <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                          <tbody>
+                              <tr>
+                                  <td valign='top' style='color: rgb(1 1 1); width: 124.406px; min-width: 100px; font-weight: bold;'>Name:</td>
+                                  <td>$RecipentName</td>
+                              </tr>
+                              <tr>
+                                  <td valign='top' style='color: rgb(1 1 1); font-weight: bold;'>Address:</td>
+                                  <td>$Address</td>
+                              </tr>
+                              <tr>
+                                  <td valign='top' style='color: rgb(1 1 1); width: 124.406px; font-weight: bold;'>Phone:</td>
+                                  <td>$Phone</td>
+                              </tr>
+                              <tr>
+                                  <td valign='top' style='color: rgb(1 1 1); width: 124.406px; font-weight: bold;'>Email:</td>
+                                  <td><a href='mailto:$Email' target='_blank'>$Email</a></td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div>
+                      <table width='100%' style='width: 691.188px; min-width: 100%;'>
+                          <tbody>
+                              <tr>
+                                  <td style='color: rgb(83, 83, 83);'>Shipping Option</td>
+                                  <td align='right'>COD</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                      <table width='100%' style='width: 691.188px; min-width: 100%;'>
+                          <tbody>
+                              <tr>
+                                  <td style='color: rgb(83, 83, 83);'>Amount</td>
+                                  <td align='right'>Rs. $Amount</td>
+                              </tr>
+                              <tr>
+                                  <td style='color: rgb(83, 83, 83);'>Delivery fee</td>
+                                  <td align='right'>Rs $DeliveryCharges</td>
+                              </tr>
+                              <tr>
+                                  <td style='color: rgb(83, 83, 83);' style='font-weight: bold;'>Total</td>
+                                  <td align='right' style='font-weight: bold;'>Rs $Total</td>
+                              </tr>
+                          </tbody>
+                      </table>
+                  </div>
+                  <div>
+                      <div>
+                          <div>
+                              <div>
+                                  <table border='0' cellpadding='0' cellspacing='0' width='100%'>
+                                      <tbody>
+                                          <tr>
+                                              <td width='300'>
+                                                  <table border='0' cellpadding='0' cellspacing='0' width='120'>
+                                                      <tbody>
+                                                          <tr>
+                                                              <td><a href='https://www.facebook.com/Moreo.pk' target='_blank'><img src='https://ci4.googleusercontent.com/proxy/ROZKcYfPTYrTOgmTwJcqjfZbyOLcCPQkUTuMqbvL0MWO0yW29b9LA6h_zRdWXLNcWk6j5v8TYIsR4EjW_2sje-BC4bHCclr00_baLHa5_A9vwL0=s0-d-e1-ft#https://img.alicdn.com/tfs/TB126gMeiDsXe8jSZR0XXXK6FXa-23-23.png' class='gmail-CToWUd'></a></td>
+                                                              <td><a href='https://www.instagram.com/Moreo.pk' target='_blank'><img src='https://ci4.googleusercontent.com/proxy/pjkqe1i5lIAFvDvpegZY4aMrnQiLcUHiK5p5gpQ54uOAWEczQoU82-o4iZzPppvpyZL84xsxq3h1wUfOwzts4Ri1Ojr8TwHdFRPEn8mZbihGfms=s0-d-e1-ft#https://img.alicdn.com/tfs/TB1rRRPSXY7gK0jSZKzXXaikpXa-22-22.png' class='gmail-CToWUd'></a></td>
+                                                              <td><a href='https://twitter.com/Moreo.pk' target='_blank'><img src='https://ci5.googleusercontent.com/proxy/r4HXtapus2-NldbzD0pJjqtqKtC2nkMsuKuYeNcMLtf6IGjavJsMaeYlM6qNf0mxwOM7InEnipJDb8xgODZ64Iiuca_mOKfiiEXFlvqKmhw0Vbg=s0-d-e1-ft#https://img.alicdn.com/tfs/TB1Npp8R8r0gK0jSZFnXXbRRXXa-23-23.png' class='gmail-CToWUd'></a></td>
+                                                              <td></td>
+                                                          </tr>
+                                                      </tbody>
+                                                  </table>
+                                              </td>
+                                          </tr>
+                                          <tr>
+                                              <td align='center' colspan='2'>
+                                                  <p style='margin: 0px;'>&nbsp;</p><a href='//moreo.pk/file-a-complaint' target='_blank' style='text-decoration-line: none;'><span style='font-weight: bold; color: rgb(1 1 1);'>FILE A COMPLAINT</span></a>&nbsp;<span style='font-weight: bold; color: rgb(1 1 1);'>|&nbsp;</span><a href='//moreo.pk/contact-us' target='_blank' style='text-decoration-line: none;'><span style='font-weight: bold; color: rgb(1 1 1);'>CONTACT US</span></a>
+                                                  <div style='font-size: 10px; line-height: 20px; height: 15px;'>&nbsp;</div>
+                                                  <div style='font-size: 10px; line-height: 20px; height: 15px;'>&nbsp;</div><a href='//moreo.pk/' target='_blank'><img src='/thesoftshop/assets/logo.png' class='gmail-CToWUd'></a>
+                                                  <div style='font-size: 10px; line-height: 20px; height: 15px;'>&nbsp;</div>
+                                                  <p style='font-size: 10px;'>This is an automatically generated <span zeum4c2='PR_5_0' data-ddnwab='PR_5_0' aria-invalid='spelling' class='LI ng'>e-mail</span> from our subscription list. Please do not reply to this <span zeum4c2='PR_6_0' data-ddnwab='PR_6_0' aria-invalid='spelling' class='LI ng'>e-mail</span>.</p>
+                                                  <div style='font-size: 10px; line-height: 20px; height: 15px;'>&nbsp;</div>
+                                              </td>
+                                          </tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
               </td>
-            </tr>
-            <tr>
-              <td>Hi $RecipentName,</td>
-            </tr>
-            <tr>
-              <td class='center'>$Message</td>
-            </tr>
-            <tr>
-              <td class='center space-y'>
-				$AdditionalInformation
-              </td>
-            </tr>
-            <tr>
-              <td class='center space-y'>
-              <br>
-                $FromName
-              </td>
-            </tr>
-            <tr align='center'>
-              <td class='disregard text-muted'>
-                <p class='disregard__text'>Please disregard this email if this action was not triggered by you.</p>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </body>
-      </html>";
+          </tr>
+      </tbody>
+    </table>
+    </center>";
 }
 
 //smtp mailing credentials
 function getSMTPCredentials(){
 	return array(
-		"host" => "mail.artt.edu.pk",
-		"port" => "587",
+		"host" => "sg-s1.dedicatedpanel.net",
+		"port" => "465",
 		"protocol" => "tls",
-		"username" => "admissions@artt.edu.pk",
-		"password" => "admissions_artt123"
+		"username" => "contact@moreo.pk",
+		"password" => "MaryamIsLaav."
 	);
 }
 

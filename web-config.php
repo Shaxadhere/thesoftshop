@@ -5,7 +5,7 @@ include_once('assets/vendor/phprapid/rapid.php');
 //get application root address
 function getHTMLRoot()
 {
-  return "/thesoftshop";
+  return "/moreo";
 }
 
 function getAppName()
@@ -30,7 +30,7 @@ function connect()
   $server = "localhost";
   $usr = "root";
   $pass = "";
-  $data = "thesoftshop.pk";
+  $data = "moreo";
   $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
   return ($connection);
 }

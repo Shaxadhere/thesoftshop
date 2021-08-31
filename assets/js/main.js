@@ -51,10 +51,10 @@ $(document).on('mouseover', '.quick-view-product', function () {
     //             var categories = JSON.parse(product['Categories'])
     //             var tags = JSON.parse(product['ProductTags'])
     //             $('#view-product-name-anchor').html(product['ProductName'])
-    //             $('#view-product-name-anchor').attr('href', "/thesoftshop/view-product?name=" + product['ProductSlug'])
+    //             $('#view-product-name-anchor').attr('href', "/view-product?name=" + product['ProductSlug'])
     //             $('#view-product-image-container').empty()
     //             images.forEach(item => {
-    //                 $('#view-product-image-container').append("<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" + "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='/thesoftshop/uploads/product-images/" + item + "'></span>" + "</div>")
+    //                 $('#view-product-image-container').append("<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" + "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='/uploads/product-images/" + item + "'></span>" + "</div>")
     //             });
     //             $('#view-product-current-price').html("Rs. " + product['Price'])
     //             $('#view-product-review-count').html(((reviews != null) ? reviews.length : "0") + " Reviews")
@@ -78,9 +78,9 @@ $(document).on('mouseover', '.quick-view-product', function () {
     //             categories.forEach(item => {
     //                 index ++
     //                 if (count == index) {
-    //                     $('#view-product-categories-container').append("<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
+    //                     $('#view-product-categories-container').append("<a href='/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
     //                 } else {
-    //                     $('#view-product-categories-container').append("<a href='/thesoftshop/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
+    //                     $('#view-product-categories-container').append("<a href='/category?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
     //                 }
     //             });
     //             $('#view-product-tags-container').empty()
@@ -90,12 +90,12 @@ $(document).on('mouseover', '.quick-view-product', function () {
     //             tags.forEach(item => {
     //                 index ++
     //                 if (count == index) {
-    //                     $('#view-product-tags-container').append("<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
+    //                     $('#view-product-tags-container').append("<a href='/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>.")
     //                 } else {
-    //                     $('#view-product-tags-container').append("<a href='/thesoftshop/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
+    //                     $('#view-product-tags-container').append("<a href='/shop?name=" + item + "' class='cg' title='" + item + "'>" + item + "</a>, ")
     //                 }
     //             });
-    //             $('#view-product-view-full-details').attr('href', "/thesoftshop/view-product?name=" + product['ProductSlug'])
+    //             $('#view-product-view-full-details').attr('href', "/view-product?name=" + product['ProductSlug'])
     //             $('#view-product-add-to-cart-button').attr('data-product', btoa(product['ProductID']))
 
 
@@ -114,7 +114,7 @@ function search_products(query, category) {
     const queryString = window.location.search
     const params = new URLSearchParams(queryString)
     const sort = (params.has('sort')) ? params.get('sort') : ""
-    var url = "/thesoftshop/shop?"
+    var url = "/shop?"
     url += "name=" + query
     if (category != "") {
         url += "&category=" + category
@@ -151,7 +151,7 @@ $(document).on('submit', '#customer_login', function (event) {
     var customerPassword = $('#CustomerPassword').val()
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/auth/auth",
+        url: "/auth/auth",
         data: {
             AuthenticateUser: true,
             CustomerEmail: customerEmail,
@@ -184,7 +184,7 @@ $(document).on('submit', '#RegisterForm', function (event) {
     var password = $('#RegisterPassword').val()
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/auth/auth",
+        url: "/auth/auth",
         data: {
             RegisterCustomer: true,
             CustomerName: fullName,
@@ -218,7 +218,7 @@ $(document).on('submit', '#PersonalProfileForm', function (event) {
     var contact = $('#edit-profile-contact').val()
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/auth/auth",
+        url: "/auth/auth",
         data: {
             UpdateProfile: true,
             FullName: fullName,
@@ -250,7 +250,7 @@ $(document).on('submit', '#ShippingAddressForm', function (event) {
     var shippingAddress = $('#edit-shipping-address-field').val()
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/auth/auth",
+        url: "/auth/auth",
         data: {
             UpdateShippingAddress: true,
             ShippingAddress: shippingAddress
@@ -280,7 +280,7 @@ $(document).on('submit', '#BillingAddressForm', function (event) {
     var billingAddress = $('#edit-billing-address-field').val()
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/auth/auth",
+        url: "/auth/auth",
         data: {
             UpdateBillingAddress: true,
             BillingAddress: billingAddress
@@ -309,7 +309,7 @@ $(document).on('click', '#edit-personal-profile', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
-        url: "/thesoftshop/components/edit-personal-profile",
+        url: "/components/edit-personal-profile",
         success: function (response) {
             $('#root').html(response)
         },
@@ -324,7 +324,7 @@ $(document).on('click', '#edit-shipping-address', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
-        url: "/thesoftshop/components/edit-shipping-address",
+        url: "/components/edit-shipping-address",
         success: function (response) {
             $('#root').html(response)
         },
@@ -339,7 +339,7 @@ $(document).on('click', '#edit-billing-address', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
-        url: "/thesoftshop/components/edit-billing-address",
+        url: "/components/edit-billing-address",
         success: function (response) {
             $('#root').html(response)
         },
@@ -364,7 +364,7 @@ $(document).on('click', '.btn-add-to-cart', function () {
     }
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/controllers/product",
+        url: "/controllers/product",
         data: {
             AddToCart: true,
             ProductID: productId,
@@ -402,14 +402,14 @@ $(document).on('click', '.remove-cart-item', function () {
     var location = $(this).attr('data-location')
     if (location == "cart") {
         var row = $(this).parent().parent().parent().parent().parent().parent()
-        var emptyCartMessage = "<div class='kalles-section page_section_heading'>" + "<div class='page-head tc pr oh cat_bg_img page_head_'>" + "<div class='parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0' data-bgset='assets/images/slide/banner21.jpg'></div>" + "<div class='container pr z_100'>" + "<h1 class='mb__5 cw'>Cart</h1>" + "<p class='mg__0'></p>" + "</div>" + "</div>" + "</div>" + "<div class='empty tc mt__60 mb__60'><i class='las la-shopping-bag pr mb__10'></i>" + "<p>Your cart is empty.</p>" + "<p class='return-to-shop mb__15'>" + "<a class='button button_primary tu js_add_ld' href='/thesoftshop/shop'>Return To Shop</a>" + "</p>" + "</div>";
+        var emptyCartMessage = "<div class='kalles-section page_section_heading'>" + "<div class='page-head tc pr oh cat_bg_img page_head_'>" + "<div class='parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0' data-bgset='assets/images/slide/banner21.jpg'></div>" + "<div class='container pr z_100'>" + "<h1 class='mb__5 cw'>Cart</h1>" + "<p class='mg__0'></p>" + "</div>" + "</div>" + "</div>" + "<div class='empty tc mt__60 mb__60'><i class='las la-shopping-bag pr mb__10'></i>" + "<p>Your cart is empty.</p>" + "<p class='return-to-shop mb__15'>" + "<a class='button button_primary tu js_add_ld' href='/shop'>Return To Shop</a>" + "</p>" + "</div>";
     } else if (location == "mini-cart") {
         var row = $(this).parent().parent().parent()
         var emptyCartMessage = "<div class='empty tc mt__40'><i class='las la-shopping-bag pr mb__10'></i>" + "<p>Your cart is empty.</p>" + "<p class='return-to-shop mb__15'>" + "<a class='button button_primary tu js_add_ld' href='  <?= getHTMLRoot() ?>/shop'>Return To Shop</a>" + "</p>" + "</div>";
     }
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/controllers/product",
+        url: "/controllers/product",
         data: {
             RemoveItemFromCart: true,
             CartItemId: cartItemId
@@ -445,7 +445,7 @@ $(document).on('click', '#checkout-btn', function () {
 
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/controllers/orders",
+        url: "/controllers/orders",
         data: {
             SubmitOrder: true,
             FullName: fullName,
@@ -459,7 +459,7 @@ $(document).on('click', '#checkout-btn', function () {
         success: function (response) {
             var result = JSON.parse(response)
             if (result['success'] == true) {
-                window.location.href = '/thesoftshop/thank-you';
+                window.location.href = '/thank-you';
             }
             else{
                 $('#errors').html(result[0])
@@ -477,7 +477,7 @@ $(document).on('click', '#checkout-btn', function () {
 function check_stocks(product, size, color) {
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/controllers/product",
+        url: "/controllers/product",
         data: {
             CheckQuantity: true,
             ProductID: product,
@@ -544,7 +544,7 @@ $(document).on('click', '#btn-update-cart', function () {
     console.log(sessionIds, qtys)
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/controllers/orders",
+        url: "/controllers/orders",
         data: {
             UpdateCart: true,
             SessionIDs: sessionIds,
@@ -581,7 +581,7 @@ $('body').on('click', '.nt_add_w', function (e) {
     var productId = productItem.attr('data-id')
     $.ajax({
         type: "POST",
-        url: "/thesoftshop/controllers/product",
+        url: "/controllers/product",
         data: {
             AddToWishList: true,
             ProductID: productId,
@@ -598,12 +598,6 @@ $('body').on('click', '.nt_add_w', function (e) {
 $(document).on('click', '#btn-track', function(){
     var order = $('#order-id').val()
     if(order != ""){
-        window.location.href='/thesoftshop/track-order?order='+order
+        window.location.href='/track-order?order='+order
     }
 })
-
-
-String.prototype.trim = function(){return this.replace(/^s+|s+$/g, "");};
-
-let aa=[];
-aa.includes(x=>x==true);

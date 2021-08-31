@@ -1,0 +1,1 @@
+[05-Aug-2021 12:40:41 UTC] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, bool given in /home/moreopk/public_html/models/customer-model.php on line 12

@@ -29,7 +29,7 @@ function getHeader(string $pageName, string $headerPath)
     $buffer=ob_get_contents();
     ob_end_clean();
     $title = $pageName;
-    $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . ' - TheSoftShop.pk$3', $buffer);
+    $buffer = preg_replace('/(<title>)(.*?)(<\/title>)/i', '$1' . $title . ' - Moreo.pk$3', $buffer);
 
     echo $buffer;
 }

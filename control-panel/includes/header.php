@@ -3,6 +3,7 @@ include_once('web-config.php');
 session_start();
 if (!isset($_SESSION['ADMIN'])) {
     redirectWindow("auth/index?error=you must login to continue");
+    exit();
 }
 
 include_once('models/user-model.php');
@@ -152,7 +153,7 @@ $User = mysqli_fetch_array($User);
                         <span>Investments</span>
                     </a>
                 </li>
-                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/withdrawls") ? "active" : "" ?>">
+                 <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/withdrawls") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/withdrawls" class="nav-link">
                         <i data-feather="dollar-sign"></i>
                         <span>Withdrawls</span>

@@ -25,10 +25,10 @@ if (isset($_POST['RegisterCustomer'])) {
   }
 
   if(!filter_var($_POST['CustomerEmail'], FILTER_VALIDATE_EMAIL)){
-    array_push($errors, "Invalid Email entered");
-    echo json_encode($errors);
-    exit();
-  }
+      array_push($errors, "Invalid Email");
+      echo json_encode($errors);
+      exit();
+    }
 
   if (isHtml($_POST['CustomerEmail'])) {
     array_push($errors, "Invalid email");
@@ -277,125 +277,5 @@ if (isset($_POST['UpdateBillingAddress'])) {
   }
 }
 
-//Request from forgot confirm
-if (isset($_POST['reset'])) {
-  //if it contains email in POST
-  if (isset($CustomerEmail)) {
-    //if email is empty string
-    if (empty($CustomerEmail)) {
-      redirectWindow("index?email=Email cannot be empty");
-    }
-    //if email is invalid
-    else if (!validateEmail($CustomerEmail)) {
-      redirectWindow("forgotPassword?email=Invalid Email");
-    }
-  }
-
-  //verifies the email entered
-  $user = verifyValues(
-    "tbl_customer",
-    array(
-      "Email",
-      $CustomerEmail
-    ),
-    connect()
-  );
-
-  //saving the result in a variable
-  $ValidUser = mysqli_fetch_array($user);
-
-  //checking if the account exists
-  if (isset($ValidUser)) {
-
-    include_once('../assets/phprapid/assets/class.phpmailer.php');
-    $mail = new PHPMailer();
-    $antiForgeryToken = random_strings(50);
-    editData(
-      "tbl_customer",
-      array(
-        "token",
-        $antiForgeryToken
-      ),
-      "PK_ID",
-      $ValidUser[0],
-      connect()
-    );
-
-    $reset_Url = "<a href='http://$_SERVER[HTTP_HOST]/auth/verify?'>Reset Your Password</a>";
-
-    $message = "";
-
-    $mail->IsSMTP();
-    $mail->Host = 'a2plcpnl0202.prod.iad2.secureserver.net';
-    $mail->Port = '465';                                //Sets the default SMTP server port
-    $mail->SMTPAuth = true;                            //Sets SMTP authentication. Utilizes the Username and Password variables
-    $mail->Username = 'admin@shaxad.com';                    //Sets SMTP username
-    $mail->Password = '786786PkPk';                    //Sets SMTP password
-    $mail->SMTPSecure = 'ssl';
-    $mail->From = "admin@shaxad.com";
-    $mail->FromName = "Point Of Sale";                //Sets the From name of the message
-    $mail->AddAddress($ValidUser[2]);
-    $mail->WordWrap = 50;
-    $mail->IsHTML(true);
-    $mail->Subject = "Reset Password";
-    $mail->Body = $message;
-    if ($mail->Send()) {
-      redirectWindow("$_HTMLROOTURI/Auth/emailSent");
-    } else {
-      http_response_code(500);
-    }
-  }
-  //returning Email doesnt exists
-  else {
-    redirectWindow("forgotPassword?email=Email doesnt exists");
-  }
-}
-
-//Request from save password confirm
-if (isset($_POST['SavePassword'])) {
-  if (isset($_REQUEST['token']) && isset($_REQUEST['uuid'])) {
-    $antiForgeryToken = $_REQUEST['token'];
-    $uuid = $_REQUEST['uuid'];
-    $fetched = fetchDataById(
-      "tbl_customer",
-      "PK_ID",
-      $uuid,
-      connect()
-    );
-    $user = mysqli_fetch_array($fetched);
-    $token = $user[6];
-    if (!($token == $antiForgeryToken)) {
-      redirectWindow("$_HTMLROOTURI/Auth/expired");
-    } else {
-      $newPassword = $_REQUEST['NewPassword'];
-      editData(
-        "tbl_customer",
-        array(
-          "Password",
-          password_hash($newPassword, 1),
-          "token",
-          ""
-        ),
-        "PK_ID",
-        $uuid,
-        connect()
-      );
-      $UserType = $user['FK_UserType'];
-      session_start();
-      $_SESSION["USER"] = $user;
-      if ($UserType == 1) {
-        redirectWindow("$_HTMLROOTURI/Controllers/Admin/index?Success=Your%20password%20was%20saved%20successfully");
-      } else if ($UserType == 2) {
-        redirectWindow("$_HTMLROOTURI/Controllers/Manager/index?Success=Your%20password%20was%20saved%20successfully");
-      } else if ($UserType == 3) {
-        redirectWindow("$_HTMLROOTURI/Controllers/Employee/index?Success=Your%20password%20was%20saved%20successfully");
-      } else {
-        return http_response_code(400);
-      }
-    }
-  } else {
-    redirectWindow("$_HTMLROOTURI/Auth/expired");
-  }
-}
 
 include_once("../errors/errors.php");

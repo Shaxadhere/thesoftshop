@@ -37,7 +37,7 @@ foreach ($OrderList as $row) {
     </div>
 
     <div class="container-fluid">
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
@@ -93,7 +93,28 @@ foreach ($OrderList as $row) {
                             <td><?= $row['OrderNumber'] ?></td>
                             <td><?= $row['CustomerName'] ?></td>
                             <td><?= $row['CustomerContact'] ?></td>
-                            <td><?= $row['OrderStatus'] ?></td>
+                            <td>
+                                <?php
+                                if($row['OrderStatus'] == "Recieved"){
+                                    echo "<span class='badge badge-primary'>";
+                                }
+                                else if($row['OrderStatus'] == "Preparing"){
+                                    echo "<span class='badge badge-warning'>";
+                                }
+                                else if($row['OrderStatus'] == "Shipped"){
+                                    echo "<span class='badge badge-info'>";
+                                }
+                                else if($row['OrderStatus'] == "Delivered"){
+                                    echo "<span class='badge badge-success'>";
+                                }
+                                else{
+                                    echo "<span class='badge badge-secondary'>";
+                                }
+                                ?>
+                                
+                                    <?= $row['OrderStatus'] ?>
+                                </span>
+                            </td>
                             <td>Rs. <?= $Bill ?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

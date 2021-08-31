@@ -159,7 +159,7 @@ getFooter("includes/footer.php");
     $(document).on('click', '#SaveWithdrawl', function(){
         $.ajax({
             type: "POST",
-            url: "/thesoftshop/control-panel/controllers/Withdrawl",
+            url: "/control-panel/controllers/Withdrawl",
             data: {
                 SaveWithdrawl: true,
                 Amount: $("#Amount").val(),

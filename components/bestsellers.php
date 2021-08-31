@@ -13,7 +13,7 @@
             <span class="section-subtitle db tc sub-title">Recently added products</span>
         </div>
 
-        <div class="products nt_products_holder row fl_center row_pr_1 cdt_des_5 round_cd_true nt_cover ratio_nt position_8 space_30">
+        <div class="products nt_products_holder row fl_center row_pr_1 cdt_des_5 round_cd_false nt_cover ratio_nt position_8 space_30">
             <?php
             include_once('web-config.php');
             include_once('models/product-model.php');
@@ -29,12 +29,14 @@
                 $ColorCodes = array();
                 $Sizes = array();
                 $PriceVarient = array();
+                $PQuantity = array();
 
                 while ($Deatil = mysqli_fetch_array($ProductDetails)) {
                     array_push($Colors, $Deatil['ColorName']);
                     array_push($ColorCodes, $Deatil['ColorCode']);
                     array_push($Sizes, $Deatil['SizeValue']);
                     array_push($PriceVarient, $Deatil['PriceVarient']);
+                    array_push($PQuantity, $Deatil['Quantity']);
                 }
                 $ProductDetailsCount = count($PriceVarient);
 
@@ -70,6 +72,20 @@
                                     <span>Quick view</span>
                                 </a>
                             </div>
+                            <?php
+                            $OutOfStock = false;
+                            if(max($PQuantity) < 1){
+                                $OutOfStock = true;
+                            }
+                            else{
+                                $OutOfStock = false;
+                            }
+                            if($OutOfStock){
+                                echo "<div style='background: pink; font-weight: 600;' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
+                                echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
+                                echo "</div>";
+                            }
+                            ?>
                             <div class="product-attr pa ts__03 cw op__0 tc">
                                 <p class="truncate mg__0 w__100"><?= ($Sizes[0] == "None") ? "" : implode(", ", $Sizes); ?></p>
                             </div>

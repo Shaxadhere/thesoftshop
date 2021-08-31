@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
-getHeader("Shipping and delivery", "includes/header.php");
+getHeader(
+    "Shipping and delivery",//page title
+    "includes/header.php",//header path
+    "Shipping and delivery",//pagetype
+    "Shipping and delivery - Buy scrunchies in pakistan",//page keywords
+    "Shipping and delivery - Buy scrunchies in pakistan",//description
+    "Shipping and delivery",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+);
 ?>
 <!--hero banner-->
 <div class="kalles-section page_section_heading">

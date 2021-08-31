@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
-getHeader("New arrivals @".getAppName().".pk Instagram Shop, cute, fancy, good quality and cheap products in pakistan", "includes/header.php");
+getHeader(
+    "New arrivals, Trendy Aesthetic Products Available In Pakistan",//page title
+    "includes/header.php",//header path
+    "New Arrivals",//pagetype
+    "New Arrivals at Moreo, Buy scrunchies in pakistan",//page keywords
+    "New Arrivals at Moreo, Buy scrunchies in pakistan",//description
+    "New Arrivals",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+);
 ?>
 <!--shop banner-->
 <div class="kalles-section page_section_heading">
@@ -41,12 +49,14 @@ getHeader("New arrivals @".getAppName().".pk Instagram Shop, cute, fancy, good q
                 $ColorCodes = array();
                 $Sizes = array();
                 $PriceVarient = array();
+                $PQuantity = array();
 
                 while ($Deatil = mysqli_fetch_array($ProductDetails)) {
                     array_push($Colors, $Deatil['ColorName']);
                     array_push($ColorCodes, $Deatil['ColorCode']);
                     array_push($Sizes, $Deatil['SizeValue']);
                     array_push($PriceVarient, $Deatil['PriceVarient']);
+                    array_push($PQuantity, $Deatil['Quantity']);
                 }
                 $ProductDetailsCount = count($PriceVarient);
                 
@@ -73,6 +83,20 @@ getHeader("New arrivals @".getAppName().".pk Instagram Shop, cute, fancy, good q
                             <div class="hover_button op__0 tc pa flex column ts__03">
                                 <a data-id="<?= base64_encode($row['PK_ID']) ?>" class="pr nt_add_qv js_add_qv cd br__40 pl__25 pr__25 bgw tc dib ttip_nt tooltip_top_left quick-view-product" href="#"><span class="tt_txt">Quick view</span><i class="iccl iccl-eye"></i><span>Quick view</span></a>
                             </div>
+                            <?php
+                            $OutOfStock = false;
+                            if(max($PQuantity) < 1){
+                                $OutOfStock = true;
+                            }
+                            else{
+                                $OutOfStock = false;
+                            }
+                            if($OutOfStock){
+                                echo "<div style='background: pink; font-weight: 600; ' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
+                                echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
+                                echo "</div>";
+                            }
+                            ?>
                             <div class="product-attr pa ts__03 cw op__0 tc">
                                 <p class="truncate mg__0 w__100"><?= ($Sizes[0] == "None") ? "" : implode(", ", $Sizes); ?></p>
                             </div>

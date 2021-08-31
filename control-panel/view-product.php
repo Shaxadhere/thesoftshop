@@ -31,7 +31,7 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <form action="Controllers/Product.php" method="post" enctype="multipart/form-data">
+                <form action="controllers/Product.php" method="post" enctype="multipart/form-data">
 
                     <div class="form-row">
                         <input type="hidden" name="ProductID" value="<?= base64_encode($Product['PK_ID']) ?>" />
@@ -203,7 +203,7 @@ getFooter("includes/footer.php");
         var product = $(this).val()
         $.ajax({
             type: "POST",
-            url: "Controllers/Product",
+            url: "controllers/Product",
             data: {
                 GenerateSlug: true,
                 ProductName: product

@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
-getHeader("Checkout", "includes/header.php");
+getHeader(
+    "Checkout",//page title
+    "includes/header.php",//header path
+    "Checkout",//pagetype
+    "Moreo, Moreo.pk Buy scrunchies in pakistan",//page keywords
+    "Checkout",//description
+    "Checkout",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+);
 if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "" || $_SESSION['CART'] == null) {
     redirectWindow(getHTMLRoot() . "?error=Your cart is empty!");
 }

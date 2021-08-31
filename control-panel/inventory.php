@@ -93,7 +93,7 @@ getFooter("includes/footer.php");
         var inventoryId = button.data('id')
         $.ajax({
             type: "POST",
-            url: "Controllers/Inventory",
+            url: "controllers/Inventory",
             data: {
                 FetchInventory: true,
                 InventoryID: inventoryId
@@ -120,7 +120,7 @@ getFooter("includes/footer.php");
         var quantity = $('#ModalQuantity').val()
         $.ajax({
             type: "POST",
-            url: "Controllers/Inventory",
+            url: "controllers/Inventory",
             data: {
                 UpdateInventory: true,
                 InventoryID: id,

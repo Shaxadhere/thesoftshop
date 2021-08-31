@@ -49,6 +49,7 @@ class Product{
                 $Order = "desc";
                 break;
         }
+        
         return mysqli_query(
             connect(),
             "SELECT * FROM `tbl_product` WHERE (tbl_product.ProductName LIKE '%$ProductName%' or tbl_product.ProductTags Like '%$ProductName%') and tbl_product.Categories Like '%$CategoryName%' and Status = 1 and Deleted = 0 order by $OrderBy $Order limit $index, $limit"
@@ -78,7 +79,7 @@ class Product{
         $limit = mysqli_real_escape_string(connect(), $limit);
         return mysqli_query(
             connect(),
-            "SELECT * FROM tbl_product where Deleted = 0 ORDER BY RAND() LIMIT $limit"
+            "SELECT * FROM tbl_product where Deleted = 0 ORDER BY RAND() LIMIT $limit;"
         );
     }
 
@@ -89,7 +90,7 @@ class Product{
             "SELECT * FROM `tbl_product` WHERE tbl_product.Categories LIKE '%$CategoryName%' and Status = 1 and Deleted = 0 order by PK_ID desc limit 8"
         );
     }
-
+    
     function ListByCategoryNameArray($CategoryArray, $limit){
         $query = "SELECT * from tbl_product where Deleted = 0 and tbl_product.Categories like ";
         $count = 0;
@@ -134,7 +135,7 @@ class Product{
         $ProductID = mysqli_real_escape_string(connect(), $ProductID);
         return mysqli_query(
             connect(),
-            "SELECT tbl_inventory.PK_ID as InventoryID, tbl_product.PK_ID as ProductID, tbl_product.ProductName, tbl_product.Price, tbl_product.PriceVary, tbl_product.ProductSlug, tbl_product.ProductDescription, tbl_product.Reviews, tbl_product.ProductCode, tbl_product.Categories, tbl_product.ProductTags, tbl_product.ProductImages, tbl_color.ColorName, tbl_color.ColorCode, tbl_size.SizeValue, tbl_inventory.Price as PriceVarient from tbl_inventory INNER join tbl_product on tbl_inventory.ProductID = tbl_product.PK_ID inner join tbl_size on tbl_inventory.SizeID = tbl_size.PK_ID inner join tbl_color on tbl_inventory.ColorID = tbl_color.PK_ID WHERE tbl_product.Status = 1 and tbl_product.Deleted = 0 and tbl_inventory.ProductID = $ProductID"
+            "SELECT tbl_inventory.PK_ID as InventoryID, tbl_inventory.Quantity, tbl_product.PK_ID as ProductID, tbl_product.ProductName, tbl_product.Price, tbl_product.PriceVary, tbl_product.ProductSlug, tbl_product.ProductDescription, tbl_product.Reviews, tbl_product.ProductCode, tbl_product.Categories, tbl_product.ProductTags, tbl_product.ProductImages, tbl_color.ColorName, tbl_color.ColorCode, tbl_size.SizeValue, tbl_inventory.Price as PriceVarient from tbl_inventory INNER join tbl_product on tbl_inventory.ProductID = tbl_product.PK_ID inner join tbl_size on tbl_inventory.SizeID = tbl_size.PK_ID inner join tbl_color on tbl_inventory.ColorID = tbl_color.PK_ID WHERE tbl_product.Status = 1 and tbl_product.Deleted = 0 and tbl_inventory.ProductID = $ProductID"
         );
     }
 

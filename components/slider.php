@@ -16,7 +16,7 @@ include_once('web-config.php');
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-left">
                             <div class="left_right">
                                 <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">SUMMER 2021</h4>
-                                <h3 class="kalles-caption-layout-01__title mg__0 lh__1">New Arrival Collection</h3>
+                                <h1 class="kalles-caption-layout-01__title mg__0 lh__1">NEW ARRIVALS COLLECTION</h3>
                                 <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/new-arrivals">Explore Now</a>
                             </div>
                         </div>
@@ -25,12 +25,32 @@ include_once('web-config.php');
                 </div>
             </div>
             <!-- end first slide -->
+            
+             <!--third slide -->
+            <div class="col-12 slideshow__slide">
+                <div class="oh position-relative nt_img_txt bg-black--transparent">
+                    <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
+                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/buy-posters-online-in-pakistan-now-available-2021.jpg"></div>
+                    </div>
+                    <div class="caption-wrap caption-w-1 pe_none z_100 tl_md tl">
+                        <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-left">
+                            <div class="left_right">
+                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">NEW ROOM DECOR COLLECTION</h4>
+                                <h3 class="kalles-caption-layout-01__title mg__0 lh__1">AESTHETIC POSTERS</h3>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?name=posters">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="<?= getHTMLRoot() ?>/category?name=posters" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
+                </div>
+            </div>
+             <!--end third slide -->
 
             <!-- second slide -->
             <div class="col-12 slideshow__slide">
                 <div class="oh position-relative nt_img_txt bg-black--transparent">
                     <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
-                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_zoom pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/2.jpg"></div>
+                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_zoom pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/buy-silk-scrunchies-on-reasonable-prices-in-pakistan-2021-latest.jpg"></div>
                     </div>
                     <div class="caption-wrap caption-w-1 pe_none z_100 tr_md tl">
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-right">
@@ -46,25 +66,7 @@ include_once('web-config.php');
             </div>
             <!-- end second slide -->
 
-            <!-- third slide -->
-            <div class="col-12 slideshow__slide">
-                <div class="oh position-relative nt_img_txt bg-black--transparent">
-                    <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
-                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/1.png"></div>
-                    </div>
-                    <div class="caption-wrap caption-w-1 pe_none z_100 tl_md tl">
-                        <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-left">
-                            <div class="left_right">
-                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">SUMMER SALE</h4>
-                                <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Save up to 70%</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/happy-deals">Explore Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="<?= getHTMLRoot() ?>/happy-deals" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
-                </div>
-            </div>
-            <!-- end third slide -->
+            
 
         </div>
     </div>

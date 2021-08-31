@@ -1,6 +1,14 @@
 <?php
 include_once('web-config.php');
-getHeader("Cart", "includes/header.php");
+getHeader(
+    "Cart",
+    "includes/header.php",
+    "Cart",
+    "Moreo.pk buy scruncies in pakistan, scrunchies on sale in pakistan",
+    "Cart",
+    "Cart",
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
+);
 include_once('models/product-model.php');
 include_once('models/color-model.php');
 include_once('models/size-model.php');

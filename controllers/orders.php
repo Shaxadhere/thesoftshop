@@ -177,35 +177,36 @@ if (isset($_POST['SubmitOrder'])) {
         foreach ($OrderInvoice as $invoiceItem) {
             $Subtotal = $Subtotal + intval($invoiceItem['PricePerUnit']) * intval($invoiceItem['ProductQuantity']);
         }
-        // $SMTPCredentials = getSMTPCredentials();
-        // include_once('../assets/vendor/phprapid/assets/class.phpmailer.php');
-        // $mail = new PHPMailer();
-        // $message = getEmailBody(
-        //     $_POST['FullName'],
-        //     $OrderNumber, 
-        //     $_POST['ShippingAddress'], 
-        //     $_POST['Phone'], 
-        //     $_POST['Email'], 
-        //     $Subtotal, 
-        //     170, 
-        //     intval($Subtotal) + 170, 
-        //     "Thank you for ordering from Moreo.pk!"
-        // );
-        // $mail->IsSMTP();
-        // $mail->Host = $SMTPCredentials['host'];
-        // $mail->Port = $SMTPCredentials['port'];
-        // $mail->SMTPAuth = true;
-        // $mail->Username = $SMTPCredentials['username'];
-        // $mail->Password = $SMTPCredentials['password'];
-        // $mail->SMTPSecure = $SMTPCredentials['protocol'];
-        // $mail->From = $SMTPCredentials['username'];
-        // $mail->FromName = $SMTPCredentials['username'];
-        // $mail->AddAddress($_POST['Email']);
-        // $mail->WordWrap = 50;
-        // $mail->IsHTML(true);
-        // $mail->Subject = "Your order is recieved";
-        // $mail->Body = $message;
-        // $mail->Send();
+        
+        $SMTPCredentials = getSMTPCredentials();
+        include_once('../assets/vendor/phprapid/assets/class.phpmailer.php');
+        $mail = new PHPMailer();
+        $message = getEmailBody(
+            $_POST['FullName'],
+            $OrderNumber, 
+            $_POST['ShippingAddress'], 
+            $_POST['Phone'], 
+            $_POST['Email'], 
+            $Subtotal, 
+            170, 
+            intval($Subtotal) + 170, 
+            "Thank you for ordering from Moreo.pk!"
+        );
+        $mail->IsSMTP();
+        $mail->Host = $SMTPCredentials['host'];
+        $mail->Port = $SMTPCredentials['port'];
+        $mail->SMTPAuth = true;
+        $mail->Username = $SMTPCredentials['username'];
+        $mail->Password = $SMTPCredentials['password'];
+        $mail->SMTPSecure = $SMTPCredentials['protocol'];
+        $mail->From = $SMTPCredentials['username'];
+        $mail->FromName = $SMTPCredentials['username'];
+        $mail->AddAddress($_POST['Email']);
+        $mail->WordWrap = 50;
+        $mail->IsHTML(true);
+        $mail->Subject = "Your order is recieved";
+        $mail->Body = $message;
+        $mail->Send();
 
         $_SESSION['LASTORDER'] = array(
             $CustomerID,
@@ -236,6 +237,7 @@ if (isset($_POST['SubmitOrder'])) {
         echo json_encode($errors);
     }
 }
+
 
 if (isset($_POST['UpdateCart'])) {
     $errors = array();

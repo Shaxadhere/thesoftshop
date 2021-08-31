@@ -27,7 +27,7 @@ getHeader("Sizes", "includes/header.php");
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Add Size</h5>
-                <form action="Controllers/Size" method="post" enctype="multipart/form-data">
+                <form action="controllers/Size" method="post" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-group col-md-12">
                             <label for="SizeValue">Size Value</label>
