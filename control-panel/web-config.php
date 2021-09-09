@@ -4,7 +4,7 @@ include_once('assets/vendor/phprapid/rapid.php');
 
 //get application root address
 function getHTMLRoot(){
-	return "//moreo.pk/control-panel";
+	return "/moreo/control-panel";
 }
 
 //get application host
@@ -13,13 +13,14 @@ function getServerRoot(){
 }
 
 //database connection
-function connect(){
-	$server = "localhost";
-    $usr = "moreopk_moreopk";
-    $pass = "Tk#UZy6$?8]q";
-    $data = "moreopk_moreopk";
-    $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
-    return ($connection);
+function connect()
+{
+  $server = "localhost";
+  $usr = "root";
+  $pass = "";
+  $data = "moreo";
+  $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
+  return ($connection);
 }
 
 //html toast
