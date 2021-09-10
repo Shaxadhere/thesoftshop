@@ -441,13 +441,18 @@ if (isset($_REQUEST['added-to-cart'])) {
                 "</div>"+
                 "</td>"+
                 "<td class='grouped-pr-list-item__quantity'>"+
-                "<button class='btn btn-sm btn-danger'>Delete</button>"+
+                "<button class='btn btn-sm btn-danger rounded delete-uploaded-image'>Delete</button>"+
                 "</td>"+
                 "</tr>";
                 $('#uploads-container').append(row)
             }
+            console.log($('#upload_file').val())
         }
     });
+    $(document).on('click', '.delete-uploaded-image', function(){
+        var row = $(this).parent().parent()
+        row.remove()
+    })
     $(".file_remove").on("click", function(e) {
         $("#uploaded_view").removeClass("show");
         $("#uploaded_view").find("img").remove();
