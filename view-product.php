@@ -54,7 +54,7 @@ $Inventory = mysqli_fetch_array($Inventory);
             <div class="row al_center">
                 <div class="col">
                     <nav class="sp-breadcrumb">
-                        <a href="index-2.html">Home</a>
+                        <a href="<?= getHTMLRoot() ?>">Home</a>
                         <i class="facl facl-angle-right"></i>
                         <a href="<?= getHTMLRoot() ?>/shop">Shop</a>
                         <i class="facl facl-angle-right"></i><?= $Product['ProductName'] ?>
