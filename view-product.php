@@ -31,7 +31,7 @@ getHeader(
     implode(",", $Tags),
     $Product['ProductDescription'],
     $Product['ProductName'],
-    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']
+    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']
 );
 
 $ColorDetails = $ColorModel->FilterByColorName($Colors[0]);
@@ -156,35 +156,97 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                 </ul>
                                             </div>
                                         </div>
-                                        <div class="nt_cart_form variations_form variations_form_ppr">
-                                            <div class="variations_button in_flex column w__100 buy_qv_false">
-                                                <div class="row">
-                                                    <div class="col-12 col-md-12">
-                                                        <p id="quantity-available"><?= (intval($Inventory['Quantity']) < 1) ? "<span class='text-danger'>Out of stock</span>" : $Inventory['Quantity'] . " pieces available." ?></p>
-                                                    </div>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-5 col-5">
-                                                        <div class="quantity pr mr__10 qty__true d-inline-block" id="sp_qty_ppr">
-                                                            <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" name="quantity" value="1" id="quantity">
-                                                            <div class="qty tc fs__14">
-                                                                <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
-                                                                    <i class="facl facl-plus"></i>
-                                                                </button>
-                                                                <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0">
-                                                                    <i class="facl facl-minus"></i>
-                                                                </button>
-                                                            </div>
+                                        <?php
+                                        if ($Product['ProductType'] == "Default") {
+                                        ?>
+                                            <div class="nt_cart_form variations_form variations_form_ppr">
+                                                <div class="variations_button in_flex column w__100 buy_qv_false">
+                                                    <div class="row">
+                                                        <div class="col-12 col-md-12">
+                                                            <p id="quantity-available"><?= (intval($Inventory['Quantity']) < 1) ? "<span class='text-danger'>Out of stock</span>" : $Inventory['Quantity'] . " pieces available." ?></p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6 col-6">
-                                                        <button style="background-color: var(--main-color);border: none;color: #fff;width: auto;" data-location="view-product" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="1000" data-ani="shake" class="button truncate d-inline-block animated btn-add-to-cart">
-                                                            <span class="txt_add">Add to cart</span>
-                                                        </button>
+                                                    <div class="row">
+                                                        <div class="col-md-5 col-5">
+                                                            <div class="quantity pr mr__10 qty__true d-inline-block" id="sp_qty_ppr">
+                                                                <input type="number" class="input-text qty text tc qty_pr_js qty_cart_js" name="quantity" value="1" id="quantity">
+                                                                <div class="qty tc fs__14">
+                                                                    <button type="button" class="plus db cb pa pd__0 pr__15 tr r__0">
+                                                                        <i class="facl facl-plus"></i>
+                                                                    </button>
+                                                                    <button type="button" class="minus db cb pa pd__0 pl__15 tl l__0">
+                                                                        <i class="facl facl-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6 col-6">
+                                                            <button style="background-color: var(--main-color);border: none;color: #fff;width: auto;" data-location="view-product" data-product="<?= base64_encode($Product['ProductID']) ?>" type="button" data-time="1000" data-ani="shake" class="button truncate d-inline-block animated btn-add-to-cart">
+                                                                <span class="txt_add">Add to cart</span>
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        <?php
+                                        } else  if ($Product['ProductType'] == "Upload") {
+                                        ?>
+                                            <style>
+                                                .btn_upload {
+                                                    cursor: pointer;
+                                                    border: 2px solid #222;
+                                                    padding: 5px 25px;
+                                                    background: #fff;
+                                                    color: #222;
+                                                    border-radius: 40px;
+                                                    font-size: 14px;
+                                                    font-weight: 600;
+                                                    min-height: 40px;
+                                                }
+
+                                                .btn_upload input {
+                                                    position: absolute;
+                                                    width: 100%;
+                                                    left: 0;
+                                                    top: 0;
+                                                    width: 100%;
+                                                    height: 105%;
+                                                    cursor: pointer;
+                                                    opacity: 0;
+                                                }
+                                            </style>
+                                            <div class="row">
+                                                <div class="col-md-12 col-12">
+                                                    <div class="button_outer" class="button w__100">
+                                                        <div class="btn_upload" style="width: 170px;text-align-last: center;">
+                                                            <input type="file" id="upload_file" name="" multiple>
+                                                            Upload Image
+                                                        </div>
+                                                    </div>
+                                                    <div class="error_msg"></div>
+                                                </div>
+                                            </div>
+                                            <div class="btn-atc atc-slide btn_des_1 btn_txt_3">
+                                                <div id="callBackVariant_ppr">
+                                                    <div class="nt_cart_form variations_form variations_form_ppr fgr_frm">
+                                                        <table class="grouped-product-list group_table mb__20">
+                                                            <tbody id="uploads-container">
+                                                                
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="variations_button">
+                                                            <div class="grouped_pr_subtotal">Subtotal:
+                                                                <span class="grp_subtt_js grouped-pr-list-item__price"><ins>PKR 150.00</ins></span>
+                                                            </div>
+                                                            <button type="submit" data-time="6000" data-ani="shake" class="single_add_to_cart_button button alt js_add_group">
+                                                                <span class="txt_add ">Add to cart</span></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        <?php
+                                        }
+                                        ?>
                                     </div>
                                 </div>
                                 <div class="product_meta">
@@ -219,7 +281,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                         </div>
                     </div>
                     <!-- end product detail -->
-                    
+
                     <!-- related collection -->
                     <div class="nt_section type_featured_collection tp_se_cdt mt-5">
                         <div class="kalles-otp-01__feature container">
@@ -346,3 +408,50 @@ if (isset($_REQUEST['added-to-cart'])) {
     echo "<script>$('#card-alert-success').show()</script>";
 }
 ?>
+<script>
+    var btnUpload = $("#upload_file"),
+        btnOuter = $(".button_outer");
+    btnUpload.on("change", function(e) {
+        var ext = btnUpload.val().split('.').pop().toLowerCase();
+        if ($.inArray(ext, ['png', 'jpg', 'jpeg']) == -1) {
+            $(".error_msg").text("Not an Image...");
+        } else {
+            $(".error_msg").text("");
+            // var uploadedFiles = URL.createObjectURL();
+
+            var images = new Array();
+            var uploads = e.target.files;
+
+            for (let i = 0; i < uploads.length; i++) {
+                console.log(i)
+                images.push(URL.createObjectURL(uploads[i]))
+                var row = "<tr class='grouped-pr-list-item'>"+
+                "<td class='grouped-pr-list-item__thumb' style='width: 100px;'>"+
+                "<a href='#'><img alt='uploaded-image' style='height: 100px;object-fit: cover;' src='"+URL.createObjectURL(uploads[i])+"' data-src='"+URL.createObjectURL(uploads[i])+"' class='w__100 lz_op_ef lazyloaded'></a>"+
+                "</td>"+
+                "<td class='grouped-pr-list-item__quantity'>"+
+                "<div class='quantity pr'>"+
+                "<input type='number' class='input-text qty text tc qty_pr_js' value='1' inputmode='numeric'>"+
+                "<div class='qty tc fs__14'>"+
+                "<button type='button' class='plus db cb pa pd__0 pr__15 tr r__0'>"+
+                "<i class='facl facl-plus'></i></button>"+
+                "<button type='button' class='minus db cb pa pd__0 pl__15 tl l__0'>"+
+                "<i class='facl facl-minus'></i></button>"+
+                "</div>"+
+                "</div>"+
+                "</td>"+
+                "<td class='grouped-pr-list-item__quantity'>"+
+                "<button class='btn btn-sm btn-danger'>Delete</button>"+
+                "</td>"+
+                "</tr>";
+                $('#uploads-container').append(row)
+            }
+        }
+    });
+    $(".file_remove").on("click", function(e) {
+        $("#uploaded_view").removeClass("show");
+        $("#uploaded_view").find("img").remove();
+        btnOuter.removeClass("file_uploading");
+        btnOuter.removeClass("file_uploaded");
+    });
+</script>
