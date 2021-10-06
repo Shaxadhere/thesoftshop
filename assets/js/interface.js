@@ -2208,7 +2208,7 @@
             var productId = $(this).attr('data-id')
             $.ajax({
                 type: "POST",
-                url: "controllers/product",
+                url: "/moreo/controllers/product",
                 data: {
                     ViewProduct: true,
                     ProductID: productId
