@@ -22,6 +22,9 @@ while ($Deatil = mysqli_fetch_array($ProductDetails)) {
     array_push($Sizes, $Deatil['SizeValue']);
     array_push($PriceVarient, $Deatil['PriceVarient']);
 }
+$Sizes = array_unique($Sizes);
+$Colors = array_unique($Colors);
+$ColorCodes = array_unique($ColorCodes);
 $ProductDetailsCount = count($PriceVarient);
 $Tags = json_decode($Product['ProductTags']);
 getHeader(
