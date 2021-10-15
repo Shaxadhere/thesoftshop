@@ -1,13 +1,13 @@
 <?php
 include_once('web-config.php');
 getHeader(
-    "Explore your aesthetic, Buy scrunchies, potraits, nostalgic vintage accessories in pakistan",//page title
-    "includes/header.php",//header path
-    "Shop",//pagetype
-    "Buy scrunchies in pakistan, buy stickers in pakistan, scrunchies sale in pakistan",//page keywords
-    "Shop Scrunchies in pakistan",//description
-    "Shop",//topic
-    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+    "Explore your aesthetic, Buy scrunchies, potraits, nostalgic vintage accessories in pakistan", //page title
+    "includes/header.php", //header path
+    "Shop", //pagetype
+    "Buy scrunchies in pakistan, buy stickers in pakistan, scrunchies sale in pakistan", //page keywords
+    "Shop Scrunchies in pakistan", //description
+    "Shop", //topic
+    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
 );
 ?>
 <!--shop banner-->
@@ -197,6 +197,9 @@ getHeader(
                             array_push($PriceVarient, $Deatil['PriceVarient']);
                             array_push($PQuantity, $Deatil['Quantity']);
                         }
+                        $Sizes = array_unique($Sizes);
+                        $Colors = array_unique($Colors);
+                        $ColorCodes = array_unique($ColorCodes);
                         $ProductDetailsCount = count($PriceVarient);
                         $Wishlist = $_SESSION['WISHLIST'];
                         $IsWish = false;
@@ -223,13 +226,12 @@ getHeader(
                                     </div>
                                     <?php
                                     $OutOfStock = false;
-                                    if(max($PQuantity) < 1){
+                                    if (max($PQuantity) < 1) {
                                         $OutOfStock = true;
-                                    }
-                                    else{
+                                    } else {
                                         $OutOfStock = false;
                                     }
-                                    if($OutOfStock){
+                                    if ($OutOfStock) {
                                         echo "<div style='background: pink; font-weight: 600; ' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
                                         echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
                                         echo "</div>";

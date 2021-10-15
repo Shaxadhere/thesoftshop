@@ -11,13 +11,13 @@ if (mysqli_num_rows($Category) == 0) {
 $Category = mysqli_fetch_array($Category);
 $Tags = json_decode($Category['CategoryTags']);
 getHeader(
-    $Category['CategoryName'] . " - " . implode(",", $Tags),//page title
-    "includes/header.php",//header path
-    "Category",//pagetype
-    implode(",", $Tags),//page keywords
-    $Category['CategoryName'] . " - " . implode(",", $Tags),//description
-    $Category['CategoryName'],//topic
-    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+    $Category['CategoryName'] . " - " . implode(",", $Tags), //page title
+    "includes/header.php", //header path
+    "Category", //pagetype
+    implode(",", $Tags), //page keywords
+    $Category['CategoryName'] . " - " . implode(",", $Tags), //description
+    $Category['CategoryName'], //topic
+    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
 );
 ?>
 <div class="kalles-section cat-shop pr tc">
@@ -83,6 +83,9 @@ getHeader(
                     array_push($PriceVarient, $Deatil['PriceVarient']);
                     array_push($PQuantity, $Deatil['Quantity']);
                 }
+                $Sizes = array_unique($Sizes);
+                $Colors = array_unique($Colors);
+                $ColorCodes = array_unique($ColorCodes);
                 $ProductDetailsCount = count($PriceVarient);
 
                 $Wishlist = $_SESSION['WISHLIST'];
@@ -110,13 +113,12 @@ getHeader(
                             </div>
                             <?php
                             $OutOfStock = false;
-                            if(max($PQuantity) < 1){
+                            if (max($PQuantity) < 1) {
                                 $OutOfStock = true;
-                            }
-                            else{
+                            } else {
                                 $OutOfStock = false;
                             }
-                            if($OutOfStock){
+                            if ($OutOfStock) {
                                 echo "<div style='background: pink; font-weight: 600;' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
                                 echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
                                 echo "</div>";

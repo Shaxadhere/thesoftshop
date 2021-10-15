@@ -685,7 +685,7 @@
             image.removeClass('hide_ic_lz');
         } $this.addClass('loaded_swatch');
         image.attr('data-bgset', imageBg).attr('data-id', id);
-        product.find('a').attr('href', href.split('?variant=')[0] + '?variant=' + vid);
+        // product.find('a').attr('href', href.split('?variant=')[0] + '?variant=' + vid);
         product.find('.nt_add_qv').attr('data-id', vid);
     }
 

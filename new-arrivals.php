@@ -1,13 +1,13 @@
 <?php
 include_once('web-config.php');
 getHeader(
-    "New arrivals, Trendy Aesthetic Products Available In Pakistan",//page title
-    "includes/header.php",//header path
-    "New Arrivals",//pagetype
-    "New Arrivals at Moreo, Buy scrunchies in pakistan",//page keywords
-    "New Arrivals at Moreo, Buy scrunchies in pakistan",//description
-    "New Arrivals",//topic
-    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+    "New arrivals, Trendy Aesthetic Products Available In Pakistan", //page title
+    "includes/header.php", //header path
+    "New Arrivals", //pagetype
+    "New Arrivals at Moreo, Buy scrunchies in pakistan", //page keywords
+    "New Arrivals at Moreo, Buy scrunchies in pakistan", //description
+    "New Arrivals", //topic
+    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
 );
 ?>
 <!--shop banner-->
@@ -58,8 +58,11 @@ getHeader(
                     array_push($PriceVarient, $Deatil['PriceVarient']);
                     array_push($PQuantity, $Deatil['Quantity']);
                 }
+                $Sizes = array_unique($Sizes);
+                $Colors = array_unique($Colors);
+                $ColorCodes = array_unique($ColorCodes);
                 $ProductDetailsCount = count($PriceVarient);
-                
+
                 $Wishlist = $_SESSION['WISHLIST'];
                 $IsWish = false;
                 foreach ($Wishlist as $item) {
@@ -85,13 +88,12 @@ getHeader(
                             </div>
                             <?php
                             $OutOfStock = false;
-                            if(max($PQuantity) < 1){
+                            if (max($PQuantity) < 1) {
                                 $OutOfStock = true;
-                            }
-                            else{
+                            } else {
                                 $OutOfStock = false;
                             }
-                            if($OutOfStock){
+                            if ($OutOfStock) {
                                 echo "<div style='background: pink; font-weight: 600; ' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
                                 echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
                                 echo "</div>";
@@ -109,7 +111,7 @@ getHeader(
                             <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                                 <?php
                                 for ($i = 0; $i < count($Colors); $i++) {
-                                    if($Colors[$i] != "None"){
+                                    if ($Colors[$i] != "None") {
                                         echo "<span ";
                                         echo "class='lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right'>";
                                         echo "<span class='tt_txt'>" . $Colors[$i] . "</span>";

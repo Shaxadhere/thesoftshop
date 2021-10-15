@@ -1,13 +1,13 @@
 <?php
 include_once('web-config.php');
 getHeader(
-    "Wishlist - Buy scrunchies in pakistan",//page title
-    "includes/header.php",//header path
-    "Wishlist",//pagetype
-    "Buy scrunchies in pakistan, wishlist, buy potraits in pakistan",//page keywords
-    "Wishlist",//description
-    "Wishlist",//topic
-    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+    "Wishlist - Buy scrunchies in pakistan", //page title
+    "includes/header.php", //header path
+    "Wishlist", //pagetype
+    "Buy scrunchies in pakistan, wishlist, buy potraits in pakistan", //page keywords
+    "Wishlist", //description
+    "Wishlist", //topic
+    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
 );
 ?>
 <!--shop banner-->
@@ -38,7 +38,7 @@ getHeader(
                     </article>
                 </div>
             <?php
-            include_once('components/featured.php');
+                include_once('components/featured.php');
             }
             foreach ($Wishlist as $item) {
                 $Product = $ProductModel->View($item);
@@ -58,6 +58,9 @@ getHeader(
                     array_push($Sizes, $Deatil['SizeValue']);
                     array_push($PriceVarient, $Deatil['PriceVarient']);
                 }
+                $Sizes = array_unique($Sizes);
+                $Colors = array_unique($Colors);
+                $ColorCodes = array_unique($ColorCodes);
                 $ProductDetailsCount = count($PriceVarient);
 
 
