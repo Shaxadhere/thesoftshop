@@ -116,7 +116,20 @@ $Inventory = mysqli_fetch_array($Inventory);
                                 <div class="alert alert-success" id="cart-alert-success" style="display:none">Product added to cart successfully!</div>
                                 <h1 class="product_title entry-title fs__16"><?= $Product['ProductName'] ?></h1>
                                 <div class="flex wrap fl_between al_center price-review">
-                                    <p class="price_range" id="price_ppr">Rs. <?= ($Product['PriceVary'] != 1) ? $Product['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></p>
+                                    <p class="price_range" id="price_ppr">
+                                        <?php
+                                        if (empty($Product['OriginalPriceIfOnSale'])) {
+                                        ?>
+                                            <span class="text-danger">Rs. <?= ($Product['PriceVary'] != 1) ? $Product['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
+                                        <?php
+                                        } else {
+                                        ?>
+                                            <del>Rs. <?= $Product['OriginalPriceIfOnSale'] ?></del>
+                                            <span class="text-danger">Rs. <?= ($Product['PriceVary'] != 1) ? $Product['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
+                                        <?php
+                                        }
+                                        ?>
+                                    </p>
                                 </div>
                                 <div class="pr_short_des">
                                     <p class="mg__0"><?= $Product['ProductDescription'] ?></p>
@@ -234,7 +247,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                     <div class="nt_cart_form variations_form variations_form_ppr fgr_frm">
                                                         <table class="grouped-product-list group_table mb__20">
                                                             <tbody id="uploads-container">
-                                                                
+
                                                             </tbody>
                                                         </table>
                                                         <div class="variations_button">
@@ -428,31 +441,31 @@ if (isset($_REQUEST['added-to-cart'])) {
             for (let i = 0; i < uploads.length; i++) {
                 console.log(i)
                 images.push(URL.createObjectURL(uploads[i]))
-                var row = "<tr class='grouped-pr-list-item'>"+
-                "<td class='grouped-pr-list-item__thumb' style='width: 100px;'>"+
-                "<a href='#'><img alt='uploaded-image' style='height: 100px;object-fit: cover;' src='"+URL.createObjectURL(uploads[i])+"' data-src='"+URL.createObjectURL(uploads[i])+"' class='w__100 lz_op_ef lazyloaded'></a>"+
-                "</td>"+
-                "<td class='grouped-pr-list-item__quantity'>"+
-                "<div class='quantity pr'>"+
-                "<input type='number' class='input-text qty text tc qty_pr_js' value='1' inputmode='numeric'>"+
-                "<div class='qty tc fs__14'>"+
-                "<button type='button' class='plus db cb pa pd__0 pr__15 tr r__0'>"+
-                "<i class='facl facl-plus'></i></button>"+
-                "<button type='button' class='minus db cb pa pd__0 pl__15 tl l__0'>"+
-                "<i class='facl facl-minus'></i></button>"+
-                "</div>"+
-                "</div>"+
-                "</td>"+
-                "<td class='grouped-pr-list-item__quantity'>"+
-                "<button class='btn btn-sm btn-danger rounded delete-uploaded-image'>Delete</button>"+
-                "</td>"+
-                "</tr>";
+                var row = "<tr class='grouped-pr-list-item'>" +
+                    "<td class='grouped-pr-list-item__thumb' style='width: 100px;'>" +
+                    "<a href='#'><img alt='uploaded-image' style='height: 100px;object-fit: cover;' src='" + URL.createObjectURL(uploads[i]) + "' data-src='" + URL.createObjectURL(uploads[i]) + "' class='w__100 lz_op_ef lazyloaded'></a>" +
+                    "</td>" +
+                    "<td class='grouped-pr-list-item__quantity'>" +
+                    "<div class='quantity pr'>" +
+                    "<input type='number' class='input-text qty text tc qty_pr_js' value='1' inputmode='numeric'>" +
+                    "<div class='qty tc fs__14'>" +
+                    "<button type='button' class='plus db cb pa pd__0 pr__15 tr r__0'>" +
+                    "<i class='facl facl-plus'></i></button>" +
+                    "<button type='button' class='minus db cb pa pd__0 pl__15 tl l__0'>" +
+                    "<i class='facl facl-minus'></i></button>" +
+                    "</div>" +
+                    "</div>" +
+                    "</td>" +
+                    "<td class='grouped-pr-list-item__quantity'>" +
+                    "<button class='btn btn-sm btn-danger rounded delete-uploaded-image'>Delete</button>" +
+                    "</td>" +
+                    "</tr>";
                 $('#uploads-container').append(row)
             }
             console.log($('#upload_file').val())
         }
     });
-    $(document).on('click', '.delete-uploaded-image', function(){
+    $(document).on('click', '.delete-uploaded-image', function() {
         var row = $(this).parent().parent()
         row.remove()
     })

@@ -2430,16 +2430,26 @@
                         var categories = JSON.parse(product['Categories'])
                         var tags = JSON.parse(product['ProductTags'])
                         $('#view-product-name-anchor').html(product['ProductName'])
-                        $('#view-product-name-anchor').attr('href', "//moreo.pk/view-product?name=" + product['ProductSlug'])
+                        $('#view-product-name-anchor').attr('href', "/moreo/view-product?name=" + product['ProductSlug'])
                         $('#view-product-image-container').empty()
                         images.forEach(item => {
-                            $('#view-product-image-container').append("<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" + "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='//moreo.pk/uploads/product-images/" + item + "'></span>" + "</div>")
+                            $('#view-product-image-container').append("<div data-grname='not4' data-grpvl='ntt4' class='js-sl-item q-item sp-pr-gallery__img w__100' data-mdtype='image'>" + "<span class='nt_bg_lz lazyload' style='background-size: cover !important' data-bgset='/moreo/uploads/product-images/" + item + "'></span>" + "</div>")
                         });
-                        if (product['PriceVary'] != "1") {
-                            $('#view-product-current-price').html("Rs. " + product['Price'])
-                        } else {
-                            $('#view-product-current-price').html("Rs. " + productDetails[0]['PriceVarient'] + " - " + productDetails[(parseInt(productDetails.length) - 1)]['PriceVarient'])
-                        } $('#view-product-description').html(product['ProductDescription'])
+                        if(product['OriginalPriceIfOnSale'] == "0"){
+                            if (product['PriceVary'] != "1") {
+                                $('#view-product-current-price').html("Rs. " + product['Price'])
+                            } else {
+                                $('#view-product-current-price').html("Rs. " + productDetails[0]['PriceVarient'] + " - " + productDetails[(parseInt(productDetails.length) - 1)]['PriceVarient'])
+                            } 
+                        }
+                        else{
+                            if (product['PriceVary'] != "1") {
+                                $('#view-product-current-price').html("<del>Rs. "+product['OriginalPriceIfOnSale']+"</del> Rs. " + product['Price'])
+                            } else {
+                                $('#view-product-current-price').html("<del>Rs. "+product['OriginalPriceIfOnSale']+"</del> Rs. " + productDetails[0]['PriceVarient'] + " - " + productDetails[(parseInt(productDetails.length) - 1)]['PriceVarient'])
+                            } 
+                        }
+                        $('#view-product-description').html(product['ProductDescription'])
                         $('#view-product-default-color').html(product['ColorName'])
                         $('#view-product-default-size').html("Size: <span class='nt_name_current user_choose_js' id='view-product-size-value'>" + product['SizeValue'] + "</span>")
                         $('#view-product-colors-container').empty()

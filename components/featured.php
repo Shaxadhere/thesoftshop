@@ -95,7 +95,20 @@
                             <h3 class="product-title position-relative fs__14 mg__0 fwm">
                                 <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                             </h3>
-                            <span class="price dib mb__5">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
+                            <span class="price dib mb__5">
+                                <?php
+                                if (empty($row['OriginalPriceIfOnSale'])) {
+                                ?>
+                                    <span class="text-danger">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
+                                <?php
+                                } else {
+                                ?>
+                                    <del>Rs. <?= $row['OriginalPriceIfOnSale'] ?></del>
+                                    <span class="text-danger">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
+                                <?php
+                                }
+                                ?>
+                            </span>
                             <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                                 <?php
                                 for ($i = 0; $i < count($Colors); $i++) {
