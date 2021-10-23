@@ -57,7 +57,7 @@ class Product{
         );
     }
 
-    function Add($ProductName, $Price, $PriceVary, $ProductDescription, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray, $CreatedBy)
+    function Add($ProductName, $Price, $PriceVary, $ProductDescription, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray, $CreatedBy, $OriginalPriceIfOnSale = "0")
     {
         $ProductName = mysqli_real_escape_string(connect(), $ProductName);
         $Price = mysqli_real_escape_string(connect(), $Price);
@@ -68,6 +68,7 @@ class Product{
         $ProductImagesArray = mysqli_real_escape_string(connect(), $ProductImagesArray);
         $ProductTagsArray = mysqli_real_escape_string(connect(), $ProductTagsArray);
         $CreatedBy = mysqli_real_escape_string(connect(), $CreatedBy);
+        $OriginalPriceIfOnSale = mysqli_real_escape_string(connect(), $OriginalPriceIfOnSale);
         insertData(
             "tbl_product",
             array(
@@ -79,7 +80,8 @@ class Product{
                 "ProductSlug",
                 "ProductImages",
                 "ProductTags",
-                "CreatedBy"
+                "CreatedBy",
+                "OriginalPriceIfOnSale"
             ),
             array(
                 $ProductName,
@@ -90,7 +92,8 @@ class Product{
                 $ProductSlug,
                 $ProductImagesArray,
                 $ProductTagsArray,
-                $CreatedBy
+                $CreatedBy,
+                $OriginalPriceIfOnSale
             ),
             connect()
         );

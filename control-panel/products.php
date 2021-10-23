@@ -32,7 +32,7 @@ getHeader("Products", "includes/header.php");
                         </div>
                         <div class="form-group col-md-4">
                             <label for="Price">Original Price (if product is on sale)</label>
-                            <input type="number" name="Price" class="form-control" id="Price" placeholder="Please input original price if on sale" value="0">
+                            <input type="number" name="OriginalPriceIfOnSale" class="form-control" id="Price" placeholder="Please input original price if on sale" value="0">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="ProductDescription">Product Description</label>

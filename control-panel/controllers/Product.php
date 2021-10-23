@@ -93,7 +93,8 @@ if (isset($_POST['SaveProduct'])) {
             $_POST['ProductSlug'],
             json_encode($ImageNamesArray),
             json_encode($TagsArray),
-            $_SESSION['ADMIN']['PK_ID']
+            $_SESSION['ADMIN']['PK_ID'],
+            $_POST['OriginalPriceIfOnSale']
         );
         
         ///Add inventory
