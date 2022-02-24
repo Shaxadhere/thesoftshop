@@ -1,13 +1,13 @@
 <?php
 include_once('web-config.php');
 getHeader(
-    "Checkout",//page title
-    "includes/header.php",//header path
-    "Checkout",//pagetype
-    "Moreo, Moreo.pk Buy scrunchies in pakistan",//page keywords
-    "Checkout",//description
-    "Checkout",//topic
-    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
+    "Checkout", //page title
+    "includes/header.php", //header path
+    "Checkout", //pagetype
+    "Moreo, Moreo.pk Buy scrunchies in pakistan", //page keywords
+    "Checkout", //description
+    "Checkout", //topic
+    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
 );
 if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "" || $_SESSION['CART'] == null) {
     redirectWindow(getHTMLRoot() . "?error=Your cart is empty!");
@@ -141,6 +141,11 @@ $Cart = $_SESSION['CART'];
                                 </tr>
                             </tfoot>
                         </table>
+                        <div class="checkout-section__field col-12" style="padding:12px">
+                            <label for="address_01">Have a promo code?</label>
+                            <input type="text" id="promo-code-input" value="" class="mb__5" placeholder="Enter promo code">
+                            <button type="button" style="padding:0px;display:none" id="apply-promo-code" class="mt__5 button button_primary btn checkout-payment__btn-place-order">Apply</button>
+                        </div>
                         <div class="checkout-payment">
                             <ul class="payment_methods">
                                 <li class="payment_method">
@@ -176,3 +181,36 @@ include_once('components/mobile-menu.php');
 include_once('components/back-to-top-button.php');
 getFooter("includes/footer.php");
 ?>
+<script>
+    function displayApplyPromoCode() {
+        if ($(this).val().length > 0) {
+            $("#apply-promo-code").show();
+        } else {
+            $("#apply-promo-code").hide();
+        }
+    }
+    $(document).on("keyup", "#promo-code-input", function() {
+        displayApplyPromoCode()
+    });
+    $(document).on("change", "#promo-code-input", function() {
+        displayApplyPromoCode()
+    });
+
+   $(document).on("click", "#apply-promo-code", function(){
+       let promoCode = $("#promo-code-input").val();
+         $.ajax({
+              url: "/moreo/controllers/promo-code",
+              type: "POST",
+              data: {
+                promoCode: promoCode
+              },
+              success: function(data) {
+                if (data == "success") {
+                     location.reload();
+                } else {
+                     alert(data);
+                }
+              }
+         });
+   })
+</script>

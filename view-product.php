@@ -151,7 +151,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                 </h4>
                                                 <ul class="swatches-select swatch__list_pr d-flex">
                                                     <?php
-                                                    $colorArray = array();
+                                                    $colorsArray = array();
                                                     if($Colors != null){
                                                         for ($i = 0; $i < count($Colors); $i++) {
                                                             if(in_array($Colors[$i], $colorsArray)){
@@ -160,7 +160,7 @@ $Inventory = mysqli_fetch_array($Inventory);
                                                                 echo "<span data-location='view-product' class='swatch__value_pr pr color-switch' style='$ColorCodes[$i]'></span>";
                                                                 echo "</li>";
                                                             }
-                                                        array_push($colorArray, $Colors[$i]);
+                                                        array_push($colorsArray, $Colors[$i]);
                                                         }
                                                     }
                                                     

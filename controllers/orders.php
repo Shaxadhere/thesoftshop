@@ -177,19 +177,19 @@ if (isset($_POST['SubmitOrder'])) {
         foreach ($OrderInvoice as $invoiceItem) {
             $Subtotal = $Subtotal + intval($invoiceItem['PricePerUnit']) * intval($invoiceItem['ProductQuantity']);
         }
-        
+
         $SMTPCredentials = getSMTPCredentials();
         include_once('../assets/vendor/phprapid/assets/class.phpmailer.php');
         $mail = new PHPMailer();
         $message = getEmailBody(
             $_POST['FullName'],
-            $OrderNumber, 
-            $_POST['ShippingAddress'], 
-            $_POST['Phone'], 
-            $_POST['Email'], 
-            $Subtotal, 
-            170, 
-            intval($Subtotal) + 170, 
+            $OrderNumber,
+            $_POST['ShippingAddress'],
+            $_POST['Phone'],
+            $_POST['Email'],
+            $Subtotal,
+            170,
+            intval($Subtotal) + 170,
             "Thank you for ordering from Moreo.pk!"
         );
         $mail->IsSMTP();
@@ -293,5 +293,67 @@ if (isset($_POST['UpdateCart'])) {
     }
     if ($errors != null) {
         echo json_encode($errors);
+    }
+}
+
+if (isset($_POST['RedeemPromoCode'])) {
+    $errors = array();
+    if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
+        array_push($errors, "Your cart is empty!");
+        echo json_encode(array("success" => false, "errors" => $errors));
+        exit();
+    } else {
+        $Cart = $_SESSION['CART'];
+        $OrderInvoice = array();
+        $DeliveryCost = 170;
+        $Amount = 0;
+
+        foreach ($Cart as $item) {
+            $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
+            $Product = mysqli_fetch_array($Product);
+
+            $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
+            $ColorDetails = mysqli_fetch_array($ColorDetails);
+            $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
+            $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+            $Inventory = $ProductModel->InventoryByAttributes(
+                $item['productId'],
+                $SizeDetails['PK_ID'],
+                $ColorDetails['PK_ID']
+            );
+            $Inventory = mysqli_fetch_array($Inventory);
+
+            if ($Product['PriceVary'] != 1) {
+                $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
+            } else {
+                $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+            }
+
+            if ($Product['PriceVary'] != 1) {
+                $ProductItem = array(
+                    "ProductId" => $item['productId'],
+                    "ProductColor" => $item['productColor'],
+                    "ProductSize" => $item['productSize'],
+                    "ProductQuantity" => $item['productqty'],
+                    "PricePerUnit" => $Product['Price']
+                );
+            } else {
+                $ProductItem = array(
+                    "ProductId" => $item['productId'],
+                    "ProductColor" => $item['productColor'],
+                    "ProductSize" => $item['productSize'],
+                    "ProductQuantity" => $item['productqty'],
+                    "PricePerUnit" => $Inventory['Price']
+                );
+            }
+            array_push($OrderInvoice, $ProductItem);
+
+            $NewQty = intval($Inventory['Quantity']) - intval($item['productqty']);
+            $ProductModel->UpdateInventory(
+                base64_encode($Inventory['PK_ID']),
+                $NewQty
+            );
+        }
     }
 }
