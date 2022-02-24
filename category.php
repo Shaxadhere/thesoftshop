@@ -11,13 +11,13 @@ if (mysqli_num_rows($Category) == 0) {
 $Category = mysqli_fetch_array($Category);
 $Tags = json_decode($Category['CategoryTags']);
 getHeader(
-    $Category['CategoryName'] . " - " . implode(",", $Tags), //page title
-    "includes/header.php", //header path
-    "Category", //pagetype
-    implode(",", $Tags), //page keywords
-    $Category['CategoryName'] . " - " . implode(",", $Tags), //description
-    $Category['CategoryName'], //topic
-    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
+    $Category['CategoryName'] . " - " . $Category['CategoryDescription'] . " Buy online in Pakistan",//page title
+    "includes/header.php",//header path
+    "Category",//pagetype
+    implode(",", $Tags),//page keywords
+    $Category['CategoryName'] . " - " . implode(",", $Tags),//description
+    $Category['CategoryName'],//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
 );
 ?>
 <div class="kalles-section cat-shop pr tc">
@@ -41,7 +41,7 @@ getHeader(
         <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
         <div class="container pr z_100">
             <h1 class="mb__5 cw"><?= $Category['CategoryName'] ?></h1>
-            <p class="mg__0">Trendy new products with very unique style and design for your unique experience.</p>
+            <p class="mg__0"><?= $Category['CategoryDescription'] ?></p>
         </div>
     </div>
 </div>
@@ -66,6 +66,15 @@ getHeader(
             }
 
             $Products = $ProductModel->List($ProductIndex, 24, "", $Category['CategoryName'], "new-to-old");
+            if(mysqli_num_rows($Products) == 0){
+            ?>
+            <div class="post-content mt__50 inl_cnt_js">
+                    <article class="post type-post">
+                        <p>Currently there are no products in <?= $Category['CategoryName'] ?>. Please check back later.</p>
+                    </article>
+                </div>
+            <?php
+            }
             while ($row = mysqli_fetch_array($Products)) {
                 $ProductImages = json_decode($row['ProductImages']);
 
@@ -113,12 +122,13 @@ getHeader(
                             </div>
                             <?php
                             $OutOfStock = false;
-                            if (max($PQuantity) < 1) {
+                            if(max($PQuantity) < 1){
                                 $OutOfStock = true;
-                            } else {
+                            }
+                            else{
                                 $OutOfStock = false;
                             }
-                            if ($OutOfStock) {
+                            if($OutOfStock){
                                 echo "<div style='background: pink; font-weight: 600;' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
                                 echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
                                 echo "</div>";

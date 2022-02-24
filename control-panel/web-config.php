@@ -3,46 +3,42 @@
 include_once('assets/vendor/phprapid/rapid.php');
 
 //get application root address
-function getHTMLRoot()
-{
-    return "/moreo/control-panel";
+function getHTMLRoot(){
+	return "/moreo/control-panel";
 }
 
 //get application host
-function getServerRoot()
-{
-    return $_SERVER['HTTP_HOST'];
+function getServerRoot(){
+	return $_SERVER['HTTP_HOST'];
 }
 
 //database connection
-function connect()
-{
-    $server = "localhost";
+function connect(){
+	$server = "localhost";
     $usr = "root";
     $pass = "";
-    $data = "moreo";
+    $data = "moreopk_moreopk";
     $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
     return ($connection);
 }
 
 //html toast
-function HTMLToast()
-{
-    if (isset($_REQUEST['success'])) {
-        echo "<div id='alert' class='container-fluid'>";
-        echo "<div class='alert alert-success d-flex' role='alert'>";
-        echo "<i data-feather='alert-circle' class='mg-r-10'></i> $_REQUEST[success]";
-        echo "</div>";
-        echo "</div>";
-    }
+function HTMLToast(){
+	if (isset($_REQUEST['success'])) {
+    echo "<div id='alert' class='container-fluid'>";
+    echo "<div class='alert alert-success d-flex' role='alert'>";
+    echo "<i data-feather='alert-circle' class='mg-r-10'></i> $_REQUEST[success]";
+    echo "</div>";
+		echo "</div>";
+	}
 
-    if (isset($_REQUEST['error'])) {
-        echo "<div id='alertdanger' class='container-fluid'>";
-        echo "<div class='alert alert-danger d-flex' role='alert'>";
-        echo "<i data-feather='alert-triangle' class='mg-r-10'></i> $_REQUEST[error]";
-        echo "</div>";
-        echo "</div>";
-    }
+	if (isset($_REQUEST['error'])) {
+      echo "<div id='alertdanger' class='container-fluid'>";
+      echo "<div class='alert alert-danger d-flex' role='alert'>";
+      echo "<i data-feather='alert-triangle' class='mg-r-10'></i> $_REQUEST[error]";
+      echo "</div>";
+      echo "</div>";
+  }
 }
 
 //email body
@@ -177,6 +173,7 @@ function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Am
       </center>";
 }
 
+
 //smtp mailing credentials
 function getSMTPCredentials()
 {
@@ -184,45 +181,43 @@ function getSMTPCredentials()
         "host" => "sg-s1.dedicatedpanel.net",
         "port" => "465",
         "protocol" => "ssl",
-        "username" => "shehzad@moreo.pk",
+        "username" => "contact@moreo.pk",
         "password" => "MaryamIsLaav."
     );
 }
 
 //check if string have html tags
-function isHtml($string)
-{
-    return preg_match("/<[^<]+>/", $string, $m) != 0;
+function isHtml($string){
+  return preg_match("/<[^<]+>/",$string,$m) != 0;
 }
 
 function slugify($text, string $divider = '-')
 {
-    // replace non letter or digits by divider
-    $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
+  // replace non letter or digits by divider
+  $text = preg_replace('~[^\pL\d]+~u', $divider, $text);
 
-    // transliterate
-    $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+  // transliterate
+  $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
 
-    // remove unwanted characters
-    $text = preg_replace('~[^-\w]+~', '', $text);
+  // remove unwanted characters
+  $text = preg_replace('~[^-\w]+~', '', $text);
 
-    // trim
-    $text = trim($text, $divider);
+  // trim
+  $text = trim($text, $divider);
 
-    // remove duplicate divider
-    $text = preg_replace('~-+~', $divider, $text);
+  // remove duplicate divider
+  $text = preg_replace('~-+~', $divider, $text);
 
-    // lowercase
-    $text = strtolower($text);
+  // lowercase
+  $text = strtolower($text);
 
-    if (empty($text)) {
-        return 'n-a';
-    }
+  if (empty($text)) {
+    return 'n-a';
+  }
 
-    return $text;
+  return $text;
 }
 
-function getShippingCharges()
-{
-    return 170;
+function getShippingCharges(){
+  return 170;
 }

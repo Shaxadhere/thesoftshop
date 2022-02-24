@@ -125,7 +125,7 @@ class Product{
         $ProductSlug = mysqli_real_escape_string(connect(), $ProductSlug);
         return mysqli_query(
             connect(),
-            "SELECT tbl_product.PK_ID as ProductID, tbl_product.OriginalPriceIfOnSale, tbl_product.ProductName, tbl_product.ProductType, tbl_product.Price, tbl_product.PriceVary, tbl_product.ProductSlug, tbl_product.ProductDescription, tbl_product.Reviews, tbl_product.ProductCode, tbl_product.Categories, tbl_product.ProductTags, tbl_product.ProductImages from tbl_product WHERE tbl_product.Status = 1 and tbl_product.Deleted = 0 and tbl_product.ProductSlug = '$ProductSlug'"
+            "SELECT tbl_product.PK_ID as ProductID, tbl_product.OriginalPriceIfOnSale, tbl_product.ProductName, tbl_product.Price, tbl_product.PriceVary, tbl_product.ProductSlug, tbl_product.ProductDescription, tbl_product.Reviews, tbl_product.ProductCode, tbl_product.Categories, tbl_product.ProductTags, tbl_product.ProductImages from tbl_product WHERE tbl_product.Status = 1 and tbl_product.Deleted = 0 and tbl_product.ProductSlug = '$ProductSlug'"
         );
     }
 

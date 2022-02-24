@@ -1,13 +1,13 @@
 <?php
 include_once('web-config.php');
 getHeader(
-    "Explore your aesthetic, Buy scrunchies, potraits, nostalgic vintage accessories in pakistan", //page title
-    "includes/header.php", //header path
-    "Shop", //pagetype
-    "Buy scrunchies in pakistan, buy stickers in pakistan, scrunchies sale in pakistan", //page keywords
-    "Shop Scrunchies in pakistan", //description
-    "Shop", //topic
-    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
+    "Explore your aesthetic, Buy scrunchies, potraits, nostalgic vintage accessories in pakistan",//page title
+    "includes/header.php",//header path
+    "Shop",//pagetype
+    "Buy scrunchies in pakistan, buy stickers in pakistan, scrunchies sale in pakistan",//page keywords
+    "Shop Scrunchies in pakistan",//description
+    "Shop",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
 );
 ?>
 <!--shop banner-->
@@ -16,7 +16,7 @@ getHeader(
         <div class="parallax-inner nt_parallax_false lazyload nt_bg_lz pa t__0 l__0 r__0 b__0" data-bgset="assets/images/slide/banner21.jpg"></div>
         <div class="container pr z_100">
             <h1 class="mb__5 cw">Shop</h1>
-            <p class="mg__0">Shop through our latest selection of very unique and best quality products</p>
+            <p class="mg__0">shop through our latest selection of aesthetic and dreamy products.</p>
         </div>
     </div>
 </div>
@@ -180,6 +180,16 @@ getHeader(
                     } else {
                         $Products = $ProductModel->List($ProductIndex, 24, "", "", "");
                     }
+                    
+                    if(mysqli_num_rows($Products) == 0){
+                    ?>
+                    <div class="post-content mt__50 inl_cnt_js">
+                        <article class="post type-post">
+                            <p>No products found.</p>
+                        </article>
+                    </div>
+                    <?php
+                    }
                     while ($row = mysqli_fetch_array($Products)) {
                         $ProductImages = json_decode($row['ProductImages']);
 
@@ -226,12 +236,13 @@ getHeader(
                                     </div>
                                     <?php
                                     $OutOfStock = false;
-                                    if (max($PQuantity) < 1) {
+                                    if(max($PQuantity) < 1){
                                         $OutOfStock = true;
-                                    } else {
+                                    }
+                                    else{
                                         $OutOfStock = false;
                                     }
-                                    if ($OutOfStock) {
+                                    if($OutOfStock){
                                         echo "<div style='background: pink; font-weight: 600; ' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
                                         echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
                                         echo "</div>";
@@ -246,19 +257,19 @@ getHeader(
                                         <a class="cd chp" href="<?= getHTMLRoot() ?>/view-product?name=<?= $row['ProductSlug'] ?>"><?= $row['ProductName'] ?></a>
                                     </h3>
                                     <span class="price dib mb__5">
-                                        <?php
-                                        if (empty($row['OriginalPriceIfOnSale'])) {
-                                        ?>
-                                            <span class="text-danger">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
-                                        <?php
-                                        } else {
-                                        ?>
-                                            <del>Rs. <?= $row['OriginalPriceIfOnSale'] ?></del>
-                                            <span class="text-danger">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
-                                        <?php
-                                        }
-                                        ?>
-                                    </span>
+                                <?php
+                                if (empty($row['OriginalPriceIfOnSale'])) {
+                                ?>
+                                    <span class="text-danger">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
+                                <?php
+                                } else {
+                                ?>
+                                    <del>Rs. <?= $row['OriginalPriceIfOnSale'] ?></del>
+                                    <span class="text-danger">Rs. <?= ($row['PriceVary'] != 1) ? $row['Price'] : $PriceVarient[0] . " - " . $PriceVarient[intval($ProductDetailsCount) - 1] ?></span>
+                                <?php
+                                }
+                                ?>
+                            </span>
                                     <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                                         <?php
                                         for ($i = 0; $i < count($Colors); $i++) {

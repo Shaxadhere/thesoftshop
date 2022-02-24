@@ -11,12 +11,13 @@ getHeader(
 );
 include_once('components/slider.php');
 include_once('components/category-banner.php');
-include_once('components/featured.php');
+include_once('components/five-category-banner.php');
+
 include_once('components/single-banner.php');
-include_once('components/bestsellers.php');
+include_once('components/featured.php');
 include_once('components/instagram.php');
 include_once('components/quick-view.php');
-include_once('components/quick-shop.php');
+// include_once('components/quick-shop.php');
 include_once('components/mini-cart-box.php');
 include_once('components/search-box.php');
 include_once('components/login-box.php');
@@ -26,3 +27,8 @@ include_once('components/back-to-top-button.php');
 include_once('components/discount-popup.php');
 getFooter("includes/footer.php");
 ?>
+<script>
+    $(document).ready(function(){
+        $('#spc').attr('style', 'margin-bottom: 0px !important;')
+    })
+</script>

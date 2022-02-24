@@ -2,18 +2,18 @@
 include_once('../web-config.php');
 include_once('../models/order-model.php');
 session_start();
-if (!isset($_SESSION['ADMIN'])) {
+if(!isset($_SESSION['ADMIN'])){
     exit();
 }
 $OrderModel = new Order();
 
-if (isset($_POST['UpdateOrderStatus'])) {
+if(isset($_POST['UpdateOrderStatus'])){
     $errors = array();
-    if (empty($_POST['OrderID'])) {
+    if(empty($_POST['OrderID'])){
         array_push($errors, "502 - Bad request error");
     }
 
-    if (empty($_POST['OrderStatus'])) {
+    if(empty($_POST['OrderStatus'])){
         array_push($errors, "Please select order status");
     }
 
@@ -40,7 +40,7 @@ if (isset($_POST['UpdateOrderStatus'])) {
         }
         if (!empty($Subject)) {
             $SMTPCredentials = getSMTPCredentials();
-            echo json_encode($SMTPCredentials);
+            
             include_once('../../assets/vendor/phprapid/assets/class.phpmailer.php');
             $mail = new PHPMailer();
             $message = getEmailBody(

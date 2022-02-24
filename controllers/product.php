@@ -71,7 +71,7 @@ if (isset($_POST['AddToCart'])) {
         array_push($errors, "Please choose a size");
     }
 
-    if (empty($_POST['Quantity']) || $_POST['Quantity'] == "0" || $_POST['Quantity'] == 0) {
+    if (empty($_POST['Quantity']) || $_POST['Quantity'] == "0" || $_POST['Quantity'] == 0 || intval($_POST['Quantity']) < 1) {
         array_push($errors, "Invalid quantity");
     }
 
@@ -195,14 +195,14 @@ if (isset($_POST['CheckQuantity'])) {
         $ColorDetails['PK_ID']
     );
     $Inventory = mysqli_fetch_array($Inventory);
-    if ($Inventory != null && $Inventory['Quantity'] != 0) {
+    if ($Inventory != null && $Inventory['Quantity'] > 0) {
         $result = array(
-            "Inventory" => $Inventory['Quantity'] . " pieces available.",
+            "Inventory" => $Inventory['Quantity'] . " piece(s) left.",
             "InventoryPrice" => $Inventory['Price'],
             "PriceVary" => $Product['PriceVary']
         );
         echo json_encode($result);
-        // echo $Inventory['Quantity'] . " pieces available.";
+        // echo $Inventory['Quantity'] . " pieces left.";
     } else {
         $result = array(
             "Inventory" => "<span class='text-danger'>Out of stock</span>",

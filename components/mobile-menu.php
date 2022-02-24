@@ -12,7 +12,6 @@
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>">Home</a></li>
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/shop">Shop</a></li>
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/new-arrivals">New Arrivals</a></li>
-                <li class="menu-item"><a href="<?= getHTMLRoot() ?>/category?name=stationary">Stationary</a></li>
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/happy-deals">Happy Deals</a></li>
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/category?name=accessories">Accessories</a></li>
                 <li class="menu-item"><a href="<?= getHTMLRoot() ?>/category?name=stickers">Stickers</a></li>

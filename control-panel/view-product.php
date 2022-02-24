@@ -35,13 +35,17 @@ $Inventory = $InventoryModel->FilterByProductID(base64_encode($Product['PK_ID'])
 
                     <div class="form-row">
                         <input type="hidden" name="ProductID" value="<?= base64_encode($Product['PK_ID']) ?>" />
-                        <div class="form-group col-md-8">
+                        <div class="form-group col-md-4">
                             <label for="ProductName">Product Name</label>
                             <input required type="text" name="ProductName" class="form-control" id="ProductName" placeholder="Please type product name" value="<?= $Product['ProductName'] ?>">
                         </div>
                         <div class="form-group col-md-4">
-                            <label for="Price">Price (in rupees)</label>
-                            <input required type="number" name="Price" class="form-control" id="Price" placeholder="Please type price" value="<?= $Product['Price'] ?>">
+                            <label for="Price">Selling Price (if it doesn't varies with varients)</label>
+                            <input type="number" name="Price" class="form-control" id="Price" placeholder="Please type selling price" value="<?= $Product['Price'] ?>">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="Price">Original Price (if product is on sale)</label>
+                            <input type="number" name="OriginalPriceIfOnSale" class="form-control" id="Price" placeholder="Please input original price if on sale" value="<?= (empty($Product['OriginalPriceIfOnSale'])) ? "0" : $Product['OriginalPriceIfOnSale'] ?>">
                         </div>
                         <div class="form-group col-md-12">
                             <label for="ProductDescription">Product Description</label>

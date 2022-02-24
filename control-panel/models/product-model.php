@@ -109,7 +109,7 @@ class Product{
         );
     }
 
-    function Edit($ProductID, $ProductName, $Price, $ProductDescription, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray)
+    function Edit($ProductID, $ProductName, $Price, $ProductDescription, $Categories, $ProductSlug, $ProductImagesArray, $ProductTagsArray, $OriginalPriceIfOnSale = "0")
     {
         $ProductID = base64_decode($ProductID);
         $ProductID = mysqli_real_escape_string(connect(), $ProductID);
@@ -129,7 +129,9 @@ class Product{
                 "ProductImages",
                 $ProductImagesArray,
                 "ProductTags",
-                $ProductTagsArray
+                $ProductTagsArray,
+                "OriginalPriceIfOnSale",
+                $OriginalPriceIfOnSale
             ),
             "PK_ID",
             $ProductID,

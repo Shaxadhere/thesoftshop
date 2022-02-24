@@ -12,7 +12,10 @@ $MaryamInv = mysqli_fetch_array($MaryamInv);
 $ShehzadInv = $model->InvCount(1);
 $ShehzadInv = mysqli_fetch_array($ShehzadInv);
 
-$TotalInvestments = intval($MaryamInv[0]) + intval($ShehzadInv[0]);
+$MOREOInv = $model->InvCount(3);
+$MOREOInv = mysqli_fetch_array($MOREOInv);
+
+$TotalInvestments = intval($MaryamInv[0]) + intval($ShehzadInv[0]) + intval($MOREOInv[0]);
 
 $error = "";
 if (isset($_GET['error'])) {
@@ -34,7 +37,7 @@ if (isset($_GET['error'])) {
 
 <a class="btn btn-primary mb-3" href="add-investments"><i data-feather="plus"></i> Add Investments</a>
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Total Investment</h5>
@@ -42,7 +45,7 @@ if (isset($_GET['error'])) {
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Maryam's Investment</h5>
@@ -50,11 +53,19 @@ if (isset($_GET['error'])) {
             </div>
         </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-3">
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Shehzad's Investment</h5>
                 <h6 class="card-subtitle mb-2 text-muted"><?php echo (empty($ShehzadInv[0])) ? "No Data To Show" : "PKR " . $ShehzadInv[0] ?></h6>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">MOREO's Investment</h5>
+                <h6 class="card-subtitle mb-2 text-muted"><?php echo (empty($MOREOInv[0])) ? "No Data To Show" : "PKR " . $MOREOInv[0] ?></h6>
             </div>
         </div>
     </div>
@@ -81,7 +92,7 @@ if (isset($_GET['error'])) {
                     <td><?= $Sno ?></td>
                     <td><?= $row['Reason'] ?></td>
                     <td><?= $row['Amount'] ?></tdal>
-                    <td><?php echo ($row['FK_User'] == '1') ? "Shehzad" : "Maryam" ?></td>
+                    <td><?php if($row['FK_User'] == 1){ echo "Shehzad"; }else if($row['FK_User'] == 2){ echo "Maryam"; }else if($row['FK_User'] == 3){ echo "MOREO"; } ?></td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Button group with nested dropdown">
                             <div class="btn-group" role="group">

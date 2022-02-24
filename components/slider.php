@@ -10,14 +10,14 @@ include_once('web-config.php');
             <div class="col-12 slideshow__slide">
                 <div class="oh position-relative nt_img_txt bg-black--transparent">
                     <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
-                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/3.png"></div>
+                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_tran_ef pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/buy-off-shoulder-tops-online-in-pakistan-moreo.jpeg"></div>
                     </div>
                     <div class="caption-wrap caption-w-1 pe_none z_100 tl_md tl">
                         <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-left">
                             <div class="left_right">
-                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">SUMMER 2021</h4>
-                                <h1 class="kalles-caption-layout-01__title mg__0 lh__1">NEW ARRIVALS COLLECTION</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/new-arrivals">Explore Now</a>
+                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1" style="color:white">SUMMER 2021</h4>
+                                <h1 class="kalles-caption-layout-01__title mg__0 lh__1" style="color:white">NEW ARRIVALS COLLECTION</h3>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/new-arrivals" style="background:white; border-color:white; color:#222222">Explore Now</a>
                             </div>
                         </div>
                     </div>
@@ -25,7 +25,28 @@ include_once('web-config.php');
                 </div>
             </div>
             <!-- end first slide -->
-            
+
+            <!-- second slide -->
+            <div class="col-12 slideshow__slide">
+                <div class="oh position-relative nt_img_txt bg-black--transparent">
+                    <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
+                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_zoom pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/buy-aesthetic-cute-scrunchies-online-in-pakistan.png"></div>
+                    </div>
+                    <div class="caption-wrap caption-w-1 pe_none z_100 tr_md tl">
+                        <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-right">
+                            <div class="right_left">
+                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">NEW SEASON</h4>
+                                <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Scrunchies Collection</h3>
+                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?name=Scrunchie">Explore Now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="<?= getHTMLRoot() ?>/category?name=Scrunchie" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
+                </div>
+            </div>
+            <!-- end second slide -->
+
+             
              <!--third slide -->
             <div class="col-12 slideshow__slide">
                 <div class="oh position-relative nt_img_txt bg-black--transparent">
@@ -45,28 +66,6 @@ include_once('web-config.php');
                 </div>
             </div>
              <!--end third slide -->
-
-            <!-- second slide -->
-            <div class="col-12 slideshow__slide">
-                <div class="oh position-relative nt_img_txt bg-black--transparent">
-                    <div class="js_full_ht4 img_slider_block kalles-slide-element__pdb-600">
-                        <div class="bg_rp_norepeat bg_sz_cover lazyload item__position center center img_zoom pa l__0 t__0 r__0 b__0" data-bgset="<?= getHTMLRoot() ?>/assets/images/slide/buy-silk-scrunchies-on-reasonable-prices-in-pakistan-2021-latest.jpg"></div>
-                    </div>
-                    <div class="caption-wrap caption-w-1 pe_none z_100 tr_md tl">
-                        <div class="pa_txts caption kalles-caption-layout-01 kalles-caption--midle-right">
-                            <div class="right_left">
-                                <h4 class="kalles-caption-layout-01__subtitle mg__0 lh__1">NEW SEASON</h4>
-                                <h3 class="kalles-caption-layout-01__title mg__0 lh__1">Scrunchies Collection</h3>
-                                <a class="kalles-caption-layout-01__button kalles-button--square slt4_btn button pe_auto round_false btn_icon_false" href="<?= getHTMLRoot() ?>/category?name=Scrunchie">Explore Now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <a href="<?= getHTMLRoot() ?>/category?name=Scrunchie" class="pa t__0 l__0 b__0 r__0 pe_none"></a>
-                </div>
-            </div>
-            <!-- end second slide -->
-
-            
 
         </div>
     </div>

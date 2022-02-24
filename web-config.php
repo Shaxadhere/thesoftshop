@@ -5,77 +5,82 @@ include_once('assets/vendor/phprapid/rapid.php');
 //get application root address
 function getHTMLRoot()
 {
-    return "/moreo";
+    if($_SERVER['HTTP_HOST'] == "moreo.pk"){
+        return "/moreo";
+    }
+    else{
+        return "/moreo";
+    }
 }
 
 function getAppName()
 {
-    return "Moreo";
+  return "Moreo";
 }
 
 function getSiteDomain()
 {
-    return "moreo.pk";
+  return "moreo.pk";
 }
 
 //get application host
 function getServerRoot()
 {
-    return $_SERVER['HTTP_HOST'];
+  return $_SERVER['HTTP_HOST'];
 }
 
 //database connection
 function connect()
 {
-    $server = "localhost";
-    $usr = "root";
-    $pass = "";
-    $data = "moreo";
-    $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
-    return ($connection);
+  $server = "localhost";
+  $usr = "root";
+  $pass = "";
+  $data = "moreopk_moreopk";
+  $connection = mysqli_connect($server, $usr, $pass, $data) or die("failed to connect to database");
+  return ($connection);
 }
 
 //html toast
 function HTMLToast()
 {
-    if (isset($_REQUEST['Success'])) {
-        echo "<div class='sa4d25'>";
-        echo "<div class='container-fluid'>";
-        echo "<div class='row'>";
-        echo "<div class='col-lg-12'>";
-        echo "<div class='alert alert-success' id='alert'>";
-        echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
-        echo "<strong>Success! </strong> $_REQUEST[Success]";
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-    }
+  if (isset($_REQUEST['Success'])) {
+    echo "<div class='sa4d25'>";
+    echo "<div class='container-fluid'>";
+    echo "<div class='row'>";
+    echo "<div class='col-lg-12'>";
+    echo "<div class='alert alert-success' id='alert'>";
+    echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
+    echo "<strong>Success! </strong> $_REQUEST[Success]";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+  }
 
-    if (isset($_REQUEST['error'])) {
-        echo "<div class='sa4d25'>";
-        echo "<div class='container-fluid'>";
-        echo "<div class='row'>";
-        echo "<div class='col-lg-12'>";
-        echo "<div class='alert alert-danger' id='alertdanger'>";
-        echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
-        if ($_REQUEST['error'] == 401) {
-            echo "<strong>Error! </strong> Access Unauthorized! You are not allowed to visit the page you are trying to access";
-        } else {
-            echo "<strong>Error! </strong> $_REQUEST[error]";
-        }
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
+  if (isset($_REQUEST['error'])) {
+    echo "<div class='sa4d25'>";
+    echo "<div class='container-fluid'>";
+    echo "<div class='row'>";
+    echo "<div class='col-lg-12'>";
+    echo "<div class='alert alert-danger' id='alertdanger'>";
+    echo "<button type='button' class='close' data-dismiss='alert'>x</button>";
+    if ($_REQUEST['error'] == 401) {
+      echo "<strong>Error! </strong> Access Unauthorized! You are not allowed to visit the page you are trying to access";
+    } else {
+      echo "<strong>Error! </strong> $_REQUEST[error]";
     }
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+  }
 }
 
-
 //email body
-function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Amount, $DeliveryCharges, $Total, $Message, $Subject = "Your order is placed!"){
+function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Amount, $DeliveryCharges, $Total, $Message, $Subject = "Your order is placed!")
+{
     return "<style>
       * {
           font-family: Roboto, RobotoDraft, Helvetica, Arial, sans-serif
@@ -203,63 +208,62 @@ function getEmailBody($RecipentName, $OrderNumber, $Address, $Phone, $Email, $Am
         </tbody>
       </table>
       </center>";
-  }
-  
+}
+
 
 //smtp mailing credentials
-function getSMTPCredentials()
-{
-    return array(
-        "host" => "sg-s1.dedicatedpanel.net",
-        "port" => "465",
-        "protocol" => "ssl",
-        "username" => "shehzad@moreo.pk",
-        "password" => "MaryamIsLaav."
-    );
+function getSMTPCredentials(){
+	return array(
+		"host" => "sg-s1.dedicatedpanel.net",
+		"port" => "465",
+		"protocol" => "ssl",
+		"username" => "contact@moreo.pk",
+		"password" => "MaryamIsLaav."
+	);
 }
 
 //check if string have html tags
 function isHtml($string)
 {
-    return preg_match("/<[^<]+>/", $string, $m) != 0;
+  return preg_match("/<[^<]+>/", $string, $m) != 0;
 }
 
 //generate random numeric string
 function generateNumericString($min, $max)
 {
-    $str_result = '0123456789';
-    return substr(str_shuffle($str_result), $min, $max);
+  $str_result = '0123456789';
+  return substr(str_shuffle($str_result), $min, $max);
 }
 
 function resizeImageT()
 {
-    $filename = 'uploads/product-images/qrban85h1Y7dIPTB4N2S.jfif';
-    $percent = 0.5;
+  $filename = 'uploads/product-images/qrban85h1Y7dIPTB4N2S.jfif';
+  $percent = 0.5;
 
-    // Content type
-    // header('Content-Type: image/jpeg');
+  // Content type
+  // header('Content-Type: image/jpeg');
 
-    // Get new sizes
-    list($width, $height) = getimagesize($filename);
-    $newwidth = $width * $percent;
-    $newheight = 600;
+  // Get new sizes
+  list($width, $height) = getimagesize($filename);
+  $newwidth = $width * $percent;
+  $newheight = 600;
 
-    // Load
-    $thumb = imagecreatetruecolor($newwidth, $newheight);
-    $source = imagecreatefromjpeg($filename);
+  // Load
+  $thumb = imagecreatetruecolor($newwidth, $newheight);
+  $source = imagecreatefromjpeg($filename);
 
-    // Resize
-    imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+  // Resize
+  imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
-    // Output
-    // imagejpeg($thumb);
-    $randomStrings = random_strings(14);
-    echo $randomStrings;
-    imagepng($thumb, 'uploads/product-images/' . $randomStrings . '.png');
+  // Output
+  // imagejpeg($thumb);
+  $randomStrings = random_strings(14);
+  echo $randomStrings;
+  imagepng($thumb, 'uploads/product-images/' . $randomStrings . '.png');
 }
 
-function validateRegexEmail($email)
-{
+
+function validateRegexEmail($email) {
     $re = '/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/';
     return preg_match($re, strtolower($email));
     // return re.test(String($email).toLowerCase());

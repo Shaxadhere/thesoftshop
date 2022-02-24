@@ -34,7 +34,7 @@ $(document).on('mouseover', '.quick-view-product', function () {
     // var productId = $(this).attr('data-id')
     // $.ajax({
     //     type: "POST",
-    //     url: "/moreo/controllers/product",
+    //     url: "controllers/product",
     //     data: {
     //         ViewProduct: true,
     //         ProductID: productId
@@ -44,7 +44,7 @@ $(document).on('mouseover', '.quick-view-product', function () {
     //         if (result['success'] == true) {
     //             var productDetails = result['productDetails']
     //             var inventory = result['inventory']
-    //             $('#quantity-available').html(inventory['Quantity'] + " pieces available")
+    //             $('#quantity-available').html(inventory['Quantity'] + " piece(s) left")
     //             var product = productDetails[0]
     //             var images = JSON.parse(product['ProductImages'])
     //             var reviews = JSON.parse(product['Reviews'])
@@ -114,7 +114,7 @@ function search_products(query, category) {
     const queryString = window.location.search
     const params = new URLSearchParams(queryString)
     const sort = (params.has('sort')) ? params.get('sort') : ""
-    var url = "/moreo/shop?"
+    var url = "/shop?"
     url += "name=" + query
     if (category != "") {
         url += "&category=" + category
@@ -151,7 +151,7 @@ $(document).on('submit', '#customer_login', function (event) {
     var customerPassword = $('#CustomerPassword').val()
     $.ajax({
         type: "POST",
-        url: "/moreo/auth/auth",
+        url: "/auth/auth",
         data: {
             AuthenticateUser: true,
             CustomerEmail: customerEmail,
@@ -184,7 +184,7 @@ $(document).on('submit', '#RegisterForm', function (event) {
     var password = $('#RegisterPassword').val()
     $.ajax({
         type: "POST",
-        url: "/moreo/auth/auth",
+        url: "/auth/auth",
         data: {
             RegisterCustomer: true,
             CustomerName: fullName,
@@ -218,7 +218,7 @@ $(document).on('submit', '#PersonalProfileForm', function (event) {
     var contact = $('#edit-profile-contact').val()
     $.ajax({
         type: "POST",
-        url: "/moreo/auth/auth",
+        url: "/auth/auth",
         data: {
             UpdateProfile: true,
             FullName: fullName,
@@ -250,7 +250,7 @@ $(document).on('submit', '#ShippingAddressForm', function (event) {
     var shippingAddress = $('#edit-shipping-address-field').val()
     $.ajax({
         type: "POST",
-        url: "/moreo/auth/auth",
+        url: "/auth/auth",
         data: {
             UpdateShippingAddress: true,
             ShippingAddress: shippingAddress
@@ -280,7 +280,7 @@ $(document).on('submit', '#BillingAddressForm', function (event) {
     var billingAddress = $('#edit-billing-address-field').val()
     $.ajax({
         type: "POST",
-        url: "/moreo/auth/auth",
+        url: "/auth/auth",
         data: {
             UpdateBillingAddress: true,
             BillingAddress: billingAddress
@@ -309,7 +309,7 @@ $(document).on('click', '#edit-personal-profile', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
-        url: "/moreo/components/edit-personal-profile",
+        url: "/components/edit-personal-profile",
         success: function (response) {
             $('#root').html(response)
         },
@@ -324,7 +324,7 @@ $(document).on('click', '#edit-shipping-address', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
-        url: "/moreo/components/edit-shipping-address",
+        url: "/components/edit-shipping-address",
         success: function (response) {
             $('#root').html(response)
         },
@@ -339,7 +339,7 @@ $(document).on('click', '#edit-billing-address', function () {
     var root = $('#root').html()
     $.ajax({
         type: "GET",
-        url: "/moreo/components/edit-billing-address",
+        url: "/components/edit-billing-address",
         success: function (response) {
             $('#root').html(response)
         },
@@ -364,7 +364,7 @@ $(document).on('click', '.btn-add-to-cart', function () {
     }
     $.ajax({
         type: "POST",
-        url: "/moreo/controllers/product",
+        url: "/controllers/product",
         data: {
             AddToCart: true,
             ProductID: productId,
@@ -409,7 +409,7 @@ $(document).on('click', '.remove-cart-item', function () {
     }
     $.ajax({
         type: "POST",
-        url: "/moreo/controllers/product",
+        url: "/controllers/product",
         data: {
             RemoveItemFromCart: true,
             CartItemId: cartItemId
@@ -445,7 +445,7 @@ $(document).on('click', '#checkout-btn', function () {
 
     $.ajax({
         type: "POST",
-        url: "/moreo/controllers/orders",
+        url: "/controllers/orders",
         data: {
             SubmitOrder: true,
             FullName: fullName,
@@ -459,7 +459,7 @@ $(document).on('click', '#checkout-btn', function () {
         success: function (response) {
             var result = JSON.parse(response)
             if (result['success'] == true) {
-                window.location.href = '/moreo/thank-you';
+                window.location.href = '/thank-you';
             }
             else{
                 $('#errors').html(result[0])
@@ -477,7 +477,7 @@ $(document).on('click', '#checkout-btn', function () {
 function check_stocks(product, size, color) {
     $.ajax({
         type: "POST",
-        url: "/moreo/controllers/product",
+        url: "/controllers/product",
         data: {
             CheckQuantity: true,
             ProductID: product,
@@ -544,7 +544,7 @@ $(document).on('click', '#btn-update-cart', function () {
     console.log(sessionIds, qtys)
     $.ajax({
         type: "POST",
-        url: "/moreo/controllers/orders",
+        url: "/controllers/orders",
         data: {
             UpdateCart: true,
             SessionIDs: sessionIds,
@@ -581,7 +581,7 @@ $('body').on('click', '.nt_add_w', function (e) {
     var productId = productItem.attr('data-id')
     $.ajax({
         type: "POST",
-        url: "/moreo/controllers/product",
+        url: "/controllers/product",
         data: {
             AddToWishList: true,
             ProductID: productId,

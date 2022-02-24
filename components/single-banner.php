@@ -18,9 +18,9 @@ include_once('web-config.php');
             <div class="cat_space_item col-lg-6 col-md-6 col-12">
                 <div class="nt_promotion oh pr middle center banner_design_1">
                     <a href="<?= getHTMLRoot() ?>/shop" class="db">
-                        <div class="nt_bg_lz item__position center padding-top__113_7 lazyloaded" data-bgset="<?= getHTMLRoot() ?>/assets/images/home-flower/card-info-02.jpg" style="background-image: url(&quot;<?= getHTMLRoot() ?>/assets/images/home-flower/card-info-02.jpg&quot;);">
+                        <div class="nt_bg_lz item__position center padding-top__113_7 lazyloaded" data-bgset="<?= getHTMLRoot() ?>/assets/images/card-info-02.jpg" style="background-image: url(&quot;<?= getHTMLRoot() ?>/assets/images/card-info-02.jpg&quot;);">
                             <picture style="display: none;">
-                                <source data-srcset="<?= getHTMLRoot() ?>/assets/images/home-flower/card-info-02.jpg" sizes="585px" srcset="<?= getHTMLRoot() ?>/assets/images/home-flower/card-info-02.jpg"><img alt="" class="lazyautosizes lazyloaded ls-is-cached" data-sizes="auto" data-parent-fit="cover" sizes="585px">
+                                <source data-srcset="<?= getHTMLRoot() ?>/assets/images/card-info-02.jpg" sizes="585px" srcset="<?= getHTMLRoot() ?>/assets/images/card-info-02.jpg"><img alt="" class="lazyautosizes lazyloaded ls-is-cached" data-sizes="auto" data-parent-fit="cover" sizes="585px">
                             </picture>
                         </div>
                     </a>

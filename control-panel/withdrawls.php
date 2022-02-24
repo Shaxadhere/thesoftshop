@@ -27,7 +27,12 @@ if ($ShehzadWithdrawl != false) {
     $ShehzadWithdrawl = mysqli_fetch_array($ShehzadWithdrawl);
 }
 
-$TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
+$MOREOWithdrawl = $WithdrawlModel->WithdrawlCount(base64_encode(3));
+if ($MOREOWithdrawl != false) {
+    $MOREOWithdrawl = mysqli_fetch_array($MOREOWithdrawl);
+}
+
+$TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]) + intval($MOREOWithdrawl[0]);
 ?>
 <div class="content-body">
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
@@ -57,6 +62,7 @@ $TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
                     <select name="UserID" id="UserID" class="custom-select" required>
                         <option value="1">Shehzad</option>
                         <option value="2">Maryam</option>
+                        <option value="3">MOREO</option>
                     </select>
                 </div>
                 <button type="button" id="SaveWithdrawl" name="SaveWithdrawl" class="btn btn-primary">Submit</button>
@@ -66,7 +72,7 @@ $TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Sales Amount</h5>
+                        <h5 class="card-title text-primary">Sales Amount</h5>
                         <h6 class="card-subtitle mb-2 text-muted">PKR <?= $SalesAmount ?></h6>
                     </div>
                 </div>
@@ -74,26 +80,35 @@ $TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Cash Left</h5>
+                        <h5 class="card-title text-success">Cash Left</h5>
                         <h6 class="card-subtitle mb-2 text-muted">PKR <?= intval($SalesAmount) - intval($TotalWithdrawls) ?></h6>
                     </div>
                 </div>
             </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title text-danger">Total Withdrawls</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $TotalWithdrawls ?></h6>
+                    </div>
+                </div>
+            </div>
+            
             </div>
             <div class="row mt-3">
                 
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Total Withdrawls</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">PKR <?= $TotalWithdrawls ?></h6>
+                        <h5 class="card-title text-danger">MOREO's Withdrawls</h5>
+                        <h6 class="card-subtitle mb-2 text-muted"><?php echo (empty($MOREOWithdrawl[0])) ? "No Data To Show" : "PKR " . $MOREOWithdrawl[0] ?></h6>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Maryam's Withdrawls</h5>
+                        <h5 class="card-title text-danger">Maryam's Withdrawls</h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo (empty($MaryamWithdrawl[0])) ? "No Data To Show" : "PKR " . $MaryamWithdrawl[0] ?></h6>
                     </div>
                 </div>
@@ -101,7 +116,7 @@ $TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Shehzad's Withdrawls</h5>
+                        <h5 class="card-title text-danger">Shehzad's Withdrawls</h5>
                         <h6 class="card-subtitle mb-2 text-muted"><?php echo (empty($ShehzadWithdrawl[0])) ? "No Data To Show" : "PKR " . $ShehzadWithdrawl[0] ?></h6>
                     </div>
                 </div>
@@ -128,7 +143,7 @@ $TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
                         <tr>
                             <td><?= $SNo ?></td>
                             <td>PKR <?= $row['Amount'] ?></td>
-                            <td><?= ($row['UserID'] == 1) ? "Shehzad" : "Maryam" ?></td>
+                            <td><?php if($row['UserID'] == 1){ echo "Shehzad"; }else if($row['UserID'] == 2){ echo "Maryam"; }else if($row['UserID'] == 3){ echo "MOREO"; } ?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Options

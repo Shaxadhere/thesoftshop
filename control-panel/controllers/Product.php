@@ -196,7 +196,8 @@ if (isset($_POST['UpdateProduct'])) {
             json_encode($_POST['Categories']),
             $_POST['ProductSlug'],
             json_encode($ProductImages),
-            json_encode($TagsArray)
+            json_encode($TagsArray),
+            $_POST['OriginalPriceIfOnSale']
         );
         
         ///Add inventory

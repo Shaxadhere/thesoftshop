@@ -1,13 +1,13 @@
 <?php
 include_once('web-config.php');
 getHeader(
-    "Happy Deals, Customized deals, perfect gifts to spoil your loved ones", //page title
-    "includes/header.php", //header path
-    "Deals", //pagetype
-    "Happy Deals at Moreo, Buy scrunchies in pakistan", //page keywords
-    "Happy Deals at Moreo, Buy scrunchies in pakistan", //description
-    "Happy Deals", //topic
-    'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] //url
+    "Happy Deals, Customized deals, perfect gifts to spoil your loved ones",//page title
+    "includes/header.php",//header path
+    "Deals",//pagetype
+    "Happy Deals at Moreo, Buy scrunchies in pakistan",//page keywords
+    "Happy Deals at Moreo, Buy scrunchies in pakistan",//description
+    "Happy Deals",//topic
+    'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']//url
 );
 ?>
 <!--shop banner-->
@@ -40,8 +40,8 @@ getHeader(
                 $ProductIndex = 0;
             }
 
-            $Products = $ProductModel->List($ProductIndex, 24, "", "happy-deals", "new-to-old");
-            if (mysqli_num_rows($Products) < 1) {
+            $Products = $ProductModel->List($ProductIndex, 24, "", "happy deals", "new-to-old");
+            if(mysqli_num_rows($Products) < 1){
                 echo "<div class='post-content mt__50 inl_cnt_js'>";
                 echo "<article class='post type-post'>";
                 echo "<p>There are no happy deals avaialble right now, once there are you will see them here. though, you can choose from our featured products here</p>";
@@ -49,6 +49,7 @@ getHeader(
                 echo "</div>";
                 include_once('components/featured.php');
                 include_once('components/bestsellers.php');
+                
             }
             while ($row = mysqli_fetch_array($Products)) {
                 $ProductImages = json_decode($row['ProductImages']);
@@ -71,7 +72,7 @@ getHeader(
                 $Colors = array_unique($Colors);
                 $ColorCodes = array_unique($ColorCodes);
                 $ProductDetailsCount = count($PriceVarient);
-
+                
                 $Wishlist = $_SESSION['WISHLIST'];
                 $IsWish = false;
                 foreach ($Wishlist as $item) {
@@ -97,12 +98,13 @@ getHeader(
                             </div>
                             <?php
                             $OutOfStock = false;
-                            if (max($PQuantity) < 1) {
+                            if(max($PQuantity) < 1){
                                 $OutOfStock = true;
-                            } else {
+                            }
+                            else{
                                 $OutOfStock = false;
                             }
-                            if ($OutOfStock) {
+                            if($OutOfStock){
                                 echo "<div style='background: pink; font-weight: 600; ' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
                                 echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
                                 echo "</div>";
@@ -133,7 +135,7 @@ getHeader(
                             <div class="swatch__list_js swatch__list lh__1 nt_swatches_on_grid">
                                 <?php
                                 for ($i = 0; $i < count($Colors); $i++) {
-                                    if ($Colors[$i] != "None") {
+                                    if($Colors[$i] != "None"){
                                         echo "<span ";
                                         echo "class='lazyload nt_swatch_on_bg swatch__list--item position-relative ttip_nt tooltip_top_right'>";
                                         echo "<span class='tt_txt'>" . $Colors[$i] . "</span>";

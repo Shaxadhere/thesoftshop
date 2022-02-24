@@ -77,12 +77,13 @@
                             </div>
                             <?php
                             $OutOfStock = false;
-                            if (max($PQuantity) < 1) {
+                            if(max($PQuantity) < 1){
                                 $OutOfStock = true;
-                            } else {
+                            }
+                            else{
                                 $OutOfStock = false;
                             }
-                            if ($OutOfStock) {
+                            if($OutOfStock){
                                 echo "<div style='background: pink; font-weight: 600;' class='pr_deal_dt pa pe_none op__0 donetmcd'>";
                                 echo "<span class='pr_title_dt text-danger'>OUT OF STOCK</span>";
                                 echo "</div>";

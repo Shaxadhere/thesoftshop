@@ -15,6 +15,7 @@ foreach ($OrderList as $row) {
 
 include_once('models/withdrawl-model.php');
 $WithdrawlModel = new Withdrawl();
+
 $MaryamWithdrawl = $WithdrawlModel->WithdrawlCount(base64_encode(2));
 if ($MaryamWithdrawl != false) {
     $MaryamWithdrawl = mysqli_fetch_array($MaryamWithdrawl);
@@ -25,7 +26,12 @@ if ($ShehzadWithdrawl != false) {
     $ShehzadWithdrawl = mysqli_fetch_array($ShehzadWithdrawl);
 }
 
-$TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]);
+$MOREOWithdrawl = $WithdrawlModel->WithdrawlCount(base64_encode(3));
+if ($MOREOWithdrawl != false) {
+    $MOREOWithdrawl = mysqli_fetch_array($MOREOWithdrawl);
+}
+
+$TotalWithdrawls = intval($MaryamWithdrawl[0]) + intval($ShehzadWithdrawl[0]) + intval($MOREOWithdrawl[0]);
 
 ?>
 <div class="col-md-8 col-sm-12 mt-5">

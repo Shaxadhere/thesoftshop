@@ -34,7 +34,10 @@ $MaryamInv = mysqli_fetch_array($MaryamInv);
 $ShehzadInv = $InvestmentModel->InvCount(1);
 $ShehzadInv = mysqli_fetch_array($ShehzadInv);
 
-$TotalInvestments = intval($MaryamInv[0]) + intval($ShehzadInv[0]);
+$MOREOInv = $InvestmentModel->InvCount(3);
+$MOREOInv = mysqli_fetch_array($MOREOInv);
+
+$TotalInvestments = intval($MaryamInv[0]) + intval($ShehzadInv[0]) + intval($MOREOInv[0]);
 ?>
 <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
     <div class="card card-body">
