@@ -116,6 +116,12 @@ $User = mysqli_fetch_array($User);
                         <span>Colors</span>
                     </a>
                 </li>
+                <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/promo-codes") ? "active" : "" ?>">
+                    <a href="<?= getHTMLRoot() ?>/promo-codes" class="nav-link">
+                        <i data-feather="droplet"></i>
+                        <span>Promo Codes</span>
+                    </a>
+                </li>
                 <li class="nav-item <?= ($_SERVER['REQUEST_URI'] == getHTMLRoot() . "/sizes") ? "active" : "" ?>">
                     <a href="<?= getHTMLRoot() ?>/sizes" class="nav-link">
                         <i data-feather="bar-chart-2"></i>

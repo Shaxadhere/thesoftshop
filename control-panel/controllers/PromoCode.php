@@ -7,25 +7,32 @@ session_start();
 
 $PromoCodeModel = new PromoCode();
 
-if(isset($_POST['CreatePromoCode'])){
+if(isset($_POST['SavePromoCode'])){
     if(!isset($_SESSION['ADMIN'])){
         exit();
     }
-    
+
     $errors = array();
-    if(empty($_POST['PromoCodeName'])){
-        array_push($errors, "PromoCode name is required");
+    if(empty($_POST['Title'])){
+        array_push($errors, "Title is required");
     }
-    if(empty($_POST['PromoCodeCode'])){
-        array_push($errors, "PromoCode code is required");
+    if(empty($_POST['Code'])){
+        array_push($errors, "Code is required");
     }
     if($errors == null){
         $PromoCodeModel->Add(
-            $_POST['PromoCodeName'],
-            $_POST['PromoCodeCode'],
-            $_SESSION['ADMIN']['PK_ID']
+            $_POST['Title'],
+            $_POST['Description'],
+            $_POST['Code'],
+            $_POST['ValidityStart'],
+            $_POST['ValidityEnd'],
+            $_POST['MaxDiscount'],
+            $_POST['DiscountPercentage'],
+            $_POST['DiscountAmount'],
+            $_POST['ReferredTo'],
+            $_POST['UsageLimit']
         );
-        echo true;
+        redirectWindow(getHTMLRoot()."/promo-codes");
     }
     else{
         echo json_encode($errors);
@@ -49,8 +56,16 @@ if(isset($_POST['UpdatePromoCode'])){
     if($errors == null){
         $PromoCodeModel->Edit(
             $_POST['PromoCodeID'],
-            $_POST['PromoCodeName'],
-            $_POST['PromoCodeCode']
+            $_POST['Title'],
+            $_POST['Description'],
+            $_POST['Code'],
+            $_POST['ValidityStart'],
+            $_POST['ValidityEnd'],
+            $_POST['MaxDiscount'],
+            $_POST['DiscountPercentage'],
+            $_POST['DiscountAmount'],
+            $_POST['ReferredTo'],
+            $_POST['UsageLimit']
         );
         echo true;
     }

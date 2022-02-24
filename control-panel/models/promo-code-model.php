@@ -6,11 +6,11 @@ class PromoCode
     {
         return mysqli_query(
             connect(),
-            "SELECT * FROM `tbl_promocodes` where Deleted = 0"
+            "SELECT * FROM `tbl_promocodes` where Deleted = 0 order by PK_ID desc"
         );
     }
 
-    function Add($Title, $Description, $Code, $ValidityStart, $ValidityEnd, $MaxDiscount, $DiscountPercentage, $DiscountAmount, $ReferredTo)
+    function Add($Title, $Description, $Code, $ValidityStart, $ValidityEnd, $MaxDiscount, $DiscountPercentage, $DiscountAmount, $ReferredTo, $UsageLimit)
     {
         $Title = mysqli_real_escape_string(connect(), $Title);
         $Description = mysqli_real_escape_string(connect(), $Description);
@@ -21,13 +21,14 @@ class PromoCode
         $DiscountPercentage = mysqli_real_escape_string(connect(), $DiscountPercentage);
         $DiscountAmount = mysqli_real_escape_string(connect(), $DiscountAmount);
         $ReferredTo = mysqli_real_escape_string(connect(), $ReferredTo);
+        $UsageLimit  = mysqli_real_escape_string(connect(), $UsageLimit);
         insertData(
             "tbl_promocodes",
             array(
-                "Title", "Description", "Code", "ValidityStart", "ValidityEnd", "MaxDiscount", "DiscountPercentage", "DiscountAmount", "ReferredTo"
+                "Title", "Description", "Code", "ValidityStart", "ValidityEnd", "MaxDiscount", "DiscountPercentage", "DiscountAmount", "ReferredTo", "UsageLimit"
             ),
             array(
-                $Title, $Description, $Code, $ValidityStart, $ValidityEnd, $MaxDiscount, $DiscountPercentage, $DiscountAmount, $ReferredTo
+                $Title, $Description, $Code, $ValidityStart, $ValidityEnd, $MaxDiscount, $DiscountPercentage, $DiscountAmount, $ReferredTo, $UsageLimit
             ),
             connect()
         );
@@ -43,7 +44,7 @@ class PromoCode
         );
     }
 
-    function Edit($PromoCodeID,  $Title, $Description, $Code, $ValidityStart, $ValidityEnd, $MaxDiscount, $DiscountPercentage, $DiscountAmount, $ReferredTo)
+    function Edit($PromoCodeID,  $Title, $Description, $Code, $ValidityStart, $ValidityEnd, $MaxDiscount, $DiscountPercentage, $DiscountAmount, $ReferredTo, $UsageLimit)
     {
         $PromoCodeID = base64_decode($PromoCodeID);
         $PromoCodeID = mysqli_real_escape_string(connect(), $PromoCodeID);
@@ -67,7 +68,9 @@ class PromoCode
                 "DiscountAmount",
                 $DiscountAmount,
                 "ReferredTo",
-                $ReferredTo
+                $ReferredTo,
+                "UsageLimit",
+                $UsageLimit
             ),
             "PK_ID",
             $PromoCodeID,

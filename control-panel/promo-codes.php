@@ -1,6 +1,6 @@
 <?php
 include_once('web-config.php');
-getHeader("Categories", "includes/header.php");
+getHeader("Promo Codes", "includes/header.php");
 ?>
 <div class="content-body">
     <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
@@ -8,7 +8,7 @@ getHeader("Categories", "includes/header.php");
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb breadcrumb-style1 mg-b-10">
                     <li class="breadcrumb-item"><a href="<?= getHTMLRoot() . "/dashboard" ?>">Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Categories</li>
+                    <li class="breadcrumb-item active" aria-current="page">Promo Codes</li>
                 </ol>
             </nav>
         </div>
@@ -19,60 +19,81 @@ getHeader("Categories", "includes/header.php");
     <div class="container-fluid">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">Add Category</h5>
-                <form action="controllers/Category" method="post" enctype="multipart/form-data">
+                <h5 class="card-title">Add Promo Code</h5>
+                <form action="controllers/PromoCode" method="post" enctype="multipart/form-data">
                     <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="CategoryName">Category Name</label>
-                            <input type="text" name="CategoryName" class="form-control" id="CategoryName" placeholder="Please type category name">
+                        <div class="form-group col-md-3">
+                            <label for="Title">Title</label>
+                            <input type="text" name="Title" class="form-control" id="Title" placeholder="Please type title">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="Code">Code</label>
+                            <input type="text" name="Code" class="form-control" id="Code" placeholder="Please type code">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="ReferredTo">Referred To</label>
+                            <input type="text" name="ReferredTo" class="form-control" id="ReferredTo" placeholder="Please enter referers">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label for="UsageLimit">Usage Limit</label>
+                            <input type="number" name="UsageLimit" class="form-control" id="UsageLimit" placeholder="Please enter usage limit">
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="CategorySlug">Category Slug</label>
-                            <input type="text" name="CategorySlug" class="form-control" id="CategorySlug" placeholder="Please type category slug">
+                            <label for="ValidityStart">Validity Start</label>
+                            <input type="date" name="ValidityStart" class="form-control" id="ValidityStart">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="ValidityEnd">Validity End</label>
+                            <input type="date" name="ValidityEnd" class="form-control" id="ValidityEnd">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="DiscountPercentage">Discount in %</label>
+                            <input type="number" name="DiscountPercentage" class="form-control" id="DiscountPercentage" placeholder="Discount in %">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="DiscountAmount">Discount in Rupees</label>
+                            <input type="number" name="DiscountAmount" class="form-control" id="DiscountAmount" placeholder="Discount in rupees">
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="MaxDiscount">Max Discount</label>
+                            <input type="number" name="MaxDiscount" class="form-control" id="MaxDiscount" placeholder="Discount limit">
+                        </div>
+                        <div class="form-group col-md-12">
+                            <label for="Description">Description</label>
+                            <input type="text" name="Description" class="form-control" id="Description" placeholder="Promo code description">
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="CategoryImages">Category Images</label>
-                            <div class="custom-file">
-                                <input type="file" name="CategoryImages[]" class="custom-file-input" id="CategoryImages" multiple>
-                                <label class="custom-file-label" for="customFile">Upload Category Images</label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label for="CategoryTags">Category Tags (Comma Seperated)</label>
-                            <input type="text" name="CategoryTags" class="form-control" id="CategoryTags" placeholder="watch, discount, aesthetic..">
-                        </div>
-                    </div>
-                    <button name="SaveCategory" type="submit" class="btn btn-primary">Submit</button>
+                    <button name="SavePromoCode" type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
         </div>
 
         <hr>
-        <h2>Categories</h2>
-        <div data-label="Categories" class="normal-table">
+        <h2>Promo Codes</h2>
+        <div data-label="PromoCodes" class="normal-table">
             <table id="normal-table" class="table">
                 <thead>
                     <tr>
                         <th class="wd-5p">S.NO</th>
-                        <th class="wd-25p">Category Name</th>
-                        <th class="wd-20p">Category Slug</th>
+                        <th class="wd-25p">Title </th>
+                        <th class="wd-20p">Code</th>
+                        <th class="wd-20p">UsageLimit</th>
                         <th class="wd-20p">Options</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                    include_once('models/category-model.php');
-                    $CategoryModel = new Category();
-                    $CategoryList = $CategoryModel->List();
+                    include_once('models/promo-code-model.php');
+                    $PromoCodeModel = new PromoCode();
+                    $PromoCodeList = $PromoCodeModel->List();
                     $SNo = 1;
-                    while ($row = mysqli_fetch_array($CategoryList)) {
+                    while ($row = mysqli_fetch_array($PromoCodeList)) {
                     ?>
                         <tr>
                             <td><?= $SNo ?></td>
-                            <td><?= $row['CategoryName'] ?></td>
-                            <td><?= $row['CategorySlug'] ?></td>
+                            <td><?= $row['Title'] ?></td>
+                            <td><?= $row['Code'] ?></td>
+                            <td><?= $row['UsedCount'] ?>/<?= $row['UsageLimit'] ?></td>
                             <td>
                                 <button class="btn btn-link dropdown-toggle" type="button" id="dropleftMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Options
@@ -99,32 +120,3 @@ getHeader("Categories", "includes/header.php");
 <?php
 getFooter("includes/footer.php");
 ?>
-<script>
-    //get category slug
-    $(document).on('keyup', '#CategoryName', function() {
-        var category = $(this).val()
-        $.ajax({
-            type: "POST",
-            url: "controllers/Category",
-            data: {
-                GenerateSlug: true,
-                CategoryName: category
-            },
-            success: function(response) {
-                var result = JSON.parse(response)
-                if (result['success'] == true) {
-                    if (result['slug'] != "n-a") {
-                        $('#CategorySlug').val(result['slug'])
-                    } else {
-                        $('#CategorySlug').val("")
-                    }
-                } else {
-                    console.log("Error in generating slug")
-                }
-            },
-            error: function(error) {
-                console.log("Error in connection: " + error)
-            }
-        })
-    })
-</script>
