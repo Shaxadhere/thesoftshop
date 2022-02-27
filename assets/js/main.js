@@ -442,7 +442,7 @@ $(document).on('click', '#checkout-btn', function () {
     var state = $('#checkout-state').val()
     var city = $('#checkout-city').val()
     var orderNotes = $('#checkout-order-notes').val()
-
+    var promoCode = $("#promo-code-input").val();
     $.ajax({
         type: "POST",
         url: "/moreo/controllers/orders",
@@ -454,7 +454,8 @@ $(document).on('click', '#checkout-btn', function () {
             ShippingAddress: shippingAddress,
             City: city,
             State: state,
-            OrderNotes: orderNotes
+            OrderNotes: orderNotes,
+            PromoCode:promoCode
         },
         success: function (response) {
             var result = JSON.parse(response)

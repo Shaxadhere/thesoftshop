@@ -101,52 +101,150 @@ if (isset($_POST['SubmitOrder'])) {
         $DeliveryCost = 170;
         $Amount = 0;
 
-        foreach ($Cart as $item) {
-            $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
-            $Product = mysqli_fetch_array($Product);
-
-            $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
-            $ColorDetails = mysqli_fetch_array($ColorDetails);
-            $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
-            $SizeDetails = mysqli_fetch_array($SizeDetails);
-
-            $Inventory = $ProductModel->InventoryByAttributes(
-                $item['productId'],
-                $SizeDetails['PK_ID'],
-                $ColorDetails['PK_ID']
-            );
-            $Inventory = mysqli_fetch_array($Inventory);
-
-            if ($Product['PriceVary'] != 1) {
-                $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
-            } else {
-                $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+        if (!empty($_POST['PromoCode'])) {
+            $PromoCode = $_POST['PromoCode'];
+            $PromoCode = $PromoCodeModel->View($PromoCode);
+            if (mysqli_num_rows($PromoCode) == 0) {
+                array_push($errors, "Invalid Promo Code");
+                echo json_encode($errors);
+                exit();
+            }
+            $PromoCode = mysqli_fetch_array($PromoCode);
+            if (intval($PromoCode['UsageLimit']) <= intval($PromoCode['UsedCount'])) {
+                array_push($errors, "Promo Code have reached its usage limit");
+                echo json_encode($errors);
+                exit();
+            }
+            if ($PromoCode['ValidityStart'] > date("Y-m-d")) {
+                array_push($errors, "Promo Code is not yet valid");
+                echo json_encode($errors);
+                exit();
             }
 
-            if ($Product['PriceVary'] != 1) {
-                $ProductItem = array(
-                    "ProductId" => $item['productId'],
-                    "ProductColor" => $item['productColor'],
-                    "ProductSize" => $item['productSize'],
-                    "ProductQuantity" => $item['productqty'],
-                    "PricePerUnit" => $Product['Price']
+            if ($PromoCode['ValidityEnd'] < date("Y-m-d")) {
+                array_push($errors, "Promo Code has expired");
+                echo json_encode($errors);
+                exit();
+            }
+
+            if ($PromoCode['DiscountPercentage'] == 0 && $PromoCode['DiscountAmount'] == 0) {
+                array_push($errors, "Promo Code is not applicabl");
+                echo json_encode($errors);
+                exit();
+            }
+
+            $DiscountType = $PromoCode['DiscountType'];
+
+            if ($DiscountType == "DELIVERY") {
+                $DeliveryCost = 0;
+            }
+
+            if ($DiscountType == "PERCENTAGE") {
+                foreach ($Cart as $item) {
+                    $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
+                    $Product = mysqli_fetch_array($Product);
+
+                    $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
+                    $ColorDetails = mysqli_fetch_array($ColorDetails);
+                    $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
+                    $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                    $Inventory = $ProductModel->InventoryByAttributes(
+                        $item['productId'],
+                        $SizeDetails['PK_ID'],
+                        $ColorDetails['PK_ID']
+                    );
+                    $Inventory = mysqli_fetch_array($Inventory);
+
+                    if ($Product['PriceVary'] != 1) {
+                        $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
+                    } else {
+                        $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+                    }
+                }
+                $DiscountAmount = $Amount * ($PromoCode['DiscountPercentage'] / 100);
+                if ($DiscountAmount > intval($PromoCode['MaxDiscount'])) {
+                    $DiscountAmount = intval($PromoCode['MaxDiscount']);
+                }
+                $Amount = $Amount - $DiscountAmount;
+            }
+
+            if ($DiscountType == "AMOUNT") {
+                foreach ($Cart as $item) {
+                    $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
+                    $Product = mysqli_fetch_array($Product);
+
+                    $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
+                    $ColorDetails = mysqli_fetch_array($ColorDetails);
+                    $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
+                    $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                    $Inventory = $ProductModel->InventoryByAttributes(
+                        $item['productId'],
+                        $SizeDetails['PK_ID'],
+                        $ColorDetails['PK_ID']
+                    );
+                    $Inventory = mysqli_fetch_array($Inventory);
+
+                    if ($Product['PriceVary'] != 1) {
+                        $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
+                    } else {
+                        $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+                    }
+                }
+                $DiscountAmount = intval($PromoCode['DiscountAmount']);
+                $Amount = $Amount - $DiscountAmount;
+            }
+        } else {
+
+
+            foreach ($Cart as $item) {
+                $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
+                $Product = mysqli_fetch_array($Product);
+
+                $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
+                $ColorDetails = mysqli_fetch_array($ColorDetails);
+                $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
+                $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                $Inventory = $ProductModel->InventoryByAttributes(
+                    $item['productId'],
+                    $SizeDetails['PK_ID'],
+                    $ColorDetails['PK_ID']
                 );
-            } else {
-                $ProductItem = array(
-                    "ProductId" => $item['productId'],
-                    "ProductColor" => $item['productColor'],
-                    "ProductSize" => $item['productSize'],
-                    "ProductQuantity" => $item['productqty'],
-                    "PricePerUnit" => $Inventory['Price']
+                $Inventory = mysqli_fetch_array($Inventory);
+
+                if ($Product['PriceVary'] != 1) {
+                    $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
+                } else {
+                    $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+                }
+
+                if ($Product['PriceVary'] != 1) {
+                    $ProductItem = array(
+                        "ProductId" => $item['productId'],
+                        "ProductColor" => $item['productColor'],
+                        "ProductSize" => $item['productSize'],
+                        "ProductQuantity" => $item['productqty'],
+                        "PricePerUnit" => $Product['Price']
+                    );
+                } else {
+                    $ProductItem = array(
+                        "ProductId" => $item['productId'],
+                        "ProductColor" => $item['productColor'],
+                        "ProductSize" => $item['productSize'],
+                        "ProductQuantity" => $item['productqty'],
+                        "PricePerUnit" => $Inventory['Price']
+                    );
+                }
+                array_push($OrderInvoice, $ProductItem);
+
+                $NewQty = intval($Inventory['Quantity']) - intval($item['productqty']);
+                $ProductModel->UpdateInventory(
+                    base64_encode($Inventory['PK_ID']),
+                    $NewQty
                 );
             }
-            array_push($OrderInvoice, $ProductItem);
-
-            $NewQty = intval($Inventory['Quantity']) - intval($item['productqty']);
-            $ProductModel->UpdateInventory(
-                base64_encode($Inventory['PK_ID']),
-                $NewQty
-            );
         }
     }
     $CustomerID = (isset($_SESSION['USER'])) ? $_SESSION['USER']['PK_ID'] : "";
@@ -168,7 +266,8 @@ if (isset($_POST['SubmitOrder'])) {
             "Recieved",
             $_POST['OrderNotes'],
             $DeliveryCost,
-            $Amount
+            $Amount,
+            $_POST['PromoCode']
         );
         $result = array(
             "success" => true,
@@ -308,42 +407,120 @@ if (isset($_POST['RedeemPromoCode'])) {
     } else {
         $PromoCode = $_POST['PromoCode'];
         $PromoCode = $PromoCodeModel->View($PromoCode);
-        if(mysqli_num_rows($PromoCode) == 0){
+        if (mysqli_num_rows($PromoCode) == 0) {
             array_push($errors, "Invalid Promo Code");
             echo json_encode(array("success" => false, "errors" => $errors));
             exit();
         }
         $PromoCode = mysqli_fetch_array($PromoCode);
-        if(intval($PromoCode['UsageLimit']) <= intval($PromoCode['UsedCount'])){
+        if (intval($PromoCode['UsageLimit']) <= intval($PromoCode['UsedCount'])) {
             array_push($errors, "Promo Code have reached its usage limit");
             echo json_encode(array("success" => false, "errors" => $errors));
             exit();
         }
-        if($PromoCode['ValidityStart'] > date("Y-m-d")){
+        if ($PromoCode['ValidityStart'] > date("Y-m-d")) {
             array_push($errors, "Promo Code is not yet valid");
             echo json_encode(array("success" => false, "errors" => $errors));
             exit();
         }
 
-        if($PromoCode['ValidityEnd'] < date("Y-m-d")){
+        if ($PromoCode['ValidityEnd'] < date("Y-m-d")) {
             array_push($errors, "Promo Code has expired");
             echo json_encode(array("success" => false, "errors" => $errors));
             exit();
         }
 
-        if($PromoCode['DiscountPercentage'] == 0 && $PromoCode['DiscountAmount'] == 0){
+        if ($PromoCode['DiscountPercentage'] == 0 && $PromoCode['DiscountAmount'] == 0) {
             array_push($errors, "Promo Code is not applicable");
             echo json_encode(array("success" => false, "errors" => $errors));
             exit();
         }
-        
-        $DiscountType = $PromoCode['DiscountType'];
 
-        
+        $DiscountType = $PromoCode['DiscountType'];
         $Cart = $_SESSION['CART'];
         $OrderInvoice = array();
-        $DeliveryCost = 170;
         $Amount = 0;
+        $DiscountArray = array();
+
+        if ($DiscountType == "DELIVERY") {
+            $DiscountArray = array(
+                "DiscountType" => $DiscountType,
+            );
+        }
+
+        if ($DiscountType == "PERCENTAGE") {
+            $Cart = $_SESSION['CART'];
+            foreach ($Cart as $item) {
+                $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
+                $Product = mysqli_fetch_array($Product);
+
+                $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
+                $ColorDetails = mysqli_fetch_array($ColorDetails);
+                $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
+                $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                $Inventory = $ProductModel->InventoryByAttributes(
+                    $item['productId'],
+                    $SizeDetails['PK_ID'],
+                    $ColorDetails['PK_ID']
+                );
+                $Inventory = mysqli_fetch_array($Inventory);
+
+                if ($Product['PriceVary'] != 1) {
+                    $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
+                } else {
+                    $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+                }
+            }
+            $DiscountAmount = $Amount * ($PromoCode['DiscountPercentage'] / 100);
+            if ($DiscountAmount > intval($PromoCode['MaxDiscount'])) {
+                $DiscountAmount = intval($PromoCode['MaxDiscount']);
+            }
+            $AmountWithDiscount = $Amount - $DiscountAmount;
+            $DiscountArray = array(
+                "DiscountType" => $DiscountType,
+                "DiscountedTotal" => $AmountWithDiscount,
+                "DiscountAmount" => $DiscountAmount,
+            );
+        }
+
+        if ($DiscountType == "AMOUNT") {
+            $Cart = $_SESSION['CART'];
+            foreach ($Cart as $item) {
+                $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));
+                $Product = mysqli_fetch_array($Product);
+
+                $ColorDetails = $ColorModel->FilterByColorName($item['productColor']);
+                $ColorDetails = mysqli_fetch_array($ColorDetails);
+                $SizeDetails = $SizeModel->FilterBySizeName($item['productSize']);
+                $SizeDetails = mysqli_fetch_array($SizeDetails);
+
+                $Inventory = $ProductModel->InventoryByAttributes(
+                    $item['productId'],
+                    $SizeDetails['PK_ID'],
+                    $ColorDetails['PK_ID']
+                );
+                $Inventory = mysqli_fetch_array($Inventory);
+
+                if ($Product['PriceVary'] != 1) {
+                    $Amount = intval($Amount) + (intval($Product['Price'] * $item['productqty']));
+                } else {
+                    $Amount = intval($Amount) + (intval($Inventory['Price'] * $item['productqty']));
+                }
+            }
+            $DiscountAmount = intval($PromoCode['DiscountAmount']);
+            $AmountWithDiscount = $Amount - $DiscountAmount;
+            $DiscountArray = array(
+                "DiscountType" => $DiscountType,
+                "DiscountedTotal" => $AmountWithDiscount,
+                "DiscountAmount" => $DiscountAmount,
+            );
+        }
+
+        echo json_encode(array("success" => true, "discount" => $DiscountArray));
+        exit();
+
+
 
         foreach ($Cart as $item) {
             $Product = $ProductModel->FilterByProductID(base64_encode($item['productId']));

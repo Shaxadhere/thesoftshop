@@ -129,22 +129,31 @@ $Cart = $_SESSION['CART'];
                             <tfoot>
                                 <tr class="cart-subtotal cart_item">
                                     <th>Subtotal</th>
-                                    <td><span class="cart_price">Rs. <?= $Subtotal ?></span></td>
+                                    <td><span class="cart_price" id="subtotal-amount">Rs. <?= $Subtotal ?></span></td>
                                 </tr>
                                 <tr class="cart_item">
                                     <th>Shipping</th>
-                                    <td><span class="cart_price">Rs. 170</span></td>
+                                    <td><span class="cart_price" id="delivery-amount">Rs. 170</span></td>
                                 </tr>
                                 <tr class="order-total cart_item">
                                     <th>Total</th>
-                                    <td><strong><span class="cart_price amount">Rs. <?= $Subtotal + 170 ?></span></strong></td>
+                                    <td><strong><span class="cart_price amount" id="total-amount">Rs. <?= $Subtotal + 170 ?></span></strong></td>
+                                </tr>
+                                <tr class="order-total cart_item" id="discount-row-head" style="display:none">
+                                    <th class="text-success">Congrats! You've got yourself discount</th>
+                                </tr>
+                                <tr class="order-total cart_item" id="discount-row" style="display:none">
+                                    <th>You Will Pay</th>
+                                    <td><strong><span class="cart_price amount" id="total-with-discount-amount"></span></strong></td>
                                 </tr>
                             </tfoot>
                         </table>
                         <div class="checkout-section__field col-12" style="padding:12px">
                             <label for="address_01">Have a promo code?</label>
                             <input type="text" id="promo-code-input" value="" class="mb__5" placeholder="Enter promo code">
+                            <span class="text-danger" id="promocode-error" style="font-size:12px"></span>
                             <button type="button" style="padding:0px;display:none" id="apply-promo-code" class="mt__5 button button_primary btn checkout-payment__btn-place-order">Apply</button>
+
                         </div>
                         <div class="checkout-payment">
                             <ul class="payment_methods">
@@ -196,22 +205,35 @@ getFooter("includes/footer.php");
         displayApplyPromoCode($(this))
     });
 
-   $(document).on("click", "#apply-promo-code", function(){
-       let promoCode = $("#promo-code-input").val();
-         $.ajax({
-              url: "/moreo/controllers/orders",
-              type: "POST",
-              data: {
-                RedeemPromoCode:true,
+    $(document).on("click", "#apply-promo-code", function() {
+        let promoCode = $("#promo-code-input").val();
+        $.ajax({
+            url: "/moreo/controllers/orders",
+            type: "POST",
+            data: {
+                RedeemPromoCode: true,
                 PromoCode: promoCode
-              },
-              success: function(data) {
-                // if (data == "success") {
-                //      console.log(data)
-                // } else {
-                //      alert(data);
-                // }
-              }
-         });
-   })
+            },
+            success: function(response) {
+                let result = JSON.parse(response);
+                if (result['success'] == true || result['success'] == "true") {
+                    $('#promocode-error').html("");
+                    $('#discount-row-head').show();
+                    $('#discount-row').show();
+                    $('#apply-promo-code').attr("disabled", true);
+                    $('#promo-code-input').attr("disabled", true);
+                    let discount = result['discount']
+                    if (discount['DiscountType'] == "DELIVERY") {
+                        $('#delivery-amount').html("FREE");
+                    } else if (discount['DiscountType'] == "PERCENTAGE") {
+                        $('#total-with-discount-amount').html("Rs. " + (parseInt(discount['DiscountedTotal']) + 170));
+                    } else if (discount['DiscountType'] == "AMOUNT") {
+                        $('#total-with-discount-amount').html("Rs. " + (parseInt(discount['DiscountedTotal']) + 170));
+                    }
+                } else {
+                    $('#promocode-error').html(result['errors'][0]);
+                }
+            }
+        });
+    })
 </script>
