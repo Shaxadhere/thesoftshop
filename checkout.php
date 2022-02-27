@@ -182,34 +182,35 @@ include_once('components/back-to-top-button.php');
 getFooter("includes/footer.php");
 ?>
 <script>
-    function displayApplyPromoCode() {
-        if ($(this).val().length > 0) {
+    function displayApplyPromoCode(event) {
+        if (event.val().length > 0) {
             $("#apply-promo-code").show();
         } else {
             $("#apply-promo-code").hide();
         }
     }
     $(document).on("keyup", "#promo-code-input", function() {
-        displayApplyPromoCode()
+        displayApplyPromoCode($(this))
     });
     $(document).on("change", "#promo-code-input", function() {
-        displayApplyPromoCode()
+        displayApplyPromoCode($(this))
     });
 
    $(document).on("click", "#apply-promo-code", function(){
        let promoCode = $("#promo-code-input").val();
          $.ajax({
-              url: "/moreo/controllers/promo-code",
+              url: "/moreo/controllers/orders",
               type: "POST",
               data: {
-                promoCode: promoCode
+                RedeemPromoCode:true,
+                PromoCode: promoCode
               },
               success: function(data) {
-                if (data == "success") {
-                     location.reload();
-                } else {
-                     alert(data);
-                }
+                // if (data == "success") {
+                //      console.log(data)
+                // } else {
+                //      alert(data);
+                // }
               }
          });
    })

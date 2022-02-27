@@ -5,12 +5,14 @@ include_once('../models/product-model.php');
 include_once('../models/color-model.php');
 include_once('../models/size-model.php');
 include_once('../models/customer-model.php');
+include_once('../models/promo-code-model.php');
 
 $CustomerModel = new Customer();
 $OrderModel = new Order();
 $ProductModel = new Product();
 $ColorModel = new Color();
 $SizeModel = new Size();
+$PromoCodeModel = new PromoCode();
 
 if (isset($_POST['SubmitOrder'])) {
     session_start();
@@ -298,11 +300,46 @@ if (isset($_POST['UpdateCart'])) {
 
 if (isset($_POST['RedeemPromoCode'])) {
     $errors = array();
+    session_start();
     if (!isset($_SESSION['CART']) || $_SESSION['CART'] == "") {
         array_push($errors, "Your cart is empty!");
         echo json_encode(array("success" => false, "errors" => $errors));
         exit();
     } else {
+        $PromoCode = $_POST['PromoCode'];
+        $PromoCode = $PromoCodeModel->View($PromoCode);
+        if(mysqli_num_rows($PromoCode) == 0){
+            array_push($errors, "Invalid Promo Code");
+            echo json_encode(array("success" => false, "errors" => $errors));
+            exit();
+        }
+        $PromoCode = mysqli_fetch_array($PromoCode);
+        if(intval($PromoCode['UsageLimit']) <= intval($PromoCode['UsedCount'])){
+            array_push($errors, "Promo Code have reached its usage limit");
+            echo json_encode(array("success" => false, "errors" => $errors));
+            exit();
+        }
+        if($PromoCode['ValidityStart'] > date("Y-m-d")){
+            array_push($errors, "Promo Code is not yet valid");
+            echo json_encode(array("success" => false, "errors" => $errors));
+            exit();
+        }
+
+        if($PromoCode['ValidityEnd'] < date("Y-m-d")){
+            array_push($errors, "Promo Code has expired");
+            echo json_encode(array("success" => false, "errors" => $errors));
+            exit();
+        }
+
+        if($PromoCode['DiscountPercentage'] == 0 && $PromoCode['DiscountAmount'] == 0){
+            array_push($errors, "Promo Code is not applicable");
+            echo json_encode(array("success" => false, "errors" => $errors));
+            exit();
+        }
+        
+        $DiscountType = $PromoCode['DiscountType'];
+
+        
         $Cart = $_SESSION['CART'];
         $OrderInvoice = array();
         $DeliveryCost = 170;
